@@ -27,7 +27,7 @@ connection.connect(function(err) {
                 "DROP TABLE IF EXISTS paso;",
                 "DROP TABLE IF EXISTS solucion;",
                 "DROP TABLE IF EXISTS reto;",
-                "CREATE TABLE Usuario (id INT AUTO_INCREMENT, username VARCHAR(50) NOT NULL, nombre VARCHAR(255) NOT NULL, correo VARCHAR(100) NOT NULL, contraseña VARCHAR(255) NOT NULL, telefono INT, tipo ENUM('ADMIN','NO ADMIN') NOT NULL, creditoDigital FLOAT DEFAULT 0.0, PRIMARY KEY(id));",
+                "CREATE TABLE Usuario (id INT AUTO_INCREMENT, username VARCHAR(50) NOT NULL, nombre VARCHAR(255) NOT NULL, correo VARCHAR(100) NOT NULL, contraseña VARCHAR(255) NOT NULL, telefono INT, tipo ENUM('ADMIN','NO ADMIN') NOT NULL DEFAULT 'NO ADMIN', creditoDigital FLOAT DEFAULT 0.0, PRIMARY KEY(id));",
                 "CREATE TABLE Tarjeta (id INT AUTO_INCREMENT, numero VARCHAR(20) NOT NULL, expiracion DATE NOT NULL, usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id));",
                 "CREATE TABLE Direccion (id INT AUTO_INCREMENT, nombreDireccion VARCHAR(50) NOT NULL, direccion VARCHAR(200) NOT NULL, pais VARCHAR(50) NOT NULL, ciudad VARCHAR(100) NOT NULL, usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id));",
                 "CREATE TABLE CuponDescuento (id INT AUTO_INCREMENT, codigo VARCHAR(255) NOT NULL, porcentaje INT NOT NULL, PRIMARY KEY(id));",
@@ -45,7 +45,9 @@ connection.connect(function(err) {
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Tarta de la abuela', 'Tarda de galleta con natilla de chocolate',4.0,'https://recetasdecocina.elmundo.es/wp-content/uploads/2020/02/receta-tarta-de-galletas-y-chocolate.jpg','Postre')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Ensaladilla', 'Ensalada de patatas, mayonesa, huevo y atún',3.8,'https://www.hogarmania.com/archivos/201906/ensaladilla-rusa-xl-668x400x80xX.jpg','Entremes')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Cruzcampo', 'Cerveza española bien fresquita',2.0,'https://www.sanchez-garrido.com/wp-content/uploads/2020/03/botella1l.jpg','Bebida')",
-                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono,tipo,creditoDigital) VALUES ('perico','Pepe Rico','perico@gmail.com','asd1234','666777888','ADMIN',20.5)"];
+                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono,creditoDigital) VALUES ('perico','Pepe Rico','perico@gmail.com','asd1234','666777888',20.5)",
+                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono,tipo,creditoDigital) VALUES ('josrompoz1','Jose Carlos','josrompoz1@gmail.com','qwerty','654654654','ADMIN',10000)",
+                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono) VALUES ('aitor','aitortilla','aitortilla@gmail.com','asd1234','653780421')"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;
