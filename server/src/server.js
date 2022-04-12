@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const productos = require('./controllers/productosRouter');
 const usuarios = require('./controllers/usuariosRouter');
+const cupones = require('./controllers/cuponesDescuentoRouter');
 
 const connection = mysql.createConnection({
   host     : 'localhost',
@@ -48,7 +49,10 @@ connection.connect(function(err) {
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Cruzcampo', 'Cerveza española bien fresquita',2.0,'https://www.sanchez-garrido.com/wp-content/uploads/2020/03/botella1l.jpg','Bebida')",
                 "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono,creditoDigital) VALUES ('perico','Pepe Rico','perico@gmail.com','asd1234','666777888',20.5)",
                 "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono,tipo,creditoDigital) VALUES ('josrompoz1','Jose Carlos','josrompoz1@gmail.com','qwerty','654654654','ADMIN',10000)",
-                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono) VALUES ('aitor','aitortilla','aitortilla@gmail.com','asd1234','653780421')"];
+                "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono) VALUES ('aitor','aitortilla','aitortilla@gmail.com','asd1234','653780421')",
+                "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semverano',5)",
+                "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('seminvierno',10)",
+                "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semotoño',15)"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;
@@ -63,7 +67,8 @@ const app = express()
   .use(cors())
   .use(bodyParser.json())
   .use(productos(connection))
-  .use(usuarios(connection));
+  .use(usuarios(connection))
+  .use(cupones(connection));
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);

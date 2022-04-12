@@ -103,7 +103,7 @@ function createRouterUsuarios(db) {
                     [req.body.contraseña, req.params.id],
                     (error) => {
                         if (error) {
-                        if(req.body.contraseña) {
+                        if(req.body.contraseña==undefined) {
                             res.status(400).json({status: 'Bad request'});
                         } else {
                             res.status(500).json({status: 'error'});
@@ -136,7 +136,7 @@ function createRouterUsuarios(db) {
                     [req.body.creditoDigital + results[0].creditoDigital, req.params.id],
                     (error) => {
                         if (error) {
-                        if(req.body.contraseña) {
+                        if(req.body.creditoDigital==undefined) {
                             res.status(400).json({status: 'Bad request'});
                         } else {
                             res.status(500).json({status: 'error'});
@@ -169,7 +169,7 @@ function createRouterUsuarios(db) {
                     [results[0].creditoDigital - req.body.creditoDigital, req.params.id],
                     (error) => {
                         if (error) {
-                        if(req.body.contraseña) {
+                        if(req.body.creditoDigital==undefined) {
                             res.status(400).json({status: 'Bad request'});
                         } else {
                             res.status(500).json({status: 'error'});
