@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const events = require('./events');
+const productos = require('./controllers/productosRouter');
+const usuarios = require('./controllers/usuariosRouter');
 
 const connection = mysql.createConnection({
   host     : 'localhost',
@@ -61,7 +62,8 @@ const port = process.env.PORT || 8080;
 const app = express()
   .use(cors())
   .use(bodyParser.json())
-  .use(events(connection));
+  .use(productos(connection))
+  .use(usuarios(connection));
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);

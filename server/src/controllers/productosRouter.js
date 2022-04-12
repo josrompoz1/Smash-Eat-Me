@@ -1,6 +1,6 @@
 const express = require('express');
 
-function createRouter(db) {
+function createRouterProductos(db) {
   const router = express.Router();
 
   //---------------------------------ENDPOINTS PRODUCTOS---------------------------------
@@ -349,4 +349,4 @@ function createRouter(db) {
   return router;
 }
 
-module.exports = createRouter;
+module.exports = createRouterProductos;
