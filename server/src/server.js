@@ -5,6 +5,7 @@ const mysql = require('mysql');
 const productos = require('./controllers/productosRouter');
 const usuarios = require('./controllers/usuariosRouter');
 const cupones = require('./controllers/cuponesDescuentoRouter');
+const retos = require('./controllers/retosRouter');
 
 const connection = mysql.createConnection({
   host     : 'localhost',
@@ -40,9 +41,9 @@ connection.connect(function(err) {
                 "CREATE TABLE ProductoOfertado (id INT AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL, descripcion VARCHAR(255) NOT NULL, imagen TEXT NOT NULL, precio FLOAT NOT NULL, tipo ENUM('Entremes','Plato','Postre','Bebida') NOT NULL, menuId INT, PRIMARY KEY(id), FOREIGN KEY (menuId) REFERENCES Menu(id));",
                 "CREATE TABLE ProductoOfertadoPedido (id INT AUTO_INCREMENT, productoOfertadoId INT, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (productoOfertadoId) REFERENCES ProductoOfertado(id), FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id))",
                 "CREATE TABLE Mesa (id INT AUTO_INCREMENT, numeroPersonas INT NOT NULL, fecha DATE NOT NULL, hora TIME NOT NULL, usuarioId INT NOT NULL, menuId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id), FOREIGN KEY (menuId) REFERENCES Menu(id));",
-                "CREATE TABLE Reto (id INT AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(255) NOT NULL, categoria ENUM('Inyeccion de codigo','Criptografia','Autenticacion e identificacion','Control de acceso') NOT NULL, dificultad INT NOT NULL, completado BOOLEAN NOT NULL DEFAULT false, PRIMARY KEY(id));",
+                "CREATE TABLE Reto (id INT AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(255) NOT NULL, categoria ENUM('Inyeccion de codigo','Criptografia','Autenticacion e identificacion','Control de acceso') NOT NULL, dificultad INT NOT NULL, completado BOOLEAN NOT NULL DEFAULT FALSE, PRIMARY KEY(id));",
                 "CREATE TABLE Solucion (id INT AUTO_INCREMENT, tipo ENUM('Interactiva','No interactiva') NOT NULL, retoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (retoId) REFERENCES Reto(id));",
-                "CREATE TABLE Paso (id INT AUTO_INCREMENT, numero INT NOT NULL, descripcion VARCHAR(255) NOT NULL, solucion TEXT NOT NULL, solucionId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (solucionId) REFERENCES Solucion(id));",
+                "CREATE TABLE Paso (id INT AUTO_INCREMENT, numero INT NOT NULL, solucion TEXT NOT NULL, solucionId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (solucionId) REFERENCES Solucion(id));",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Tortilla de papas', 'Tortilla española de patatas de la huerta',5.3,'https://recetasdecocina.elmundo.es/wp-content/uploads/2021/01/tortilla-de-patatas-rellena.jpg','Plato')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Tarta de la abuela', 'Tarda de galleta con natilla de chocolate',4.0,'https://recetasdecocina.elmundo.es/wp-content/uploads/2020/02/receta-tarta-de-galletas-y-chocolate.jpg','Postre')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Ensaladilla', 'Ensalada de patatas, mayonesa, huevo y atún',3.8,'https://www.hogarmania.com/archivos/201906/ensaladilla-rusa-xl-668x400x80xX.jpg','Entremes')",
@@ -52,7 +53,21 @@ connection.connect(function(err) {
                 "INSERT INTO Usuario (username,nombre,correo,contraseña,telefono) VALUES ('aitor','aitortilla','aitortilla@gmail.com','asd1234','653780421')",
                 "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semverano',5)",
                 "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('seminvierno',10)",
-                "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semotoño',15)"];
+                "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semotoño',15)",
+                "INSERT INTO Reto (nombre, descripcion, categoria, dificultad) VALUES ('Prueba 1', 'Reto de prueba numero 1', 'Criptografia', 1)",
+                "INSERT INTO Reto (nombre, descripcion, categoria, dificultad) VALUES ('Prueba 2', 'Reto de prueba numero 2', 'Inyeccion de codigo', 3)",
+                "INSERT INTO Solucion (tipo, retoId) VALUES ('Interactiva', 1)",
+                "INSERT INTO Solucion (tipo, retoId) VALUES ('No interactiva', 1)",
+                "INSERT INTO Solucion (tipo, retoId) VALUES ('No interactiva', 2)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (1,'Paso numero 1 de la solucion 1',1)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 1',1)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (3,'Paso numero 3 de la solucion 1',1)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (4,'Paso numero 4 de la solucion 1',1)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (1,'Paso numero 1 de la solucion 2',2)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 2',2)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (3,'Paso numero 3 de la solucion 2',2)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (1,'Paso numero 1 de la solucion 3',3)",
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 3',3)"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;
@@ -68,7 +83,8 @@ const app = express()
   .use(bodyParser.json())
   .use(productos(connection))
   .use(usuarios(connection))
-  .use(cupones(connection));
+  .use(cupones(connection))
+  .use(retos(connection));
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
