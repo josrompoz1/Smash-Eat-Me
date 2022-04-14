@@ -6,6 +6,7 @@ const productos = require('./controllers/productosRouter');
 const usuarios = require('./controllers/usuariosRouter');
 const cupones = require('./controllers/cuponesDescuentoRouter');
 const retos = require('./controllers/retosRouter');
+const mesas = require('./controllers/mesaRouter');
 
 const connection = mysql.createConnection({
   host     : 'localhost',
@@ -46,6 +47,7 @@ connection.connect(function(err) {
                 "CREATE TABLE Paso (id INT AUTO_INCREMENT, numero INT NOT NULL, solucion TEXT NOT NULL, solucionId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (solucionId) REFERENCES Solucion(id));",
                 "INSERT INTO Menu (nombre, descripcion) VALUES ('Mediterraneo','Menu de la dieta mediterranea')",
                 "INSERT INTO Menu (nombre, descripcion) VALUES ('Asiatico','Menu de la dieta asiatica')",
+                "INSERT INTO Menu (nombre, descripcion) VALUES ('Sin menú','Los comensales pedirán a la carta')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo,menuId) VALUES ('Tortilla de papas', 'Tortilla española de patatas de la huerta',5.3,'https://recetasdecocina.elmundo.es/wp-content/uploads/2021/01/tortilla-de-patatas-rellena.jpg','Plato',1)",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Tarta de la abuela', 'Tarda de galleta con natilla de chocolate',4.0,'https://recetasdecocina.elmundo.es/wp-content/uploads/2020/02/receta-tarta-de-galletas-y-chocolate.jpg','Postre')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Ensaladilla', 'Ensalada de patatas, mayonesa, huevo y atún',3.8,'https://www.hogarmania.com/archivos/201906/ensaladilla-rusa-xl-668x400x80xX.jpg','Entremes')",
@@ -69,7 +71,10 @@ connection.connect(function(err) {
                 "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 2',2)",
                 "INSERT INTO Paso (numero, solucion, solucionId) VALUES (3,'Paso numero 3 de la solucion 2',2)",
                 "INSERT INTO Paso (numero, solucion, solucionId) VALUES (1,'Paso numero 1 de la solucion 3',3)",
-                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 3',3)"];
+                "INSERT INTO Paso (numero, solucion, solucionId) VALUES (2,'Paso numero 2 de la solucion 3',3)",
+                "INSERT INTO Mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (4,'2023-01-01','13:30',1,3)",
+                "INSERT INTO Mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (8,'2023-01-01','13:30',2,2)",
+                "INSERT INTO Mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (5,'2023-01-01','13:30',3,1)"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;
@@ -86,7 +91,8 @@ const app = express()
   .use(productos(connection))
   .use(usuarios(connection))
   .use(cupones(connection))
-  .use(retos(connection));
+  .use(retos(connection))
+  .use(mesas(connection));
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
