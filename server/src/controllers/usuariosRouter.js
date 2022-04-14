@@ -191,24 +191,24 @@ function createRouterUsuarios(db) {
         [req.params.id],
         (error, results) => {
             if (error) {
-            console.log(error);
-            res.status(500).json({status: 'error'});
+                console.log(error);
+                res.status(500).json({status: 'error'});
             } else {
-            if(results.length==0) {
-                res.status(404).json({status: 'Not found'})
-            } else {
-                db.query(
-                    'DELETE FROM usuario WHERE id=?',
-                    [req.params.id],
-                    (error) => {
-                    if (error) {
-                        res.status(500).json({status: 'error'});
-                    } else {
-                        res.status(200).json({status: 'ok'});
-                    }
-                    }
-                );
-            }
+                if(results.length==0) {
+                    res.status(404).json({status: 'Not found'})
+                } else {
+                    db.query(
+                        'DELETE FROM usuario WHERE id=?',
+                        [req.params.id],
+                        (error) => {
+                        if (error) {
+                            res.status(500).json({status: 'error'});
+                        } else {
+                            res.status(200).json({status: 'ok'});
+                        }
+                        }
+                    );
+                }
             }
         });
     });
@@ -318,6 +318,93 @@ function createRouterUsuarios(db) {
               } else {
                 db.query(
                     'DELETE FROM tarjeta WHERE id=?',
+                    [req.params.id],
+                    (error) => {
+                      if (error) {
+                        res.status(500).json({status: 'error'});
+                      } else {
+                        res.status(200).json({status: 'ok'});
+                      }
+                    }
+                );
+              }
+            }
+          }
+        );
+      });
+
+    //---------------------------------ENDPOINTS DIRECCION DE USUARIOS---------------------------------
+    router.get('/direcciones/:id', function (req, res, next) {
+        db.query(
+        'SELECT * FROM direccion WHERE id=?',
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({status: 'error'});
+            } else {
+                if(results.length==0) {
+                    res.status(404).json({status: 'Not found'})
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        }
+        );
+    });
+
+    router.get('/direcciones/usuario/:id', function (req, res, next) {
+        db.query(
+            'SELECT * FROM direccion WHERE usuarioId=?',
+            [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    if(results.length==0) {
+                        res.status(404).json({status: 'Not found'})
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            }
+        );
+    });
+
+    router.post('/direcciones', (req, res, next) => {
+        db.query(
+        'INSERT INTO direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES (?,?,?,?,?)',
+        [req.body.nombreDireccion, req.body.direccion, req.body.pais, req.body.ciudad, req.body.usuarioId],
+        (error) => {
+            if (error) {
+                if(req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
+                    res.status(400).json({status: 'Bad request'});
+                } else {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                }
+            } else {
+                res.status(200).json({status: 'ok'});
+            }
+        }
+        );
+    });
+
+    router.delete('/direcciones/:id', function (req, res, next) {
+        db.query(
+          'SELECT * FROM direccion WHERE id=?',
+          [req.params.id],
+          (error, results) => {
+            if (error) {
+              console.log(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              if(results.length==0) {
+                res.status(404).json({status: 'Not found'})
+              } else {
+                db.query(
+                    'DELETE FROM direccion WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {
