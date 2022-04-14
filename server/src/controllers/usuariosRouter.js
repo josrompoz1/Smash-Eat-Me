@@ -213,6 +213,126 @@ function createRouterUsuarios(db) {
         });
     });
 
+    //---------------------------------ENDPOINTS TARJETAS DE USUARIOS---------------------------------
+    router.get('/tarjetas/:id', function (req, res, next) {
+        db.query(
+        'SELECT * FROM tarjeta WHERE id=?',
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({status: 'error'});
+            } else {
+                if(results.length==0) {
+                    res.status(404).json({status: 'Not found'})
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        }
+        );
+    });
+
+    router.get('/tarjetas/usuario/:id', function (req, res, next) {
+        db.query(
+            'SELECT * FROM tarjeta WHERE usuarioId=?',
+            [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    if(results.length==0) {
+                        res.status(404).json({status: 'Not found'})
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            }
+        );
+    });
+
+    router.post('/tarjetas', (req, res, next) => {
+        db.query(
+        'INSERT INTO tarjeta (numero, expiracion, usuarioId) VALUES (?,?,?)',
+        [req.body.numero, req.body.expiracion, req.body.usuarioId],
+        (error) => {
+            if (error) {
+                if(req.body.numero || req.body.expiracion || req.body.usuarioId) {
+                    res.status(400).json({status: 'Bad request'});
+                } else {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                }
+            } else {
+                res.status(200).json({status: 'ok'});
+            }
+        }
+        );
+    });
+
+    router.put('/tarjetas/:id', function (req, res, next) {
+        db.query(
+        'SELECT * FROM tarjeta WHERE id=?',
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({status: 'error'});
+            } else {
+                if(results.length==0) {
+                    res.status(404).json({status: 'Not found'});
+                } else {
+                    db.query(
+                        'UPDATE tarjeta SET expiracion=? WHERE id=?',
+                        [req.body.expiracion, req.params.id],
+                        (error) => {
+                            if (error) {
+                                if(req.body.expiracion==null) {
+                                    res.status(400).json({status: 'Bad request'});
+                                } else {
+                                    res.status(500).json({status: 'error'});
+                                }
+                            } else {
+                                res.status(200).json({status: 'ok'});
+                            }
+                        }
+                    );
+                }
+            }
+        }
+        );
+    });
+
+    router.delete('/tarjetas/:id', function (req, res, next) {
+        db.query(
+          'SELECT * FROM tarjeta WHERE id=?',
+          [req.params.id],
+          (error, results) => {
+            if (error) {
+              console.log(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              if(results.length==0) {
+                res.status(404).json({status: 'Not found'})
+              } else {
+                db.query(
+                    'DELETE FROM tarjeta WHERE id=?',
+                    [req.params.id],
+                    (error) => {
+                      if (error) {
+                        res.status(500).json({status: 'error'});
+                      } else {
+                        res.status(200).json({status: 'ok'});
+                      }
+                    }
+                );
+              }
+            }
+          }
+        );
+      });
+
     return router;
 }
 
