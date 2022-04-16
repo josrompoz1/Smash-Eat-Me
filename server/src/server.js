@@ -18,15 +18,14 @@ const connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if(err) throw err;
-  var queries = ["DROP TABLE IF EXISTS productoofertadopedido;",
-                "DROP TABLE IF EXISTS productoofertado;",
-                "DROP TABLE IF EXISTS tarjeta;",
+  var queries = ["DROP TABLE IF EXISTS tarjeta;",
                 "DROP TABLE IF EXISTS direccion;",
                 "DROP TABLE IF EXISTS mesa;",
-                "DROP TABLE IF EXISTS menu;",
                 "DROP TABLE IF EXISTS valoracion;",                
                 "DROP TABLE IF EXISTS cupondescuento;",
                 "DROP TABLE IF EXISTS productopedido;",
+                "DROP TABLE IF EXISTS productoofertado;",
+                "DROP TABLE IF EXISTS menu;",
                 "DROP TABLE IF EXISTS pedidocomida;",
                 "DROP TABLE IF EXISTS usuario;",
                 "DROP TABLE IF EXISTS paso;",
@@ -37,11 +36,10 @@ connection.connect(function(err) {
                 "CREATE TABLE Direccion (id INT AUTO_INCREMENT, nombreDireccion VARCHAR(50) NOT NULL, direccion VARCHAR(200) NOT NULL, pais VARCHAR(50) NOT NULL, ciudad VARCHAR(100) NOT NULL, usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE);",
                 "CREATE TABLE CuponDescuento (id INT AUTO_INCREMENT, codigo VARCHAR(255) NOT NULL, porcentaje INT NOT NULL, PRIMARY KEY(id));",
                 "CREATE TABLE PedidoComida (id INT AUTO_INCREMENT, metodoPago ENUM('Tarjeta','Cartera digital'), fecha DATE NOT NULL, hora TIME NOT NULL, estado ENUM('Pagado','En preparacion','En transito','Entregado') DEFAULT 'Pagado', usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE);",
-                "CREATE TABLE ProductoPedido (id INT AUTO_INCREMENT, cantidad INT NOT NULL, pedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (pedidoId) REFERENCES PedidoComida(id));",
-                "CREATE TABLE Valoracion (id INT AUTO_INCREMENT, puntuacion INT NOT NULL, reseña TEXT, usuarioId INT NOT NULL, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id));",
                 "CREATE TABLE Menu (id INT AUTO_INCREMENT, nombre VARCHAR(100) NOT NULL, descripcion TEXT NOT NULL, PRIMARY KEY(id));",
                 "CREATE TABLE ProductoOfertado (id INT AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL, descripcion VARCHAR(255) NOT NULL, imagen TEXT NOT NULL, precio FLOAT NOT NULL, tipo ENUM('Entremes','Plato','Postre','Bebida') NOT NULL, menuId INT, PRIMARY KEY(id), FOREIGN KEY (menuId) REFERENCES Menu(id));",
-                "CREATE TABLE ProductoOfertadoPedido (id INT AUTO_INCREMENT, productoOfertadoId INT, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (productoOfertadoId) REFERENCES ProductoOfertado(id), FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id))",
+                "CREATE TABLE ProductoPedido (id INT AUTO_INCREMENT, cantidad INT NOT NULL, pedidoId INT NOT NULL, productoOfertadoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (pedidoId) REFERENCES PedidoComida(id), FOREIGN KEY (productoOfertadoId) REFERENCES ProductoOfertado(id));",
+                "CREATE TABLE Valoracion (id INT AUTO_INCREMENT, puntuacion INT NOT NULL, reseña TEXT, usuarioId INT NOT NULL, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id));",
                 "CREATE TABLE Mesa (id INT AUTO_INCREMENT, numeroPersonas INT NOT NULL, fecha DATE NOT NULL, hora TIME NOT NULL, usuarioId INT NOT NULL, menuId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (menuId) REFERENCES Menu(id));",
                 "CREATE TABLE Reto (id INT AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(255) NOT NULL, categoria ENUM('Inyeccion de codigo','Criptografia','Autenticacion e identificacion','Control de acceso') NOT NULL, dificultad INT NOT NULL, completado BOOLEAN NOT NULL DEFAULT FALSE, PRIMARY KEY(id));",
                 "CREATE TABLE Solucion (id INT AUTO_INCREMENT, tipo ENUM('Interactiva','No interactiva') NOT NULL, retoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (retoId) REFERENCES Reto(id));",
@@ -87,7 +85,12 @@ connection.connect(function(err) {
                 "INSERT INTO PedidoComida (metodoPago, fecha, hora, estado, usuarioId) VALUES ('Tarjeta','2022-01-01','13:30','En transito',1)",
                 "INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES ('Cartera digital','2023-01-01','13:30',2)",
                 "INSERT INTO PedidoComida (metodoPago, fecha, hora, estado, usuarioId) VALUES ('Tarjeta','2023-01-01','13:30','Entregado',2)",
-                "INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES ('Tarjeta','2023-01-01','13:30',3)"];
+                "INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES ('Tarjeta','2023-01-01','13:30',3)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (2, 1, 1)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (3, 1, 2)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 2, 3)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 2)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 4)",];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;

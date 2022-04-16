@@ -163,6 +163,44 @@ function createRouterPedidos(db) {
         );
     });
 
+    //---------------------------------ENDPOINTS PRODUCTOS PEDIDOS---------------------------------
+    router.get('/productospedidos/:pedidoId', function (req, res, next) {
+        db.query(
+          'SELECT * FROM productopedido WHERE pedidoId=?',
+          [req.params.pedidoId],
+          (error, results) => {
+            if (error) {
+              console.log(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              if(results.length==0) {
+                res.status(404).json({status: 'Not found'});
+              } else {
+                res.status(200).json(results);
+              }
+            }
+          }
+        );
+    });
+
+    router.post('/productospedidos', (req, res, next) => {
+        db.query(
+        'INSERT INTO productopedido (cantidad, pedidoId, productoOfertadoId) VALUES (?,?,?)',
+        [req.body.cantidad, req.body.pedidoId, req.body.productoOfertadoId],
+        (error) => {
+            if (error) {
+                if(req.body.cantidad || req.body.pedidoId || req.body.productoOfertadoId) {
+                    res.status(400).json({status: 'Bad request'});
+                } else {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                }
+            } else {
+                res.status(200).json({status: 'ok'});
+            }
+        });
+    });
+
     return router;
 }
 
