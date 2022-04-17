@@ -8,6 +8,7 @@ const cupones = require('./controllers/cuponesDescuentoRouter');
 const retos = require('./controllers/retosRouter');
 const mesas = require('./controllers/mesaRouter');
 const pedidos = require('./controllers/pedidosRouter');
+const valoraciones = require('./controllers/valoracionRouter');
 const login = require('./controllers/loginRouter');
 
 const connection = mysql.createConnection({
@@ -91,9 +92,13 @@ connection.connect(function(err) {
                 "INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES ('Tarjeta','2023-01-01','13:30',3)",
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (2, 1, 1)",
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (3, 1, 2)",
-                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 2, 3)",
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 2, 2)",
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 2)",
-                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 4)",];
+                "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 4)",
+                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (4,'Bueno',1,1)",
+                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (2,'Malo',1,2)",
+                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (3,'Mediocre',1,4)",
+                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (5,'Muy bueno',1,2)"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;
@@ -112,7 +117,8 @@ const app = express()
   .use(cupones(connection))
   .use(retos(connection))
   .use(mesas(connection))
-  .use(pedidos(connection));
+  .use(pedidos(connection))
+  .use(valoraciones(connection))
   .use(login(connection));
 
 app.listen(port, () => {
