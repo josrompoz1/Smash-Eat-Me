@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductosComponent } from './productos/productos.component';
 import { InMemoryDataService } from './Services/in-memory-data.service';
 import { HeaderComponent } from './header/header.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatGridListModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],

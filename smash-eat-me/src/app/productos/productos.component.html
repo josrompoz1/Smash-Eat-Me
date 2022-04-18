@@ -1,11 +1,19 @@
-<h1>Nuestros productos</h1>
-<ul>
-    <li *ngFor="let producto of productos">
-        <button type="button" (click)="onSelect(producto)">
-        <span><h2>{{producto.nombre | uppercase}}</h2></span>
+<div class="titulo">
+    <h1>Nuestros productos</h1>
+</div>
+
+<div class="listado">
+    <mat-grid-list cols="4" rowHeight="4:3" gutterSize="15px">
+        <button *ngFor="let producto of productos" type="button" (click)="onSelect(producto)">
+            <mat-grid-tile>
+                <!-- <img src="./assets/Dotnettricks.png"> -->
+                <mat-grid-tile-footer>
+                    <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
         </button>
-    </li>
-</ul>
+    </mat-grid-list>
+</div>
 
 <div *ngIf="selectedProducto">
     <h2>Detalles del producto {{selectedProducto.nombre | uppercase}}</h2>

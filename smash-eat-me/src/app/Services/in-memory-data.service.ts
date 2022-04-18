@@ -21,6 +21,22 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 1, nombre: 'Tortilla de papas', descripcion: 'Torrilla española de patatas de la huerta', precio: 5.3, tipoPlato: tipos[1]},
       { id: 2, nombre: 'Tarta de la abuela', descripcion: 'Tarda de galleta con natilla de chocolate', precio: 4.0, tipoPlato: tipos[2] },
       { id: 3, nombre: 'Ensaladilla', descripcion: 'Ensalada de patatas, mayonesa, huevo y atún', precio: 3.8, tipoPlato: tipos[0] },
+      { id: 4, nombre: 'Cruzcampo', descripcion: 'Cerveza española', precio: 2.0, tipoPlato: tipos[3] },
+      { id: 1, nombre: 'Tortilla de papas', descripcion: 'Torrilla española de patatas de la huerta', precio: 5.3, tipoPlato: tipos[1]},
+      { id: 2, nombre: 'Tarta de la abuela', descripcion: 'Tarda de galleta con natilla de chocolate', precio: 4.0, tipoPlato: tipos[2] },
+      { id: 3, nombre: 'Ensaladilla', descripcion: 'Ensalada de patatas, mayonesa, huevo y atún', precio: 3.8, tipoPlato: tipos[0] },
+      { id: 1, nombre: 'Cruzcampo', descripcion: 'Cerveza española', precio: 2.0, tipoPlato: tipos[3] },
+      { id: 1, nombre: 'Tortilla de papas', descripcion: 'Torrilla española de patatas de la huerta', precio: 5.3, tipoPlato: tipos[1]},
+      { id: 2, nombre: 'Tarta de la abuela', descripcion: 'Tarda de galleta con natilla de chocolate', precio: 4.0, tipoPlato: tipos[2] },
+      { id: 3, nombre: 'Ensaladilla', descripcion: 'Ensalada de patatas, mayonesa, huevo y atún', precio: 3.8, tipoPlato: tipos[0] },
+      { id: 1, nombre: 'Cruzcampo', descripcion: 'Cerveza española', precio: 2.0, tipoPlato: tipos[3] },
+      { id: 1, nombre: 'Tortilla de papas', descripcion: 'Torrilla española de patatas de la huerta', precio: 5.3, tipoPlato: tipos[1]},
+      { id: 2, nombre: 'Tarta de la abuela', descripcion: 'Tarda de galleta con natilla de chocolate', precio: 4.0, tipoPlato: tipos[2] },
+      { id: 3, nombre: 'Ensaladilla', descripcion: 'Ensalada de patatas, mayonesa, huevo y atún', precio: 3.8, tipoPlato: tipos[0] },
+      { id: 1, nombre: 'Cruzcampo', descripcion: 'Cerveza española', precio: 2.0, tipoPlato: tipos[3] },
+      { id: 1, nombre: 'Tortilla de papas', descripcion: 'Torrilla española de patatas de la huerta', precio: 5.3, tipoPlato: tipos[1]},
+      { id: 2, nombre: 'Tarta de la abuela', descripcion: 'Tarda de galleta con natilla de chocolate', precio: 4.0, tipoPlato: tipos[2] },
+      { id: 3, nombre: 'Ensaladilla', descripcion: 'Ensalada de patatas, mayonesa, huevo y atún', precio: 3.8, tipoPlato: tipos[0] },
       { id: 1, nombre: 'Cruzcampo', descripcion: 'Cerveza española', precio: 2.0, tipoPlato: tipos[3] }
     ];
     return {tipos, productos};

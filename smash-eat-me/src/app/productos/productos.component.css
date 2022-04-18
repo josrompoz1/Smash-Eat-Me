@@ -1,0 +1,21 @@
+mat-grid-tile {
+    background: lightblue;
+}
+
+mat-grid-tile-footer .texto {
+    text-align: center;
+    font-size: 15px;
+}
+
+.listado {
+    padding-left: 75px;
+    padding-right: 75px;
+}
+
+.titulo {
+    font-size: 20px;
+    border-right: 75px solid white;
+    border-left: 75px solid white;
+    background-color: lightblue;
+    padding-left: 25px;
+}
