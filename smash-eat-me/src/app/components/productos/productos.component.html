@@ -1,0 +1,36 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Todos nuestros platos</h1>
+    </div>
+    <div class="busqueda">
+        <form [formGroup]="form" (ngSubmit)="buscarPlato()">
+            <mat-form-field appearance="fill">
+                <mat-label>Buscar plato</mat-label>
+                <input matInput type="text" name="busqueda" formControlName="busqueda" placeholder="Buscar plato">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+<hr>
+
+<div *ngIf="productos.length!==0" class="listado">
+    <mat-grid-list cols="3" rowHeight="4:3" gutterSize="80px">
+        <mat-grid-tile *ngFor="let producto of productos | paginate:page_size:page_number">
+            <button type="button" (click)="onSelect(producto)">
+                <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+            </button>
+            <mat-grid-tile-footer>
+                <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+                <div class="icono">
+                    <mat-icon class="fa-icono" (click)="onAdd()">add_circle</mat-icon>
+                </div>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div *ngIf="productos.length===0" class="listado">Sin resultados en la busqueda</div>
+
+<mat-paginator [length]="productos.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+    (page)="handlePage($event)" showFirstLastButtons>
+</mat-paginator>
