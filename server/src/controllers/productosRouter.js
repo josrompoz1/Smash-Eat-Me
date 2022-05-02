@@ -38,6 +38,21 @@ function createRouterProductos(db) {
     );
   });
 
+  router.get('/productos/busqueda/:nombre', function (req, res, next) {
+    db.query(
+      "SELECT * FROM productoofertado WHERE nombre LIKE ?",
+      "%"+[req.params.nombre]+"%",
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
   router.get('/productos/tipo/:tipo', function (req, res, next) {
     db.query(
       'SELECT * FROM productoofertado WHERE tipo=?',
