@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
+import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PaginatePipe } from './pipes/paginate.pipe';
     ProductosComponent,
     HeaderComponent,
     ProductosDialogComponent,
-    PaginatePipe
+    PaginatePipe,
+    RegistroUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { PaginatePipe } from './pipes/paginate.pipe';
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

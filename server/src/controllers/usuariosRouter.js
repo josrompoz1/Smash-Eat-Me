@@ -38,6 +38,7 @@ function createRouterUsuarios(db) {
     });
 
     router.post('/usuarios', (req, res, next) => {
+        console.log(req);
         db.query(
         'INSERT INTO usuario (username, nombre, correo, contraseña, telefono) VALUES (?,?,?,?,?)',
         [req.body.username, req.body.nombre, req.body.correo, req.body.contraseña, req.body.telefono],

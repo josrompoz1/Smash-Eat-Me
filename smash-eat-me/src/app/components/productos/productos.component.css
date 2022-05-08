@@ -14,30 +14,9 @@ mat-grid-tile-footer .texto {
     font-size: 20px;
 }
 
-.contenedor {
-    border-right: 75px solid white;
-    border-left: 75px solid white;
-    background-color: transparent;
-    padding-left: 25px;
-    padding-right: 25px;
-    margin-top: 50px;
-}
-
-.titulo {
-    font-size: 20px;
-    display: inline-block;
-}
-
 .busqueda {
     font-size: 15px;
     float: right;
-}
-
-
-hr {
-    width: 95%;
-    border-color: darkorange;
-    margin-bottom: 50px;
 }
 
 mat-paginator {
