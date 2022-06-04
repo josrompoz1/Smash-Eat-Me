@@ -6,7 +6,7 @@ function createRouterMesas(db) {
     //---------------------------------ENDPOINTS MESAS---------------------------------
     router.get('/mesas', function (req, res, next) {
         db.query(
-          'SELECT * FROM mesa',
+          'SELECT * FROM Mesa',
           [10*(req.params.page || 0)],
           (error, results) => {
             if (error) {
@@ -21,7 +21,7 @@ function createRouterMesas(db) {
 
     router.get('/mesas/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM mesa WHERE id=?',
+          'SELECT * FROM Mesa WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -40,7 +40,7 @@ function createRouterMesas(db) {
 
     router.get('/mesas/usuario/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM mesa WHERE usuarioId=?',
+          'SELECT * FROM Mesa WHERE usuarioId=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -59,7 +59,7 @@ function createRouterMesas(db) {
 
     router.get('/mesas/menu/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM mesa WHERE menuId=?',
+          'SELECT * FROM Mesa WHERE menuId=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -78,7 +78,7 @@ function createRouterMesas(db) {
 
     router.post('/mesas', (req, res, next) => {
         db.query(
-            'INSERT INTO mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (?,?,?,?,?)',
+            'INSERT INTO Mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (?,?,?,?,?)',
             [req.body.numeroPersonas, req.body.fecha, req.body.hora, req.body.usuarioId, req.body.menuId],
             (error) => {
                 if (error) {
@@ -97,7 +97,7 @@ function createRouterMesas(db) {
 
     router.delete('/mesas/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM mesa WHERE id=?',
+          'SELECT * FROM Mesa WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -108,7 +108,7 @@ function createRouterMesas(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                    'DELETE FROM mesa WHERE id=?',
+                    'DELETE FROM Mesa WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {

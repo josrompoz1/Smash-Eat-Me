@@ -5,7 +5,7 @@ function createRouterUsuarios(db) {
     //---------------------------------ENDPOINTS USUARIOS---------------------------------
     router.get('/usuarios', function (req, res, next) {
         db.query(
-        'SELECT * FROM usuario',
+        'SELECT * FROM Usuario',
         [10*(req.params.page || 0)],
         (error, results) => {
             if (error) {
@@ -20,7 +20,7 @@ function createRouterUsuarios(db) {
 
     router.get('/usuarios/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM usuario WHERE id=?',
+        'SELECT * FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -38,8 +38,9 @@ function createRouterUsuarios(db) {
     });
 
     router.post('/usuarios', (req, res, next) => {
+        console.log(req);
         db.query(
-        'INSERT INTO usuario (username, nombre, correo, contraseña, telefono) VALUES (?,?,?,?,?)',
+        'INSERT INTO Usuario (username, nombre, correo, contraseña, telefono) VALUES (?,?,?,?,?)',
         [req.body.username, req.body.nombre, req.body.correo, req.body.contraseña, req.body.telefono],
         (error) => {
             if (error) {
@@ -58,7 +59,7 @@ function createRouterUsuarios(db) {
 
     router.put('/usuarios/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM usuario WHERE id=?',
+        'SELECT * FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -69,7 +70,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'})
             } else {
                 db.query(
-                    'UPDATE usuario SET username=?, nombre=?, correo=?, telefono=? WHERE id=?',
+                    'UPDATE Usuario SET username=?, nombre=?, correo=?, telefono=? WHERE id=?',
                     [req.body.username ? req.body.username : results[0].username, req.body.nombre ? req.body.nombre : results[0].nombre,
                     req.body.correo ? req.body.correo : results[0].correo, req.body.telefono ? req.body.telefono : results[0].telefono, req.params.id],
                     (error) => {
@@ -88,7 +89,7 @@ function createRouterUsuarios(db) {
 
     router.put('/usuarios/:id/changepassword', function (req, res, next) {
         db.query(
-        'SELECT * FROM usuario WHERE id=?',
+        'SELECT * FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -99,7 +100,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'})
             } else {
                 db.query(
-                    'UPDATE usuario SET contraseña=? WHERE id=?',
+                    'UPDATE Usuario SET contraseña=? WHERE id=?',
                     [req.body.contraseña, req.params.id],
                     (error) => {
                         if (error) {
@@ -121,7 +122,7 @@ function createRouterUsuarios(db) {
 
     router.put('/usuarios/:id/addcash', function (req, res, next) {
         db.query(
-        'SELECT creditoDigital FROM usuario WHERE id=?',
+        'SELECT creditoDigital FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -132,7 +133,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'});
             } else {
                 db.query(
-                    'UPDATE usuario SET creditoDigital=? WHERE id=?',
+                    'UPDATE Usuario SET creditoDigital=? WHERE id=?',
                     [req.body.creditoDigital + results[0].creditoDigital, req.params.id],
                     (error) => {
                         if (error) {
@@ -154,7 +155,7 @@ function createRouterUsuarios(db) {
 
     router.put('/usuarios/:id/deletecash', function (req, res, next) {
         db.query(
-        'SELECT creditoDigital FROM usuario WHERE id=?',
+        'SELECT creditoDigital FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -165,7 +166,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'});
             } else {
                 db.query(
-                    'UPDATE usuario SET creditoDigital=? WHERE id=?',
+                    'UPDATE Usuario SET creditoDigital=? WHERE id=?',
                     [results[0].creditoDigital - req.body.creditoDigital, req.params.id],
                     (error) => {
                         if (error) {
@@ -187,7 +188,7 @@ function createRouterUsuarios(db) {
 
     router.delete('/usuarios/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM usuario WHERE id=?',
+        'SELECT * FROM Usuario WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -198,7 +199,7 @@ function createRouterUsuarios(db) {
                     res.status(404).json({status: 'Not found'})
                 } else {
                     db.query(
-                        'DELETE FROM usuario WHERE id=?',
+                        'DELETE FROM Usuario WHERE id=?',
                         [req.params.id],
                         (error) => {
                         if (error) {
@@ -216,7 +217,7 @@ function createRouterUsuarios(db) {
     //---------------------------------ENDPOINTS TARJETAS DE USUARIOS---------------------------------
     router.get('/tarjetas/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM tarjeta WHERE id=?',
+        'SELECT * FROM Tarjeta WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -233,9 +234,9 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.get('/tarjetas/usuario/:id', function (req, res, next) {
+    router.get('/tarjetas/Usuario/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM tarjeta WHERE usuarioId=?',
+            'SELECT * FROM Tarjeta WHERE usuarioId=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -254,7 +255,7 @@ function createRouterUsuarios(db) {
 
     router.post('/tarjetas', (req, res, next) => {
         db.query(
-        'INSERT INTO tarjeta (numero, expiracion, usuarioId) VALUES (?,?,?)',
+        'INSERT INTO Tarjeta (numero, expiracion, usuarioId) VALUES (?,?,?)',
         [req.body.numero, req.body.expiracion, req.body.usuarioId],
         (error) => {
             if (error) {
@@ -273,7 +274,7 @@ function createRouterUsuarios(db) {
 
     router.put('/tarjetas/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM tarjeta WHERE id=?',
+        'SELECT * FROM Tarjeta WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -284,7 +285,7 @@ function createRouterUsuarios(db) {
                     res.status(404).json({status: 'Not found'});
                 } else {
                     db.query(
-                        'UPDATE tarjeta SET expiracion=? WHERE id=?',
+                        'UPDATE Tarjeta SET expiracion=? WHERE id=?',
                         [req.body.expiracion, req.params.id],
                         (error) => {
                             if (error) {
@@ -306,7 +307,7 @@ function createRouterUsuarios(db) {
 
     router.delete('/tarjetas/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM tarjeta WHERE id=?',
+          'SELECT * FROM Tarjeta WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -317,7 +318,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                    'DELETE FROM tarjeta WHERE id=?',
+                    'DELETE FROM Tarjeta WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {
@@ -336,7 +337,7 @@ function createRouterUsuarios(db) {
     //---------------------------------ENDPOINTS DIRECCION DE USUARIOS---------------------------------
     router.get('/direcciones/:id', function (req, res, next) {
         db.query(
-        'SELECT * FROM direccion WHERE id=?',
+        'SELECT * FROM Direccion WHERE id=?',
         [req.params.id],
         (error, results) => {
             if (error) {
@@ -353,9 +354,9 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.get('/direcciones/usuario/:id', function (req, res, next) {
+    router.get('/direcciones/Usuario/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM direccion WHERE usuarioId=?',
+            'SELECT * FROM Direccion WHERE usuarioId=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -374,11 +375,11 @@ function createRouterUsuarios(db) {
 
     router.post('/direcciones', (req, res, next) => {
         db.query(
-        'INSERT INTO direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES (?,?,?,?,?)',
-        [req.body.nombreDireccion, req.body.direccion, req.body.pais, req.body.ciudad, req.body.usuarioId],
+        'INSERT INTO Direccion (nombreDireccion, Direccion, pais, ciudad, usuarioId) VALUES (?,?,?,?,?)',
+        [req.body.nombreDireccion, req.body.Direccion, req.body.pais, req.body.ciudad, req.body.usuarioId],
         (error) => {
             if (error) {
-                if(req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
+                if(req.body.nombreDireccion || req.body.Direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
                     res.status(400).json({status: 'Bad request'});
                 } else {
                     console.error(error);
@@ -393,7 +394,7 @@ function createRouterUsuarios(db) {
 
     router.delete('/direcciones/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM direccion WHERE id=?',
+          'SELECT * FROM Direccion WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -404,7 +405,7 @@ function createRouterUsuarios(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                    'DELETE FROM direccion WHERE id=?',
+                    'DELETE FROM Direccion WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {
