@@ -5,7 +5,7 @@ function createRouterLogin(db) {
 
     router.get('/signin', function (req, res, next) {
         db.query(
-            'SELECT * FROM usuario WHERE username=? AND contraseña=?',
+            'SELECT * FROM Usuario WHERE username=? AND contraseña=?',
             [req.body.username, req.body.contraseña],
             (error, results) => {
                 if (error) {
@@ -18,7 +18,7 @@ function createRouterLogin(db) {
                         token = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
                         dicc = {"id":results[0].id, "tipo":results[0].tipo, "token":token};
                         db.query(
-                            'INSERT INTO usuarioprincipal (usuarioId, tipo, token) VALUES (?,?,?)',
+                            'INSERT INTO UsuarioPrincipal (usuarioId, tipo, token) VALUES (?,?,?)',
                             [dicc.id, dicc.tipo, dicc.token],
                             (error, results) => {
                                 if(error) {

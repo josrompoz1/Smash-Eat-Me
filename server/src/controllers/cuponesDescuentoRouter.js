@@ -7,7 +7,7 @@ function createRouterCuponesDescuento(db) {
     //---------------------------------ENDPOINTS CUPONES DESCUENTO---------------------------------
     router.get('/cupones', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento',
+            'SELECT * FROM CuponDescuento',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
@@ -21,7 +21,7 @@ function createRouterCuponesDescuento(db) {
 
     router.get('/cupones/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento WHERE id=?',
+            'SELECT * FROM CuponDescuento WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -39,7 +39,7 @@ function createRouterCuponesDescuento(db) {
 
     router.get('/cupones/codigo/:codigo', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento WHERE codigo=?',
+            'SELECT * FROM CuponDescuento WHERE codigo=?',
             [req.params.codigo],
             (error, results) => {
                 if (error) {
@@ -58,7 +58,7 @@ function createRouterCuponesDescuento(db) {
 
     router.get('/cupones/porcentaje/:porcentaje', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento WHERE porcentaje=?',
+            'SELECT * FROM CuponDescuento WHERE porcentaje=?',
             [req.params.porcentaje],
             (error, results) => {
                 if (error) {
@@ -77,7 +77,7 @@ function createRouterCuponesDescuento(db) {
 
     router.post('/cupones', (req, res, next) => {
         db.query(
-          'INSERT INTO cupondescuento (codigo, porcentaje) VALUES (?,?)',
+          'INSERT INTO CuponDescuento (codigo, porcentaje) VALUES (?,?)',
           [req.body.codigo, req.body.porcentaje],
           (error) => {
             if (error) {
@@ -96,7 +96,7 @@ function createRouterCuponesDescuento(db) {
 
     router.put('/cupones/:id/changepercent', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento WHERE id=?',
+            'SELECT * FROM CuponDescuento WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -107,7 +107,7 @@ function createRouterCuponesDescuento(db) {
                         res.status(404).json({status: 'Not found'})
                     } else {
                         db.query(
-                            'UPDATE cupondescuento SET porcentaje=? WHERE id=?',
+                            'UPDATE CuponDescuento SET porcentaje=? WHERE id=?',
                             [req.body.porcentaje, req.params.id],
                             (error) => {
                                 if (error) {
@@ -129,7 +129,7 @@ function createRouterCuponesDescuento(db) {
 
     router.delete('/cupones/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM cupondescuento WHERE id=?',
+            'SELECT * FROM CuponDescuento WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -140,7 +140,7 @@ function createRouterCuponesDescuento(db) {
                         res.status(404).json({status: 'Not found'})
                     } else {
                         db.query(
-                            'DELETE FROM cupondescuento WHERE id=?',
+                            'DELETE FROM CuponDescuento WHERE id=?',
                             [req.params.id],
                             (error) => {
                             if (error) {

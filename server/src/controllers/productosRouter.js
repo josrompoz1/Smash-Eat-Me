@@ -6,7 +6,7 @@ function createRouterProductos(db) {
   //---------------------------------ENDPOINTS PRODUCTOS---------------------------------
   router.get('/productos', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado',
+      'SELECT * FROM ProductoOfertado',
       [10*(req.params.page || 0)],
       (error, results) => {
         if (error) {
@@ -21,7 +21,7 @@ function createRouterProductos(db) {
 
   router.get('/productos/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE id=?',
+      'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -40,7 +40,7 @@ function createRouterProductos(db) {
 
   router.get('/productos/busqueda/:nombre', function (req, res, next) {
     db.query(
-      "SELECT * FROM productoofertado WHERE nombre LIKE ?",
+      "SELECT * FROM ProductoOfertado WHERE nombre LIKE ?",
       "%"+[req.params.nombre]+"%",
       (error, results) => {
         if (error) {
@@ -55,7 +55,7 @@ function createRouterProductos(db) {
 
   router.get('/productos/tipo/:tipo', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE tipo=?',
+      'SELECT * FROM ProductoOfertado WHERE tipo=?',
       [req.params.tipo],
       (error, results) => {
         if (error) {
@@ -72,9 +72,9 @@ function createRouterProductos(db) {
     );
   });
 
-  router.get('/productos/menu/:id', function (req, res, next) {
+  router.get('/productos/Menu/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE menuId=?',
+      'SELECT * FROM ProductoOfertado WHERE menuId=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -93,7 +93,7 @@ function createRouterProductos(db) {
 
   router.post('/productos', (req, res, next) => {
     db.query(
-      'INSERT INTO productoofertado (nombre, descripcion, precio, tipo) VALUES (?,?,?,?)',
+      'INSERT INTO ProductoOfertado (nombre, descripcion, precio, tipo) VALUES (?,?,?,?)',
       [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo],
       (error) => {
         if (error) {
@@ -112,7 +112,7 @@ function createRouterProductos(db) {
 
   router.put('/productos/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE id=?',
+      'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -123,7 +123,7 @@ function createRouterProductos(db) {
             res.status(404).json({status: 'Not found'})
           } else {
             db.query(
-                  'UPDATE productoofertado SET nombre=?, descripcion=?, precio=?, tipo=? WHERE id=?',
+                  'UPDATE ProductoOfertado SET nombre=?, descripcion=?, precio=?, tipo=? WHERE id=?',
                   [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo, req.params.id],
                   (error) => {
                     if (error) {
@@ -143,9 +143,9 @@ function createRouterProductos(db) {
     );
   });
 
-  router.put('/productos/:pid/menu/:mid', function (req, res, next) {
+  router.put('/productos/:pid/Menu/:mid', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE id=?',
+      'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.pid],
       (error, results) => {
         if(error) {
@@ -156,7 +156,7 @@ function createRouterProductos(db) {
             res.status(404).json({status: 'Product not found'});
           } else {
             db.query(
-              'SELECT * FROM menu WHERE id=?',
+              'SELECT * FROM Menu WHERE id=?',
               [req.params.mid],
               (error, results) => {
                 if(error) {
@@ -167,7 +167,7 @@ function createRouterProductos(db) {
                     res.status(404).json({status: 'Menu not found'});
                   } else {
                     db.query(
-                      'UPDATE productoofertado SET menuId=? WHERE id=?',
+                      'UPDATE ProductoOfertado SET menuId=? WHERE id=?',
                       [req.params.mid, req.params.pid],
                       (error) => {
                         if (error) {
@@ -189,7 +189,7 @@ function createRouterProductos(db) {
 
   router.delete('/productos/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM productoofertado WHERE id=?',
+      'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -200,7 +200,7 @@ function createRouterProductos(db) {
             res.status(404).json({status: 'Not found'})
           } else {
             db.query(
-                'DELETE FROM productoofertado WHERE id=?',
+                'DELETE FROM ProductoOfertado WHERE id=?',
                 [req.params.id],
                 (error) => {
                   if (error) {
@@ -219,7 +219,7 @@ function createRouterProductos(db) {
   //---------------------------------ENDPOINTS MENUS---------------------------------
   router.get('/menus', function (req, res, next) {
     db.query(
-      'SELECT * FROM menu',
+      'SELECT * FROM Menu',
       [10*(req.params.page || 0)],
       (error, results) => {
         if (error) {
@@ -234,7 +234,7 @@ function createRouterProductos(db) {
 
   router.get('/menus/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM menu WHERE id=?',
+      'SELECT * FROM Menu WHERE id=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -253,7 +253,7 @@ function createRouterProductos(db) {
 
   router.post('/menus', (req, res, next) => {
     db.query(
-      'INSERT INTO menu (nombre, descripcion) VALUES (?,?)',
+      'INSERT INTO Menu (nombre, descripcion) VALUES (?,?)',
       [req.body.nombre, req.body.descripcion],
       (error) => {
         if (error) {
@@ -272,7 +272,7 @@ function createRouterProductos(db) {
 
   router.delete('/menus/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM menu WHERE id=?',
+      'SELECT * FROM Menu WHERE id=?',
       [req.params.id],
       (error, results) => {
         if (error) {
@@ -283,14 +283,14 @@ function createRouterProductos(db) {
             res.status(404).json({status: 'Not found'})
           } else {
             db.query(
-              'UPDATE productoofertado SET menuId=null WHERE menuId=?',
+              'UPDATE ProductoOfertado SET menuId=null WHERE menuId=?',
               [req.params.id],
               (error) => {
                 if (error) {
                   res.status(500).json({status: 'error'});
                 } else {
                   db.query(
-                    'DELETE FROM menu WHERE id=?',
+                    'DELETE FROM Menu WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {

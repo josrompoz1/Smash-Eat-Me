@@ -1,24 +1,13 @@
 <header>
     <div class="wrapper">
-        <div class="logo">Smash&Eat Me</div>
+        <div>
+          <a class="logo" routerLink="" routerLinkActive="active">Smash&Eat Me</a>
+        </div>
         <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Inicio</a>
-            <a href="#">Inicio</a>
-            <a href="#">Inicio</a>
+            <a routerLink="/registro" routerLinkActive="active">Cuenta</a>
+            <a>Menu</a>
+            <a>Cesta</a>
         </nav>
     </div>
 </header>
-<!-- <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
-</mat-toolbar> -->
+<router-outlet></router-outlet>
