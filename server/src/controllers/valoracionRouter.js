@@ -6,7 +6,7 @@ function createRouterValoraciones(db) {
     //---------------------------------ENDPOINTS VALORACIONES---------------------------------
     router.get('/valoraciones/usuario/:usuarioId', function (req, res, next) {
         db.query(
-          'SELECT * FROM valoracion WHERE usuarioId=?',
+          'SELECT * FROM Valoracion WHERE usuarioId=?',
           [req.params.usuarioId],
           (error, results) => {
             if (error) {
@@ -25,7 +25,7 @@ function createRouterValoraciones(db) {
 
     router.get('/valoraciones/producto/:productoId', function (req, res, next) {
         db.query(
-          'SELECT valoracion.puntuacion, valoracion.reseña, valoracion.usuarioId, productopedido.productoOfertadoId FROM valoracion JOIN productopedido ON valoracion.productoPedidoId=productopedido.id AND productopedido.productoOfertadoId=?',
+          'SELECT Valoracion.puntuacion, Valoracion.reseña, Valoracion.usuarioId, ProductoPedido.productoOfertadoId FROM Valoracion JOIN ProductoPedido ON Valoracion.productoPedidoId=ProductoPedido.id AND ProductoPedido.productoOfertadoId=?',
           [req.params.productoId],
           (error, results) => {
             if (error) {
@@ -44,7 +44,7 @@ function createRouterValoraciones(db) {
 
     router.post('/valoraciones', (req, res, next) => {
         db.query(
-          'INSERT INTO valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (?,?,?,?)',
+          'INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (?,?,?,?)',
           [req.body.puntuacion, req.body.reseña, req.body.usuarioId, req.body.productoPedidoId],
           (error) => {
               if (error) {

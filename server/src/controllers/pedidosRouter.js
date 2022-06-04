@@ -6,7 +6,7 @@ function createRouterPedidos(db) {
     //---------------------------------ENDPOINTS PEDIDOS DE COMIDA---------------------------------
     router.get('/pedidos', function (req, res, next) {
         db.query(
-            'SELECT * FROM pedidocomida ORDER BY estado',
+            'SELECT * FROM PedidoComida ORDER BY estado',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
@@ -21,7 +21,7 @@ function createRouterPedidos(db) {
 
     router.get('/pedidos/:id', function (req, res, next) {
         db.query(
-          'SELECT * FROM pedidocomida WHERE id=?',
+          'SELECT * FROM PedidoComida WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -40,7 +40,7 @@ function createRouterPedidos(db) {
 
     router.get('/pedidos/usuario/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM pedidocomida WHERE usuarioId=?',
+            'SELECT * FROM PedidoComida WHERE usuarioId=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -59,7 +59,7 @@ function createRouterPedidos(db) {
 
     router.post('/pedidos', (req, res, next) => {
         db.query(
-        'INSERT INTO pedidocomida (metodoPago, fecha, hora, usuarioId) VALUES (?,?,?,?)',
+        'INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES (?,?,?,?)',
         [req.body.metodoPago, req.body.fecha, req.body.hora, req.body.usuarioId],
         (error) => {
             if (error) {
@@ -78,7 +78,7 @@ function createRouterPedidos(db) {
 
     router.put('/pedidos/:id/preparacion', function (req, res, next) {
         db.query(
-          'SELECT * FROM pedidocomida WHERE id=?',
+          'SELECT * FROM PedidoComida WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -89,7 +89,7 @@ function createRouterPedidos(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                      "UPDATE pedidocomida SET estado='En preparacion' WHERE id=?",
+                      "UPDATE PedidoComida SET estado='En preparacion' WHERE id=?",
                       [req.params.id],
                       (error) => {
                         if (error) {
@@ -107,7 +107,7 @@ function createRouterPedidos(db) {
 
     router.put('/pedidos/:id/transito', function (req, res, next) {
         db.query(
-          'SELECT * FROM pedidocomida WHERE id=?',
+          'SELECT * FROM PedidoComida WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -118,7 +118,7 @@ function createRouterPedidos(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                      "UPDATE pedidocomida SET estado='En transito' WHERE id=?",
+                      "UPDATE PedidoComida SET estado='En transito' WHERE id=?",
                       [req.params.id],
                       (error) => {
                         if (error) {
@@ -136,7 +136,7 @@ function createRouterPedidos(db) {
 
     router.put('/pedidos/:id/entregado', function (req, res, next) {
         db.query(
-          'SELECT * FROM pedidocomida WHERE id=?',
+          'SELECT * FROM PedidoComida WHERE id=?',
           [req.params.id],
           (error, results) => {
             if (error) {
@@ -147,7 +147,7 @@ function createRouterPedidos(db) {
                 res.status(404).json({status: 'Not found'})
               } else {
                 db.query(
-                      "UPDATE pedidocomida SET estado='Entregado' WHERE id=?",
+                      "UPDATE PedidoComida SET estado='Entregado' WHERE id=?",
                       [req.params.id],
                       (error) => {
                         if (error) {
@@ -166,7 +166,7 @@ function createRouterPedidos(db) {
     //---------------------------------ENDPOINTS PRODUCTOS PEDIDOS---------------------------------
     router.get('/productospedidos/:pedidoId', function (req, res, next) {
         db.query(
-          'SELECT * FROM productopedido WHERE pedidoId=?',
+          'SELECT * FROM ProductoPedido WHERE pedidoId=?',
           [req.params.pedidoId],
           (error, results) => {
             if (error) {
@@ -185,7 +185,7 @@ function createRouterPedidos(db) {
 
     router.post('/productospedidos', (req, res, next) => {
         db.query(
-        'INSERT INTO productopedido (cantidad, pedidoId, productoOfertadoId) VALUES (?,?,?)',
+        'INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (?,?,?)',
         [req.body.cantidad, req.body.pedidoId, req.body.productoOfertadoId],
         (error) => {
             if (error) {

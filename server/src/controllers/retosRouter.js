@@ -6,7 +6,7 @@ function createRouterRetos(db) {
     //---------------------------------ENDPOINTS RETOS DE SEGURIDAD---------------------------------
     router.get('/retos', function (req, res, next) {
         db.query(
-            'SELECT * FROM reto',
+            'SELECT * FROM Reto',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
@@ -21,7 +21,7 @@ function createRouterRetos(db) {
 
     router.get('/retos/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM reto WHERE id=?',
+            'SELECT * FROM Reto WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -40,7 +40,7 @@ function createRouterRetos(db) {
 
     router.put('/retos/:id/setfinished', function (req, res, next) {
         db.query(
-            'SELECT * FROM reto WHERE id=?',
+            'SELECT * FROM Reto WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -51,7 +51,7 @@ function createRouterRetos(db) {
                         res.status(404).json({status: 'Not found'})
                     } else {
                         db.query(
-                            'UPDATE reto SET completado=TRUE WHERE id=?',
+                            'UPDATE Reto SET completado=TRUE WHERE id=?',
                             [req.params.id],
                             (error) => {
                                 if (error) {
@@ -70,7 +70,7 @@ function createRouterRetos(db) {
     //---------------------------------ENDPOINTS SOLUCIONES---------------------------------
     router.get('/soluciones/retos', function (req, res, next) {
         db.query(
-            'SELECT * FROM solucion',
+            'SELECT * FROM Solucion',
             [10*(req.params.page || 0)],
             
             (error, results) => {
@@ -86,7 +86,7 @@ function createRouterRetos(db) {
 
     router.get('/soluciones/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM solucion WHERE id=?',
+            'SELECT * FROM Solucion WHERE id=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -103,9 +103,9 @@ function createRouterRetos(db) {
         );
     });
 
-    router.get('/soluciones/reto/:id', function (req, res, next) {
+    router.get('/soluciones/Reto/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM solucion WHERE retoId=?',
+            'SELECT * FROM Solucion WHERE retoId=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
@@ -123,9 +123,9 @@ function createRouterRetos(db) {
     });
 
     //---------------------------------ENDPOINTS PASOS DE LAS SOLUCIONES---------------------------------
-    router.get('/pasos/solucion/:id', function (req, res, next) {
+    router.get('/pasos/Solucion/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM paso WHERE solucionId=?',
+            'SELECT * FROM Paso WHERE solucionId=?',
             [req.params.id],
             (error, results) => {
                 if (error) {
