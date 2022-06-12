@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
+import { MensajesComponent } from './components/mensajes/mensajes.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
     HeaderComponent,
     ProductosDialogComponent,
     PaginatePipe,
-    RegistroUsuarioComponent
+    RegistroUsuarioComponent,
+    MensajesComponent
   ],
   imports: [
     BrowserModule,
