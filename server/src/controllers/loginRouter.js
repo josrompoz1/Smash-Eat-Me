@@ -3,7 +3,7 @@ const express = require('express');
 function createRouterLogin(db) {
     const router = express.Router();
 
-    router.get('/signin', function (req, res, next) {
+    router.post('/signin', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario WHERE username=? AND contraseña=?',
             [req.body.username, req.body.contraseña],
@@ -18,8 +18,8 @@ function createRouterLogin(db) {
                         token = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
                         dicc = {"id":results[0].id, "tipo":results[0].tipo, "token":token};
                         db.query(
-                            'INSERT INTO UsuarioPrincipal (usuarioId, tipo, token) VALUES (?,?,?)',
-                            [dicc.id, dicc.tipo, dicc.token],
+                            'INSERT INTO UsuarioPrincipal (usuarioId, tipo, token, fecha) VALUES (?,?,?,?)',
+                            [dicc.id, dicc.tipo, dicc.token, new Date()],
                             (error, results) => {
                                 if(error) {
                                     console.log(error);

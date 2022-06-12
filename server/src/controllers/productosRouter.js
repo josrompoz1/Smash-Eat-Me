@@ -1,4 +1,5 @@
 const express = require('express');
+const token = require('../utils/token');
 
 function createRouterProductos(db) {
   const router = express.Router();
