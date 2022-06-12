@@ -19,12 +19,13 @@ export class RegistroUsuarioComponent implements OnInit {
       'nombre': new FormControl('', [Validators.required]),
       'username': new FormControl('', [Validators.required]),
       'correo': new FormControl('', [Validators.required, Validators.email]),
-      'contraseña': new FormControl('', [Validators.required]),
-      'telefono': new FormControl('', [])
+      'contrasena': new FormControl('', [Validators.required]),
+      'telefono': new FormControl(null, [])
     })
   }
 
   crearUsuario() {
+    console.log(this.form.valid)
     if(this.form.valid) {
       this.usuarioService.crearUsuario(this.form.value);
     }

@@ -38,20 +38,20 @@ function createRouterUsuarios(db) {
     });
 
     router.post('/usuarios', (req, res, next) => {
-        console.log(req);
         db.query(
-        'INSERT INTO Usuario (username, nombre, correo, contraseña, telefono) VALUES (?,?,?,?,?)',
-        [req.body.username, req.body.nombre, req.body.correo, req.body.contraseña, req.body.telefono],
+        'INSERT INTO Usuario (username, nombre, correo, contrasena, telefono) VALUES (?,?,?,?,?)',
+        [req.body.username, req.body.nombre, req.body.correo, req.body.contrasena, req.body.telefono],
         (error) => {
             if (error) {
-            if(req.body.username || req.body.nombre || req.body.correo || req.body.contraseña) {
-                res.status(400).json({status: 'Bad request'});
+                console.log(error);
+                if(req.body.username || req.body.nombre || req.body.correo || req.body.contraseña) {
+                    res.status(400).json({status: 'Bad request'});
+                } else {
+                    console.error(error);
+                    res.status(500).json({status: 'error'});
+                }
             } else {
-                console.error(error);
-                res.status(500).json({status: 'error'});
-            }
-            } else {
-            res.status(200).json({status: 'ok'});
+                res.status(200).json({status: 'ok'});
             }
         }
         );
