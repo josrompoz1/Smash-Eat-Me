@@ -8,11 +8,11 @@ function createRouterProductos(db) {
   router.get('/productos', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado',
-      [10*(req.params.page || 0)],
+      [10 * (req.params.page || 0)],
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
           res.status(200).json(results);
         }
@@ -27,10 +27,10 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             res.status(200).json(results);
           }
@@ -42,11 +42,11 @@ function createRouterProductos(db) {
   router.get('/productos/busqueda/:nombre', function (req, res, next) {
     db.query(
       "SELECT * FROM ProductoOfertado WHERE nombre LIKE ?",
-      "%"+[req.params.nombre]+"%",
+      "%" + [req.params.nombre] + "%",
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
           res.status(200).json(results);
         }
@@ -61,10 +61,10 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             res.status(200).json(results);
           }
@@ -80,10 +80,10 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             res.status(200).json(results);
           }
@@ -98,14 +98,14 @@ function createRouterProductos(db) {
       [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo],
       (error) => {
         if (error) {
-          if(req.body.nombre || req.body.descripcion || req.body.precio || req.body.tipo) {
-            res.status(400).json({status: 'Bad request'});
+          if (req.body.nombre || req.body.descripcion || req.body.precio || req.body.tipo) {
+            res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
-            res.status(500).json({status: 'error'});
+            res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(200).json({status: 'ok'});
+          res.status(201).json({status: 'Resource created'});
         }
       }
     );
@@ -118,25 +118,25 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             db.query(
-                  'UPDATE ProductoOfertado SET nombre=?, descripcion=?, precio=?, tipo=? WHERE id=?',
-                  [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo, req.params.id],
-                  (error) => {
-                    if (error) {
-                      if(req.body.nombre || req.body.descripcion || req.body.precio || req.body.tipo) {
-                        res.status(400).json({status: 'Bad request'});
-                      } else {
-                        res.status(500).json({status: 'error'});
-                      }
-                    } else {
-                      res.status(200).json({status: 'ok'});
-                    }
+              'UPDATE ProductoOfertado SET nombre=?, descripcion=?, precio=?, tipo=? WHERE id=?',
+              [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo, req.params.id],
+              (error) => {
+                if (error) {
+                  if (req.body.nombre || req.body.descripcion || req.body.precio || req.body.tipo) {
+                    res.status(400).json({ status: 'Bad request' });
+                  } else {
+                    res.status(500).json({ status: 'error' });
                   }
+                } else {
+                  res.status(204).json({ status: 'Resource updated successfully' });
+                }
+              }
             );
           }
         }
@@ -149,32 +149,32 @@ function createRouterProductos(db) {
       'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.pid],
       (error, results) => {
-        if(error) {
+        if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Product not found'});
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Product not found' });
           } else {
             db.query(
               'SELECT * FROM Menu WHERE id=?',
               [req.params.mid],
               (error, results) => {
-                if(error) {
+                if (error) {
                   console.log(error);
-                  res.status(500).json({status: 'error'});
+                  res.status(500).json({ status: 'error' });
                 } else {
-                  if(results.length==0) {
-                    res.status(404).json({status: 'Menu not found'});
+                  if (results.length == 0) {
+                    res.status(404).json({ status: 'Menu not found' });
                   } else {
                     db.query(
                       'UPDATE ProductoOfertado SET menuId=? WHERE id=?',
                       [req.params.mid, req.params.pid],
                       (error) => {
                         if (error) {
-                          res.status(500).json({status: 'error'});
+                          res.status(500).json({ status: 'error' });
                         } else {
-                          res.status(200).json({status: 'ok'});
+                          res.status(204).json({ status: 'Resource updated successfully' });
                         }
                       }
                     )
@@ -195,21 +195,21 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             db.query(
-                'DELETE FROM ProductoOfertado WHERE id=?',
-                [req.params.id],
-                (error) => {
-                  if (error) {
-                    res.status(500).json({status: 'error'});
-                  } else {
-                    res.status(200).json({status: 'ok'});
-                  }
+              'DELETE FROM ProductoOfertado WHERE id=?',
+              [req.params.id],
+              (error) => {
+                if (error) {
+                  res.status(500).json({ status: 'error' });
+                } else {
+                  res.status(200).json({ status: 'ok' });
                 }
+              }
             );
           }
         }
@@ -221,11 +221,11 @@ function createRouterProductos(db) {
   router.get('/menus', function (req, res, next) {
     db.query(
       'SELECT * FROM Menu',
-      [10*(req.params.page || 0)],
+      [10 * (req.params.page || 0)],
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
           res.status(200).json(results);
         }
@@ -240,10 +240,10 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             res.status(200).json(results);
           }
@@ -258,14 +258,14 @@ function createRouterProductos(db) {
       [req.body.nombre, req.body.descripcion],
       (error) => {
         if (error) {
-          if(req.body.nombre || req.body.descripcion) {
-            res.status(400).json({status: 'Bad request'});
+          if (req.body.nombre || req.body.descripcion) {
+            res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
-            res.status(500).json({status: 'error'});
+            res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(200).json({status: 'ok'});
+          res.status(201).json({status: 'Resource created'});
         }
       }
     );
@@ -278,39 +278,39 @@ function createRouterProductos(db) {
       (error, results) => {
         if (error) {
           console.log(error);
-          res.status(500).json({status: 'error'});
+          res.status(500).json({ status: 'error' });
         } else {
-          if(results.length==0) {
-            res.status(404).json({status: 'Not found'})
+          if (results.length == 0) {
+            res.status(404).json({ status: 'Not found' })
           } else {
             db.query(
               'UPDATE ProductoOfertado SET menuId=null WHERE menuId=?',
               [req.params.id],
               (error) => {
                 if (error) {
-                  res.status(500).json({status: 'error'});
+                  res.status(500).json({ status: 'error' });
                 } else {
                   db.query(
                     'DELETE FROM Menu WHERE id=?',
                     [req.params.id],
                     (error) => {
                       if (error) {
-                        res.status(500).json({status: 'error'});
+                        res.status(500).json({ status: 'error' });
                       } else {
-                        res.status(200).json({status: 'ok'});
+                        res.status(200).json({ status: 'ok' });
                       }
                     }
                   );
                 }
               }
             );
-            
+
           }
         }
       }
     );
   });
-  
+
   return router;
 }
 

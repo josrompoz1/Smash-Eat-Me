@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { ProductosDialogComponent } from './components/productos-dialog/producto
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
+import { ServerResponseInterceptor } from './interceptors/server-response.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { MensajesComponent } from './components/mensajes/mensajes.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

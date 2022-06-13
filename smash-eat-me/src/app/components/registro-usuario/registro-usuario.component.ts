@@ -25,7 +25,6 @@ export class RegistroUsuarioComponent implements OnInit {
   }
 
   crearUsuario() {
-    console.log(this.form.valid)
     if(this.form.valid) {
       this.usuarioService.crearUsuario(this.form.value);
     }

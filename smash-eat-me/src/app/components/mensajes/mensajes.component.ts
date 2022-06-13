@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mensajes',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MensajesComponent implements OnInit {
 
-  element: boolean = true;
+  element: boolean = false;
+  mensaje: string = '';
 
   constructor() { }
 

@@ -15,9 +15,7 @@ export class UsuarioService {
 
   crearUsuario(usuario: any) {
     console.log(usuario);
-    return this.http.post<any>(this.url + 'usuarios', usuario).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.post<any>(this.url + 'usuarios', usuario).subscribe({ });
   }
 
 }
