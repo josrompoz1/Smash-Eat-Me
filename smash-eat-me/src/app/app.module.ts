@@ -23,6 +23,8 @@ import { PaginatePipe } from './pipes/paginate.pipe';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { MensajesComponent } from './components/mensajes/mensajes.component';
 import { ServerResponseInterceptor } from './interceptors/server-response.interceptor';
+import { RestService } from './Services/rest-service.service';
+import { DataManagementService } from './Services/data-management.service';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { ServerResponseInterceptor } from './interceptors/server-response.interc
     AppRoutingModule
   ],
   providers: [
+    RestService,
+    DataManagementService,
     { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

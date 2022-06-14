@@ -1,14 +1,14 @@
 <mat-dialog-actions>
     <mat-icon (click)="onClose()">close</mat-icon>
 </mat-dialog-actions>
-<div *ngIf="productoService.selectedProducto">
-    <h2 mat-dialog-title>{{productoService.selectedProducto.nombre | uppercase}}</h2>
+<div *ngIf="dataManagement.selectedProducto">
+    <h2 mat-dialog-title>{{dataManagement.selectedProducto.nombre | uppercase}}</h2>
     <mat-dialog-content>
         <div class="contenido">
-            <div><img src="{{productoService.selectedProducto.imagen}}"></div>
-            <div>Descripción del producto: {{productoService.selectedProducto.descripcion}}</div>
-            <div>Precio: {{productoService.selectedProducto.precio}} €</div>
-            <div>Tipo de producto: {{productoService.selectedProducto.tipo}}</div>
+            <div><img src="{{dataManagement.selectedProducto.imagen}}"></div>
+            <div>Descripción del producto: {{dataManagement.selectedProducto.descripcion}}</div>
+            <div>Precio: {{dataManagement.selectedProducto.precio}} €</div>
+            <div>Tipo de producto: {{dataManagement.selectedProducto.tipo}}</div>
         </div>
     </mat-dialog-content>
 </div>

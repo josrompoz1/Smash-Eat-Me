@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/Models/types';
-import { ProductoService } from 'src/app/Services/producto.service'; 
+import { ProductoOfertado } from 'src/app/Models/types';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
   selector: 'app-productos',
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./productos.component.css', '../styles.css']
 })
 export class ProductosComponent implements OnInit {
-  public productos: Producto[] = [];
+  public productos: ProductoOfertado[] = [];
 
   //Paginator inputs
   page_size: number = 6;
@@ -20,23 +20,21 @@ export class ProductosComponent implements OnInit {
   pageSizeOptions: number[] = [6, 12, 24, 48];
   form!: FormGroup;
 
-  constructor(private productoService: ProductoService, private dialog: MatDialog) { }
+  constructor(private dataManagement: DataManagementService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getProductos();
+    this.getData()
+  }
+
+  private async getData() {
+    this.productos = await this.dataManagement.getProductos();
     this.form = new FormGroup({
       'busqueda': new FormControl('')
     })
   }
 
-  private async getProductos(): Promise<void> {
-    this.productoService.getProductos().subscribe(data => {
-      this.productos = data;
-    });
-  }
-
-  public async onSelect(producto: Producto): Promise<void> {
-    this.productoService.selectedProducto = producto;
+  public async onSelect(producto: ProductoOfertado): Promise<void> {
+    this.dataManagement.selectedProducto = producto;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     this.dialog.open(ProductosDialogComponent, dialogConfig);
@@ -52,17 +50,13 @@ export class ProductosComponent implements OnInit {
     console.log("El icono funciona");
   }
 
-  buscarPlato() {
+  public async buscarPlato(): Promise<void> {
     const busqueda: string = this.form.controls['busqueda'].value;
     console.log(busqueda);
     if(busqueda!=='') {
-      this.productoService.getProductosPorBusqueda(busqueda).subscribe(data => {
-        this.productos = data;
-      });
+      this.productos = await this.dataManagement.getProductosPorBusqueda(busqueda);
     } else {
-      this.productoService.getProductos().subscribe(data => {
-        this.productos = data;
-      });
+      this.productos = await this.dataManagement.getProductos();
     }
   }
 
