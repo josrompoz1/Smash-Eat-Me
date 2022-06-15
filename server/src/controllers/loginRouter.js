@@ -10,25 +10,25 @@ function createRouterLogin(db) {
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    if(results.length==0) {
-                        res.status(401).json({status: 'Invalid credentials'})
+                    if (results.length == 0) {
+                        res.status(401).json({ status: 'Invalid credentials' })
                     } else {
                         token = Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2);
-                        dicc = {"id":results[0].id, "tipo":results[0].tipo, "token":token};
+                        dicc = { "id": results[0].id, "tipo": results[0].tipo, "token": token };
                         db.query(
                             'INSERT INTO UsuarioPrincipal (usuarioId, tipo, token, fecha) VALUES (?,?,?,?)',
                             [dicc.id, dicc.tipo, dicc.token, new Date()],
                             (error, results) => {
-                                if(error) {
+                                if (error) {
                                     console.log(error);
-                                    res.status(500).json({status: 'error'});
+                                    res.status(500).json({ status: 'error' });
                                 } else {
                                     res.status(200).json(dicc);
                                 }
                             }
-                        )                        
+                        )
                     }
                 }
             }

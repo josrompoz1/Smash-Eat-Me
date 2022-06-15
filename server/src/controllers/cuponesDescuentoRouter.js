@@ -8,11 +8,11 @@ function createRouterCuponesDescuento(db) {
     router.get('/cupones', function (req, res, next) {
         db.query(
             'SELECT * FROM CuponDescuento',
-            [10*(req.params.page || 0)],
+            [10 * (req.params.page || 0)],
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
                     res.status(200).json(results);
                 }
@@ -25,16 +25,16 @@ function createRouterCuponesDescuento(db) {
             [req.params.id],
             (error, results) => {
                 if (error) {
-                console.log(error);
-                res.status(500).json({status: 'error'});
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
                 } else {
-                if(results.length==0) {
-                    res.status(404).json({status: 'Not found'})
-                } else {
-                    res.status(200).json(results);
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
+                    } else {
+                        res.status(200).json(results);
+                    }
                 }
-            }
-        });
+            });
     });
 
     router.get('/cupones/codigo/:codigo', function (req, res, next) {
@@ -44,13 +44,13 @@ function createRouterCuponesDescuento(db) {
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    if(results.length==0) {
-                        res.status(404).json({status: 'Not found'})
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
                     } else {
                         res.status(200).json(results);
-                    }                    
+                    }
                 }
             }
         );
@@ -63,13 +63,13 @@ function createRouterCuponesDescuento(db) {
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    if(results.length==0) {
-                        res.status(404).json({status: 'Not found'})
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
                     } else {
                         res.status(200).json(results);
-                    }                    
+                    }
                 }
             }
         );
@@ -77,20 +77,20 @@ function createRouterCuponesDescuento(db) {
 
     router.post('/cupones', (req, res, next) => {
         db.query(
-          'INSERT INTO CuponDescuento (codigo, porcentaje) VALUES (?,?)',
-          [req.body.codigo, req.body.porcentaje],
-          (error) => {
-            if (error) {
-              if(req.body.codigo || req.body.porcentaje) {
-                res.status(400).json({status: 'Bad request'});
-              } else {
-                console.error(error);
-                res.status(500).json({status: 'error'});
-              }
-            } else {
-              res.status(200).json({status: 'ok'});
+            'INSERT INTO CuponDescuento (codigo, porcentaje) VALUES (?,?)',
+            [req.body.codigo, req.body.porcentaje],
+            (error) => {
+                if (error) {
+                    if (req.body.codigo || req.body.porcentaje) {
+                        res.status(400).json({ status: 'Bad request' });
+                    } else {
+                        console.error(error);
+                        res.status(500).json({ status: 'error' });
+                    }
+                } else {
+                    res.status(201).json({ status: 'Resource created' });
+                }
             }
-          }
         );
     });
 
@@ -101,23 +101,23 @@ function createRouterCuponesDescuento(db) {
             (error, results) => {
                 if (error) {
                     console.log(error);
-                    res.status(500).json({status: 'error'});
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    if(results.length==0) {
-                        res.status(404).json({status: 'Not found'})
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
                     } else {
                         db.query(
                             'UPDATE CuponDescuento SET porcentaje=? WHERE id=?',
                             [req.body.porcentaje, req.params.id],
                             (error) => {
                                 if (error) {
-                                    if(req.body.porcentaje==undefined) {
-                                        res.status(400).json({status: 'Bad request'});
+                                    if (req.body.porcentaje == undefined) {
+                                        res.status(400).json({ status: 'Bad request' });
                                     } else {
-                                        res.status(500).json({status: 'error'});
+                                        res.status(500).json({ status: 'error' });
                                     }
                                 } else {
-                                    res.status(200).json({status: 'ok'});
+                                    res.status(204).json({ status: 'Resource updated successfully' });
                                 }
                             }
                         );
@@ -133,21 +133,21 @@ function createRouterCuponesDescuento(db) {
             [req.params.id],
             (error, results) => {
                 if (error) {
-                console.log(error);
-                res.status(500).json({status: 'error'});
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    if(results.length==0) {
-                        res.status(404).json({status: 'Not found'})
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
                     } else {
                         db.query(
                             'DELETE FROM CuponDescuento WHERE id=?',
                             [req.params.id],
                             (error) => {
-                            if (error) {
-                                res.status(500).json({status: 'error'});
-                            } else {
-                                res.status(200).json({status: 'ok'});
-                            }
+                                if (error) {
+                                    res.status(500).json({ status: 'error' });
+                                } else {
+                                    res.status(200).json({ status: 'ok' });
+                                }
                             }
                         );
                     }

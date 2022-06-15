@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
+import { ServerResponseInterceptor } from './interceptors/server-response.interceptor';
+import { RestService } from './Services/rest-service.service';
+import { DataManagementService } from './Services/data-management.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,7 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
     HeaderComponent,
     ProductosDialogComponent,
     PaginatePipe,
-    RegistroUsuarioComponent
+    RegistroUsuarioComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +52,15 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    RestService,
+    DataManagementService,
+    { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

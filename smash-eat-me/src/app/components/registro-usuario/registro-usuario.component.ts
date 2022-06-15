@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UsuarioService } from 'src/app/Services/usuario.service';
+import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -12,7 +12,7 @@ export class RegistroUsuarioComponent implements OnInit {
   form!: FormGroup;
   errors: string[] = [];
   
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private dataManagement: DataManagementService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -24,10 +24,9 @@ export class RegistroUsuarioComponent implements OnInit {
     })
   }
 
-  crearUsuario() {
-    console.log(this.form.valid)
+  public async crearUsuario() {
     if(this.form.valid) {
-      this.usuarioService.crearUsuario(this.form.value);
+      await this.dataManagement.crearUsuario(this.form.value);
     }
   }
 

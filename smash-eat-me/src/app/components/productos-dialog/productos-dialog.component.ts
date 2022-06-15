@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ProductoService } from 'src/app/Services/producto.service';
+import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
   selector: 'app-productos-dialog',
@@ -9,7 +9,7 @@ import { ProductoService } from 'src/app/Services/producto.service';
 })
 export class ProductosDialogComponent implements OnInit {
 
-  constructor(public productoService: ProductoService, private dialogRef: MatDialogRef<ProductosDialogComponent>) { }
+  constructor(public dataManagement: DataManagementService, private dialogRef: MatDialogRef<ProductosDialogComponent>) { }
 
   ngOnInit(): void {
   }
