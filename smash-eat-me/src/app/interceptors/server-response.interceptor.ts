@@ -7,13 +7,14 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { catchError, Observable, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ServerResponseInterceptor implements HttpInterceptor {
 
   private predicates: string[] = ['PUT', 'POST', 'DELETE'];
 
-  constructor() {}
+  constructor(private toastr: ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -22,8 +23,7 @@ export class ServerResponseInterceptor implements HttpInterceptor {
           let message: string = evt.body['status']
           if(message) {
             console.log(message)
-            // this.mensajesComponent.element = true;
-            // this.mensajesComponent.mensaje = message;
+            this.toastr.success(message, 'Smash&Eat Me App')
           }
         }
       })
