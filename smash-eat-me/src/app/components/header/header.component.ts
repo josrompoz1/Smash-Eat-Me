@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public numberOfItems: number | undefined;
+
+  constructor(private dataManagement: DataManagementService) {
+    this.dataManagement.numberOfItemsInBasket.subscribe(value => {
+      this.numberOfItems = value;
+    })
+  }
 
   ngOnInit(): void {
   }

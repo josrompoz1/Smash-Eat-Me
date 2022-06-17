@@ -19,6 +19,10 @@ mat-grid-tile-footer .texto {
     float: right;
 }
 
+button {
+    cursor: pointer;
+}
+
 mat-paginator {
     background-color: darkorange;
     margin-top: 50px;
@@ -29,4 +33,5 @@ mat-paginator {
     position: absolute;
     right: 20px;
     top: 7px;
+    cursor: pointer;
 }

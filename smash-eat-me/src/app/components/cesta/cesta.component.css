@@ -1,0 +1,27 @@
+.cestaPadre {
+    width: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cesta {
+    position: relative;
+    width: 80%;
+    height: auto;
+    
+}
+
+.producto {
+    position: absolute;
+    background-color: #EEEEEE;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+img {
+    width: 20%;
+}
