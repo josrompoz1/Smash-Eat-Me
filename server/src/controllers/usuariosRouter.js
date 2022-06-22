@@ -354,7 +354,7 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.get('/direcciones/Usuario/:id', function (req, res, next) {
+    router.get('/direcciones/usuario/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Direccion WHERE usuarioId=?',
             [req.params.id],

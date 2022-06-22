@@ -18,3 +18,12 @@ export interface Usuario {
     creditoDigital: number;
     telefono: number;
 }
+
+export interface Direccion {
+    id: number;
+    nombreDireccion: string;
+    direccion: string;
+    pais: string;
+    ciudad: string;
+    usuarioId: number;
+}

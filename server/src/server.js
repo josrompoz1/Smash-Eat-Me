@@ -70,7 +70,7 @@ connection.connect(function(err) {
                 "INSERT INTO Tarjeta (numero, expiracion, usuarioId) VALUES ('55554444333311112222','2026-05-01',1)",
                 "INSERT INTO Tarjeta (numero, expiracion, usuarioId) VALUES ('42424242424242424242','2028-05-01',2)",
                 "INSERT INTO Direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES ('Mi casa','C/ Rodrigo, 2','España','Sevilla',1)",
-                "INSERT INTO Direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES ('Mi casa','C/ España, 23','España','Malaga',3)",
+                "INSERT INTO Direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES ('Mi casa','C/ España, 23','España','Malaga',1)",
                 "INSERT INTO Direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES ('Casa abuela','C/ Oriente, 78','España','Granada',3)",
                 "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('semverano',5)",
                 "INSERT INTO CuponDescuento (codigo, porcentaje) VALUES ('seminvierno',10)",

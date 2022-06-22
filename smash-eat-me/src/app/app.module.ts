@@ -27,6 +27,7 @@ import { DataManagementService } from './Services/data-management.service';
 import { ToastrModule } from 'ngx-toastr';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CestaComponent } from './components/cesta/cesta.component';
+import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CestaComponent } from './components/cesta/cesta.component';
     PaginatePipe,
     RegistroUsuarioComponent,
     CestaComponent,
+    DireccionUsuarioComponent,
   ],
   imports: [
     MatBadgeModule,
