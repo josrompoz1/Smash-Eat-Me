@@ -1,4 +1,4 @@
-.cestaPadre {
+/* .cestaPadre {
     width: 100%;
     background: transparent;
     display: flex;
@@ -24,4 +24,37 @@
 
 img {
     width: 20%;
+} */
+
+.cestaPadre {
+    background-color: #EEEEEE;
+    margin-right: 15rem;
+    margin-left: 15rem;
+    height: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    /* IMPORTANTE */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cesta {
+    width: auto;
+}
+
+.precio {
+    float: right;
+}
+
+img {
+    width: 20%;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+.vaciar {
+    float: right;
 }

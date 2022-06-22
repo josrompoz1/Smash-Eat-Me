@@ -23,11 +23,10 @@ export class CestaComponent implements OnInit {
 
   ngOnInit(): void {
     let array = from(this.productosEnCesta);
-    console.log(array)
     array.forEach(val => {
-      if(this.productosCantidad.has(val)) {
+      if (this.productosCantidad.has(val)) {
         let cantidad = this.productosCantidad.get(val)
-        if(cantidad != undefined) {
+        if (cantidad != undefined) {
           cantidad = cantidad + 1;
           this.productosCantidad.set(val, cantidad)
         }
@@ -35,11 +34,11 @@ export class CestaComponent implements OnInit {
         this.productosCantidad.set(val, 1);
       }
     })
-    for(let key of this.productosCantidad.keys()) {
+    for (let key of this.productosCantidad.keys()) {
       let cantidad = this.productosCantidad.get(key);
-      if(cantidad != undefined) {
+      if (cantidad != undefined) {
         this.productosPrecio.set(key.nombre, key.precio * cantidad)
-        this.precioTotal+=key.precio * cantidad;
+        this.precioTotal += key.precio * cantidad;
       }
     }
   }
@@ -55,6 +54,53 @@ export class CestaComponent implements OnInit {
 
   tramitarPedido() {
     console.log(this.productosEnCesta)
+  }
+
+  eliminarUnProducto(producto: ProductoOfertado) {
+    let indice = this.productosEnCesta.indexOf(producto);
+    const prueba = this.productosEnCesta
+    this.productosEnCesta.splice(indice,1)
+    this.dataManagement.productosEnCesta.next(this.productosEnCesta)
+    this.dataManagement.numberOfItemsInBasket.next(this.productosEnCesta.length)
+
+    let cantidadActual = this.productosCantidad.get(producto)
+    if (cantidadActual != undefined) {
+      let cantidadRestante = cantidadActual - 1;
+      if (cantidadRestante == 0) {
+        this.productosCantidad.delete(producto)
+      } else {
+        this.productosCantidad.set(producto, cantidadRestante)
+        this.productosPrecio.set(producto.nombre, producto.precio * cantidadRestante)
+      }
+      this.precioTotal = 0;
+      for (let key of this.productosCantidad.keys()) {
+        let cantidad = this.productosCantidad.get(key);
+        if (cantidad != undefined) {
+          this.precioTotal += key.precio * cantidad;
+        }
+      }
+    }
+  }
+
+  anyadirUnProducto(producto: ProductoOfertado) {    
+    this.productosEnCesta.push(producto)
+    this.dataManagement.productosEnCesta.next(this.productosEnCesta)
+    this.dataManagement.numberOfItemsInBasket.next(this.productosEnCesta.length)
+
+    let cantidadActual = this.productosCantidad.get(producto)
+    if (cantidadActual != undefined) {
+      let cantidadSumante = cantidadActual + 1;
+      this.productosCantidad.set(producto, cantidadSumante)
+      this.productosPrecio.set(producto.nombre, producto.precio * cantidadSumante)
+
+      this.precioTotal = 0;
+      for (let key of this.productosCantidad.keys()) {
+        let cantidad = this.productosCantidad.get(key);
+        if (cantidad != undefined) {
+          this.precioTotal += key.precio * cantidad;
+        }
+      }
+    }
   }
 
 }
