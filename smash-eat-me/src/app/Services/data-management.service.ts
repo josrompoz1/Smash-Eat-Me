@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ProductoOfertado } from '../Models/types';
 import { RestService } from './rest-service.service';
 
@@ -6,6 +7,8 @@ import { RestService } from './rest-service.service';
 export class DataManagementService {
 
   selectedProducto?: ProductoOfertado;
+  public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
 
   constructor(private rest: RestService) { }
 

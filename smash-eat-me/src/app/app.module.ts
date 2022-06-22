@@ -25,6 +25,8 @@ import { ServerResponseInterceptor } from './interceptors/server-response.interc
 import { RestService } from './Services/rest-service.service';
 import { DataManagementService } from './Services/data-management.service';
 import { ToastrModule } from 'ngx-toastr';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CestaComponent } from './components/cesta/cesta.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,10 @@ import { ToastrModule } from 'ngx-toastr';
     ProductosDialogComponent,
     PaginatePipe,
     RegistroUsuarioComponent,
+    CestaComponent,
   ],
   imports: [
+    MatBadgeModule,
     BrowserModule,
     AppRoutingModule,
     MatSliderModule,

@@ -14,6 +14,8 @@ import { DataManagementService } from 'src/app/Services/data-management.service'
 export class ProductosComponent implements OnInit {
   public productos: ProductoOfertado[] = [];
 
+  private productosAñadidos:  ProductoOfertado[] = [];
+
   //Paginator inputs
   page_size: number = 6;
   page_number: number = 1;
@@ -45,9 +47,13 @@ export class ProductosComponent implements OnInit {
     this.page_number = page.pageIndex + 1;
   }
 
-  public onAdd() {
-    this.dialog.closeAll();
-    console.log("El icono funciona");
+  public onAdd(producto: ProductoOfertado) {
+    this.dataManagement.productosEnCesta.subscribe(value => {
+      this.productosAñadidos = value;
+    })
+    this.productosAñadidos.push(producto);
+    this.dataManagement.productosEnCesta.next(this.productosAñadidos);
+    this.dataManagement.numberOfItemsInBasket.next(this.productosAñadidos.length);
   }
 
   public async buscarPlato(): Promise<void> {
