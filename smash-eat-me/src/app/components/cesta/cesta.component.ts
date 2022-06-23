@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { from, map } from 'rxjs';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
@@ -15,7 +16,9 @@ export class CestaComponent implements OnInit {
   productosPrecio = new Map<string, number>();
   precioTotal: number = 0;
 
-  constructor(private dataManagement: DataManagementService) {
+  constructor(private dataManagement: DataManagementService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
     })
@@ -53,7 +56,7 @@ export class CestaComponent implements OnInit {
   }
 
   tramitarPedido() {
-    console.log(this.productosEnCesta)
+    this.router.navigate(['direccion'], { relativeTo: this.route });
   }
 
   eliminarUnProducto(producto: ProductoOfertado) {
@@ -72,13 +75,7 @@ export class CestaComponent implements OnInit {
         this.productosCantidad.set(producto, cantidadRestante)
         this.productosPrecio.set(producto.nombre, producto.precio * cantidadRestante)
       }
-      this.precioTotal = 0;
-      for (let key of this.productosCantidad.keys()) {
-        let cantidad = this.productosCantidad.get(key);
-        if (cantidad != undefined) {
-          this.precioTotal += key.precio * cantidad;
-        }
-      }
+      this.calculaPrecio()
     }
   }
 
@@ -93,12 +90,16 @@ export class CestaComponent implements OnInit {
       this.productosCantidad.set(producto, cantidadSumante)
       this.productosPrecio.set(producto.nombre, producto.precio * cantidadSumante)
 
-      this.precioTotal = 0;
-      for (let key of this.productosCantidad.keys()) {
-        let cantidad = this.productosCantidad.get(key);
-        if (cantidad != undefined) {
-          this.precioTotal += key.precio * cantidad;
-        }
+      this.calculaPrecio()
+    }
+  }
+
+  private calculaPrecio() {
+    this.precioTotal = 0;
+    for (let key of this.productosCantidad.keys()) {
+      let cantidad = this.productosCantidad.get(key);
+      if (cantidad != undefined) {
+        this.precioTotal += key.precio * cantidad;
       }
     }
   }

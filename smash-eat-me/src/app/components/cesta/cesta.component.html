@@ -5,27 +5,6 @@
 </div>
 <hr>
 
-<!-- <div class="cestaPadre">
-    <button *ngIf="productosCantidad.size > 0" mat-raised-button color="primary" (click)="vaciarCesta()">Vaciar cesta</button>
-    <div class="cesta" *ngFor="let key of productosCantidad.keys()">
-        <div class="producto">
-            <img src="{{key.imagen}}" />
-            {{key.nombre}}
-            <mat-icon>remove_circle_outline</mat-icon>
-            {{productosCantidad.get(key)}}
-            <mat-icon>add_circle</mat-icon>
-            {{productosPrecio.get(key.nombre)}}
-            <hr>
-        </div>
-        
-    </div>
-    <div *ngIf="precioTotal > 0">{{precioTotal}}</div>
-    <div *ngIf="productosCantidad.size == 0">
-        Sin productos en la cesta
-    </div>
-</div>
-<button *ngIf="productosCantidad.size > 0" mat-raised-button color="primary" (click)="tramitarPedido()">Tramitar pedido</button> -->
-
 <div class="cestaPadre">
     <div *ngIf="productosCantidad.size > 0" class="cesta">
         <button class="vaciar" mat-raised-button color="primary" (click)="vaciarCesta()">Vaciar cesta</button>
@@ -46,3 +25,4 @@
         Sin productos en la cesta
     </div>
 </div>
+<router-outlet></router-outlet>

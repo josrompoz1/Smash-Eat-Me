@@ -354,7 +354,7 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.get('/direcciones/Usuario/:id', function (req, res, next) {
+    router.get('/direcciones/usuario/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Direccion WHERE usuarioId=?',
             [req.params.id],
@@ -375,11 +375,11 @@ function createRouterUsuarios(db) {
 
     router.post('/direcciones', (req, res, next) => {
         db.query(
-            'INSERT INTO Direccion (nombreDireccion, Direccion, pais, ciudad, usuarioId) VALUES (?,?,?,?,?)',
-            [req.body.nombreDireccion, req.body.Direccion, req.body.pais, req.body.ciudad, req.body.usuarioId],
+            'INSERT INTO Direccion (nombreDireccion, direccion, pais, ciudad, usuarioId) VALUES (?,?,?,?,?)',
+            [req.body.nombreDireccion, req.body.direccion, req.body.pais, req.body.ciudad, req.body.usuarioId],
             (error) => {
                 if (error) {
-                    if (req.body.nombreDireccion || req.body.Direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
+                    if (req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
                         res.status(400).json({ status: 'Bad request' });
                     } else {
                         console.error(error);

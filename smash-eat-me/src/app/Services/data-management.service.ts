@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ProductoOfertado } from '../Models/types';
+import { Direccion, ProductoOfertado } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -9,6 +9,7 @@ export class DataManagementService {
   selectedProducto?: ProductoOfertado;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
+  public direccionSeleccionada: BehaviorSubject<Direccion> | undefined;
 
   constructor(private rest: RestService) { }
 
@@ -24,6 +25,14 @@ export class DataManagementService {
   //USUARIOS
   public async crearUsuario(usuario: any) {
     return await this.rest.crearUsuario(usuario);
+  }
+
+  public async getDireccionesUsuario(id: number): Promise<Direccion[]> {
+    return await this.rest.getDireccionesUsuario(id);
+  }
+
+  public async crearDireccion(direccion: any) {
+    return await this.rest.crearDireccion(direccion);
   }
 
 }
