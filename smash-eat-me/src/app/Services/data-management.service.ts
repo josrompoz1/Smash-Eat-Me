@@ -9,6 +9,7 @@ export class DataManagementService {
   selectedProducto?: ProductoOfertado;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
+  public direccionSeleccionada: BehaviorSubject<Direccion> | undefined;
 
   constructor(private rest: RestService) { }
 
@@ -28,6 +29,10 @@ export class DataManagementService {
 
   public async getDireccionesUsuario(id: number): Promise<Direccion[]> {
     return await this.rest.getDireccionesUsuario(id);
+  }
+
+  public async crearDireccion(direccion: any) {
+    return await this.rest.crearDireccion(direccion);
   }
 
 }

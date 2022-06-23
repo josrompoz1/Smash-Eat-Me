@@ -10,6 +10,8 @@ import { DataManagementService } from 'src/app/Services/data-management.service'
 export class DireccionUsuarioComponent implements OnInit {
 
   public direcciones: Direccion[] = [];
+  direccionSeleccionadaIndex: number = -1;
+  // labelPosition: 'before' | 'after' = 'after';
 
   constructor(private dataManagement: DataManagementService) { }
 
@@ -19,7 +21,11 @@ export class DireccionUsuarioComponent implements OnInit {
 
   private async getData() {
     this.direcciones = await this.dataManagement.getDireccionesUsuario(1); //usuario 1 por defecto. cambiar cuando esté el login
-    console.log(this.direcciones)
+  }
+
+  public guardarDireccionSeleccionada() {
+    const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
+    this.dataManagement.direccionSeleccionada?.next(direccionSeleccionada)
   }
 
 }

@@ -7,32 +7,14 @@
 
 <div class="cestaPadre">
     <div *ngIf="direcciones.length > 0" class="direcciones">
-        <div *ngFor="let direccion of direcciones">
-            {{direccion.direccion}}
+        <div *ngFor="let item of direcciones;  let i = index">
+            <mat-checkbox [checked]="direccionSeleccionadaIndex === i" (change)="direccionSeleccionadaIndex = i">{{item.direccion}}</mat-checkbox>
         </div>
-        <button mat-raised-button color="primary">Agregar direccion</button>
-        <button mat-raised-button color="primary">Continuar</button>
+        <button *ngIf="direccionSeleccionadaIndex > -1" mat-raised-button color="primary" (click)="guardarDireccionSeleccionada()">Continuar</button>
     </div>
     <div *ngIf="direcciones.length == 0">
         No existen direcciones
-        <button mat-raised-button color="primary">Continuar</button>
     </div>
-    <!-- <div *ngIf="productosCantidad.size > 0" class="cesta">
-        <button class="vaciar" mat-raised-button color="primary" (click)="vaciarCesta()">Vaciar cesta</button>
-        <div class="producto" *ngFor="let key of productosCantidad.keys()">
-            <img src="{{key.imagen}}" />
-            {{key.nombre}}
-            <mat-icon (click)="eliminarUnProducto(key)">remove_circle_outline</mat-icon>
-            {{productosCantidad.get(key)}}
-            <mat-icon (click)="anyadirUnProducto(key)">add_circle</mat-icon>
-            {{productosPrecio.get(key.nombre)}}
-            <hr>
-        </div>
-        <div class="precio">{{precioTotal}}</div>
-        <button class="tramitar" mat-raised-button color="primary" (click)="tramitarPedido()">Tramitar pedido</button>
-    </div>
-    
-    <div *ngIf="productosCantidad.size == 0" class="cesta">
-        Sin productos en la cesta
-    </div> -->
+    <button mat-raised-button color="primary" routerLink="/direccion" routerLinkActive="active" >Agregar direccion</button>
 </div>
+<router-outlet></router-outlet>

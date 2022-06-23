@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddDirecionComponent } from './components/add-direcion/add-direcion.component';
 import { CestaComponent } from './components/cesta/cesta.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
 import { ProductosComponent } from './components/productos/productos.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'registro', component: RegistroUsuarioComponent },
   { path: 'cesta', component: CestaComponent, children: [
     { path: 'direccion', component: DireccionUsuarioComponent }
-  ]}
+  ]},
+  { path: 'direccion', component: AddDirecionComponent }
   
 ];
 

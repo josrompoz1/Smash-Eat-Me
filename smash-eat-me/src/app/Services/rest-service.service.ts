@@ -30,4 +30,8 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'direcciones/usuario/' + id);
   }
 
+  public async crearDireccion(direccion: any) {
+    return await this.makePostRequest(this.url + 'direcciones', direccion);
+  }
+
 }

@@ -28,6 +28,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CestaComponent } from './components/cesta/cesta.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { AddDirecionComponent } from './components/add-direcion/add-direcion.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
     RegistroUsuarioComponent,
     CestaComponent,
     DireccionUsuarioComponent,
+    AddDirecionComponent,
   ],
   imports: [
     MatBadgeModule,
@@ -55,6 +59,8 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatRadioModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
