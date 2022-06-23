@@ -31,6 +31,7 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { AddDirecionComponent } from './components/add-direcion/add-direcion.component';
+import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AddDirecionComponent } from './components/add-direcion/add-direcion.com
     CestaComponent,
     DireccionUsuarioComponent,
     AddDirecionComponent,
+    HoraEntregaComponent,
   ],
   imports: [
     MatBadgeModule,
