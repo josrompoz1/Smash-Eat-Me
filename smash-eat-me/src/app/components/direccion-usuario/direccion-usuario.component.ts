@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Direccion } from 'src/app/Models/types';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Direccion, ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
@@ -11,9 +12,16 @@ export class DireccionUsuarioComponent implements OnInit {
 
   public direcciones: Direccion[] = [];
   direccionSeleccionadaIndex: number = -1;
-  // labelPosition: 'before' | 'after' = 'after';
+  productosEnCesta: ProductoOfertado[] = [];
 
-  constructor(private dataManagement: DataManagementService) { }
+  constructor(private dataManagement: DataManagementService,
+              private route: ActivatedRoute,
+              private router: Router) {
+
+    this.dataManagement.productosEnCesta.subscribe(value => {
+      this.productosEnCesta = value;
+    })
+  }
 
   ngOnInit(): void {
     this.getData()
@@ -26,6 +34,7 @@ export class DireccionUsuarioComponent implements OnInit {
   public guardarDireccionSeleccionada() {
     const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
     this.dataManagement.direccionSeleccionada?.next(direccionSeleccionada)
+    this.router.navigate(['horaentrega'], { relativeTo: this.route });
   }
 
 }

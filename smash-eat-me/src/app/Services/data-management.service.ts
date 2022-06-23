@@ -10,6 +10,7 @@ export class DataManagementService {
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> | undefined;
+  public horaSeleccionada: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private rest: RestService) { }
 
