@@ -27,3 +27,16 @@ export interface Direccion {
     ciudad: string;
     usuarioId: number;
 }
+
+export interface Tarjeta {
+    id: number;
+    numero: string;
+    expiracion: Date;
+    usuarioId: number;
+}
+
+export interface CuponDescuento {
+    id: number;
+    codigo: string;
+    porcentaje: number;
+}
