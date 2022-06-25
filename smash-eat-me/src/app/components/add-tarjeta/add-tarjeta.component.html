@@ -1,0 +1,23 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Agregar direccion</h1>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formRegistro">
+        <form [formGroup]="form" (ngSubmit)="crearTarjeta()">
+            <mat-form-field appearance="fill">
+                <mat-label>Numero de tarjeta</mat-label>
+                <input matInput type="number" name="numero" formControlName="numero" placeholder="4242 4242 4242 4242">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de expiracion</mat-label>
+                <input matInput type="date" name="expiracion" formControlName="expiracion">
+            </mat-form-field><br>
+            <button mat-raised-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

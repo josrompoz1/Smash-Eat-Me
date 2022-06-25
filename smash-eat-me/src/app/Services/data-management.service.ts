@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Direccion, ProductoOfertado } from '../Models/types';
+import { CuponDescuento, Direccion, ProductoOfertado, Tarjeta } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -11,6 +11,8 @@ export class DataManagementService {
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> | undefined;
   public horaSeleccionada: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public tarjetaSeleccionada: BehaviorSubject<Tarjeta> | undefined;
+  public seleccionadoCreditoDigital: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private rest: RestService) { }
 
@@ -34,6 +36,23 @@ export class DataManagementService {
 
   public async crearDireccion(direccion: any) {
     return await this.rest.crearDireccion(direccion);
+  }
+
+  public async getTarjetasUsuario(usuarioId: number): Promise<Tarjeta[]> {
+    return await this.rest.getTarjetasUsuario(usuarioId);
+  }
+
+  public async crearTarjeta(tarjeta: any) {
+    return await this.rest.crearTarjeta(tarjeta);
+  }
+
+  public async getCreditoDigital(usuarioId: number): Promise<number> {
+    return await this.rest.getCreditoDigital(usuarioId);
+  }
+
+  //CUPONES DESCUENTO
+  public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
+    return await this.rest.getCuponDescuentoByCodigo(codigo);
   }
 
 }

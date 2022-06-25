@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
@@ -13,7 +14,9 @@ export class HoraEntregaComponent implements OnInit {
   horaSeleccionadaIndex: number = -1;
   productosEnCesta: ProductoOfertado[] = [];
 
-  constructor(private dataManagement: DataManagementService) {
+  constructor(private dataManagement: DataManagementService,
+              private route: ActivatedRoute,
+              private router: Router) {
 
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
@@ -33,6 +36,7 @@ export class HoraEntregaComponent implements OnInit {
   public guardarHoraSeleccionada() {
     const horaSeleccionada: string = this.horas[this.horaSeleccionadaIndex]
     this.dataManagement.horaSeleccionada.next(horaSeleccionada)
+    this.router.navigate(['metodopago'], { relativeTo: this.route })
   }
 
 }

@@ -37,6 +37,25 @@ function createRouterUsuarios(db) {
         );
     });
 
+    router.get('/usuarios/cartera/:id', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Usuario WHERE id=?',
+            [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' })
+                    } else {
+                        res.status(200).json(results[0].creditoDigital);
+                    }
+                }
+            }
+        );
+    });
+
     router.post('/usuarios', (req, res, next) => {
         db.query(
             'INSERT INTO Usuario (username, nombre, correo, contrasena, telefono) VALUES (?,?,?,?,?)',
@@ -234,7 +253,7 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.get('/tarjetas/Usuario/:id', function (req, res, next) {
+    router.get('/tarjetas/usuario/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Tarjeta WHERE usuarioId=?',
             [req.params.id],
