@@ -35,6 +35,7 @@
         <mat-checkbox (change)="creditoSeleccionadoIndex = 0">Credito en la cartera digital....{{creditoDigital}}</mat-checkbox>
         <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-raised-button color="primary" (click)="guardarCarteraDigital()">Continuar</button>
     </div>
+    <button mat-raised-button color="primary" routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
 </div>
 
 <div class="div-subtitulo">

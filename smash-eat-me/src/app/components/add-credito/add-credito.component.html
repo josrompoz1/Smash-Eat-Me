@@ -1,0 +1,50 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Cartera digital</h1>
+    </div>
+</div>
+<hr>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Añadir credito</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="cestaPadre">
+    <div class="tarjetas">
+        Credito en la cartera digital....{{creditoDigital}}
+        {{value}}
+        <mat-slider
+            class="example-margin"
+            [max]=100
+            [min]=0
+            [step]=1
+            [thumbLabel]=true
+            [(ngModel)]="value"
+            aria-labelledby="example-name-label"
+            (change)="setCreditoSeleccionado(value)">
+        </mat-slider>
+    </div>
+</div>
+
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Seleccionar tarjeta</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="cestaPadre">
+    <div *ngIf="tarjetas.length > 0" class="tarjetas">
+        <div *ngFor="let item of tarjetas;  let i = index">
+            <mat-checkbox [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i">{{item.numero}}</mat-checkbox>
+        </div>
+    </div>
+    <div *ngIf="tarjetas.length == 0">
+        No existen tarjetas
+    </div>
+    <button mat-raised-button color="primary" routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
+</div>
+
+<button class="tarjetas" mat-raised-button color="primary" *ngIf="tarjetaSeleccionadaIndex > -1" (click)="anyadirCredito()">Aceptar</button>

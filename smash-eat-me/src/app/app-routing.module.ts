@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddCreditoComponent } from './components/add-credito/add-credito.component';
 import { AddDirecionComponent } from './components/add-direcion/add-direcion.component';
 import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.component';
 import { CestaComponent } from './components/cesta/cesta.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
     ] }
   ]},
   { path: 'direccion', component: AddDirecionComponent },
-  { path: 'tarjeta', component: AddTarjetaComponent }
+  { path: 'tarjeta', component: AddTarjetaComponent },
+  { path: 'creditodigital', component: AddCreditoComponent }
   
 ];
 

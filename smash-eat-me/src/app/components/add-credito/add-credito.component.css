@@ -1,0 +1,40 @@
+.div-subtitulo {
+    border-left: 11em solid white;
+    padding-left: 2em;
+}
+
+.subtitulo {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.hr-subtitulo {
+    width: 80%;
+    border-color: darkorange;
+    margin-bottom: 50px;
+}
+
+.cestaPadre {
+    background-color: #EEEEEE;
+    margin-right: 15rem;
+    margin-left: 15rem;
+    height: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    /* IMPORTANTE */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjetas {
+    width: auto;
+}
+
+h2 {
+    margin-top: 1em;
+}
+
+mat-slider {
+    width: 100%;
+}
