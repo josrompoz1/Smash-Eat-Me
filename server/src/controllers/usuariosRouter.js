@@ -139,7 +139,7 @@ function createRouterUsuarios(db) {
         );
     });
 
-    router.put('/usuarios/:id/addcash', function (req, res, next) {
+    router.put('/usuarios/:id/addcash/:creditoDigital', function (req, res, next) {
         db.query(
             'SELECT creditoDigital FROM Usuario WHERE id=?',
             [req.params.id],
@@ -153,7 +153,7 @@ function createRouterUsuarios(db) {
                     } else {
                         db.query(
                             'UPDATE Usuario SET creditoDigital=? WHERE id=?',
-                            [req.body.creditoDigital + results[0].creditoDigital, req.params.id],
+                            [+req.params.creditoDigital + +results[0].creditoDigital, req.params.id],
                             (error) => {
                                 if (error) {
                                     if (req.body.creditoDigital == undefined) {
@@ -162,7 +162,7 @@ function createRouterUsuarios(db) {
                                         res.status(500).json({ status: 'error' });
                                     }
                                 } else {
-                                    res.status(204).json({ status: 'Resource updated successfully' });
+                                    res.status(201).json({ status: 'Credito actualizado correctamente' });
                                 }
                             }
                         );

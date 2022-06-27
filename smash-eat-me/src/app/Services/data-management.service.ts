@@ -50,6 +50,10 @@ export class DataManagementService {
     return await this.rest.getCreditoDigital(usuarioId);
   }
 
+  public async addCreditoDigital(usuarioId: number, credito: number) {
+    return await this.rest.addCreditoDigital(usuarioId, credito);
+  }
+
   //CUPONES DESCUENTO
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.rest.getCuponDescuentoByCodigo(codigo);

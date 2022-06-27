@@ -37,4 +37,17 @@ export class AbstractWebService {
     })
   }
 
+  protected makePutRequest(path: string, data: any): Promise<any> {
+    return this.getHeaders().then((headers) => {
+      return new Promise((resolve, reject) => {
+        this.http.put(path, data, {headers: headers}).subscribe(response => {
+          resolve(response);
+        }, error => {
+          console.log(error)
+          reject(error);
+        })
+      })
+    })
+  }
+
 }

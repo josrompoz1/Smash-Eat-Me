@@ -66,7 +66,6 @@ export class MetodoPagoComponent implements OnInit {
     for (let key of this.dataManagement.productosEnCesta.getValue()) {
       this.precioTotal += key.precio;
     }
-    console.log(this.precioTotal)
   }
 
 }
