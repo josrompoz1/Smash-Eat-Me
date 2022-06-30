@@ -60,7 +60,7 @@ function createRouterPedidos(db) {
   router.post('/pedidos', (req, res, next) => {
     db.query(
       'INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES (?,?,?,?)',
-      [req.body.metodoPago, req.body.fecha, req.body.hora, req.body.usuarioId],
+      [req.body.metodoPago, req.body.fecha.split("T")[0], req.body.hora, req.body.usuarioId],
       (error) => {
         if (error) {
           if (req.body.metodoPago || req.body.fecha || req.body.hora || req.body.usuarioId) {
@@ -70,7 +70,18 @@ function createRouterPedidos(db) {
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          db.query(
+            'SELECT MAX(id) AS id FROM PedidoComida',
+            [10 * (req.params.page || 0)],
+            (error, result) => {
+              if (error) {
+                console.log(error);
+                res.status(500).json({ status: 'error' });
+              } else {
+                res.status(201).json({status: 'Pedido realizado, gracias!', id: result[0].id});
+              }
+            }
+          );
         }
       }
     );
@@ -196,7 +207,7 @@ function createRouterPedidos(db) {
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          res.status(202).json({status: 'Resource created'});
         }
       });
   });

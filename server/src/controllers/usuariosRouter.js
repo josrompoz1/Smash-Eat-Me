@@ -186,7 +186,7 @@ function createRouterUsuarios(db) {
                     } else {
                         db.query(
                             'UPDATE Usuario SET creditoDigital=? WHERE id=?',
-                            [results[0].creditoDigital - req.body.creditoDigital, req.params.id],
+                            [+results[0].creditoDigital - +req.body.creditoDigital, req.params.id],
                             (error) => {
                                 if (error) {
                                     if (req.body.creditoDigital == undefined) {
@@ -195,7 +195,7 @@ function createRouterUsuarios(db) {
                                         res.status(500).json({ status: 'error' });
                                     }
                                 } else {
-                                    res.status(204).json({ status: 'Resource updated successfully' });
+                                    res.status(201).json({ status: 'Credito digital disminuido' });
                                 }
                             }
                         );

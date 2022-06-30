@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, Direccion, ProductoOfertado, Tarjeta } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -9,10 +9,12 @@ export class DataManagementService {
   selectedProducto?: ProductoOfertado;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
-  public direccionSeleccionada: BehaviorSubject<Direccion> | undefined;
+  public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
   public horaSeleccionada: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public tarjetaSeleccionada: BehaviorSubject<Tarjeta> | undefined;
+  public tarjetaSeleccionada: BehaviorSubject<Tarjeta> = new BehaviorSubject<Tarjeta>({});
   public seleccionadoCreditoDigital: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public precioPedido: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public descuentoAplicado: BehaviorSubject<CuponDescuento> = new BehaviorSubject<CuponDescuento>({});
 
   constructor(private rest: RestService) { }
 
@@ -54,9 +56,22 @@ export class DataManagementService {
     return await this.rest.addCreditoDigital(usuarioId, credito);
   }
 
+  public async deleteCreditoDigital(usuarioId: number, credito: DeleteCashRequest) {
+    return await this.rest.deleteCreditoDigital(usuarioId, credito);
+  }
+
   //CUPONES DESCUENTO
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.rest.getCuponDescuentoByCodigo(codigo);
+  }
+
+  //PEDIDOS COMIDA
+  public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
+    return await this.rest.crearPedidoComida(pedido)
+  }
+
+  public async postProductoPedido(productoPedido: ProductoPedido) {
+    return await this.rest.postProductoPedido(productoPedido)
   }
 
 }

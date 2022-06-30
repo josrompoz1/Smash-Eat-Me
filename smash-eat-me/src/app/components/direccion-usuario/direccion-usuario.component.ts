@@ -33,7 +33,7 @@ export class DireccionUsuarioComponent implements OnInit {
 
   public guardarDireccionSeleccionada() {
     const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
-    this.dataManagement.direccionSeleccionada?.next(direccionSeleccionada)
+    this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
     this.router.navigate(['horaentrega'], { relativeTo: this.route });
   }
 

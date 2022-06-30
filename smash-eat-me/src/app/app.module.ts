@@ -35,6 +35,7 @@ import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.com
 import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
 import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.component';
 import { AddCreditoComponent } from './components/add-credito/add-credito.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AddCreditoComponent } from './components/add-credito/add-credito.compon
     MetodoPagoComponent,
     AddTarjetaComponent,
     AddCreditoComponent,
+    PedidoComponent,
   ],
   imports: [
     MatBadgeModule,
