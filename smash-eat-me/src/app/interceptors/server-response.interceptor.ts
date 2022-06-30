@@ -22,7 +22,6 @@ export class ServerResponseInterceptor implements HttpInterceptor {
         if(this.predicates.indexOf(request.method) >= 0 && evt instanceof HttpResponse && (evt.status == 201 || evt.status == 204)) {
           let message: string = evt.body['status']
           if(message) {
-            console.log(message)
             this.toastr.success(message, 'Smash&Eat Me App')
           }
         }

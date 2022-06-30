@@ -22,6 +22,9 @@ export class CestaComponent implements OnInit {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
     })
+    this.dataManagement.precioPedido.subscribe(value => {
+      this.precioTotal = value;
+    })
   }
 
   ngOnInit(): void {
@@ -44,6 +47,7 @@ export class CestaComponent implements OnInit {
         this.precioTotal += key.precio * cantidad;
       }
     }
+    this.dataManagement.precioPedido.next(this.precioTotal)
   }
 
   vaciarCesta() {
@@ -53,6 +57,7 @@ export class CestaComponent implements OnInit {
     this.dataManagement.numberOfItemsInBasket.next(0);
     this.dataManagement.productosEnCesta.next(this.productosEnCesta);
     this.precioTotal = 0;
+    this.dataManagement.precioPedido.next(this.precioTotal)
   }
 
   tramitarPedido() {
@@ -102,6 +107,7 @@ export class CestaComponent implements OnInit {
         this.precioTotal += key.precio * cantidad;
       }
     }
+    this.dataManagement.precioPedido.next(this.precioTotal)
   }
 
 }

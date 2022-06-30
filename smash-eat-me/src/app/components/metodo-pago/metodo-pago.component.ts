@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CuponDescuento, ProductoOfertado, Tarjeta } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
@@ -18,9 +19,14 @@ export class MetodoPagoComponent implements OnInit {
   precioTotal: number = 0;
   form!: FormGroup;
 
-  constructor(private dataManagement: DataManagementService) {
+  constructor(private dataManagement: DataManagementService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
+    })
+    this.dataManagement.precioPedido.subscribe(value => {
+      this.precioTotal = value;
     })
   }
 
@@ -42,7 +48,7 @@ export class MetodoPagoComponent implements OnInit {
     this.dataManagement.seleccionadoCreditoDigital.next(false);
 
     const tarjetaSeleccionada: Tarjeta = this.tarjetas[this.tarjetaSeleccionadaIndex]
-    this.dataManagement.tarjetaSeleccionada?.next(tarjetaSeleccionada)
+    this.dataManagement.tarjetaSeleccionada.next(tarjetaSeleccionada)
   }
 
   public guardarCarteraDigital() {
@@ -55,10 +61,17 @@ export class MetodoPagoComponent implements OnInit {
     if(this.form.valid) {
       const cupon: CuponDescuento[] = await this.dataManagement.getCuponDescuentoByCodigo(this.form.value.codigo);
       if(cupon != undefined) {
+        this.dataManagement.descuentoAplicado.next(cupon[0])
+        if(cupon[0].porcentaje != undefined)
         this.precioTotal = (this.precioTotal * (100 - cupon[0].porcentaje)) / 100
+        this.dataManagement.precioPedido.next(this.precioTotal)
         this.form.controls['codigo'].disable();
       }
     }
+  }
+
+  public tramitarPedido() {
+    this.router.navigate(['pedido']);
   }
 
   private calculaPrecio() {
@@ -66,6 +79,7 @@ export class MetodoPagoComponent implements OnInit {
     for (let key of this.dataManagement.productosEnCesta.getValue()) {
       this.precioTotal += key.precio;
     }
+    this.dataManagement.precioPedido.next(this.precioTotal)
   }
 
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, Direccion, ProductoOfertado, Tarjeta } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -50,9 +50,22 @@ export class RestService extends AbstractWebService {
     return await this.makePutRequest(this.url + 'usuarios/' + usuarioId + '/addcash/' + credito, null);
   }
 
+  public async deleteCreditoDigital(usuarioId: number, credito: DeleteCashRequest) {
+    return await this.makePutRequest(this.url + 'usuarios/' + usuarioId + '/deletecash', credito);
+  }
+
   //CUPONES DESCUENTO
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
+  }
+
+  //PEDIDOS COMIDA
+  public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
+    return this.makePostRequest(this.url + 'pedidos', pedido);
+  }
+
+  public async postProductoPedido(productoPedido: ProductoPedido) {
+    return this.makePostRequest(this.url + 'productospedidos', productoPedido);
   }
 
 }

@@ -52,7 +52,9 @@
                 <mat-label>Cupon descuento</mat-label>
                 <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-raised-button type="submit">Aplicar cupon</button>
         </form>
     </div>
 </div>
+
+<button *ngIf="creditoSeleccionadoIndex > -1 || tarjetaSeleccionadaIndex > -1" mat-raised-button color="primary" (click)="tramitarPedido()">Tramitar pedido</button>
