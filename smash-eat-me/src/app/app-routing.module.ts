@@ -5,6 +5,7 @@ import { AddDirecionComponent } from './components/add-direcion/add-direcion.com
 import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.component';
 import { CestaComponent } from './components/cesta/cesta.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
+import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
 import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
 import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'direccion', component: AddDirecionComponent },
   { path: 'tarjeta', component: AddTarjetaComponent },
   { path: 'creditodigital', component: AddCreditoComponent },
-  { path: 'pedido', component: PedidoComponent }
+  { path: 'pedido', component: PedidoComponent },
+  { path: 'historialpedidos', component: HistorialPedidosComponent }
   
 ];
 

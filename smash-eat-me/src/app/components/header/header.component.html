@@ -5,6 +5,7 @@
         </div>
         <nav>
             <a routerLink="/registro" routerLinkActive="active">Cuenta</a>
+            <a routerLink="/historialpedidos" routerLinkActive="active">Mis pedidos</a>
             <a>Menu</a>
             <a routerLink="/cesta" routerLinkActive="active" *ngIf="numberOfItems !== 0">
                <mat-icon matBadge="{{numberOfItems}}" matBadgeColor="warn">shopping_basket</mat-icon>

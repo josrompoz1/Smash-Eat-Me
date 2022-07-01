@@ -48,8 +48,10 @@ export interface PedidoComida {
     metodoPago: string;
     fecha: Date;
     hora: string;
+    nombreDireccion?: string;
     estado?: string;
     usuarioId: number;
+    direccionUsuarioId?: number;
 }
 
 export interface PedidoComidaResponse {

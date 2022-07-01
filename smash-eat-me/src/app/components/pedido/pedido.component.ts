@@ -11,7 +11,7 @@ import { Time } from "@angular/common";
 })
 export class PedidoComponent implements OnInit, OnDestroy {
 
-  direccion: Direccion | undefined;
+  direccion!: Direccion;
   tarjeta: Tarjeta | undefined;
   creditoDigital: boolean = false;
   productosPedido: ProductoOfertado[] = [];
@@ -99,7 +99,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
       metodoPago: metodo,
       fecha: new Date(),
       hora: this.horaEntrega,
-      usuarioId: 1
+      nombreDireccion: this.direccion.direccion,
+      usuarioId: 1,
+      direccionUsuarioId: this.direccion.id
     };
     const credito: DeleteCashRequest = {
       creditoDigital: this.precioFinal

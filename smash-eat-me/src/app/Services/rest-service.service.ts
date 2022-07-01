@@ -60,6 +60,10 @@ export class RestService extends AbstractWebService {
   }
 
   //PEDIDOS COMIDA
+  public async getPedidosByUsuarioId(usuarioId: number): Promise<PedidoComida[]> {
+    return this.makeGetRequest(this.url + 'pedidos/usuario/' + usuarioId)
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return this.makePostRequest(this.url + 'pedidos', pedido);
   }
