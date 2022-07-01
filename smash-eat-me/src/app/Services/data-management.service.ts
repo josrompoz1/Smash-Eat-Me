@@ -66,6 +66,10 @@ export class DataManagementService {
   }
 
   //PEDIDOS COMIDA
+  public async getPedidosByUsuarioId(usuarioId: number): Promise<PedidoComida[]> {
+    return await this.rest.getPedidosByUsuarioId(usuarioId);
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.rest.crearPedidoComida(pedido)
   }

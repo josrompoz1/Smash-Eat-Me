@@ -36,6 +36,8 @@ import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.compon
 import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.component';
 import { AddCreditoComponent } from './components/add-credito/add-credito.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
+import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { PedidoComponent } from './components/pedido/pedido.component';
     AddTarjetaComponent,
     AddCreditoComponent,
     PedidoComponent,
+    HistorialPedidosComponent,
   ],
   imports: [
     MatBadgeModule,
@@ -71,6 +74,7 @@ import { PedidoComponent } from './components/pedido/pedido.component';
     MatInputModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatTableModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

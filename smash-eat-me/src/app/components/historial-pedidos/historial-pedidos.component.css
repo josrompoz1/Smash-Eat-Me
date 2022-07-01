@@ -1,0 +1,13 @@
+.pedidos {
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+th {
+    text-align: center;
+}
