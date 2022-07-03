@@ -37,7 +37,9 @@ import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.compon
 import { AddCreditoComponent } from './components/add-credito/add-credito.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { ValoracionComponent } from './components/valoracion/valoracion.component'
+import { ValoracionService } from './Services/valoracion.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { MatTableModule } from '@angular/material/table'
     AddCreditoComponent,
     PedidoComponent,
     HistorialPedidosComponent,
+    ValoracionComponent,
   ],
   imports: [
     MatBadgeModule,
@@ -85,6 +88,7 @@ import { MatTableModule } from '@angular/material/table'
   providers: [
     RestService,
     DataManagementService,
+    ValoracionService,
     { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

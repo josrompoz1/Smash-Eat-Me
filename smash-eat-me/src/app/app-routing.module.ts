@@ -11,6 +11,7 @@ import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.compon
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
+import { ValoracionComponent } from './components/valoracion/valoracion.component';
 
 const routes: Routes = [
   { path: '', component: ProductosComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'tarjeta', component: AddTarjetaComponent },
   { path: 'creditodigital', component: AddCreditoComponent },
   { path: 'pedido', component: PedidoComponent },
-  { path: 'historialpedidos', component: HistorialPedidosComponent }
+  { path: 'historialpedidos', component: HistorialPedidosComponent },
+  { path: 'valoracion', component: ValoracionComponent }
   
 ];
 

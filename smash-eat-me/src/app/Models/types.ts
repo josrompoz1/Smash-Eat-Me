@@ -45,12 +45,12 @@ export interface CuponDescuento {
 
 export interface PedidoComida {
     id?: number;
-    metodoPago: string;
-    fecha: Date;
-    hora: string;
+    metodoPago?: string;
+    fecha?: Date;
+    hora?: string;
     nombreDireccion?: string;
     estado?: string;
-    usuarioId: number;
+    usuarioId?: number;
     direccionUsuarioId?: number;
 }
 
