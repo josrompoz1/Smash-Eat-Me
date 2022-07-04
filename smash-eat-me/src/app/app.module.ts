@@ -41,6 +41,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ValoracionComponent } from './components/valoracion/valoracion.component'
 import { ValoracionService } from './Services/valoracion.service';
 import { ValoracionDialogComponent } from './components/valoracion-dialog/valoracion-dialog.component';
+import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ValoracionDialogComponent } from './components/valoracion-dialog/valora
     HistorialPedidosComponent,
     ValoracionComponent,
     ValoracionDialogComponent,
+    ReservarMesaComponent,
   ],
   imports: [
     MatBadgeModule,
