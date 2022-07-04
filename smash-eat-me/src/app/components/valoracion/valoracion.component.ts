@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PedidoComida, ProductoPedido, ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { ValoracionService } from 'src/app/Services/valoracion.service';
+import { ValoracionDialogComponent } from '../valoracion-dialog/valoracion-dialog.component';
 
 @Component({
   selector: 'app-valoracion',
@@ -18,9 +20,11 @@ export class ValoracionComponent implements OnInit {
   value = 0;
   form!: FormGroup;
   displayedColumns: string[] = ['id', 'direccion', 'pago', 'fecha', 'estado'];
-  displayedColumnsValoracion: string[] = ['nombre', 'puntuacion', 'descripcion'];
+  displayedColumnsValoracion: string[] = ['nombre', 'precio', 'tipo', 'valorar'];
 
-  constructor(private dataManagement: DataManagementService, private valoracionService: ValoracionService) {
+  constructor(private dataManagement: DataManagementService,
+              private valoracionService: ValoracionService,
+              private dialog: MatDialog) {
     this.valoracionService.pedidoAValorar.subscribe(value => {
       this.pedidoAvalorar = value;
     })
@@ -28,6 +32,15 @@ export class ValoracionComponent implements OnInit {
 
   async ngOnInit() {
     this.getData()
+  }
+
+  public async onSelect(producto: ProductoOfertado): Promise<void> {
+    this.dataManagement.selectedProducto = producto;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "60%";
+    dialogConfig.height = "70%";
+    this.dialog.open(ValoracionDialogComponent, dialogConfig);
   }
 
   private async getData() {
@@ -48,15 +61,6 @@ export class ValoracionComponent implements OnInit {
       }
     }
     this.productosAValorar = auxArray;
-    console.log(this.productosAValorar)
-  }
-
-  public setPuntuacion(puntuacion: number, id: number) {
-
-  }
-
-  public anyadirDescripcion(id: number) {
-
   }
 
 }

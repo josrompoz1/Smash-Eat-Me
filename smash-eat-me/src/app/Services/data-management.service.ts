@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -89,6 +89,11 @@ export class DataManagementService {
 
   public async postProductoPedido(productoPedido: ProductoPedido) {
     return await this.rest.postProductoPedido(productoPedido)
+  }
+
+  //VALORACIONES
+  public async postValoracion(valoracion: Valoracion) {
+    return await this.rest.postValoracion(valoracion)
   }
 
 }

@@ -40,6 +40,7 @@ import { HistorialPedidosComponent } from './components/historial-pedidos/histor
 import { MatTableModule } from '@angular/material/table';
 import { ValoracionComponent } from './components/valoracion/valoracion.component'
 import { ValoracionService } from './Services/valoracion.service';
+import { ValoracionDialogComponent } from './components/valoracion-dialog/valoracion-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ValoracionService } from './Services/valoracion.service';
     PedidoComponent,
     HistorialPedidosComponent,
     ValoracionComponent,
+    ValoracionDialogComponent,
   ],
   imports: [
     MatBadgeModule,

@@ -68,3 +68,11 @@ export interface  ProductoPedido {
     pedidoId: number;
     productoOfertadoId: number;
 }
+
+export interface Valoracion {
+    id?: number;
+    puntuacion: number;
+    reseña: string;
+    usuarioId: number;
+    productoPedidoId: number;
+}

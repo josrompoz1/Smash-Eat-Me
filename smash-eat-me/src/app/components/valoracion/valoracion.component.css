@@ -33,6 +33,6 @@ mat-icon {
     margin-bottom: 50px;
 }
 
-mat-slider {
-    width: 100%;
+mat-icon {
+    cursor: pointer;
 }
