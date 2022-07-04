@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -25,6 +25,10 @@ export class DataManagementService {
 
   public async getProductosPorBusqueda(busqueda: string): Promise<ProductoOfertado[]> {
     return await this.rest.getProductosPorBusqueda(busqueda);
+  }
+
+  public async getProductosById(id: number): Promise<ProductoOfertado> {
+    return await this.rest.getProductosById(id);
   }
 
   //USUARIOS
@@ -70,12 +74,26 @@ export class DataManagementService {
     return await this.rest.getPedidosByUsuarioId(usuarioId);
   }
 
+  public async getPedidoComidaById(id: number): Promise<PedidoComida> {
+    return await this.rest.getPedidoComidaById(id);
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.rest.crearPedidoComida(pedido)
   }
 
+  //PRODUCTOS PEDIDOS
+  public async getProductosEnPedidoById(pedidoId: number): Promise<ProductoPedido[]> {
+    return await this.rest.getProductosEnPedidoById(pedidoId);
+  }
+
   public async postProductoPedido(productoPedido: ProductoPedido) {
     return await this.rest.postProductoPedido(productoPedido)
+  }
+
+  //VALORACIONES
+  public async postValoracion(valoracion: Valoracion) {
+    return await this.rest.postValoracion(valoracion)
   }
 
 }

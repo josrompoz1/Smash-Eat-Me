@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -19,6 +19,10 @@ export class RestService extends AbstractWebService {
 
   public async getProductosPorBusqueda(busqueda: string): Promise<ProductoOfertado[]> {
     return await this.makeGetRequest(this.url + 'productos/busqueda/' + busqueda);
+  }
+
+  public async getProductosById(id: number): Promise<ProductoOfertado> {
+    return await this.makeGetRequest(this.url + 'productos/' + id);
   }
 
   //USUARIOS
@@ -56,20 +60,34 @@ export class RestService extends AbstractWebService {
 
   //CUPONES DESCUENTO
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
-    return this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
+    return await this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
   }
 
   //PEDIDOS COMIDA
   public async getPedidosByUsuarioId(usuarioId: number): Promise<PedidoComida[]> {
-    return this.makeGetRequest(this.url + 'pedidos/usuario/' + usuarioId)
+    return await this.makeGetRequest(this.url + 'pedidos/usuario/' + usuarioId)
+  }
+
+  public async getPedidoComidaById(id: number): Promise<PedidoComida> {
+    return await this.makeGetRequest(this.url + 'pedidos/' + id)
   }
 
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
-    return this.makePostRequest(this.url + 'pedidos', pedido);
+    return await this.makePostRequest(this.url + 'pedidos', pedido);
+  }
+
+  //PRODUCTOS PEDIDOS
+  public async getProductosEnPedidoById(pedidoId: number): Promise<ProductoPedido[]> {
+    return await this.makeGetRequest(this.url + "productospedidos/" + pedidoId);
   }
 
   public async postProductoPedido(productoPedido: ProductoPedido) {
-    return this.makePostRequest(this.url + 'productospedidos', productoPedido);
+    return await this.makePostRequest(this.url + 'productospedidos', productoPedido);
+  }
+
+  //VALORACIONES
+  public async postValoracion(valoracion: Valoracion) {
+    return await this.makePostRequest(this.url + 'valoraciones', valoracion);
   }
 
 }

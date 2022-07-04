@@ -32,7 +32,7 @@ function createRouterProductos(db) {
           if (results.length == 0) {
             res.status(404).json({ status: 'Not found' })
           } else {
-            res.status(200).json(results);
+            res.status(200).json(results[0]);
           }
         }
       }

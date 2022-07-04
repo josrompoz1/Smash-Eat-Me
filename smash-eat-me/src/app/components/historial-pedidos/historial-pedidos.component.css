@@ -11,3 +11,7 @@ table {
 th {
     text-align: center;
 }
+
+mat-icon {
+    cursor: pointer;
+}

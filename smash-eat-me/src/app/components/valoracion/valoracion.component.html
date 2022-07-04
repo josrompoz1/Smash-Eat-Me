@@ -1,0 +1,76 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Valoracion del pedido</h1>
+    </div>
+</div>
+<hr>
+
+<div class="pedido">
+    <table mat-table [dataSource]="pedidoAValorarArray" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef> Direccion de entrega </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombreDireccion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pago">
+            <th mat-header-cell *matHeaderCellDef> Metodo de pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.metodoPago}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha de pedido </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado de pedido </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Productos en el pedido</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+
+<div class="valoracion">
+    <table mat-table [dataSource]="productosAValorar" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let producto"> {{producto.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let producto"> {{producto.precio}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <td mat-cell *matCellDef="let producto"> {{producto.tipo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valorar">
+            <th mat-header-cell *matHeaderCellDef> Valorar producto </th>
+            <td mat-cell *matCellDef="let producto">
+                <mat-icon (click)="onSelect(producto)">thumbs_up_down</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsValoracion"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsValoracion;"></tr>
+    </table>
+</div>

@@ -45,12 +45,12 @@ export interface CuponDescuento {
 
 export interface PedidoComida {
     id?: number;
-    metodoPago: string;
-    fecha: Date;
-    hora: string;
+    metodoPago?: string;
+    fecha?: Date;
+    hora?: string;
     nombreDireccion?: string;
     estado?: string;
-    usuarioId: number;
+    usuarioId?: number;
     direccionUsuarioId?: number;
 }
 
@@ -67,4 +67,12 @@ export interface  ProductoPedido {
     cantidad: number;
     pedidoId: number;
     productoOfertadoId: number;
+}
+
+export interface Valoracion {
+    id?: number;
+    puntuacion: number;
+    reseña: string;
+    usuarioId: number;
+    productoPedidoId: number;
 }

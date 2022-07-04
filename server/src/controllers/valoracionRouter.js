@@ -55,7 +55,7 @@ function createRouterValoraciones(db) {
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          res.status(201).json({status: 'Producto valorado correctamente'});
         }
       });
   });
