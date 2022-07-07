@@ -76,3 +76,20 @@ export interface Valoracion {
     usuarioId: number;
     productoPedidoId: number;
 }
+
+export interface Menu {
+    id?: number;
+    nombre: string;
+    descripcion: string;
+    precio: number;
+}
+
+export interface Mesa {
+    id?: number;
+    numeroPersonas: number;
+    fecha: Date;
+    hora: string;
+    precioDescuento?: number;
+    usuarioId: number;
+    menuId: number;
+}

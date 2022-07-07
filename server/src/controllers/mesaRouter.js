@@ -78,18 +78,20 @@ function createRouterMesas(db) {
 
   router.post('/mesas', (req, res, next) => {
     db.query(
-      'INSERT INTO Mesa (numeroPersonas, fecha, hora, usuarioId, menuId) VALUES (?,?,?,?,?)',
-      [req.body.numeroPersonas, req.body.fecha, req.body.hora, req.body.usuarioId, req.body.menuId],
+      'INSERT INTO Mesa (numeroPersonas, fecha, hora, precioDescuento, usuarioId, menuId) VALUES (?,?,?,?,?,?)',
+      [req.body.numeroPersonas, req.body.fecha.split("T")[0], req.body.hora, req.body.precioDescuento, req.body.usuarioId, req.body.menuId],
       (error) => {
         if (error) {
           if (req.body.numeroPersonas || req.body.fecha || req.body.hora || req.body.usuarioId || req.body.menuId) {
+            console.log(req.body.fecha)
+            console.log(req.body.hora)
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          res.status(201).json({status: 'Reserva realizada correctamente'});
         }
       }
     );
