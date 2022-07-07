@@ -43,7 +43,7 @@ connection.connect(function(err) {
                 "CREATE TABLE Menu (id INT AUTO_INCREMENT, nombre VARCHAR(100) NOT NULL, descripcion TEXT NOT NULL, precio FLOAT, PRIMARY KEY(id));",
                 "CREATE TABLE ProductoOfertado (id INT AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL, descripcion VARCHAR(255) NOT NULL, imagen TEXT NOT NULL, precio FLOAT NOT NULL, tipo ENUM('Entremes','Plato','Postre','Bebida') NOT NULL, menuId INT, PRIMARY KEY(id), FOREIGN KEY (menuId) REFERENCES Menu(id));",
                 "CREATE TABLE ProductoPedido (id INT AUTO_INCREMENT, cantidad INT NOT NULL, pedidoId INT NOT NULL, productoOfertadoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (pedidoId) REFERENCES PedidoComida(id), FOREIGN KEY (productoOfertadoId) REFERENCES ProductoOfertado(id));",
-                "CREATE TABLE Valoracion (id INT AUTO_INCREMENT, puntuacion INT NOT NULL, reseña TEXT, usuarioId INT NOT NULL, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id));",
+                "CREATE TABLE Valoracion (id INT AUTO_INCREMENT, puntuacion INT NOT NULL, reseña TEXT, nombreUsuario VARCHAR(50) NOT NULL, nombreProducto VARCHAR(255) NOT NULL, usuarioId INT NOT NULL, productoPedidoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (productoPedidoId) REFERENCES ProductoPedido(id));",
                 "CREATE TABLE Mesa (id INT AUTO_INCREMENT, numeroPersonas INT NOT NULL, fecha DATE NOT NULL, hora TIME NOT NULL, precioDescuento FLOAT, usuarioId INT NOT NULL, menuId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE, FOREIGN KEY (menuId) REFERENCES Menu(id));",
                 "CREATE TABLE Reto (id INT AUTO_INCREMENT, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(255) NOT NULL, categoria ENUM('Inyeccion de codigo','Criptografia','Autenticacion e identificacion','Control de acceso') NOT NULL, dificultad INT NOT NULL, completado BOOLEAN NOT NULL DEFAULT FALSE, PRIMARY KEY(id));",
                 "CREATE TABLE Solucion (id INT AUTO_INCREMENT, tipo ENUM('Interactiva','No interactiva') NOT NULL, retoId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (retoId) REFERENCES Reto(id));",
@@ -104,10 +104,10 @@ connection.connect(function(err) {
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 2, 2)",
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 2)",
                 "INSERT INTO ProductoPedido (cantidad, pedidoId, productoOfertadoId) VALUES (1, 3, 4)",
-                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (4,'Bueno',1,1)",
-                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (2,'Malo',1,2)",
-                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (3,'Mediocre',1,4)",
-                "INSERT INTO Valoracion (puntuacion, reseña, usuarioId, productoPedidoId) VALUES (5,'Muy bueno',1,2)"];
+                "INSERT INTO Valoracion (puntuacion, reseña, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (4,'Bueno','perico','Tortilla de papas',1,1)",
+                "INSERT INTO Valoracion (puntuacion, reseña, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (2,'Malo','perico','Tarta de la abuela',1,2)",
+                "INSERT INTO Valoracion (puntuacion, reseña, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (3,'Mediocre','perico','Tortilla de papas',1,4)",
+                "INSERT INTO Valoracion (puntuacion, reseña, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (5,'Muy bueno','perico','Tarta de la abuela',1,2)"];
   queries.forEach(function(q) {
     connection.query(q, function (err, result) {
       if(err) throw err;

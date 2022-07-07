@@ -1,11 +1,11 @@
 <div class="contenedor">
     <div class="titulo">
-        <h1>Mis pedidos</h1>
+        <h1>{{titulo}}</h1>
     </div>
 </div>
 <hr>
 
-<div class="pedidos">
+<div *ngIf="rol === 'NOADMIN'" class="pedidos">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">
@@ -42,5 +42,50 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<div *ngIf="rol === 'ADMIN'" class="pedidos">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef> Cliente </th>
+            <td mat-cell *matCellDef="let element"> {{element.usuarioId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+            <th mat-header-cell *matHeaderCellDef> Direccion de entrega </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombreDireccion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha de pedido </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hora">
+            <th mat-header-cell *matHeaderCellDef> Hora de entrega </th>
+            <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado de pedido </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gestionar">
+            <th mat-header-cell *matHeaderCellDef> Gestionar pedido </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="gestionarPedido(element)">input</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsAdmin"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsAdmin;"></tr>
     </table>
 </div>

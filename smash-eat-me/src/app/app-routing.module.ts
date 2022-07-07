@@ -7,6 +7,7 @@ import { CestaComponent } from './components/cesta/cesta.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
 import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
 import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
+import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { ProductosComponent } from './components/productos/productos.component';
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'pedido', component: PedidoComponent },
   { path: 'historialpedidos', component: HistorialPedidosComponent },
   { path: 'valoracion', component: ValoracionComponent },
-  { path: 'reservamesa', component: ReservarMesaComponent }
+  { path: 'reservamesa', component: ReservarMesaComponent },
+  { path: 'listadousuarios', component: ListadoUsuariosComponent }
   
 ];
 

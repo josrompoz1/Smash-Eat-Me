@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Usuario, Valoracion } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -31,6 +31,10 @@ export class RestService extends AbstractWebService {
   }
 
   //USUARIOS
+  public async getAllUsuarios(): Promise<Usuario[]> {
+    return await this.makeGetRequest(this.url+ 'usuarios');
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.makePostRequest(this.url + 'usuarios', usuario);
   }
@@ -77,6 +81,10 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'pedidos/' + id)
   }
 
+  public async getAllPedidos(): Promise<PedidoComida[]> {
+    return await this.makeGetRequest(this.url + 'pedidos')
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.makePostRequest(this.url + 'pedidos', pedido);
   }
@@ -91,6 +99,10 @@ export class RestService extends AbstractWebService {
   }
 
   //VALORACIONES
+  public async getAllValoraciones(): Promise<Valoracion[]> {
+    return await this.makeGetRequest(this.url + 'valoraciones')
+  }
+
   public async postValoracion(valoracion: Valoracion) {
     return await this.makePostRequest(this.url + 'valoraciones', valoracion);
   }

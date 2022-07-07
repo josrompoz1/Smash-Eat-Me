@@ -1,0 +1,60 @@
+<div class="padre">
+    <div class="hijo1">
+        <div class="contenedor">
+            <div class="titulo">
+                <h1>Usuarios registrados</h1>
+            </div>
+        </div>
+        <hr>
+
+        <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef> Nombre de usuario </th>
+                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="correo">
+                <th mat-header-cell *matHeaderCellDef> Correo </th>
+                <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="rol">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsUsuario"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsUsuario;"></tr>
+        </table>
+    </div>
+    <div class="hijo2">
+        <div class="contenedor">
+            <div class="titulo">
+                <h1>Valoraciones</h1>
+            </div>
+        </div>
+        <hr>
+
+        <table mat-table [dataSource]="valoraciones" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef> Nombre de usuario </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreUsuario}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="producto">
+                <th mat-header-cell *matHeaderCellDef> Correo </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreProducto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="puntuacion">
+                <th mat-header-cell *matHeaderCellDef> Rol </th>
+                <td mat-cell *matCellDef="let element"> {{element.puntuacion}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsValoracion"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsValoracion;"></tr>
+        </table>
+    </div>
+</div>

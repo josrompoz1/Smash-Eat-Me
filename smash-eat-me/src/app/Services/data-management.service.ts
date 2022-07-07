@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Usuario, Valoracion } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
 export class DataManagementService {
 
   selectedProducto?: ProductoOfertado;
+  selectedPedido?: PedidoComida;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -37,6 +38,10 @@ export class DataManagementService {
   }
 
   //USUARIOS
+  public async getAllUsuarios(): Promise<Usuario[]> {
+    return await this.rest.getAllUsuarios()
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.rest.crearUsuario(usuario);
   }
@@ -83,6 +88,10 @@ export class DataManagementService {
     return await this.rest.getPedidoComidaById(id);
   }
 
+  public async getAllPedidos(): Promise<PedidoComida[]> {
+    return await this.rest.getAllPedidos();
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.rest.crearPedidoComida(pedido)
   }
@@ -97,6 +106,10 @@ export class DataManagementService {
   }
 
   //VALORACIONES
+  public async getAllValoraciones(): Promise<Valoracion[]> {
+    return await this.rest.getAllValoraciones()
+  }
+  
   public async postValoracion(valoracion: Valoracion) {
     return await this.rest.postValoracion(valoracion)
   }

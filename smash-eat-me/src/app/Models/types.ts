@@ -73,6 +73,8 @@ export interface Valoracion {
     id?: number;
     puntuacion: number;
     reseña: string;
+    nombreUsuario: string;
+    nombreProducto: string;
     usuarioId: number;
     productoPedidoId: number;
 }
