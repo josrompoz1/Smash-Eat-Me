@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -93,6 +93,11 @@ export class RestService extends AbstractWebService {
   //VALORACIONES
   public async postValoracion(valoracion: Valoracion) {
     return await this.makePostRequest(this.url + 'valoraciones', valoracion);
+  }
+
+  //MESAS
+  public async postReservaMesa(mesa: Mesa) {
+    return await this.makePostRequest(this.url + 'mesas', mesa)
   }
 
 }

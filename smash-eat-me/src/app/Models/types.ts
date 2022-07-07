@@ -83,3 +83,13 @@ export interface Menu {
     descripcion: string;
     precio: number;
 }
+
+export interface Mesa {
+    id?: number;
+    numeroPersonas: number;
+    fecha: Date;
+    hora: string;
+    precioDescuento?: number;
+    usuarioId: number;
+    menuId: number;
+}

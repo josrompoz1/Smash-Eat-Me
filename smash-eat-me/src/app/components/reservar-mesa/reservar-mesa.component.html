@@ -49,7 +49,7 @@
             <h3>Seleccionar menú</h3>
             <div *ngFor="let item of menus;  let i = index">
                 <mat-checkbox [checked]="menuSeleccionadoIndex === i" (change)="setMenuSeleccionado(i)">{{item.nombre}}
-                    {{item.precio}}</mat-checkbox>
+                    {{mapMenuPrecio.get(item)}}</mat-checkbox>
             </div>
         </div>
         <div class="descuento">
