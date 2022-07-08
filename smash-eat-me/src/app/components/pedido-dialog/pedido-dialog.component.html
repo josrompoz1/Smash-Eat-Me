@@ -8,3 +8,42 @@
     </div>
 </div>
 <hr>
+
+<!-- meter los productos -->
+
+<div class="formPadre">
+    <div class="formRegistro">
+        <form [formGroup]="form" (ngSubmit)="updateEstadoPedido()">
+            <mat-form-field appearance="fill">
+                <mat-label>Direccion</mat-label>
+                <input matInput type="text" name="direccion" formControlName="direccion" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de pedido</mat-label>
+                <input matInput type="text" name="fecha" formControlName="fecha" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Hora de entrega</mat-label>
+                <input matInput type="text" name="hora" formControlName="hora" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <mat-select matInput formControlName="estado">
+                    <mat-option value="Pagado" disabled>Pagado</mat-option>
+                    <mat-option value="En preparacion">En preparacion</mat-option>
+                    <mat-option value="En transito">En transito</mat-option>
+                    <mat-option value="Entregado">Entregado</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre del cliente</mat-label>
+                <input matInput type="text" name="nombreCliente" formControlName="nombreCliente" readonly>
+            </mat-form-field><br>
+            <button mat-raised-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

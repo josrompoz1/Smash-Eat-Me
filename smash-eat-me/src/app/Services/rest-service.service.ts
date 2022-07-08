@@ -35,6 +35,10 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url+ 'usuarios');
   }
 
+  public async getUsuarioById(id: number): Promise<Usuario[]> {
+    return await this.makeGetRequest(this.url + 'usuarios/' + id)
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.makePostRequest(this.url + 'usuarios', usuario);
   }
@@ -87,6 +91,18 @@ export class RestService extends AbstractWebService {
 
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.makePostRequest(this.url + 'pedidos', pedido);
+  }
+
+  public async putPedidoEnPreparacion(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/preparacion/' + id, null)
+  }
+
+  public async putPedidoEnTransito(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/transito/' + id, null)
+  }
+
+  public async putPedidoEntregado(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/entregado/' + id, null)
   }
 
   //PRODUCTOS PEDIDOS

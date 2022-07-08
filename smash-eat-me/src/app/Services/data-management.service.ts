@@ -42,6 +42,10 @@ export class DataManagementService {
     return await this.rest.getAllUsuarios()
   }
 
+  public async getUsuarioById(id: number): Promise<Usuario[]> {
+    return await this.rest.getUsuarioById(id)
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.rest.crearUsuario(usuario);
   }
@@ -94,6 +98,18 @@ export class DataManagementService {
 
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.rest.crearPedidoComida(pedido)
+  }
+
+  public async putPedidoEnPreparacion(id: number) {
+    return await this.rest.putPedidoEnPreparacion(id)
+  }
+
+  public async putPedidoEnTransito(id: number) {
+    return await this.rest.putPedidoEnTransito(id)
+  }
+
+  public async putPedidoEntregado(id: number) {
+    return await this.rest.putPedidoEntregado(id)
   }
 
   //PRODUCTOS PEDIDOS

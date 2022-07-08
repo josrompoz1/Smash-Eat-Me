@@ -64,6 +64,7 @@ export interface DeleteCashRequest {
 }
 
 export interface  ProductoPedido {
+    id?: number;
     cantidad: number;
     pedidoId: number;
     productoOfertadoId: number;
