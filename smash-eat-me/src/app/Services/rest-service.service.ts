@@ -25,6 +25,10 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'productos/' + id);
   }
 
+  public async postProducto(producto: ProductoOfertado) {
+    return await this.makePostRequest(this.url + 'productos', producto)
+  }
+
   //MENU
   public async getMenus(): Promise<Menu[]> {
     return await this.makeGetRequest(this.url + 'menus');
@@ -72,6 +76,10 @@ export class RestService extends AbstractWebService {
   }
 
   //CUPONES DESCUENTO
+  public async getAllCupones(): Promise<CuponDescuento[]> {
+    return await this.makeGetRequest(this.url + 'cupones')
+  }
+
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
   }

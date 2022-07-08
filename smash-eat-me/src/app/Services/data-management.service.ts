@@ -32,6 +32,10 @@ export class DataManagementService {
     return await this.rest.getProductosById(id);
   }
 
+  public async postProducto(producto: ProductoOfertado) {
+    return await this.rest.postProducto(producto)
+  }
+
   //MENUS
   public async getMenus(): Promise<Menu[]> {
     return await this.rest.getMenus();
@@ -79,6 +83,10 @@ export class DataManagementService {
   }
 
   //CUPONES DESCUENTO
+  public async getAllCupones(): Promise<CuponDescuento[]> {
+    return await this.rest.getAllCupones()
+  }
+
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.rest.getCuponDescuentoByCodigo(codigo);
   }

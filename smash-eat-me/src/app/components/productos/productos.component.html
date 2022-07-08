@@ -14,6 +14,11 @@
 </div>
 <hr>
 
+<div *ngIf="rol === 'ADMIN'">
+    <button mat-raised-button color="primary" routerLink="/crearproducto" routerLinkActive="active">Añadir
+        plato</button>
+</div>
+
 <div *ngIf="productos.length!==0" class="listado">
     <mat-grid-list cols="3" rowHeight="4:3" gutterSize="80px">
         <mat-grid-tile *ngFor="let producto of productos | paginate:page_size:page_number">

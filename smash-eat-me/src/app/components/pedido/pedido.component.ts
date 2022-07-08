@@ -110,12 +110,15 @@ export class PedidoComponent implements OnInit, OnDestroy {
     const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
     if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(1, credito);
     this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
-      const productoPedido: ProductoPedido = {
-        cantidad: cantidadProducto,
-        pedidoId: pedidoResponse.id,
-        productoOfertadoId: producto.id
+      if(producto.id) {
+        const productoPedido: ProductoPedido = {
+          cantidad: cantidadProducto,
+          pedidoId: pedidoResponse.id,
+          productoOfertadoId: producto.id
+        }
+        await this.dataManagement.postProductoPedido(productoPedido);
       }
-      await this.dataManagement.postProductoPedido(productoPedido);
+      
     })
     this.b = false;
     this.dataManagement.numberOfItemsInBasket.next(0);

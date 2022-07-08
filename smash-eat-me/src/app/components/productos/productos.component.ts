@@ -15,6 +15,7 @@ export class ProductosComponent implements OnInit {
   public productos: ProductoOfertado[] = [];
 
   private productosAñadidos:  ProductoOfertado[] = [];
+  rol: string = "ADMIN";
 
   //Paginator inputs
   page_size: number = 6;

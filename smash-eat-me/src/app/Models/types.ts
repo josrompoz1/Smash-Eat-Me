@@ -1,13 +1,13 @@
 import { Time } from "@angular/common";
 
 export interface ProductoOfertado {
-    id: number;
+    id?: number;
     nombre: string;
     descripcion: string;
     imagen: string,
     precio: number;
     tipo: string;
-    menuId: number;
+    menuId?: number;
 }
 
 export interface Usuario {

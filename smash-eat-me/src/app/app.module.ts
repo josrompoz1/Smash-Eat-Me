@@ -45,6 +45,8 @@ import { ValoracionDialogComponent } from './components/valoracion-dialog/valora
 import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.component';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { PedidoDialogComponent } from './components/pedido-dialog/pedido-dialog.component';
+import { AddProductoComponent } from './components/add-producto/add-producto.component';
+import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { PedidoDialogComponent } from './components/pedido-dialog/pedido-dialog.
     ValoracionDialogComponent,
     ReservarMesaComponent,
     ListadoUsuariosComponent,
-    PedidoDialogComponent
+    PedidoDialogComponent,
+    AddProductoComponent,
+    ListadoCuponesDescuentoComponent
   ],
   imports: [
     MatBadgeModule,

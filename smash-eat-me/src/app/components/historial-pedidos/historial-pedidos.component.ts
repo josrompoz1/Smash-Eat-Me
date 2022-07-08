@@ -49,6 +49,8 @@ export class HistorialPedidosComponent implements OnInit {
     this.dataManagement.selectedPedido = element;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
+    dialogConfig.width = "80%";
+    dialogConfig.height = "80%"
     let dialogRef = this.dialog.open(PedidoDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.getData()

@@ -94,18 +94,18 @@ function createRouterProductos(db) {
 
   router.post('/productos', (req, res, next) => {
     db.query(
-      'INSERT INTO ProductoOfertado (nombre, descripcion, precio, tipo) VALUES (?,?,?,?)',
-      [req.body.nombre, req.body.descripcion, req.body.precio, req.body.tipo],
+      'INSERT INTO ProductoOfertado (nombre, descripcion, precio, imagen, tipo) VALUES (?,?,?,?,?)',
+      [req.body.nombre, req.body.descripcion, req.body.precio, req.body.imagen, req.body.tipo],
       (error) => {
         if (error) {
-          if (req.body.nombre || req.body.descripcion || req.body.precio || req.body.tipo) {
+          if (req.body.nombre || req.body.descripcion || req.body.precio || req.body.imagen || req.body.tipo) {
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          res.status(201).json({status: 'Producto añadido correctamente'});
         }
       }
     );

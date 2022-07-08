@@ -47,3 +47,14 @@
         </form>
     </div>
 </div>
+
+<div class="listado">
+    <mat-grid-list cols="2" rowHeight="4:3" gutterSize="80px">
+        <mat-grid-tile *ngFor="let producto of productosEnPedido">
+            <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+            <mat-grid-tile-footer>
+                <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
