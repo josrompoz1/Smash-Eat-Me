@@ -88,13 +88,13 @@ function createRouterCuponesDescuento(db) {
                         res.status(500).json({ status: 'error' });
                     }
                 } else {
-                    res.status(201).json({ status: 'Resource created' });
+                    res.status(201).json({ status: 'Cupon añadido correctamente' });
                 }
             }
         );
     });
 
-    router.put('/cupones/:id/changepercent', function (req, res, next) {
+    router.put('/cupones/:id/changepercent/:porcentaje', function (req, res, next) {
         db.query(
             'SELECT * FROM CuponDescuento WHERE id=?',
             [req.params.id],
@@ -108,16 +108,16 @@ function createRouterCuponesDescuento(db) {
                     } else {
                         db.query(
                             'UPDATE CuponDescuento SET porcentaje=? WHERE id=?',
-                            [req.body.porcentaje, req.params.id],
+                            [req.params.porcentaje, req.params.id],
                             (error) => {
                                 if (error) {
-                                    if (req.body.porcentaje == undefined) {
+                                    if (req.params.porcentaje == undefined) {
                                         res.status(400).json({ status: 'Bad request' });
                                     } else {
                                         res.status(500).json({ status: 'error' });
                                     }
                                 } else {
-                                    res.status(204).json({ status: 'Resource updated successfully' });
+                                    res.status(201).json({ status: 'Porcentaje actualizado' });
                                 }
                             }
                         );

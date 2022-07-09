@@ -8,6 +8,7 @@ export class DataManagementService {
 
   selectedProducto?: ProductoOfertado;
   selectedPedido?: PedidoComida;
+  selectedCupon?: CuponDescuento;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -89,6 +90,14 @@ export class DataManagementService {
 
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.rest.getCuponDescuentoByCodigo(codigo);
+  }
+
+  public async postCuponDescuento(cupon: CuponDescuento) {
+    return await this.rest.postCuponDescuento(cupon)
+  }
+
+  public async changePercentCupon(id: number, porcentaje: number) {
+    return await this.rest.changePercentCupon(id, porcentaje)
   }
 
   //PEDIDOS COMIDA

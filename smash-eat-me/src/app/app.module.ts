@@ -47,6 +47,7 @@ import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-
 import { PedidoDialogComponent } from './components/pedido-dialog/pedido-dialog.component';
 import { AddProductoComponent } from './components/add-producto/add-producto.component';
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
+import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dialog/cupon-descuento-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-d
     ListadoUsuariosComponent,
     PedidoDialogComponent,
     AddProductoComponent,
-    ListadoCuponesDescuentoComponent
+    ListadoCuponesDescuentoComponent,
+    CuponDescuentoDialogComponent
   ],
   imports: [
     MatBadgeModule,

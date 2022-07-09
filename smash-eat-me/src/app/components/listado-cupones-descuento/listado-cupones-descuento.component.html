@@ -5,7 +5,7 @@
 </div>
 <hr>
 
-<button mat-raised-button color="primary">Añadir cupon de descuento</button>
+<button mat-raised-button color="primary" (click)="abrirCuponDialog()">Añadir cupon de descuento</button>
 
 <div class="cupones">
     <table mat-table [dataSource]="cupones" class="mat-elevation-z8">
@@ -23,7 +23,7 @@
         <ng-container matColumnDef="editar">
             <th mat-header-cell *matHeaderCellDef> Editar cupon </th>
             <td mat-cell *matCellDef="let element">
-                <mat-icon>edit</mat-icon>
+                <mat-icon (click)="abrirCuponDialog(element)">edit</mat-icon>
             </td>
         </ng-container>
 

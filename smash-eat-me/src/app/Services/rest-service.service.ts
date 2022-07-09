@@ -84,6 +84,14 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
   }
 
+  public async postCuponDescuento(cupon: CuponDescuento) {
+    return await this.makePostRequest(this.url + 'cupones', cupon)
+  }
+
+  public async changePercentCupon(id: number, porcentaje: number) {
+    return await this.makePutRequest(this.url + 'cupones/' + id + '/changepercent/' + porcentaje, null)
+  }
+
   //PEDIDOS COMIDA
   public async getPedidosByUsuarioId(usuarioId: number): Promise<PedidoComida[]> {
     return await this.makeGetRequest(this.url + 'pedidos/usuario/' + usuarioId)
