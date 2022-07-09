@@ -1,0 +1,17 @@
+.cerrar {
+    float: right;
+}
+
+button {
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+.mat-icon {
+    cursor: pointer;
+}
+
+.mat-form-field {
+    width: 60%;
+    margin-bottom: 1em;
+}

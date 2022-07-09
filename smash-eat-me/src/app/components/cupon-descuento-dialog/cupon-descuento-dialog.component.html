@@ -1,17 +1,18 @@
-<mat-dialog-actions>
-    <mat-icon (click)="onClose()">close</mat-icon>
-</mat-dialog-actions>
-
 <div class="contenedor">
     <div class="titulo">
         <h1>{{titulo}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
     </div>
 </div>
 <hr>
 
 <div class="formPadre">
-    <div class="formRegistro">
-        <form [formGroup]="form" (ngSubmit)="addOrUpdateCupon()">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="addOrUpdateCupon()">
             <mat-form-field appearance="fill">
                 <mat-label>Codigo de descuento</mat-label>
                 <input matInput type="text" name="codigo" formControlName="codigo" [readonly]="isReadOnly">
@@ -21,7 +22,7 @@
                 <mat-label>Porcentaje de descuento</mat-label>
                 <input matInput type="number" name="porcentaje" formControlName="porcentaje" >
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>
 </div>

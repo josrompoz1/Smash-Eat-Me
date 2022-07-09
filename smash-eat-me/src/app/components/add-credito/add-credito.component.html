@@ -44,7 +44,7 @@
     <div *ngIf="tarjetas.length == 0">
         No existen tarjetas
     </div>
-    <button mat-raised-button color="primary" routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
+    <button mat-stroked-button  routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
 </div>
 
-<button class="tarjetas" mat-raised-button color="primary" *ngIf="tarjetaSeleccionadaIndex > -1" (click)="anyadirCredito()">Aceptar</button>
+<button class="tarjetas" mat-stroked-button  *ngIf="tarjetaSeleccionadaIndex > -1" (click)="anyadirCredito()">Aceptar</button>

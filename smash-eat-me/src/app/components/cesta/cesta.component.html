@@ -7,7 +7,7 @@
 
 <div class="cestaPadre">
     <div *ngIf="productosCantidad.size > 0" class="cesta">
-        <button class="vaciar" mat-raised-button color="primary" (click)="vaciarCesta()">Vaciar cesta</button>
+        <button class="vaciar" mat-stroked-button  (click)="vaciarCesta()">Vaciar cesta</button>
         <div class="producto" *ngFor="let key of productosCantidad.keys()">
             <img src="{{key.imagen}}" />
             {{key.nombre}}
@@ -18,7 +18,7 @@
             <hr>
         </div>
         <div class="precio">{{precioTotal}}</div>
-        <button class="tramitar" mat-raised-button color="primary" (click)="tramitarPedido()">Continuar</button>
+        <button class="tramitar" mat-stroked-button  (click)="tramitarPedido()">Continuar</button>
     </div>
     
     <div *ngIf="productosCantidad.size == 0" class="cesta">

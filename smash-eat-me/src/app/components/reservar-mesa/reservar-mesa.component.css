@@ -6,11 +6,42 @@
 }
 
 .hijo1 {
-    width: 40%;
+    width: 50%;
     text-align: center;
 }
 
 .hijo2 {
-    width: 60%;
+    width: 50%;
     text-align: center;
+}
+
+button {
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+.mat-form-field {
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+h3 {
+    margin-top: 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.formpadre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3em;
+}
+  
+.formhijo {
+    width: 90%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
 }

@@ -16,12 +16,12 @@
         <div *ngFor="let item of tarjetas;  let i = index">
             <mat-checkbox [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i">{{item.numero}}</mat-checkbox>
         </div>
-        <button *ngIf="tarjetaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-raised-button color="primary" (click)="guardarTarjetaSeleccionada()">Continuar</button>
+        <button *ngIf="tarjetaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarTarjetaSeleccionada()">Continuar</button>
     </div>
     <div *ngIf="tarjetas.length == 0">
         No existen tarjetas
     </div>
-    <button mat-raised-button color="primary" routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
+    <button mat-stroked-button  routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
 </div>
 
 <div class="div-subtitulo">
@@ -33,9 +33,9 @@
 <div class="cestaPadre">
     <div class="tarjetas">
         <mat-checkbox (change)="creditoSeleccionadoIndex = 0">Credito en la cartera digital....{{creditoDigital}}</mat-checkbox>
-        <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-raised-button color="primary" (click)="guardarCarteraDigital()">Continuar</button>
+        <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarCarteraDigital()">Continuar</button>
     </div>
-    <button mat-raised-button color="primary" routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
+    <button mat-stroked-button  routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
 </div>
 
 <div class="div-subtitulo">
@@ -52,9 +52,9 @@
                 <mat-label>Cupon descuento</mat-label>
                 <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aplicar cupon</button>
+            <button mat-stroked-button type="submit">Aplicar cupon</button>
         </form>
     </div>
 </div>
 
-<button *ngIf="creditoSeleccionadoIndex > -1 || tarjetaSeleccionadaIndex > -1" mat-raised-button color="primary" (click)="tramitarPedido()">Tramitar pedido</button>
+<button *ngIf="creditoSeleccionadoIndex > -1 || tarjetaSeleccionadaIndex > -1" mat-stroked-button  (click)="tramitarPedido()">Tramitar pedido</button>

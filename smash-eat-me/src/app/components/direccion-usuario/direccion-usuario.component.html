@@ -10,11 +10,11 @@
         <div *ngFor="let item of direcciones;  let i = index">
             <mat-checkbox [checked]="direccionSeleccionadaIndex === i" (change)="direccionSeleccionadaIndex = i">{{item.direccion}}</mat-checkbox>
         </div>
-        <button *ngIf="direccionSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-raised-button color="primary" (click)="guardarDireccionSeleccionada()">Continuar</button>
+        <button *ngIf="direccionSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarDireccionSeleccionada()">Continuar</button>
     </div>
     <div *ngIf="direcciones.length == 0">
         No existen direcciones
     </div>
-    <button mat-raised-button color="primary" routerLink="/direccion" routerLinkActive="active" >Agregar direccion</button>
+    <button mat-stroked-button  routerLink="/direccion" routerLinkActive="active" >Agregar direccion</button>
 </div>
 <router-outlet></router-outlet>

@@ -17,3 +17,22 @@ hr {
     border-color: darkorange;
     margin-bottom: 50px;
 }
+
+.formPadre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3em;
+}
+  
+.formHijo {
+    width: 60%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.form {
+    margin-top: 3em;
+}
