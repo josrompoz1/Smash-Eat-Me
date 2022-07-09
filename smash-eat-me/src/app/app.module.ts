@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
@@ -42,6 +43,11 @@ import { ValoracionComponent } from './components/valoracion/valoracion.componen
 import { ValoracionService } from './Services/valoracion.service';
 import { ValoracionDialogComponent } from './components/valoracion-dialog/valoracion-dialog.component';
 import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.component';
+import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
+import { PedidoDialogComponent } from './components/pedido-dialog/pedido-dialog.component';
+import { AddProductoComponent } from './components/add-producto/add-producto.component';
+import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
+import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dialog/cupon-descuento-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +69,11 @@ import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.
     ValoracionComponent,
     ValoracionDialogComponent,
     ReservarMesaComponent,
+    ListadoUsuariosComponent,
+    PedidoDialogComponent,
+    AddProductoComponent,
+    ListadoCuponesDescuentoComponent,
+    CuponDescuentoDialogComponent
   ],
   imports: [
     MatBadgeModule,
@@ -82,6 +93,7 @@ import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.
     MatCheckboxModule,
     MatRadioModule,
     MatTableModule,
+    MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

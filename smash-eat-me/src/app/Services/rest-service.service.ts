@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Usuario, Valoracion } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -25,12 +25,24 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'productos/' + id);
   }
 
+  public async postProducto(producto: ProductoOfertado) {
+    return await this.makePostRequest(this.url + 'productos', producto)
+  }
+
   //MENU
   public async getMenus(): Promise<Menu[]> {
     return await this.makeGetRequest(this.url + 'menus');
   }
 
   //USUARIOS
+  public async getAllUsuarios(): Promise<Usuario[]> {
+    return await this.makeGetRequest(this.url+ 'usuarios');
+  }
+
+  public async getUsuarioById(id: number): Promise<Usuario[]> {
+    return await this.makeGetRequest(this.url + 'usuarios/' + id)
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.makePostRequest(this.url + 'usuarios', usuario);
   }
@@ -64,8 +76,20 @@ export class RestService extends AbstractWebService {
   }
 
   //CUPONES DESCUENTO
+  public async getAllCupones(): Promise<CuponDescuento[]> {
+    return await this.makeGetRequest(this.url + 'cupones')
+  }
+
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.makeGetRequest(this.url + 'cupones/codigo/' + codigo);
+  }
+
+  public async postCuponDescuento(cupon: CuponDescuento) {
+    return await this.makePostRequest(this.url + 'cupones', cupon)
+  }
+
+  public async changePercentCupon(id: number, porcentaje: number) {
+    return await this.makePutRequest(this.url + 'cupones/' + id + '/changepercent/' + porcentaje, null)
   }
 
   //PEDIDOS COMIDA
@@ -77,8 +101,24 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'pedidos/' + id)
   }
 
+  public async getAllPedidos(): Promise<PedidoComida[]> {
+    return await this.makeGetRequest(this.url + 'pedidos')
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.makePostRequest(this.url + 'pedidos', pedido);
+  }
+
+  public async putPedidoEnPreparacion(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/preparacion/' + id, null)
+  }
+
+  public async putPedidoEnTransito(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/transito/' + id, null)
+  }
+
+  public async putPedidoEntregado(id: number) {
+    return await this.makePutRequest(this.url + 'pedidos/entregado/' + id, null)
   }
 
   //PRODUCTOS PEDIDOS
@@ -91,6 +131,10 @@ export class RestService extends AbstractWebService {
   }
 
   //VALORACIONES
+  public async getAllValoraciones(): Promise<Valoracion[]> {
+    return await this.makeGetRequest(this.url + 'valoraciones')
+  }
+
   public async postValoracion(valoracion: Valoracion) {
     return await this.makePostRequest(this.url + 'valoraciones', valoracion);
   }

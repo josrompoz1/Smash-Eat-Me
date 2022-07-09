@@ -87,7 +87,7 @@ function createRouterPedidos(db) {
     );
   });
 
-  router.put('/pedidos/:id/preparacion', function (req, res, next) {
+  router.put('/pedidos/preparacion/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM PedidoComida WHERE id=?',
       [req.params.id],
@@ -106,7 +106,7 @@ function createRouterPedidos(db) {
                 if (error) {
                   res.status(500).json({ status: 'error' });
                 } else {
-                  res.status(204).json({ status: 'Resource updated successfully' });
+                  res.status(201).json({ status: 'Estado actualizado a: En preparacion' });
                 }
               }
             );
@@ -116,7 +116,7 @@ function createRouterPedidos(db) {
     );
   });
 
-  router.put('/pedidos/:id/transito', function (req, res, next) {
+  router.put('/pedidos/transito/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM PedidoComida WHERE id=?',
       [req.params.id],
@@ -135,7 +135,7 @@ function createRouterPedidos(db) {
                 if (error) {
                   res.status(500).json({ status: 'error' });
                 } else {
-                  res.status(204).json({ status: 'Resource updated successfully' });
+                  res.status(201).json({ status: 'Estado actualizado a: En transito' });
                 }
               }
             );
@@ -145,7 +145,7 @@ function createRouterPedidos(db) {
     );
   });
 
-  router.put('/pedidos/:id/entregado', function (req, res, next) {
+  router.put('/pedidos/entregado/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM PedidoComida WHERE id=?',
       [req.params.id],
@@ -164,7 +164,7 @@ function createRouterPedidos(db) {
                 if (error) {
                   res.status(500).json({ status: 'error' });
                 } else {
-                  res.status(204).json({ status: 'Resource updated successfully' });
+                  res.status(201).json({ status: 'Estado actualizado a: Entregado' });
                 }
               }
             );

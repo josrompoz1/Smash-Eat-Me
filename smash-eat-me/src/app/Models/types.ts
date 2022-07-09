@@ -1,13 +1,13 @@
 import { Time } from "@angular/common";
 
 export interface ProductoOfertado {
-    id: number;
+    id?: number;
     nombre: string;
     descripcion: string;
     imagen: string,
     precio: number;
     tipo: string;
-    menuId: number;
+    menuId?: number;
 }
 
 export interface Usuario {
@@ -64,6 +64,7 @@ export interface DeleteCashRequest {
 }
 
 export interface  ProductoPedido {
+    id?: number;
     cantidad: number;
     pedidoId: number;
     productoOfertadoId: number;
@@ -73,6 +74,8 @@ export interface Valoracion {
     id?: number;
     puntuacion: number;
     reseña: string;
+    nombreUsuario: string;
+    nombreProducto: string;
     usuarioId: number;
     productoPedidoId: number;
 }

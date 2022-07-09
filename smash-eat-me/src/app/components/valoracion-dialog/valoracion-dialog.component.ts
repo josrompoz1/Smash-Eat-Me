@@ -35,15 +35,18 @@ export class ValoracionDialogComponent implements OnInit {
   }
 
   public async crearValoracion() {
-    console.log(this.form.value['reseña'])
     if(this.form.valid) {
-      const valoracion: Valoracion = {
-        puntuacion: this.puntuacion,
-        reseña: this.form.value['reseña'],
-        usuarioId: 1,
-        productoPedidoId: this.productoAValorar.id
+      if(this.productoAValorar.id) {
+        const valoracion: Valoracion = {
+          puntuacion: this.puntuacion,
+          reseña: this.form.value['reseña'],
+          nombreUsuario: 'perico',
+          nombreProducto: this.productoAValorar.nombre,
+          usuarioId: 1,
+          productoPedidoId: this.productoAValorar.id
+        }
+        await this.dataManagement.postValoracion(valoracion);
       }
-      await this.dataManagement.postValoracion(valoracion);
     }
   }
 

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Valoracion } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Usuario, Valoracion } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
 export class DataManagementService {
 
   selectedProducto?: ProductoOfertado;
+  selectedPedido?: PedidoComida;
+  selectedCupon?: CuponDescuento;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -31,12 +33,24 @@ export class DataManagementService {
     return await this.rest.getProductosById(id);
   }
 
+  public async postProducto(producto: ProductoOfertado) {
+    return await this.rest.postProducto(producto)
+  }
+
   //MENUS
   public async getMenus(): Promise<Menu[]> {
     return await this.rest.getMenus();
   }
 
   //USUARIOS
+  public async getAllUsuarios(): Promise<Usuario[]> {
+    return await this.rest.getAllUsuarios()
+  }
+
+  public async getUsuarioById(id: number): Promise<Usuario[]> {
+    return await this.rest.getUsuarioById(id)
+  }
+
   public async crearUsuario(usuario: any) {
     return await this.rest.crearUsuario(usuario);
   }
@@ -70,8 +84,20 @@ export class DataManagementService {
   }
 
   //CUPONES DESCUENTO
+  public async getAllCupones(): Promise<CuponDescuento[]> {
+    return await this.rest.getAllCupones()
+  }
+
   public async getCuponDescuentoByCodigo(codigo: string): Promise<CuponDescuento[]> {
     return await this.rest.getCuponDescuentoByCodigo(codigo);
+  }
+
+  public async postCuponDescuento(cupon: CuponDescuento) {
+    return await this.rest.postCuponDescuento(cupon)
+  }
+
+  public async changePercentCupon(id: number, porcentaje: number) {
+    return await this.rest.changePercentCupon(id, porcentaje)
   }
 
   //PEDIDOS COMIDA
@@ -83,8 +109,24 @@ export class DataManagementService {
     return await this.rest.getPedidoComidaById(id);
   }
 
+  public async getAllPedidos(): Promise<PedidoComida[]> {
+    return await this.rest.getAllPedidos();
+  }
+
   public async crearPedidoComida(pedido: PedidoComida): Promise<PedidoComidaResponse> {
     return await this.rest.crearPedidoComida(pedido)
+  }
+
+  public async putPedidoEnPreparacion(id: number) {
+    return await this.rest.putPedidoEnPreparacion(id)
+  }
+
+  public async putPedidoEnTransito(id: number) {
+    return await this.rest.putPedidoEnTransito(id)
+  }
+
+  public async putPedidoEntregado(id: number) {
+    return await this.rest.putPedidoEntregado(id)
   }
 
   //PRODUCTOS PEDIDOS
@@ -97,6 +139,10 @@ export class DataManagementService {
   }
 
   //VALORACIONES
+  public async getAllValoraciones(): Promise<Valoracion[]> {
+    return await this.rest.getAllValoraciones()
+  }
+  
   public async postValoracion(valoracion: Valoracion) {
     return await this.rest.postValoracion(valoracion)
   }
