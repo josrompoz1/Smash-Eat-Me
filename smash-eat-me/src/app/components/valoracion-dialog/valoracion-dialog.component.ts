@@ -22,7 +22,7 @@ export class ValoracionDialogComponent implements OnInit {
   ngOnInit(): void {
     if(this.dataManagement.selectedProducto) this.productoAValorar = this.dataManagement.selectedProducto;
     this.form = new FormGroup({
-      'reseña': new FormControl('', [Validators.required])
+      'resenya': new FormControl('', [Validators.required])
     })
   }
 
@@ -39,7 +39,7 @@ export class ValoracionDialogComponent implements OnInit {
       if(this.productoAValorar.id) {
         const valoracion: Valoracion = {
           puntuacion: this.puntuacion,
-          reseña: this.form.value['reseña'],
+          resenya: this.form.value['resenya'],
           nombreUsuario: 'perico',
           nombreProducto: this.productoAValorar.nombre,
           usuarioId: 1,

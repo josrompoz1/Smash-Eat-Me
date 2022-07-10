@@ -40,7 +40,7 @@ function createRouterValoraciones(db) {
 
   router.get('/valoraciones/producto/:productoId', function (req, res, next) {
     db.query(
-      'SELECT Valoracion.puntuacion, Valoracion.reseña, Valoracion.usuarioId, ProductoPedido.productoOfertadoId FROM Valoracion JOIN ProductoPedido ON Valoracion.productoPedidoId=ProductoPedido.id AND ProductoPedido.productoOfertadoId=?',
+      'SELECT v.puntuacion, v.resenya, v.usuarioId, p.productoOfertadoId FROM Valoracion AS v JOIN ProductoPedido AS p ON v.productoPedidoId=p.id WHERE p.productoOfertadoId=?',
       [req.params.productoId],
       (error, results) => {
         if (error) {
@@ -59,11 +59,11 @@ function createRouterValoraciones(db) {
 
   router.post('/valoraciones', (req, res, next) => {
     db.query(
-      'INSERT INTO Valoracion (puntuacion, reseña, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (?,?,?,?,?,?)',
-      [req.body.puntuacion, req.body.reseña, req.body.nombreUsuario, req.body.nombreProducto, req.body.usuarioId, req.body.productoPedidoId],
+      'INSERT INTO Valoracion (puntuacion, resenya, nombreUsuario, nombreProducto, usuarioId, productoPedidoId) VALUES (?,?,?,?,?,?)',
+      [req.body.puntuacion, req.body.resenya, req.body.nombreUsuario, req.body.nombreProducto, req.body.usuarioId, req.body.productoPedidoId],
       (error) => {
         if (error) {
-          if (req.body.puntuacion || req.body.reseña || req.body.nombreUsuario || req.body.nombreProducto || req.body.usuarioId || req.body.productoPedidoId) {
+          if (req.body.puntuacion || req.body.resenya || req.body.nombreUsuario || req.body.nombreProducto || req.body.usuarioId || req.body.productoPedidoId) {
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);

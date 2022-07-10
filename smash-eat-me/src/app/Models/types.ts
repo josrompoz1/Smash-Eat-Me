@@ -73,11 +73,18 @@ export interface  ProductoPedido {
 export interface Valoracion {
     id?: number;
     puntuacion: number;
-    reseña: string;
+    resenya: string;
     nombreUsuario: string;
     nombreProducto: string;
     usuarioId: number;
     productoPedidoId: number;
+}
+
+export interface ValoracionResponse {
+    puntuacion: number;
+    resenya: string;
+    usuarioId: number;
+    productoOfertadoId: number;
 }
 
 export interface Menu {
