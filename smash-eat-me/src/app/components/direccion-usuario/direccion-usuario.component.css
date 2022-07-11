@@ -1,16 +1,45 @@
 .cestaPadre {
-    background-color: #EEEEEE;
+    background-color: #ECEFF1;
     margin-right: 15rem;
     margin-left: 15rem;
     height: auto;
     padding-top: 2em;
     padding-bottom: 2em;
-    /* IMPORTANTE */
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 1.5em;
 }
 
 .direcciones {
     width: auto;
 }
+
+.add-direccion {
+    float: right;
+    margin-right: 2em;
+}
+
+.guardar {
+    float: left;
+    margin-left: 2em;
+}
+
+button {
+    margin-bottom: 2em;
+}
+
+.table-detalles {
+    margin: 0 auto;
+    margin-bottom: 3em;
+    height: 4em;
+}
+
+table, th, td {
+    font-size: medium;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: #e1f5fd;
+  }

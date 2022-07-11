@@ -7,10 +7,10 @@
 
 <div class="cestaPadre">
     <div class="horas">
+        <button class="continuar" *ngIf="horaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarHoraSeleccionada()">Continuar</button>
         <div *ngFor="let item of horas;  let i = index">
             <mat-checkbox [checked]="horaSeleccionadaIndex === i" (change)="horaSeleccionadaIndex = i">{{item}}</mat-checkbox>
         </div>
-        <button *ngIf="horaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-raised-button color="primary" (click)="guardarHoraSeleccionada()">Continuar</button>
     </div>
 </div>
 <router-outlet></router-outlet>

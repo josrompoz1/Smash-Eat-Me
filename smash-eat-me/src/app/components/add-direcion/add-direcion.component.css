@@ -1,28 +1,9 @@
-.formPadre {
-    background: transparent;
-    /* width: 600px; */
-    /*IMPORTANTE*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  
-.formRegistro {
-    background: #EEEEEE;
-    width: 500px;
+button {
+    margin-bottom: 3em;
+    background-color: #ffc11b;
 }
 
 .mat-form-field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.mat-label {
-    color: black;
-}
-
-button {
-    background-color: darkorange;
-    
+    width: 60%;
+    margin-bottom: 1em;
 }

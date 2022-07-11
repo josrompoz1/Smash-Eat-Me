@@ -38,8 +38,8 @@ export class ValoracionComponent implements OnInit {
     this.dataManagement.selectedProducto = producto;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "70%";
+    dialogConfig.width = "70%";
+    dialogConfig.height = "80%";
     this.dialog.open(ValoracionDialogComponent, dialogConfig);
   }
 

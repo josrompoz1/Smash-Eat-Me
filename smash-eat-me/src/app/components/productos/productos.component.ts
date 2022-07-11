@@ -40,6 +40,8 @@ export class ProductosComponent implements OnInit {
     this.dataManagement.selectedProducto = producto;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
+    dialogConfig.width = "65%"
+    dialogConfig.height = "90%"
     this.dialog.open(ProductosDialogComponent, dialogConfig);
   }
 

@@ -1,17 +1,18 @@
-<mat-dialog-actions>
-    <mat-icon (click)="onClose()">close</mat-icon>
-</mat-dialog-actions>
-
 <div class="contenedor">
     <div class="titulo">
         <h1>Detalles del pedido {{pedido.id}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
     </div>
 </div>
 <hr>
 
 <div class="formPadre">
-    <div class="formRegistro">
-        <form [formGroup]="form" (ngSubmit)="updateEstadoPedido()">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="updateEstadoPedido()">
             <mat-form-field appearance="fill">
                 <mat-label>Direccion</mat-label>
                 <input matInput type="text" name="direccion" formControlName="direccion" readonly>
@@ -41,13 +42,19 @@
                 <mat-label>Nombre del cliente</mat-label>
                 <input matInput type="text" name="nombreCliente" formControlName="nombreCliente" readonly>
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>
 </div>
 
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Productos en el pedido</h1>
+    </div>
+</div>
+<hr>
 <div class="listado">
-    <mat-grid-list cols="2" rowHeight="4:3" gutterSize="80px">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="80px">
         <mat-grid-tile *ngFor="let producto of productosEnPedido">
             <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
             <mat-grid-tile-footer>

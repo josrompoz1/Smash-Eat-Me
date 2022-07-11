@@ -6,8 +6,8 @@
 <hr>
 
 <div class="formPadre">
-    <div class="formRegistro">
-        <form [formGroup]="form" (ngSubmit)="crearDireccion()">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearDireccion()">
             <mat-form-field appearance="fill">
                 <mat-label>Nombre de la direccion</mat-label>
                 <input matInput type="text" name="nombreDireccion" formControlName="nombreDireccion" placeholder="Mi casa">
@@ -27,7 +27,7 @@
                 <mat-label>Ciudad</mat-label>
                 <input matInput type="text" name="ciudad" formControlName="ciudad" placeholder="Sevilla">
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>
 </div>

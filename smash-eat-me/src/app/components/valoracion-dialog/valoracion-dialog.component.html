@@ -1,36 +1,28 @@
-<mat-dialog-actions>
-    <mat-icon (click)="onClose()">close</mat-icon>
-</mat-dialog-actions>
-
 <div class="contenedor">
     <div class="titulo">
         <h1>Valorar {{productoAValorar.nombre}}</h1>
     </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
 </div>
 <hr>
 
-<div class="padre">
-    <div class="puntuacion">
-        Puntuación (de 1 a 5)
-        <mat-slider
-            class="example-margin"
-            [max]=5
-            [min]=1
-            [step]=1
-            [thumbLabel]=true
-            [(ngModel)]="value"
-            aria-labelledby="example-name-label"
-            (change)="setPuntuacion(value)">
-        </mat-slider>
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearValoracion()">
+            <mat-label>Puntuación (de 1 a 5)</mat-label>
+            <mat-slider formControlName="puntuacion" [max]=5 [min]=1 [step]=1 [thumbLabel]=true>
+            </mat-slider><br>
 
-        <form [formGroup]="form" (ngSubmit)="crearValoracion()">
             <mat-form-field appearance="fill">
                 <mat-label>Reseña</mat-label>
-                <input matInput type="text" name="reseña" formControlName="reseña" placeholder="Breve reseña sobre el producto">
+                <input matInput type="text" name="resenya" formControlName="resenya"
+                    placeholder="Breve resenya sobre el producto">
             </mat-form-field><br>
-            <button mat-raised-button type="submit">Aceptar</button>
+            <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>
-
-    <!-- aqui falta un field para la reseña y un botón para aceptar -->
 </div>
