@@ -7,14 +7,23 @@
 
 <div class="cestaPadre">
     <div *ngIf="direcciones.length > 0" class="direcciones">
-        <div *ngFor="let item of direcciones;  let i = index">
-            <mat-checkbox [checked]="direccionSeleccionadaIndex === i" (change)="direccionSeleccionadaIndex = i">{{item.direccion}}</mat-checkbox>
+        <button class="guardar" *ngIf="direccionSeleccionadaIndex > -1 && productosEnCesta.length > 0"
+            mat-stroked-button (click)="guardarDireccionSeleccionada()">Continuar</button>
+        <button class="add-direccion" mat-stroked-button (click)="addDireccion()">Añadir direccion</button>
+        <div class="direccion">
+            <table class="table-detalles">
+                <tr *ngFor="let item of direcciones;  let i = index">
+                    <td>
+                        <mat-checkbox [checked]="direccionSeleccionadaIndex === i"
+                            (change)="direccionSeleccionadaIndex = i">{{item.direccion}}</mat-checkbox>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <button *ngIf="direccionSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarDireccionSeleccionada()">Continuar</button>
     </div>
     <div *ngIf="direcciones.length == 0">
+        <button class="add-direccion" mat-stroked-button (click)="addDireccion()">Añadir direccion</button>
         No existen direcciones
     </div>
-    <button mat-stroked-button  routerLink="/direccion" routerLinkActive="active" >Agregar direccion</button>
 </div>
 <router-outlet></router-outlet>

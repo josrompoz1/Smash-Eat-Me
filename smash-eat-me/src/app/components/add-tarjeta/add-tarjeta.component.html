@@ -6,8 +6,8 @@
 <hr>
 
 <div class="formPadre">
-    <div class="formRegistro">
-        <form [formGroup]="form" (ngSubmit)="crearTarjeta()">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearTarjeta()">
             <mat-form-field appearance="fill">
                 <mat-label>Numero de tarjeta</mat-label>
                 <input matInput type="number" name="numero" formControlName="numero" placeholder="4242 4242 4242 4242">

@@ -45,3 +45,23 @@ h3 {
     background: #ECEFF1;
     border-radius: 1.5em;
 }
+
+.table-detalles {
+    margin: 0 auto;
+    margin-bottom: 3em;
+    width: 60%;
+    height: 4em;
+}
+
+.td-nombre {
+    text-align: left;
+}
+
+table, th, td {
+    font-size: medium;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: #e1f5fd;
+  }

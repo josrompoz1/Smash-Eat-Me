@@ -12,8 +12,6 @@ import { DataManagementService } from 'src/app/Services/data-management.service'
 export class ValoracionDialogComponent implements OnInit {
 
   productoAValorar!: ProductoOfertado;
-  puntuacion: number = 0;
-  value: number = 1;
   form!: FormGroup;
 
   constructor(public dataManagement: DataManagementService,
@@ -22,7 +20,8 @@ export class ValoracionDialogComponent implements OnInit {
   ngOnInit(): void {
     if(this.dataManagement.selectedProducto) this.productoAValorar = this.dataManagement.selectedProducto;
     this.form = new FormGroup({
-      'resenya': new FormControl('', [Validators.required])
+      'resenya': new FormControl('', [Validators.required]),
+      'puntuacion': new FormControl('', [Validators.required])
     })
   }
 
@@ -30,15 +29,11 @@ export class ValoracionDialogComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  public setPuntuacion(puntuacion: number) {
-    this.puntuacion = puntuacion;
-  }
-
   public async crearValoracion() {
     if(this.form.valid) {
       if(this.productoAValorar.id) {
         const valoracion: Valoracion = {
-          puntuacion: this.puntuacion,
+          puntuacion: this.form.value['puntuacion'],
           resenya: this.form.value['resenya'],
           nombreUsuario: 'perico',
           nombreProducto: this.productoAValorar.nombre,

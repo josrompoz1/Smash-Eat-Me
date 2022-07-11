@@ -37,4 +37,8 @@ export class DireccionUsuarioComponent implements OnInit {
     this.router.navigate(['horaentrega'], { relativeTo: this.route });
   }
 
+  addDireccion() {
+    this.router.navigate(['direccion']);
+  }
+
 }

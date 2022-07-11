@@ -12,6 +12,7 @@
 </div>
 <hr class="hr-pago">
 <div class="cestaPadre">
+    <button mat-stroked-button  routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
     <div *ngIf="tarjetas.length > 0" class="tarjetas">
         <div *ngFor="let item of tarjetas;  let i = index">
             <mat-checkbox [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i">{{item.numero}}</mat-checkbox>
@@ -21,7 +22,6 @@
     <div *ngIf="tarjetas.length == 0">
         No existen tarjetas
     </div>
-    <button mat-stroked-button  routerLink="/tarjeta" routerLinkActive="active">Agregar tarjeta</button>
 </div>
 
 <div class="div-subtitulo">
@@ -44,10 +44,10 @@
     </div>
 </div>
 <hr class="hr-pago">
-<div class="cestaPadre">
-    <div class="tarjetas">
-        {{precioTotal}}
-        <form [formGroup]="form" (ngSubmit)="aplicarCuponDescuento()">
+<div class="formPadre">
+    <div class="formHijo">
+        <p>Precio: {{precioTotal | number : '.2-2'}} €</p>
+        <form class="form" [formGroup]="form" (ngSubmit)="aplicarCuponDescuento()">
             <mat-form-field appearance="fill">
                 <mat-label>Cupon descuento</mat-label>
                 <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">

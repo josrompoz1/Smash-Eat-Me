@@ -1,20 +1,19 @@
-mat-icon {
-    cursor: pointer;
+.cerrar {
+    float: right;
 }
 
-.padre {
-    background-color: #EEEEEE;
-    margin-right: 15rem;
-    margin-left: 15rem;
-    height: auto;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    /* IMPORTANTE */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+button {
+    margin-bottom: 3em;
+    background-color: #ffc11b;
 }
 
-.puntuacion {
-    width: auto;
+.mat-form-field {
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+mat-slider {
+    width: 50%;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
 }

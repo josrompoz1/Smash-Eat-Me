@@ -1,8 +1,5 @@
 .padre {
-    height: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .hijo1 {
@@ -13,4 +10,28 @@
 .hijo2 {
     width: 50%;
     text-align: center;
+}
+
+.usuarios {
+    width: 100%;
+}
+
+table {
+    margin: 0 auto;
+    width: 85%;
+}
+
+.mat-column-username, .mat-column-usuario {
+    text-align: center;
+    font-weight: bold;
+}
+
+.mat-column-correo, .mat-column-producto {
+    width: 55%;
+    text-align: center;
+}
+
+.mat-column-rol, .mat-column-puntuacion {
+    text-align: center;
+    font-style: italic;
 }

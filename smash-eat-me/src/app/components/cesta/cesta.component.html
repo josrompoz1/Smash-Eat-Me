@@ -7,18 +7,34 @@
 
 <div class="cestaPadre">
     <div *ngIf="productosCantidad.size > 0" class="cesta">
-        <button class="vaciar" mat-stroked-button  (click)="vaciarCesta()">Vaciar cesta</button>
+        <button class="tramitar" mat-stroked-button (click)="tramitarPedido()">Continuar</button>
+        <button class="vaciar" mat-stroked-button (click)="vaciarCesta()">Vaciar cesta</button>
         <div class="producto" *ngFor="let key of productosCantidad.keys()">
-            <img src="{{key.imagen}}" />
-            {{key.nombre}}
-            <mat-icon (click)="eliminarUnProducto(key)">remove_circle_outline</mat-icon>
-            {{productosCantidad.get(key)}}
-            <mat-icon (click)="anyadirUnProducto(key)">add_circle</mat-icon>
-            {{productosPrecio.get(key.nombre)}}
+            <table class="table-detalles">
+                <tr>
+                    <td class="td-imagen"><img src="{{key.imagen}}" /></td>
+                    <td class="td-nombre">{{key.nombre}}</td>
+                    <td class="td-eliminar"><mat-icon (click)="eliminarUnProducto(key)">remove_circle_outline</mat-icon></td>
+                    <td class="td-cantidad">{{productosCantidad.get(key)}}</td>
+                    <td class="td-añadir"><mat-icon (click)="anyadirUnProducto(key)">add_circle</mat-icon></td>
+                    <td class="td-precio">{{productosPrecio.get(key.nombre)  | number : '.2-2'}} €</td>
+                </tr>
+            </table>
             <hr>
         </div>
-        <div class="precio">{{precioTotal}}</div>
-        <button class="tramitar" mat-stroked-button  (click)="tramitarPedido()">Continuar</button>
+        <div class="producto">
+            <table class="table-detalles">
+                <tr>
+                    <td class="td-imagen"></td>
+                    <td class="td-nombre"></td>
+                    <td class="td-eliminar"></td>
+                    <td class="td-cantidad"></td>
+                    <td class="td-añadir"></td>
+                    <td class="td-precio">{{precioTotal | number : '.2-2'}} €</td>
+                </tr>
+            </table>
+        </div>
+        
     </div>
     
     <div *ngIf="productosCantidad.size == 0" class="cesta">

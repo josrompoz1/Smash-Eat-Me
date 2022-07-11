@@ -55,11 +55,17 @@
             <div class="formhijo">
                 <div class="seleccion">
                     <h3>Seleccionar menú</h3>
-                    <div *ngFor="let item of menus;  let i = index">
-                        <mat-checkbox [checked]="menuSeleccionadoIndex === i" (change)="setMenuSeleccionado(i)">
-                            {{item.nombre}}
-                            {{mapMenuPrecio.get(item)}}</mat-checkbox>
-                    </div>
+                    <table class="table-detalles">
+                        <tr *ngFor="let menu of menus; let i = index">
+                            <td class="td-nombre">
+                                <mat-checkbox [checked]="menuSeleccionadoIndex === i" (change)="setMenuSeleccionado(i)">
+                                    {{menu.nombre}}
+                                </mat-checkbox>
+                            </td>
+                            <td class="td-precio" *ngIf="mapMenuPrecio.get(menu)">{{mapMenuPrecio.get(menu)}} €</td>
+                            <td class="td-precio" *ngIf="!mapMenuPrecio.get(menu)"></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="descuento">
                     <h3>Aplicar cupón de descuento</h3>

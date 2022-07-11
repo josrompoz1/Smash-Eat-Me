@@ -24,10 +24,6 @@
     float: right;
 }
 
-mat-icon {
-    cursor: pointer;
-}
-
 .table-detalles {
     margin: 0 auto;
     margin-bottom: 3em;

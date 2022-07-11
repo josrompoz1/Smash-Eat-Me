@@ -36,3 +36,7 @@ hr {
 .form {
     margin-top: 3em;
 }
+
+mat-icon {
+    cursor: pointer;
+}
