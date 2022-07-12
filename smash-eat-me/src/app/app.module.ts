@@ -48,6 +48,7 @@ import { PedidoDialogComponent } from './components/pedido-dialog/pedido-dialog.
 import { AddProductoComponent } from './components/add-producto/add-producto.component';
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
 import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dialog/cupon-descuento-dialog.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dial
     PedidoDialogComponent,
     AddProductoComponent,
     ListadoCuponesDescuentoComponent,
-    CuponDescuentoDialogComponent
+    CuponDescuentoDialogComponent,
+    FooterComponent
   ],
   imports: [
     MatBadgeModule,
