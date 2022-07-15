@@ -103,3 +103,12 @@ export interface Mesa {
     usuarioId: number;
     menuId: number;
 }
+
+export interface Reto {
+    id?: number;
+    nombre: string;
+    descripcion: string;
+    categoria: string;
+    dificultad: number;
+    completado: boolean;
+}

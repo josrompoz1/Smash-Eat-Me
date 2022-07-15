@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
@@ -49,6 +50,8 @@ import { AddProductoComponent } from './components/add-producto/add-producto.com
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
 import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dialog/cupon-descuento-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardDialogComponent } from './components/dashboard-dialog/dashboard-dialog.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,9 @@ import { FooterComponent } from './components/footer/footer.component';
     AddProductoComponent,
     ListadoCuponesDescuentoComponent,
     CuponDescuentoDialogComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent,
+    DashboardDialogComponent
   ],
   imports: [
     MatBadgeModule,
@@ -96,6 +101,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatRadioModule,
     MatTableModule,
     MatSelectModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
