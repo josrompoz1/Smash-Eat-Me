@@ -19,6 +19,7 @@ function createRouterValoraciones(db) {
     );
   });
 
+  // FALTA
   router.get('/valoraciones/usuario/:usuarioId', function (req, res, next) {
     db.query(
       'SELECT * FROM Valoracion WHERE usuarioId=?',
