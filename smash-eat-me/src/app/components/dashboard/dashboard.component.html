@@ -1,26 +1,32 @@
 <div class="padre">
     <div class="dashboard">
         <div class="progreso">
-            <h2>Progreso</h2>
+            <h2>PROGRESO</h2>
             <mat-progress-bar mode="determinate" value={{progreso}} color="warn"></mat-progress-bar>
         </div>
     </div>
 
     <div class="dashboard">
         <div class="filtros">
-            <h2>Opciones</h2>
+            <h2>OPCIONES</h2>
             <div class="iconos">
-                <mat-icon>filter_list</mat-icon>
-                <mat-icon>cloud_download</mat-icon>
-                <mat-icon>cloud_upload</mat-icon>
+                <div class="filter-icon">
+                    <mat-icon matBadge="{{numberOfFilters}}" [matBadgeHidden]="hidden" (click)="filterDialog()">filter_list</mat-icon>
+                </div>
+                <div class="download-icon">
+                    <mat-icon (click)="downloadProgress()">cloud_download</mat-icon>
+                </div>
+                <div class="upload-icon">
+                    <mat-icon (click)="uploadProgress()">cloud_upload</mat-icon>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="dashboard">
         <div class="retos">
-            <h2>Retos</h2>
-            <table mat-table [dataSource]="retos" class="mat-elevation-z8">
+            <h2>RETOS</h2>
+            <table *ngIf="retos.length > 0" mat-table [dataSource]="retos" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="nombre">
                     <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -86,6 +92,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <p>Sin resultados en la búsqueda</p>
         </div>
     </div>
 </div>

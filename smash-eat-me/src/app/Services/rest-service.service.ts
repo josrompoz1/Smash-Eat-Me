@@ -153,4 +153,24 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'retos')
   }
 
+  public async countAllRetos(): Promise<number> {
+    return await this.makeGetRequest(this.url + 'retos/count/todos')
+  }
+
+  public async countRetosCompletados(): Promise<number> {
+    return await this.makeGetRequest(this.url + 'retos/count/completados')
+  }
+
+  public async getRetosFilterByCategoria(categoria: string): Promise<Reto[]> {
+    return await this.makeGetRequest(this.url + 'retos/categoria/' + categoria)
+  }
+
+  public async getRetosFilterByDificultad(minimo: number, maximo: number): Promise<Reto[]> {
+    return await this.makeGetRequest(this.url + 'retos/dificultad/' + minimo + '/' + maximo)
+  }
+
+  public async getRetosFilterByCategoriaAndDificultad(categoria: string, minimo: number, maximo: number): Promise<Reto[]> {
+    return await this.makeGetRequest(this.url + 'retos/categoria/' + categoria + '/dificultad/' + minimo + '/' + maximo)
+  }
+
 }

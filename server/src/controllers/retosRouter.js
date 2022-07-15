@@ -38,6 +38,81 @@ function createRouterRetos(db) {
         );
     });
 
+    router.get('/retos/categoria/:categoria', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Reto WHERE categoria=?',
+            [req.params.categoria],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    router.get('/retos/dificultad/:minimo/:maximo', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Reto WHERE dificultad BETWEEN ? AND ?',
+            [req.params.minimo, req.params.maximo],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    router.get('/retos/categoria/:categoria/dificultad/:minimo/:maximo', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Reto WHERE categoria=? AND dificultad BETWEEN ? AND ?',
+            [req.params.categoria, req.params.minimo, req.params.maximo],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    router.get('/retos/count/todos', function (req, res, next) {
+        db.query(
+            'SELECT COUNT(*) FROM Reto',
+            [],
+            (error, count) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(count[0]['COUNT(*)']);
+                }
+            }
+        );
+    });
+
+    router.get('/retos/count/completados', function (req, res, next) {
+        db.query(
+            'SELECT COUNT(*) FROM Reto WHERE completado=true',
+            [],
+            (error, count) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(count[0]['COUNT(*)']);
+                }
+            }
+        );
+    });
+
     router.put('/retos/:id/setfinished', function (req, res, next) {
         db.query(
             'SELECT * FROM Reto WHERE id=?',
