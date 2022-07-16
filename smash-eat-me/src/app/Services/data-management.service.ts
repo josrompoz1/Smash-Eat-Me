@@ -19,6 +19,9 @@ export class DataManagementService {
   public precioPedido: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public descuentoAplicado: BehaviorSubject<CuponDescuento> = new BehaviorSubject<CuponDescuento>({});
 
+  public paramTipo: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public paramBusqueda: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   constructor(private rest: RestService) { }
 
   //PRODUCTOS
@@ -42,12 +45,28 @@ export class DataManagementService {
     return await this.rest.getProductosSinMenuId()
   }
 
+  public async getProductosPorTipo(tipo: string): Promise<ProductoOfertado[]> {
+    return await this.rest.getProductosPorTipo(tipo)
+  }
+
+  public async getProductosFilterByTipoAndNombre(tipo: string, busqueda: string): Promise<ProductoOfertado[]> {
+    return await this.rest.getProductosFilterByTipoAndNombre(tipo, busqueda)
+  }
+
   public async postProducto(producto: ProductoOfertado) {
     return await this.rest.postProducto(producto)
   }
 
+  public async editarProducto(id: number, producto: ProductoOfertado) {
+    return await this.rest.editarProducto(id, producto)
+  }
+
   public async putMenuIdInProducto(productoId: number, menuId: number) {
     return await this.rest.putMenuIdInProducto(productoId, menuId)
+  }
+
+  public async deleteProducto(productoId: number) {
+    return await this.rest.deleteProducto(productoId)
   }
 
   //MENUS

@@ -56,6 +56,8 @@ import { SolucionesRetoDialogComponent } from './components/soluciones-reto-dial
 import { ListadoMenusComponent } from './components/listado-menus/listado-menus.component';
 import { DetallesMenuDialogComponent } from './components/detalles-menu-dialog/detalles-menu-dialog.component';
 import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.component';
+import { EditProductoComponent } from './components/edit-producto/edit-producto.component';
+import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.compon
     SolucionesRetoDialogComponent,
     ListadoMenusComponent,
     DetallesMenuDialogComponent,
-    MenuDialogComponent
+    MenuDialogComponent,
+    EditProductoComponent,
+    FiltroProductosComponent
   ],
   imports: [
     MatBadgeModule,

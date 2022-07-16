@@ -54,7 +54,6 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
   router.get('/productos/tipo/:tipo', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE tipo=?',
@@ -104,6 +103,21 @@ function createRouterProductos(db) {
     );
   });
 
+  router.get('/productos/tipo/:tipo/busqueda/:busqueda', function (req, res, next) {
+    db.query(
+        'SELECT * FROM ProductoOfertado WHERE tipo=? AND nombre LIKE ?',
+        [req.params.tipo, "%" + req.params.busqueda + "%"],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({status: 'error'});
+            } else {
+                res.status(200).json(results);
+            }
+        }
+    );
+});
+
   router.post('/productos', (req, res, next) => {
     db.query(
       'INSERT INTO ProductoOfertado (nombre, descripcion, precio, imagen, tipo) VALUES (?,?,?,?,?)',
@@ -123,7 +137,6 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
   router.put('/productos/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
@@ -147,7 +160,7 @@ function createRouterProductos(db) {
                     res.status(500).json({ status: 'error' });
                   }
                 } else {
-                  res.status(204).json({ status: 'Resource updated successfully' });
+                  res.status(201).json({ status: 'Producto editado correctamente' });
                 }
               }
             );
@@ -201,7 +214,6 @@ function createRouterProductos(db) {
     )
   });
 
-  // FALTA
   router.delete('/productos/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
@@ -219,9 +231,10 @@ function createRouterProductos(db) {
               [req.params.id],
               (error) => {
                 if (error) {
+                  console.log(error)
                   res.status(500).json({ status: 'error' });
                 } else {
-                  res.status(200).json({ status: 'ok' });
+                  res.status(201).json({ status: 'Producto eliminado' });
                 }
               }
             );

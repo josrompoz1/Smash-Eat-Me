@@ -13,9 +13,12 @@ mat-grid-tile-footer .texto {
     font-size: 20px;
 }
 
-.busqueda {
-    font-size: 15px;
+.filtro {
     float: right;
+}
+
+.filter-icono {
+    font-size: 2.5em;
 }
 
 button {
@@ -32,7 +35,20 @@ mat-paginator {
     position: absolute;
     right: 20px;
     top: 7px;
-    cursor: pointer;
+}
+
+.remove-icono {
+    font-size: 35px;
+    position: absolute;
+    right: 60px;
+    top: 7px;
+}
+
+.edit-icono {
+    font-size: 35px;
+    position: absolute;
+    right: 100px;
+    top: 7px;
 }
 
 .boton {
