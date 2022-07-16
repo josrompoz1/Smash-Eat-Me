@@ -112,3 +112,17 @@ export interface Reto {
     dificultad: number;
     completado: boolean;
 }
+
+export interface Solucion {
+    id: number;
+    nombre: string;
+    tipo: string;
+    retoId: number;
+}
+
+export interface Paso {
+    id: number;
+    numero: number;
+    solucion: string;
+    solucionId: number;
+}

@@ -85,7 +85,7 @@
                 <ng-container matColumnDef="solucion">
                     <th mat-header-cell *matHeaderCellDef> Solucion </th>
                     <td mat-cell *matCellDef="let element">
-                        <mat-icon>question_answer</mat-icon>
+                        <mat-icon (click)="solucionDialog(element)">question_answer</mat-icon>
                     </td>
                 </ng-container>
 

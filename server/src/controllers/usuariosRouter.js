@@ -76,6 +76,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.put('/usuarios/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario WHERE id=?',
@@ -106,6 +107,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.put('/usuarios/:id/changepassword', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario WHERE id=?',
@@ -205,6 +207,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.delete('/usuarios/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario WHERE id=?',
@@ -234,6 +237,7 @@ function createRouterUsuarios(db) {
     });
 
     //---------------------------------ENDPOINTS TARJETAS DE USUARIOS---------------------------------
+    // FALTA
     router.get('/tarjetas/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Tarjeta WHERE id=?',
@@ -291,6 +295,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.put('/tarjetas/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Tarjeta WHERE id=?',
@@ -324,6 +329,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.delete('/tarjetas/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Tarjeta WHERE id=?',
@@ -354,6 +360,7 @@ function createRouterUsuarios(db) {
     });
 
     //---------------------------------ENDPOINTS DIRECCION DE USUARIOS---------------------------------
+    // FALTA
     router.get('/direcciones/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Direccion WHERE id=?',
@@ -411,6 +418,7 @@ function createRouterUsuarios(db) {
         );
     });
 
+    // FALTA
     router.delete('/direcciones/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Direccion WHERE id=?',

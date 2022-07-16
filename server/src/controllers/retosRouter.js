@@ -28,11 +28,7 @@ function createRouterRetos(db) {
                     console.log(error);
                     res.status(500).json({status: 'error'});
                 } else {
-                    if(results.length==0) {
-                        res.status(404).json({status: 'Not found'})
-                    } else {
-                        res.status(200).json(results);
-                    }
+                    res.status(200).json(results[0]);
                 }
             }
         );
@@ -113,6 +109,7 @@ function createRouterRetos(db) {
         );
     });
 
+    // FALTA
     router.put('/retos/:id/setfinished', function (req, res, next) {
         db.query(
             'SELECT * FROM Reto WHERE id=?',
@@ -143,6 +140,7 @@ function createRouterRetos(db) {
     });
 
     //---------------------------------ENDPOINTS SOLUCIONES---------------------------------
+    // FALTA
     router.get('/soluciones/retos', function (req, res, next) {
         db.query(
             'SELECT * FROM Solucion',
@@ -159,6 +157,7 @@ function createRouterRetos(db) {
         );
     });
 
+    // FALTA
     router.get('/soluciones/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Solucion WHERE id=?',
@@ -178,7 +177,7 @@ function createRouterRetos(db) {
         );
     });
 
-    router.get('/soluciones/Reto/:id', function (req, res, next) {
+    router.get('/soluciones/reto/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Solucion WHERE retoId=?',
             [req.params.id],
@@ -198,7 +197,7 @@ function createRouterRetos(db) {
     });
 
     //---------------------------------ENDPOINTS PASOS DE LAS SOLUCIONES---------------------------------
-    router.get('/pasos/Solucion/:id', function (req, res, next) {
+    router.get('/pasos/solucion/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Paso WHERE solucionId=?',
             [req.params.id],

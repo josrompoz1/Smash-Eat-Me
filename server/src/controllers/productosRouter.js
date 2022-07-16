@@ -54,6 +54,7 @@ function createRouterProductos(db) {
     );
   });
 
+  // FALTA
   router.get('/productos/tipo/:tipo', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE tipo=?',
@@ -73,7 +74,8 @@ function createRouterProductos(db) {
     );
   });
 
-  router.get('/productos/Menu/:id', function (req, res, next) {
+  // FALTA
+  router.get('/productos/menu/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE menuId=?',
       [req.params.id],
@@ -111,6 +113,7 @@ function createRouterProductos(db) {
     );
   });
 
+  // FALTA
   router.put('/productos/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
@@ -144,7 +147,8 @@ function createRouterProductos(db) {
     );
   });
 
-  router.put('/productos/:pid/Menu/:mid', function (req, res, next) {
+  // FALTA
+  router.put('/productos/:pid/menu/:mid', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.pid],
@@ -188,6 +192,7 @@ function createRouterProductos(db) {
     )
   });
 
+  // FALTA
   router.delete('/productos/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
@@ -233,6 +238,7 @@ function createRouterProductos(db) {
     );
   });
 
+  // FALTA
   router.get('/menus/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM Menu WHERE id=?',
@@ -252,6 +258,7 @@ function createRouterProductos(db) {
     );
   });
 
+  // FALTA
   router.post('/menus', (req, res, next) => {
     db.query(
       'INSERT INTO Menu (nombre, descripcion) VALUES (?,?)',
@@ -271,6 +278,7 @@ function createRouterProductos(db) {
     );
   });
 
+  // FALTA
   router.delete('/menus/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM Menu WHERE id=?',
