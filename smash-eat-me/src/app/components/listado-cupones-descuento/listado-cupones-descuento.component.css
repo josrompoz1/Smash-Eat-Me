@@ -4,11 +4,11 @@
 
 table {
     margin: 0 auto;
-    width: 50%;
+    width: 70%;
 }
 
 .mat-column-codigo {
-    width: 50%;
+    width: 40%;
     border-right: 1px solid;
     text-align: center;
     font-style: italic;
@@ -22,6 +22,11 @@ table {
 }
 
 .mat-column-editar {
+    text-align: center;
+    font-size: medium;
+}
+
+.mat-column-eliminar {
     text-align: center;
     font-size: medium;
 }
