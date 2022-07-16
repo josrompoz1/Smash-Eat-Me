@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DataManagementService } from 'src/app/Services/data-management.service';
+import { RetosService } from 'src/app/Services/retos.service';
 
 @Component({
   selector: 'app-dashboard-dialog',
@@ -15,11 +15,11 @@ export class DashboardDialogComponent implements OnInit {
   paramCategoria!: string;
 
   constructor(private dialogRef: MatDialogRef<DashboardDialogComponent>,
-              private dataManagement: DataManagementService) {
-    this.dataManagement.paramDificultad.subscribe(value => {
+              private retosService: RetosService) {
+    this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
-    this.dataManagement.paramCategoria.subscribe(value => {
+    this.retosService.paramCategoria.subscribe(value => {
       this.paramCategoria = value
     })
   }
@@ -57,14 +57,14 @@ export class DashboardDialogComponent implements OnInit {
   }
 
   public updateParametros() {    
-    this.dataManagement.paramDificultad.next(this.form.value.dificultad)
-    this.dataManagement.paramCategoria.next(this.form.value.categoria)
+    this.retosService.paramDificultad.next(this.form.value.dificultad)
+    this.retosService.paramCategoria.next(this.form.value.categoria)
     this.onClose()
   }
 
   public limpiarForm() {
-    this.dataManagement.paramDificultad.next('')
-    this.dataManagement.paramCategoria.next('')
+    this.retosService.paramDificultad.next('')
+    this.retosService.paramCategoria.next('')
     this.onClose()
   }
 

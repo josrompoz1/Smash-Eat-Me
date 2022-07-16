@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Reto, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, Paso, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Reto, Solucion, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -153,6 +153,10 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'retos')
   }
 
+  public async getRetoById(id: number): Promise<Reto> {
+    return await this.makeGetRequest(this.url + 'retos/' + id)
+  }
+
   public async countAllRetos(): Promise<number> {
     return await this.makeGetRequest(this.url + 'retos/count/todos')
   }
@@ -171,6 +175,16 @@ export class RestService extends AbstractWebService {
 
   public async getRetosFilterByCategoriaAndDificultad(categoria: string, minimo: number, maximo: number): Promise<Reto[]> {
     return await this.makeGetRequest(this.url + 'retos/categoria/' + categoria + '/dificultad/' + minimo + '/' + maximo)
+  }
+
+  //SOLUCIONES
+  public async getSolucionesByRetoId(retoId: number): Promise<Solucion[]> {
+    return await this.makeGetRequest(this.url + 'soluciones/reto/' + retoId);
+  }
+
+  //PASOS
+  public async getPasosBySolucionId(solucionId: number): Promise<Paso[]> {
+    return await this.makeGetRequest(this.url + 'pasos/solucion/' + solucionId)
   }
 
 }

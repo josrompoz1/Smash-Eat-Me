@@ -52,6 +52,7 @@ import { CuponDescuentoDialogComponent } from './components/cupon-descuento-dial
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardDialogComponent } from './components/dashboard-dialog/dashboard-dialog.component';
+import { SolucionesRetoDialogComponent } from './components/soluciones-reto-dialog/soluciones-reto-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DashboardDialogComponent } from './components/dashboard-dialog/dashboar
     CuponDescuentoDialogComponent,
     FooterComponent,
     DashboardComponent,
-    DashboardDialogComponent
+    DashboardDialogComponent,
+    SolucionesRetoDialogComponent
   ],
   imports: [
     MatBadgeModule,

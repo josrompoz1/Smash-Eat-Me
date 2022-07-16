@@ -19,6 +19,21 @@ function createRouterRetos(db) {
         );
     });
 
+    router.get('/retos/:id', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Reto WHERE id=?',
+            [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({status: 'error'});
+                } else {
+                    res.status(200).json(results[0]);
+                }
+            }
+        );
+    });
+
     router.get('/retos/categoria/:categoria', function (req, res, next) {
         db.query(
             'SELECT * FROM Reto WHERE categoria=?',
@@ -162,7 +177,6 @@ function createRouterRetos(db) {
         );
     });
 
-    // FALTA
     router.get('/soluciones/reto/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Solucion WHERE retoId=?',
@@ -183,7 +197,6 @@ function createRouterRetos(db) {
     });
 
     //---------------------------------ENDPOINTS PASOS DE LAS SOLUCIONES---------------------------------
-    // FALTA
     router.get('/pasos/solucion/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Paso WHERE solucionId=?',

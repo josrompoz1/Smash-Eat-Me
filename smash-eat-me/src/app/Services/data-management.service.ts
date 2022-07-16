@@ -9,8 +9,6 @@ export class DataManagementService {
   selectedProducto?: ProductoOfertado;
   selectedPedido?: PedidoComida;
   selectedCupon?: CuponDescuento;
-  public paramDificultad: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public paramCategoria: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -156,31 +154,6 @@ export class DataManagementService {
   //MESAS
   public async postReservaMesa(mesa: Mesa) {
     return await this.rest.postReservaMesa(mesa)
-  }
-
-  //RETOS
-  public async getAllRetos(): Promise<Reto[]> {
-    return await this.rest.getAllRetos()
-  }
-
-  public async countAllRetos(): Promise<number> {
-    return await this.rest.countAllRetos()
-  }
-
-  public async countRetosCompletados(): Promise<number> {
-    return await this.rest.countRetosCompletados()
-  }
-
-  public async getRetosFilterByCategoria(categoria: string): Promise<Reto[]> {
-    return await this.rest.getRetosFilterByCategoria(categoria)
-  }
-
-  public async getRetosFilterByDificultad(minimo: number, maximo: number): Promise<Reto[]> {
-    return await this.rest.getRetosFilterByDificultad(minimo, maximo)
-  }
-
-  public async getRetosFilterByCategoriaAndDificultad(categoria: string, minimo: number, maximo: number): Promise<Reto[]> {
-    return await this.rest.getRetosFilterByCategoriaAndDificultad(categoria, minimo, maximo)
   }
 
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Reto } from 'src/app/Models/types';
-import { DataManagementService } from 'src/app/Services/data-management.service';
+import { RetosService } from 'src/app/Services/retos.service';
 import { DashboardDialogComponent } from '../dashboard-dialog/dashboard-dialog.component';
+import { SolucionesRetoDialogComponent } from '../soluciones-reto-dialog/soluciones-reto-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,12 +21,12 @@ export class DashboardComponent implements OnInit {
   paramDificultad!: string;
   paramCategoria!: string;
 
-  constructor(private dataManagement: DataManagementService,
+  constructor(private retosService: RetosService,
               private dialog: MatDialog) {
-    this.dataManagement.paramDificultad.subscribe(value => {
+    this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
-    this.dataManagement.paramCategoria.subscribe(value => {
+    this.retosService.paramCategoria.subscribe(value => {
       this.paramCategoria = value
     })
   }
@@ -35,9 +36,9 @@ export class DashboardComponent implements OnInit {
   }
 
   private async getData() {
-    this.retos = await this.dataManagement.getAllRetos()
-    const nRetos: number = await this.dataManagement.countAllRetos()
-    const nRetosCompletados: number = await this.dataManagement.countRetosCompletados()
+    this.retos = await this.retosService.getAllRetos()
+    const nRetos: number = await this.retosService.countAllRetos()
+    const nRetosCompletados: number = await this.retosService.countRetosCompletados()
     this.progreso = (nRetosCompletados/nRetos)*100
   }
 
@@ -80,11 +81,11 @@ export class DashboardComponent implements OnInit {
           break;
         }     
       }
-      this.retos = await this.dataManagement.getRetosFilterByCategoriaAndDificultad(this.paramCategoria, minimo, maximo)
+      this.retos = await this.retosService.getRetosFilterByCategoriaAndDificultad(this.paramCategoria, minimo, maximo)
     } else if(this.paramCategoria != '') {
       this.hidden = false;
       this.numberOfFilters = 1;
-      this.retos = await this.dataManagement.getRetosFilterByCategoria(this.paramCategoria)
+      this.retos = await this.retosService.getRetosFilterByCategoria(this.paramCategoria)
     } else if(this.paramDificultad != '') {
       this.hidden = false;
       this.numberOfFilters = 1;
@@ -112,12 +113,23 @@ export class DashboardComponent implements OnInit {
           break;
         }     
       }
-      this.retos = await this.dataManagement.getRetosFilterByDificultad(minimo, maximo)
+      this.retos = await this.retosService.getRetosFilterByDificultad(minimo, maximo)
 
     } else {
       this.hidden = true;
       this.numberOfFilters = 0;
       this.getData()
+    }
+  }
+
+  public solucionDialog(element: Reto) {
+    if(element.id != undefined) {
+      this.retosService.retoIdSeleccionado.next(element.id)
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = "95%";
+      dialogConfig.height = "95%"
+      this.dialog.open(SolucionesRetoDialogComponent, dialogConfig);
     }
   }
 
