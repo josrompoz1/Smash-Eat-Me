@@ -1,0 +1,50 @@
+.menus {
+    width: 100%;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.mat-column-nombre {
+    text-align: center;
+    font-style: italic;
+    font-size: medium;
+}
+
+.mat-column-descripcion {
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.mat-column-precio {
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.mat-column-detalles {
+    width: 10%;
+    text-align: center;
+    font-size: medium;
+}
+
+.mat-column-editar {
+    width: 10%;
+    text-align: center;
+    font-size: medium;
+}
+
+.mat-column-eliminar {
+    width: 10%;
+    text-align: center;
+    font-size: medium;
+}
+
+button {
+    margin-left: 7em;
+    margin-bottom: 2em;
+}

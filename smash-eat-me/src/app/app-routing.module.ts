@@ -10,6 +10,7 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
 import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
 import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
+import { ListadoMenusComponent } from './components/listado-menus/listado-menus.component';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'listadousuarios', component: ListadoUsuariosComponent },
   { path: 'crearproducto', component: AddProductoComponent },
   { path: 'listadocupones', component: ListadoCuponesDescuentoComponent },
+  { path: 'menus', component: ListadoMenusComponent },
   { path: 'dashboard', component: DashboardComponent }
   
 ];

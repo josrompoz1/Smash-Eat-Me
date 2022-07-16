@@ -74,7 +74,6 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
   router.get('/productos/menu/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE menuId=?',
@@ -84,11 +83,22 @@ function createRouterProductos(db) {
           console.log(error);
           res.status(500).json({ status: 'error' });
         } else {
-          if (results.length == 0) {
-            res.status(404).json({ status: 'Not found' })
-          } else {
-            res.status(200).json(results);
-          }
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
+  router.get('/productos/no/menu', function (req, res, next) {
+    db.query(
+      'SELECT * FROM ProductoOfertado WHERE menuId IS NULL',
+      [],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({ status: 'error' });
+        } else {
+          res.status(200).json(results);
         }
       }
     );
@@ -147,7 +157,6 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
   router.put('/productos/:pid/menu/:mid', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
@@ -178,7 +187,7 @@ function createRouterProductos(db) {
                         if (error) {
                           res.status(500).json({ status: 'error' });
                         } else {
-                          res.status(204).json({ status: 'Resource updated successfully' });
+                          res.status(201).json({ status: 'Se ha añadido el producto al menú' });
                         }
                       }
                     )
@@ -238,34 +247,13 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
-  router.get('/menus/:id', function (req, res, next) {
-    db.query(
-      'SELECT * FROM Menu WHERE id=?',
-      [req.params.id],
-      (error, results) => {
-        if (error) {
-          console.log(error);
-          res.status(500).json({ status: 'error' });
-        } else {
-          if (results.length == 0) {
-            res.status(404).json({ status: 'Not found' })
-          } else {
-            res.status(200).json(results);
-          }
-        }
-      }
-    );
-  });
-
-  // FALTA
   router.post('/menus', (req, res, next) => {
     db.query(
-      'INSERT INTO Menu (nombre, descripcion) VALUES (?,?)',
-      [req.body.nombre, req.body.descripcion],
+      'INSERT INTO Menu (nombre, descripcion, precio) VALUES (?,?,?)',
+      [req.body.nombre, req.body.descripcion, req.body.precio],
       (error) => {
         if (error) {
-          if (req.body.nombre || req.body.descripcion) {
+          if (req.body.nombre || req.body.descripcion || req.body.precio) {
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
@@ -278,7 +266,6 @@ function createRouterProductos(db) {
     );
   });
 
-  // FALTA
   router.delete('/menus/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM Menu WHERE id=?',
@@ -298,21 +285,28 @@ function createRouterProductos(db) {
                 if (error) {
                   res.status(500).json({ status: 'error' });
                 } else {
-                  db.query(
-                    'DELETE FROM Menu WHERE id=?',
-                    [req.params.id],
-                    (error) => {
-                      if (error) {
-                        res.status(500).json({ status: 'error' });
-                      } else {
-                        res.status(200).json({ status: 'ok' });
-                      }
+                  db.query('DELETE FROM Mesa WHERE menuId=?',
+                  [req.params.id],
+                  (error) => {
+                    if (error) {
+                      res.status(500).json({ status: 'error' });
+                    } else {
+                      db.query(
+                        'DELETE FROM Menu WHERE id=?',
+                        [req.params.id],
+                        (error) => {
+                          if (error) {
+                            res.status(500).json({ status: 'error' });
+                          } else {
+                            res.status(201).json({ status: 'Menú eliminado correctamente' });
+                          }
+                        }
+                      );
                     }
-                  );
+                  })
                 }
               }
             );
-
           }
         }
       }

@@ -9,6 +9,7 @@ export class DataManagementService {
   selectedProducto?: ProductoOfertado;
   selectedPedido?: PedidoComida;
   selectedCupon?: CuponDescuento;
+  selectedMenu?: Menu;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -33,13 +34,33 @@ export class DataManagementService {
     return await this.rest.getProductosById(id);
   }
 
+  public async getProductosByMenuId(menuId: number): Promise<ProductoOfertado[]> {
+    return await this.rest.getProductosByMenuId(menuId)
+  }
+
+  public async getProductosSinMenuId(): Promise<ProductoOfertado[]> {
+    return await this.rest.getProductosSinMenuId()
+  }
+
   public async postProducto(producto: ProductoOfertado) {
     return await this.rest.postProducto(producto)
+  }
+
+  public async putMenuIdInProducto(productoId: number, menuId: number) {
+    return await this.rest.putMenuIdInProducto(productoId, menuId)
   }
 
   //MENUS
   public async getMenus(): Promise<Menu[]> {
     return await this.rest.getMenus();
+  }
+
+  public async postMenu(menu: Menu) {
+    return await this.rest.postMenu(menu)
+  }
+
+  public async deleteMenu(id: number) {
+    return await this.rest.deleteMenu(id)
   }
 
   //USUARIOS

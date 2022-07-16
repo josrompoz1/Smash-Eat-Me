@@ -91,7 +91,7 @@ export interface Menu {
     id?: number;
     nombre: string;
     descripcion: string;
-    precio: number;
+    precio?: number;
 }
 
 export interface Mesa {
