@@ -50,4 +50,19 @@ export class AbstractWebService {
     })
   }
 
+  protected makeDeleteRequest(path: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.delete(path).subscribe(response => {
+        resolve(response)
+      }, error => {
+        if (error.status === 200) {
+          resolve(null)
+        } else {
+          console.log(error)
+          reject(error)
+        }
+      })
+    })
+  }
+
 }

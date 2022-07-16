@@ -12,7 +12,7 @@ import { CuponDescuentoDialogComponent } from '../cupon-descuento-dialog/cupon-d
 export class ListadoCuponesDescuentoComponent implements OnInit {
 
   cupones: CuponDescuento[] = []
-  displayedColumns: string[] = ['codigo', 'porcentaje', 'editar'];
+  displayedColumns: string[] = ['codigo', 'porcentaje', 'editar', 'eliminar'];
 
   constructor(private dataManagement: DataManagementService,
               private dialog: MatDialog) { }
@@ -36,6 +36,12 @@ export class ListadoCuponesDescuentoComponent implements OnInit {
     let dialogRef = this.dialog.open(CuponDescuentoDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.dataManagement.selectedCupon = undefined;
+      this.getData()
+    })
+  }
+
+  public async deleteCupon(element: CuponDescuento) {
+    if(element.id) await this.dataManagement.deleteCupon(element.id).then(() => {
       this.getData()
     })
   }

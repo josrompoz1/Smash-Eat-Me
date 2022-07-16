@@ -90,7 +90,6 @@ function createRouterCuponesDescuento(db) {
         );
     });
 
-    // FALTA
     router.delete('/cupones/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM CuponDescuento WHERE id=?',
@@ -110,7 +109,7 @@ function createRouterCuponesDescuento(db) {
                                 if (error) {
                                     res.status(500).json({ status: 'error' });
                                 } else {
-                                    res.status(200).json({ status: 'ok' });
+                                    res.status(201).json({ status: 'Cupón de descuento eliminado' });
                                 }
                             }
                         );

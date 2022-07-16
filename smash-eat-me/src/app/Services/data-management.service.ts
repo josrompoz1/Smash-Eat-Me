@@ -100,6 +100,10 @@ export class DataManagementService {
     return await this.rest.changePercentCupon(id, porcentaje)
   }
 
+  public async deleteCupon(id: number) {
+    return await this.rest.deleteCupon(id)
+  }
+
   //PEDIDOS COMIDA
   public async getPedidosByUsuarioId(usuarioId: number): Promise<PedidoComida[]> {
     return await this.rest.getPedidosByUsuarioId(usuarioId);
