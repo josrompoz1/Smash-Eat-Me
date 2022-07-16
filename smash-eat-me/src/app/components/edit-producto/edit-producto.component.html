@@ -1,0 +1,49 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>{{titulo}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="editarProducto()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" name="nombre" formControlName="nombre">
+            </mat-form-field><br>
+            
+            <mat-form-field appearance="fill">
+                <mat-label>Tipo</mat-label>
+                <mat-select matInput formControlName="tipo">
+                    <mat-option value="Entremes">Entremes</mat-option>
+                    <mat-option value="Plato">Plato principal</mat-option>
+                    <mat-option value="Postre">Postre</mat-option>
+                    <mat-option value="Bebida">Bebida</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <input matInput type="text" name="descripcion" formControlName="descripcion" >
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" name="precion" formControlName="precio" >
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>URL imagen</mat-label>
+                <input matInput type="url" name="imagen" formControlName="imagen" [readonly]="true">
+            </mat-form-field><br>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

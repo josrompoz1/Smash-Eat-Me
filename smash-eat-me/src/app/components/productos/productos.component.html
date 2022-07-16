@@ -2,14 +2,8 @@
     <div class="titulo">
         <h1>Todos nuestros platos</h1>
     </div>
-    <div class="busqueda">
-        <form [formGroup]="form" (ngSubmit)="buscarPlato()">
-            <mat-form-field appearance="fill">
-                <mat-label>Buscar plato</mat-label>
-                <input matInput type="text" name="busqueda" formControlName="busqueda" placeholder="Buscar plato">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-        </form>
+    <div class="filtro">
+        <mat-icon class="filter-icono" matBadge="{{numberOfFilters}}" [matBadgeHidden]="hidden" (click)="filterDialog()">filter_list</mat-icon>
     </div>
 </div>
 <hr>
@@ -29,6 +23,8 @@
                 <mat-grid-tile-footer>
                     <h3 class="texto">{{producto.nombre | uppercase}}</h3>
                     <div class="icono">
+                        <mat-icon *ngIf="rol == 'ADMIN'" class="edit-icono" (click)="onEdit(producto)">edit</mat-icon>
+                        <mat-icon *ngIf="rol == 'ADMIN'" class="remove-icono" (click)="onDelete(producto)">remove_circle</mat-icon>
                         <mat-icon class="fa-icono" (click)="onAdd(producto)">add_circle</mat-icon>
                     </div>
                 </mat-grid-tile-footer>

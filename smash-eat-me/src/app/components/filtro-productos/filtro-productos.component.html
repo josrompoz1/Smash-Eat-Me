@@ -1,0 +1,37 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Opciones de filtrado</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="updateParametros()">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Tipo de plato</mat-label>
+                <mat-select matInput formControlName="tipo">
+                    <mat-option value="Entremes">Entremes</mat-option>
+                    <mat-option value="Plato">Plato principal</mat-option>
+                    <mat-option value="Postre">Postre</mat-option>
+                    <mat-option value="Bebida">Bebida</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Buscar plato</mat-label>
+                <input matInput type="text" name="busqueda" formControlName="busqueda">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field><br>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+        <button mat-stroked-button (click)="limpiarForm()">Limpiar</button>
+    </div>
+</div>

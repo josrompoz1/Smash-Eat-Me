@@ -5,6 +5,8 @@ import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.c
 import { PageEvent } from '@angular/material/paginator';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { EditProductoComponent } from '../edit-producto/edit-producto.component';
+import { FiltroProductosComponent } from '../filtro-productos/filtro-productos.component';
 
 @Component({
   selector: 'app-productos',
@@ -23,7 +25,19 @@ export class ProductosComponent implements OnInit {
   pageSizeOptions: number[] = [6, 12, 24, 48];
   form!: FormGroup;
 
-  constructor(private dataManagement: DataManagementService, private dialog: MatDialog) { }
+  numberOfFilters: number = 0;
+  hidden: boolean = true;
+  paramTipo!: string;
+  paramBusqueda!: string;
+
+  constructor(private dataManagement: DataManagementService, private dialog: MatDialog) {
+    this.dataManagement.paramTipo.subscribe(value => {
+      this.paramTipo = value
+    })
+    this.dataManagement.paramBusqueda.subscribe(value => {
+      this.paramBusqueda = value
+    })
+  }
 
   ngOnInit() {
     this.getData()
@@ -42,7 +56,10 @@ export class ProductosComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width = "65%"
     dialogConfig.height = "90%"
-    this.dialog.open(ProductosDialogComponent, dialogConfig);
+    let dialogRef = this.dialog.open(ProductosDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.dataManagement.selectedProducto = undefined;
+    })
   }
 
   handlePage(page: PageEvent) {
@@ -59,13 +76,54 @@ export class ProductosComponent implements OnInit {
     this.dataManagement.numberOfItemsInBasket.next(this.productosAñadidos.length);
   }
 
-  public async buscarPlato(): Promise<void> {
-    const busqueda: string = this.form.controls['busqueda'].value;
-    console.log(busqueda);
-    if(busqueda!=='') {
-      this.productos = await this.dataManagement.getProductosPorBusqueda(busqueda);
+  public async onDelete(producto: ProductoOfertado) {
+    if(producto.id)
+    await this.dataManagement.deleteProducto(producto.id).then(() => {
+      this.getData()
+    })
+  }
+
+  public onEdit(producto: ProductoOfertado) {
+    this.dataManagement.selectedProducto = producto;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "70%"
+    dialogConfig.height = "90%"
+    let dialogRef = this.dialog.open(EditProductoComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.dataManagement.selectedProducto = undefined;
+      this.getData()
+    })
+  }
+
+  public filterDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "60%";
+    dialogConfig.height = "70%"
+    let dialogRef = this.dialog.open(FiltroProductosComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      this.filterData()
+    })
+  }
+
+  private async filterData() {
+    if(this.paramTipo != '' && this.paramBusqueda != '') {
+      this.hidden = false;
+      this.numberOfFilters = 2;
+      this.productos = await this.dataManagement.getProductosFilterByTipoAndNombre(this.paramTipo, this.paramBusqueda)
+    } else if(this.paramTipo != '') {
+      this.hidden = false;
+      this.numberOfFilters = 1;
+      this.productos = await this.dataManagement.getProductosPorTipo(this.paramTipo);
+    } else if(this.paramBusqueda != '') {
+      this.hidden = false;
+      this.numberOfFilters = 1;
+      this.productos = await this.dataManagement.getProductosPorBusqueda(this.paramBusqueda);
     } else {
-      this.productos = await this.dataManagement.getProductos();
+      this.hidden = true;
+      this.numberOfFilters = 0;
+      this.getData()
     }
   }
 
