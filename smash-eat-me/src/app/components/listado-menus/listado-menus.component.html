@@ -1,0 +1,52 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Menús disponibles</h1>
+    </div>
+</div>
+<hr>
+
+<button mat-stroked-button (click)="abrirMenuDialog()">Añadir menú</button>
+
+<div class="menus">
+    <table mat-table [dataSource]="menus" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"><p *ngIf="element.precio"> {{element.precio}} € </p></td>
+        </ng-container>
+
+        <ng-container matColumnDef="detalles">
+            <th mat-header-cell *matHeaderCellDef> Productos </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon *ngIf="element.precio" (click)="abrirDetallesDialog(element)">remove_red_eye</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef> Editar menu </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="abrirMenuDialog(element)">edit</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef> Eliminar menu </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-icon (click)="deleteMenu(element)">delete</mat-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

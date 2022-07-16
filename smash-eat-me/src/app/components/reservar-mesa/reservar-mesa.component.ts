@@ -25,7 +25,7 @@ export class ReservarMesaComponent implements OnInit {
   private async getData() {
     this.menus = await this.dataManagement.getMenus();
     this.menus.forEach(menu => {
-      this.mapMenuPrecio.set(menu, menu.precio)
+      if(menu.precio) this.mapMenuPrecio.set(menu, menu.precio)
     })
     this.form = new FormGroup({
       'nombre_apellido': new FormControl('', [Validators.required]),
@@ -70,8 +70,10 @@ export class ReservarMesaComponent implements OnInit {
       if(descuento.length > 0) {
         this.menus.forEach(menu => {
           if (descuento[0].porcentaje != undefined) {
-            const precioConDescuento: number = menu.precio * (100 - descuento[0].porcentaje) / 100;
-            this.mapMenuPrecio.set(menu, precioConDescuento)
+            if(menu.precio) {
+              const precioConDescuento: number = menu.precio * (100 - descuento[0].porcentaje) / 100;
+              this.mapMenuPrecio.set(menu, precioConDescuento)
+            }
           }
         })
         this.formDescuento.controls['codigo'].disable();

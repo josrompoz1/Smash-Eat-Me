@@ -25,13 +25,33 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'productos/' + id);
   }
 
+  public async getProductosByMenuId(menuId: number): Promise<ProductoOfertado[]> {
+    return await this.makeGetRequest(this.url + 'productos/menu/' + menuId)
+  }
+
+  public async getProductosSinMenuId(): Promise<ProductoOfertado[]> {
+    return await this.makeGetRequest(this.url + 'productos/no/menu')
+  }
+
   public async postProducto(producto: ProductoOfertado) {
     return await this.makePostRequest(this.url + 'productos', producto)
+  }
+
+  public async putMenuIdInProducto(productoId: number, menuId: number) {
+    return await this.makePutRequest(this.url + 'productos/' + productoId + '/menu/' + menuId, null)
   }
 
   //MENU
   public async getMenus(): Promise<Menu[]> {
     return await this.makeGetRequest(this.url + 'menus');
+  }
+
+  public async postMenu(menu: Menu) {
+    return await this.makePostRequest(this.url + 'menus', menu)
+  }
+
+  public async deleteMenu(id: number) {
+    return await this.makeDeleteRequest(this.url + 'menus/' + id)
   }
 
   //USUARIOS

@@ -53,6 +53,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardDialogComponent } from './components/dashboard-dialog/dashboard-dialog.component';
 import { SolucionesRetoDialogComponent } from './components/soluciones-reto-dialog/soluciones-reto-dialog.component';
+import { ListadoMenusComponent } from './components/listado-menus/listado-menus.component';
+import { DetallesMenuDialogComponent } from './components/detalles-menu-dialog/detalles-menu-dialog.component';
+import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,10 @@ import { SolucionesRetoDialogComponent } from './components/soluciones-reto-dial
     FooterComponent,
     DashboardComponent,
     DashboardDialogComponent,
-    SolucionesRetoDialogComponent
+    SolucionesRetoDialogComponent,
+    ListadoMenusComponent,
+    DetallesMenuDialogComponent,
+    MenuDialogComponent
   ],
   imports: [
     MatBadgeModule,

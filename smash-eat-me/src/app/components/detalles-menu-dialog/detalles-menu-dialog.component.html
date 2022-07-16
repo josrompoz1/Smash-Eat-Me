@@ -1,0 +1,57 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>{{titulo}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="menuPadre">
+    <div class="menuHijo">
+        <div class="menu">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+                    <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef> Precio </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p *ngIf="element.precio"> {{element.precio}} € </p>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Productos del menú</h1>
+    </div>
+</div>
+<hr>
+<div class="listado">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="80px">
+        <mat-grid-tile *ngFor="let producto of productos">
+            <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+            <mat-grid-tile-footer>
+                <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
