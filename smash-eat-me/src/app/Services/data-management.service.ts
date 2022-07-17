@@ -196,8 +196,20 @@ export class DataManagementService {
   }
 
   //MESAS
+  public async getAllMesas(): Promise<Mesa[]> {
+    return await this.rest.getAllMesas()
+  }
+
+  public async getMesaByUsuarioId(usuarioId: number): Promise<Mesa[]> {
+    return await this.rest.getMesaByUsuarioId(usuarioId)
+  }
+
   public async postReservaMesa(mesa: Mesa) {
     return await this.rest.postReservaMesa(mesa)
+  }
+
+  public async deleteReserva(id: number) {
+    return await this.rest.deleteReserva(id)
   }
 
 }

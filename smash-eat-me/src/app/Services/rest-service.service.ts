@@ -184,8 +184,20 @@ export class RestService extends AbstractWebService {
   }
 
   //MESAS
+  public async getAllMesas(): Promise<Mesa[]> {
+    return await this.makeGetRequest(this.url + 'mesas')
+  }
+
+  public async getMesaByUsuarioId(usuarioId: number): Promise<Mesa[]> {
+    return await this.makeGetRequest(this.url + 'mesas/usuario/' + usuarioId)
+  }
+
   public async postReservaMesa(mesa: Mesa) {
     return await this.makePostRequest(this.url + 'mesas', mesa)
+  }
+
+  public async deleteReserva(id: number) {
+    return await this.makeDeleteRequest(this.url+ 'mesas/' + id)
   }
 
   //RETOS

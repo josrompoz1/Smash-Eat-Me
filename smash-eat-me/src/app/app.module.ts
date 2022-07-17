@@ -58,6 +58,7 @@ import { DetallesMenuDialogComponent } from './components/detalles-menu-dialog/d
 import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.component';
 import { EditProductoComponent } from './components/edit-producto/edit-producto.component';
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
+import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { FiltroProductosComponent } from './components/filtro-productos/filtro-p
     DetallesMenuDialogComponent,
     MenuDialogComponent,
     EditProductoComponent,
-    FiltroProductosComponent
+    FiltroProductosComponent,
+    HistorialMesasComponent
   ],
   imports: [
     MatBadgeModule,

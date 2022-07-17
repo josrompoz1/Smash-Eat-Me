@@ -7,6 +7,7 @@ import { AddTarjetaComponent } from './components/add-tarjeta/add-tarjeta.compon
 import { CestaComponent } from './components/cesta/cesta.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DireccionUsuarioComponent } from './components/direccion-usuario/direccion-usuario.component';
+import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
 import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
 import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'crearproducto', component: AddProductoComponent },
   { path: 'listadocupones', component: ListadoCuponesDescuentoComponent },
   { path: 'menus', component: ListadoMenusComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'historialmesas', component: HistorialMesasComponent }
   
 ];
 
