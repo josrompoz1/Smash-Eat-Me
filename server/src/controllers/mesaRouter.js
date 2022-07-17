@@ -4,7 +4,6 @@ function createRouterMesas(db) {
   const router = express.Router();
 
   //---------------------------------ENDPOINTS MESAS---------------------------------
-  // FALTA
   router.get('/mesas', function (req, res, next) {
     db.query(
       'SELECT * FROM Mesa',
@@ -20,27 +19,6 @@ function createRouterMesas(db) {
     );
   });
 
-  // FALTA
-  router.get('/mesas/:id', function (req, res, next) {
-    db.query(
-      'SELECT * FROM Mesa WHERE id=?',
-      [req.params.id],
-      (error, results) => {
-        if (error) {
-          console.log(error);
-          res.status(500).json({ status: 'error' });
-        } else {
-          if (results.length == 0) {
-            res.status(404).json({ status: 'Not found' })
-          } else {
-            res.status(200).json(results);
-          }
-        }
-      }
-    );
-  });
-
-  // FALTA
   router.get('/mesas/usuario/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM Mesa WHERE usuarioId=?',
@@ -50,11 +28,7 @@ function createRouterMesas(db) {
           console.log(error);
           res.status(500).json({ status: 'error' });
         } else {
-          if (results.length == 0) {
-            res.status(404).json({ status: 'Not found' })
-          } else {
-            res.status(200).json(results);
-          }
+          res.status(200).json(results);
         }
       }
     );
@@ -81,7 +55,6 @@ function createRouterMesas(db) {
     );
   });
 
-  // FALTA
   router.delete('/mesas/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM Mesa WHERE id=?',
@@ -99,9 +72,10 @@ function createRouterMesas(db) {
               [req.params.id],
               (error) => {
                 if (error) {
+                  console.log(error)
                   res.status(500).json({ status: 'error' });
                 } else {
-                  res.status(200).json({ status: 'ok' });
+                  res.status(201).json({ status: 'Reserva eliminada' });
                 }
               }
             );

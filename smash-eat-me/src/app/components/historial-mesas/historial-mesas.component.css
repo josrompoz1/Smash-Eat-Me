@@ -1,0 +1,44 @@
+.mesas {
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+button {
+    margin-left: 7em;
+    margin-bottom: 2em;
+}
+
+.mat-column-fecha {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-menuId {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-numeroPersonas {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-usuarioId {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-hora {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-eliminar {
+    text-align: center;
+    font-size: 110%;
+}
