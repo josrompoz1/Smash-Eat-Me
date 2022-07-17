@@ -75,12 +75,16 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url+ 'usuarios');
   }
 
-  public async getUsuarioById(id: number): Promise<Usuario[]> {
+  public async getUsuarioById(id: number): Promise<Usuario> {
     return await this.makeGetRequest(this.url + 'usuarios/' + id)
   }
 
   public async crearUsuario(usuario: any) {
     return await this.makePostRequest(this.url + 'usuarios', usuario);
+  }
+
+  public async updateUsuario(usuario: Usuario, id: number) {
+    return await this.makePutRequest(this.url + 'usuarios/' + id, usuario)
   }
 
   public async getDireccionesUsuario(id: number): Promise<Direccion[]> {
@@ -97,6 +101,10 @@ export class RestService extends AbstractWebService {
 
   public async crearTarjeta(tarjeta: any) {
     return await this.makePostRequest(this.url + 'tarjetas', tarjeta);
+  }
+
+  public async editarTarjeta(tarjeta: Tarjeta, id: number) {
+    return await this.makePutRequest(this.url + 'tarjetas/' + id, tarjeta)
   }
 
   public async getCreditoDigital(usuarioId: number): Promise<number> {

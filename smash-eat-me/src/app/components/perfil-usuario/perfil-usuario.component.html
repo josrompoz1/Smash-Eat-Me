@@ -5,3 +5,103 @@
 </div>
 <hr>
 
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Datos de usuario</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="formUsuario" (ngSubmit)="actualizarUsuario()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput type="text" name="username" formControlName="username">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre completo</mat-label>
+                <input matInput type="text" name="nombre" formControlName="nombre">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="text" name="correo" formControlName="correo">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" name="contraseña" formControlName="contrasena">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Tipo de usuario</mat-label>
+                <input matInput type="text" name="tipo" formControlName="tipo" readonly="true">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Credito digital</mat-label>
+                <input matInput type="number" name="credito" formControlName="credito" readonly="true">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Telefono</mat-label>
+                <input matInput type="number" name="telefono" formControlName="telefono">
+            </mat-form-field><br>
+
+            <button mat-stroked-button type="submit">Actualizar</button>
+        </form>
+    </div>
+</div>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Tarjetas guardadas</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="formPadre">
+    <div class="formHijo" *ngIf="tarjetas.length > 0">
+        <div *ngFor="let tarjeta of tarjetas; let i = index" (click)="fillForm(i)">
+            <mat-expansion-panel expanded="{{expandPanelTarjetas[i]}}" >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Tarjeta {{i + 1}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Número y fecha de tarjeta
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <form [formGroup]="formTarjeta" (ngSubmit)="editarTarjeta(i)">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero</mat-label>
+                        <input matInput type="text" name="numero" formControlName="numeroTarjeta">
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Expiración</mat-label>
+                        <input matInput type="text" name="expiracion" formControlName="expiracion">
+                    </mat-form-field><br>
+                    <button mat-stroked-button type="submit">Actualizar</button>
+                </form>
+            </mat-expansion-panel>
+        </div>
+
+    </div>
+    <div class="formHijo" *ngIf="tarjetas.length == 0">
+        <p>No hay tarjetas guardadas para este usuario</p>
+    </div>
+</div>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Direcciones guardadas</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="formPadre" *ngFor="let direccion of direcciones">
+    <div class="formHijo">
+
+    </div>
+</div>

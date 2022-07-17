@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
@@ -120,6 +121,7 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
     MatSelectModule,
     MatProgressBarModule,
     MatMenuModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
