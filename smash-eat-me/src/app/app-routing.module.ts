@@ -15,6 +15,7 @@ import { ListadoMenusComponent } from './components/listado-menus/listado-menus.
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { MetodoPagoComponent } from './components/metodo-pago/metodo-pago.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { ProductosComponent } from './components/productos/productos.component';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.component';
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'listadocupones', component: ListadoCuponesDescuentoComponent },
   { path: 'menus', component: ListadoMenusComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'historialmesas', component: HistorialMesasComponent }
+  { path: 'historialmesas', component: HistorialMesasComponent },
+  { path: 'usuario', component: PerfilUsuarioComponent }
   
 ];
 
