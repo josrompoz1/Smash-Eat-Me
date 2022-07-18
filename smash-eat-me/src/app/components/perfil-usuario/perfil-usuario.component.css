@@ -1,0 +1,51 @@
+button {
+    margin-bottom: 3em;
+    margin-left: 2em;
+    background-color: #ffc11b;
+}
+
+.mat-form-field {
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+.div-subtitulo {
+    border-left: 11em solid white;
+    padding-left: 2em;
+}
+
+.subtitulo {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.hr-subtitulo {
+    width: 80%;
+    border-color: darkorange;
+    margin-bottom: 50px;
+}
+
+.mesas {
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.mat-column-puntuacion {
+    text-align: center;
+    width: 20%;
+}
+
+.mat-column-producto {
+    text-align: center;
+    width: 20%;
+}
+
+.mat-column-resenya {
+    text-align: center;
+    width: 60%;
+}

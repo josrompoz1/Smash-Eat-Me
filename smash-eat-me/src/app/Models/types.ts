@@ -11,14 +11,14 @@ export interface ProductoOfertado {
 }
 
 export interface Usuario {
-    id: number;
+    id?: number;
     username: string;
     nombre: string;
     correo: string;
-    contraseña: string;
-    tipo: string;
-    creditoDigital: number;
-    telefono: number;
+    contrasena: string;
+    tipo?: string;
+    creditoDigital?: number;
+    telefono?: number;
 }
 
 export interface Direccion {
@@ -33,7 +33,7 @@ export interface Direccion {
 export interface Tarjeta {
     id?: number;
     numero?: string;
-    expiracion?: Date;
+    expiracion?: string;
     usuarioId?: number;
 }
 

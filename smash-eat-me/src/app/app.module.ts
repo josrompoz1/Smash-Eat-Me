@@ -19,6 +19,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
@@ -59,6 +61,7 @@ import { MenuDialogComponent } from './components/menu-dialog/menu-dialog.compon
 import { EditProductoComponent } from './components/edit-producto/edit-producto.component';
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
 import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
+import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +97,8 @@ import { HistorialMesasComponent } from './components/historial-mesas/historial-
     MenuDialogComponent,
     EditProductoComponent,
     FiltroProductosComponent,
-    HistorialMesasComponent
+    HistorialMesasComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     MatBadgeModule,
@@ -116,6 +120,8 @@ import { HistorialMesasComponent } from './components/historial-mesas/historial-
     MatTableModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatMenuModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

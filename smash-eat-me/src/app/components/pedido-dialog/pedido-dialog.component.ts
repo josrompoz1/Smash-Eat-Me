@@ -14,7 +14,7 @@ export class PedidoDialogComponent implements OnInit {
   pedido!: PedidoComida;
   productosPedidos: ProductoPedido[] = []
   productosEnPedido: ProductoOfertado[] = []
-  cliente: Usuario[] = [];
+  cliente!: Usuario;
   form!: FormGroup;
   
   constructor(private dataManagement: DataManagementService,
@@ -41,7 +41,7 @@ export class PedidoDialogComponent implements OnInit {
         'fecha': this.pedido.fecha,
         'hora': this.pedido.hora,
         'estado': this.pedido.estado,
-        'nombreCliente': this.cliente[0].nombre
+        'nombreCliente': this.cliente.nombre
       })
       console.log(this.form.value)
     }
@@ -50,10 +50,7 @@ export class PedidoDialogComponent implements OnInit {
         const productoOfertado = await this.dataManagement.getProductosById(p.productoOfertadoId)
         if(productoOfertado) this.productosEnPedido.push(productoOfertado)
       })
-    }
-    console.log(this.cliente)
-    console.log(this.pedido)
-    
+    }    
   }
 
   onClose() {

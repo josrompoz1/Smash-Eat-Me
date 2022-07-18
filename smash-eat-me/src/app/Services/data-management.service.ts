@@ -10,6 +10,7 @@ export class DataManagementService {
   selectedPedido?: PedidoComida;
   selectedCupon?: CuponDescuento;
   selectedMenu?: Menu;
+  selectedUsuarioId?: number;
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});
@@ -87,12 +88,20 @@ export class DataManagementService {
     return await this.rest.getAllUsuarios()
   }
 
-  public async getUsuarioById(id: number): Promise<Usuario[]> {
+  public async getUsuarioById(id: number): Promise<Usuario> {
     return await this.rest.getUsuarioById(id)
   }
 
   public async crearUsuario(usuario: any) {
     return await this.rest.crearUsuario(usuario);
+  }
+
+  public async updateUsuario(usuario: Usuario, id: number) {
+    return await this.rest.updateUsuario(usuario, id)
+  }
+
+  public async deleteUsuario(id: number) {
+    return await this.rest.deleteUsuario(id)
   }
 
   public async getDireccionesUsuario(id: number): Promise<Direccion[]> {
@@ -103,12 +112,28 @@ export class DataManagementService {
     return await this.rest.crearDireccion(direccion);
   }
 
+  public async editarDireccion(direccion: Direccion, id: number) {
+    return await this.rest.editarDireccion(direccion, id)
+  }
+
+  public async deleteDireccion(id: number) {
+    return await this.rest.deleteDireccion(id)
+  }
+
   public async getTarjetasUsuario(usuarioId: number): Promise<Tarjeta[]> {
     return await this.rest.getTarjetasUsuario(usuarioId);
   }
 
   public async crearTarjeta(tarjeta: any) {
     return await this.rest.crearTarjeta(tarjeta);
+  }
+
+  public async editarTarjeta(tarjeta: Tarjeta, id: number) {
+    return await this.rest.editarTarjeta(tarjeta, id)
+  }
+
+  public async deleteTarjeta(id: number) {
+    return await this.rest.deleteTarjeta(id)
   }
 
   public async getCreditoDigital(usuarioId: number): Promise<number> {
@@ -189,6 +214,10 @@ export class DataManagementService {
 
   public async getValoracionesWithProductoId(id: number): Promise<ValoracionResponse[]> {
     return await this.rest.getValoracionesWithProductoId(id)
+  }
+
+  public async getValoracionesByUsuarioId(usuarioId: number): Promise<Valoracion[]> {
+    return await this.rest.getValoracionesByUsuarioId(usuarioId)
   }
   
   public async postValoracion(valoracion: Valoracion) {

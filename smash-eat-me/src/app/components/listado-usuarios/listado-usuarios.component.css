@@ -3,12 +3,12 @@
 }
 
 .hijo1 {
-    width: 50%;
+    width: 60%;
     text-align: center;
 }
 
 .hijo2 {
-    width: 50%;
+    width: 40%;
     text-align: center;
 }
 
@@ -34,4 +34,8 @@ table {
 .mat-column-rol, .mat-column-puntuacion {
     text-align: center;
     font-style: italic;
+}
+
+.mat-column-perfil, .mat-column-eliminar {
+    text-align: center;
 }

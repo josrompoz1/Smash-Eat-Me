@@ -75,12 +75,20 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url+ 'usuarios');
   }
 
-  public async getUsuarioById(id: number): Promise<Usuario[]> {
+  public async getUsuarioById(id: number): Promise<Usuario> {
     return await this.makeGetRequest(this.url + 'usuarios/' + id)
   }
 
   public async crearUsuario(usuario: any) {
     return await this.makePostRequest(this.url + 'usuarios', usuario);
+  }
+
+  public async updateUsuario(usuario: Usuario, id: number) {
+    return await this.makePutRequest(this.url + 'usuarios/' + id, usuario)
+  }
+
+  public async deleteUsuario(id: number) {
+    return await this.makeDeleteRequest(this.url + 'usuarios/' + id)
   }
 
   public async getDireccionesUsuario(id: number): Promise<Direccion[]> {
@@ -91,12 +99,28 @@ export class RestService extends AbstractWebService {
     return await this.makePostRequest(this.url + 'direcciones', direccion);
   }
 
+  public async editarDireccion(direccion: Direccion, id: number) {
+    return await this.makePutRequest(this.url + 'direcciones/' + id, direccion)
+  }
+
+  public async deleteDireccion(id: number) {
+    return await this.makeDeleteRequest(this.url + 'direcciones/' + id)
+  }
+
   public async getTarjetasUsuario(usuarioId: number): Promise<Tarjeta[]> {
     return await this.makeGetRequest(this.url + 'tarjetas/usuario/' + usuarioId);
   }
 
   public async crearTarjeta(tarjeta: any) {
     return await this.makePostRequest(this.url + 'tarjetas', tarjeta);
+  }
+
+  public async editarTarjeta(tarjeta: Tarjeta, id: number) {
+    return await this.makePutRequest(this.url + 'tarjetas/' + id, tarjeta)
+  }
+
+  public async deleteTarjeta(id: number) {
+    return await this.makeDeleteRequest(this.url + 'tarjetas/' + id)
   }
 
   public async getCreditoDigital(usuarioId: number): Promise<number> {
@@ -177,6 +201,10 @@ export class RestService extends AbstractWebService {
 
   public async getValoracionesWithProductoId(id: number): Promise<ValoracionResponse[]> {
     return await this.makeGetRequest(this.url + 'valoraciones/producto/' + id)
+  }
+
+  public async getValoracionesByUsuarioId(usuarioId: number): Promise<Valoracion[]> {
+    return await this.makeGetRequest(this.url + 'valoraciones/usuario/' + usuarioId)
   }
 
   public async postValoracion(valoracion: Valoracion) {

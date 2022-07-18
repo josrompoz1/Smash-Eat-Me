@@ -9,6 +9,7 @@ import { DataManagementService } from 'src/app/Services/data-management.service'
 export class HeaderComponent implements OnInit {
 
   public numberOfItems: number | undefined;
+  rol: string = 'ADMIN';
 
   constructor(private dataManagement: DataManagementService) {
     this.dataManagement.numberOfItemsInBasket.subscribe(value => {
