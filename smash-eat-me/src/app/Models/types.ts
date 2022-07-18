@@ -33,7 +33,7 @@ export interface Direccion {
 export interface Tarjeta {
     id?: number;
     numero?: string;
-    expiracion?: Date;
+    expiracion?: string;
     usuarioId?: number;
 }
 

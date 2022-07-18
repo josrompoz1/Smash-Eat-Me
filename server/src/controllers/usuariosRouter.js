@@ -173,7 +173,6 @@ function createRouterUsuarios(db) {
         );
     });
 
-    // FALTA
     router.delete('/usuarios/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario WHERE id=?',
@@ -193,7 +192,7 @@ function createRouterUsuarios(db) {
                                 if (error) {
                                     res.status(500).json({ status: 'error' });
                                 } else {
-                                    res.status(200).json({ status: 'ok' });
+                                    res.status(201).json({ status: 'Usuario eliminado' });
                                 }
                             }
                         );
@@ -271,7 +270,6 @@ function createRouterUsuarios(db) {
         );
     });
 
-    // FALTA
     router.delete('/tarjetas/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Tarjeta WHERE id=?',
@@ -311,11 +309,7 @@ function createRouterUsuarios(db) {
                     console.log(error);
                     res.status(500).json({ status: 'error' });
                 } else {
-                    if (results.length == 0) {
-                        res.status(404).json({ status: 'Not found' })
-                    } else {
-                        res.status(200).json(results);
-                    }
+                    res.status(200).json(results);
                 }
             }
         );
@@ -340,7 +334,40 @@ function createRouterUsuarios(db) {
         );
     });
 
-    // FALTA
+    router.put('/direcciones/:id', function (req, res, next) {
+        db.query(
+            'SELECT * FROM Direccion WHERE id=?',
+            [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    if (results.length == 0) {
+                        res.status(404).json({ status: 'Not found' });
+                    } else {
+                        db.query(
+                            'UPDATE Direccion SET nombreDireccion=?, direccion=?, pais=?, ciudad=? WHERE id=?',
+                            [req.body.nombreDireccion, req.body.direccion, req.body.pais, req.body.ciudad, req.params.id],
+                            (error) => {
+                                if (error) {
+                                    if (req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad) {
+                                        res.status(400).json({ status: 'Bad request' });
+                                    } else {
+                                        console.log(error)
+                                        res.status(500).json({ status: 'error' });
+                                    }
+                                } else {
+                                    res.status(201).json({ status: 'Direccion actualizada correctamente' });
+                                }
+                            }
+                        );
+                    }
+                }
+            }
+        );
+    });
+
     router.delete('/direcciones/:id', function (req, res, next) {
         db.query(
             'SELECT * FROM Direccion WHERE id=?',
@@ -358,9 +385,10 @@ function createRouterUsuarios(db) {
                             [req.params.id],
                             (error) => {
                                 if (error) {
+                                    console.log(error)
                                     res.status(500).json({ status: 'error' });
                                 } else {
-                                    res.status(200).json({ status: 'ok' });
+                                    res.status(201).json({ status: 'Direccion eliminada' });
                                 }
                             }
                         );
