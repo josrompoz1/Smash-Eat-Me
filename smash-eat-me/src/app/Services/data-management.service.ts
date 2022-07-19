@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CuponDescuento, DeleteCashRequest, Direccion, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Reto, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Login, LoginResponse, Menu, Mesa, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable()
@@ -24,6 +24,11 @@ export class DataManagementService {
   public paramBusqueda: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private rest: RestService) { }
+
+  //LOGIN
+  public async login(login: Login): Promise<LoginResponse> {
+    return await this.rest.login(login)
+  }
 
   //PRODUCTOS
   public async getProductos(): Promise<ProductoOfertado[]> {
