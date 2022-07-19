@@ -25,7 +25,6 @@ export class ProductosDialogComponent implements OnInit {
       this.producto = this.dataManagement.selectedProducto;
       if(this.producto.id) this.valoraciones = await this.dataManagement.getValoracionesWithProductoId(this.producto.id)
     }
-    console.log(this.valoraciones)
   }
 
   onClose() {

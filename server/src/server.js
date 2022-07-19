@@ -34,7 +34,7 @@ connection.connect(function(err) {
                 "DROP TABLE IF EXISTS Paso;",
                 "DROP TABLE IF EXISTS Solucion;",
                 "DROP TABLE IF EXISTS Reto;",
-                "CREATE TABLE UsuarioPrincipal (usuarioId INT NOT NULL, tipo ENUM('ADMIN','NO ADMIN') NOT NULL, token VARCHAR(100) NOT NULL, fechaLogin DATETIME NOT NULL)",
+                "CREATE TABLE UsuarioPrincipal (usuarioId INT NOT NULL, tipo ENUM('ADMIN','NO ADMIN') NOT NULL, token VARCHAR(100) NOT NULL, fechaLogin BIGINT NOT NULL)",
                 "CREATE TABLE Usuario (id INT AUTO_INCREMENT, username VARCHAR(50) NOT NULL, nombre VARCHAR(255) NOT NULL, correo VARCHAR(100) NOT NULL, contrasena VARCHAR(255) NOT NULL, telefono INT, tipo ENUM('ADMIN','NO ADMIN') NOT NULL DEFAULT 'NO ADMIN', creditoDigital FLOAT DEFAULT 0.0, PRIMARY KEY(id));",
                 "CREATE TABLE Tarjeta (id INT AUTO_INCREMENT, numero VARCHAR(20) NOT NULL, expiracion DATE NOT NULL, usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE);",
                 "CREATE TABLE Direccion (id INT AUTO_INCREMENT, nombreDireccion VARCHAR(50) NOT NULL, direccion VARCHAR(200) NOT NULL, pais VARCHAR(50) NOT NULL, ciudad VARCHAR(100) NOT NULL, usuarioId INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE CASCADE);",

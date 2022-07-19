@@ -62,6 +62,7 @@ import { EditProductoComponent } from './components/edit-producto/edit-producto.
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
 import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
+import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuar
     EditProductoComponent,
     FiltroProductosComponent,
     HistorialMesasComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    InicioSesionComponent
   ],
   imports: [
     MatBadgeModule,

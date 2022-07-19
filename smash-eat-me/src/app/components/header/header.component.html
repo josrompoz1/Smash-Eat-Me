@@ -45,11 +45,11 @@
                     <mat-icon>person_add</mat-icon>
                     <span>Registro usuario</span>
                 </button>
-                <button mat-menu-item> <!-- Si no hay sesión iniciada !-->
+                <button mat-menu-item routerLink="/signin" routerLinkActive="active"> <!-- Si no hay sesión iniciada !-->
                     <mat-icon>input</mat-icon>
                     <span>Iniciar sesión</span>
                 </button>
-                <button mat-menu-item> <!-- Si hay sesión iniciada !-->
+                <button mat-menu-item (click)="cerrarSesion()"> <!-- Si hay sesión iniciada !-->
                     <mat-icon>close</mat-icon>
                     <span>Cerrar sesión</span>
                 </button>

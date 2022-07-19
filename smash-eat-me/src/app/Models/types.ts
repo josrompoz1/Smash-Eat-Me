@@ -126,3 +126,15 @@ export interface Paso {
     solucion: string;
     solucionId: number;
 }
+
+export interface Login {
+    username: string;
+    contrasena: string;
+}
+
+export interface LoginResponse {
+    id: number;
+    tipo: string;
+    token: string;
+    fechaLogin: number;
+}

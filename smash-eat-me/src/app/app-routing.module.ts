@@ -10,6 +10,7 @@ import { DireccionUsuarioComponent } from './components/direccion-usuario/direcc
 import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
 import { HistorialPedidosComponent } from './components/historial-pedidos/historial-pedidos.component';
 import { HoraEntregaComponent } from './components/hora-entrega/hora-entrega.component';
+import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.component';
 import { ListadoCuponesDescuentoComponent } from './components/listado-cupones-descuento/listado-cupones-descuento.component';
 import { ListadoMenusComponent } from './components/listado-menus/listado-menus.component';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
@@ -44,8 +45,8 @@ const routes: Routes = [
   { path: 'menus', component: ListadoMenusComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'historialmesas', component: HistorialMesasComponent },
-  { path: 'usuario', component: PerfilUsuarioComponent }
-  
+  { path: 'usuario', component: PerfilUsuarioComponent },
+  { path: 'signin', component: InicioSesionComponent }
 ];
 
 @NgModule({
