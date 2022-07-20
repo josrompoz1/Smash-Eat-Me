@@ -17,39 +17,39 @@
                 <mat-icon>person</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item routerLink="/usuario" routerLinkActive="active">
+                <button *ngIf="userLogged" mat-menu-item routerLink="/usuario" routerLinkActive="active">
                     <mat-icon>account_circle</mat-icon>
                     <span>Perfil usuario</span>
                 </button>
-                <button *ngIf="rol == 'ADMIN'" mat-menu-item routerLink="/listadousuarios" routerLinkActive="active">
+                <button *ngIf="rol == 'ADMIN' && userLogged" mat-menu-item routerLink="/listadousuarios" routerLinkActive="active">
                     <mat-icon>group</mat-icon>
                     <span>Usuarios</span>
                 </button>
-                <button *ngIf="rol == 'ADMIN'" mat-menu-item routerLink="/listadocupones" routerLinkActive="active">
+                <button *ngIf="rol == 'ADMIN' && userLogged" mat-menu-item routerLink="/listadocupones" routerLinkActive="active">
                     <mat-icon>card_giftcard</mat-icon>
                     <span>Cupones descuento</span>
                 </button>
-                <button mat-menu-item routerLink="/historialpedidos" routerLinkActive="active">
+                <button *ngIf="userLogged" mat-menu-item routerLink="/historialpedidos" routerLinkActive="active">
                     <mat-icon>receipt</mat-icon>
                     <span>Pedidos</span>
                 </button>
-                <button mat-menu-item routerLink="/historialmesas" routerLinkActive="active">
+                <button *ngIf="userLogged" mat-menu-item routerLink="/historialmesas" routerLinkActive="active">
                     <mat-icon>event</mat-icon>
                     <span>Reservas</span>
                 </button>
-                <button mat-menu-item routerLink="/menus" routerLinkActive="active">
+                <button *ngIf="userLogged" mat-menu-item routerLink="/menus" routerLinkActive="active">
                     <mat-icon>list_alt</mat-icon>
                     <span>Menus</span>
                 </button>
-                <button mat-menu-item routerLink="/registro" routerLinkActive="active"> <!-- Si no hay sesión iniciada !-->
+                <button *ngIf="!userLogged" mat-menu-item routerLink="/registro" routerLinkActive="active"> <!-- Si no hay sesión iniciada !-->
                     <mat-icon>person_add</mat-icon>
                     <span>Registro usuario</span>
                 </button>
-                <button mat-menu-item routerLink="/signin" routerLinkActive="active"> <!-- Si no hay sesión iniciada !-->
+                <button *ngIf="!userLogged" mat-menu-item routerLink="/signin" routerLinkActive="active"> <!-- Si no hay sesión iniciada !-->
                     <mat-icon>input</mat-icon>
                     <span>Iniciar sesión</span>
                 </button>
-                <button mat-menu-item (click)="cerrarSesion()"> <!-- Si hay sesión iniciada !-->
+                <button *ngIf="userLogged" mat-menu-item (click)="cerrarSesion()"> <!-- Si hay sesión iniciada !-->
                     <mat-icon>close</mat-icon>
                     <span>Cerrar sesión</span>
                 </button>

@@ -58,6 +58,7 @@ export class CestaComponent implements OnInit {
     this.dataManagement.productosEnCesta.next(this.productosEnCesta);
     this.precioTotal = 0;
     this.dataManagement.precioPedido.next(this.precioTotal)
+    this.router.navigate(['cesta'])
   }
 
   tramitarPedido() {

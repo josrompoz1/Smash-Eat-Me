@@ -21,7 +21,7 @@ export class ServerResponseInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((evt: any) => {
-        if((request.url !== 'http://localhost:8080/productos') && !request.url.includes('valoraciones/producto/')) {
+        if((request.url !== 'http://localhost:8080/productos') && !request.url.includes('valoraciones/producto/') && !request.url.includes('productos/tipo/') && !request.url.includes('productos/busqueda/')) {
           if(localStorage.getItem('token')) {
             const fecha = localStorage.getItem('fechaLogin')
             const fechaActual = +new Date()

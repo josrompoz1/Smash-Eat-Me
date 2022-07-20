@@ -322,6 +322,7 @@ function createRouterUsuarios(db) {
             (error) => {
                 if (error) {
                     if (req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
+                        console.log(error)
                         res.status(400).json({ status: 'Bad request' });
                     } else {
                         console.error(error);

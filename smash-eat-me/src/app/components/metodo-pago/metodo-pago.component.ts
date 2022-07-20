@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CuponDescuento, ProductoOfertado, Tarjeta } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-metodo-pago',
@@ -18,15 +19,20 @@ export class MetodoPagoComponent implements OnInit {
   creditoDigital: number = 0;
   precioTotal: number = 0;
   form!: FormGroup;
+  userId: number = 0;
 
   constructor(private dataManagement: DataManagementService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private sesionService: SesionService) {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
     })
     this.dataManagement.precioPedido.subscribe(value => {
       this.precioTotal = value;
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
     })
   }
 
@@ -38,8 +44,8 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   private async getData() {
-    this.tarjetas = await this.dataManagement.getTarjetasUsuario(1); //usuario 1 por defecto
-    this.creditoDigital = await this.dataManagement.getCreditoDigital(1);
+    this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.userId);
+    this.creditoDigital = await this.dataManagement.getCreditoDigital(this.userId);
     this.calculaPrecio();
   }
 

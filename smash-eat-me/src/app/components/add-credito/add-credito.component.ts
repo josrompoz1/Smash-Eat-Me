@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarjeta } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-add-credito',
@@ -14,16 +15,21 @@ export class AddCreditoComponent implements OnInit {
   creditoDigital: number = 0;
   value = 0;
   creditoSeleccionado: number = 0;
+  userId: number = 0
 
-  constructor(private dataManagement: DataManagementService) { }
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
+  }
 
   ngOnInit(): void {
     this.getData()
   }
 
   private async getData() {
-    this.tarjetas = await this.dataManagement.getTarjetasUsuario(1); //usuario 1 por defecto
-    this.creditoDigital = await this.dataManagement.getCreditoDigital(1);
+    this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.userId);
+    this.creditoDigital = await this.dataManagement.getCreditoDigital(this.userId);
   }
 
   public setCreditoSeleccionado(credito: number) {
@@ -31,7 +37,7 @@ export class AddCreditoComponent implements OnInit {
   }
 
   public async anyadirCredito() {
-    await this.dataManagement.addCreditoDigital(1, this.creditoSeleccionado)
+    await this.dataManagement.addCreditoDigital(this.userId, this.creditoSeleccionado)
     await this.getData();
   }
 
