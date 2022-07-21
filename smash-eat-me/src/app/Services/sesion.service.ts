@@ -53,6 +53,7 @@ export class SesionService implements CanActivate {
     localStorage.setItem('fechaLogin', login.fechaLogin.toString())
     this.userLogged.next(true);
     this.rol.next(login.tipo)
+    this.userId.next(login.id)
     this.router.navigate([''])
   }
 
@@ -64,7 +65,9 @@ export class SesionService implements CanActivate {
     localStorage.removeItem('rol')
     this.userLogged.next(false)
     this.rol.next('')
+    this.userId.next(0)
     this.toastr.success('Sesión cerrada correctamente', 'Smash&Eat Me')
+    this.router.navigate([''])
   }
 
   public redirectToLogin() {

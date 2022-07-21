@@ -13,7 +13,7 @@
 <hr class="hr-subtitulo">
 <div class="formPadre">
     <div class="formHijo">
-        <form class="form" [formGroup]="formUsuario" (ngSubmit)="actualizarUsuario()">
+        <form class="form" [formGroup]="formUsuario">
             <mat-form-field appearance="fill">
                 <mat-label>Nombre de usuario</mat-label>
                 <input matInput type="text" name="username" formControlName="username">
@@ -49,7 +49,8 @@
                 <input matInput type="number" name="telefono" formControlName="telefono">
             </mat-form-field><br>
 
-            <button mat-stroked-button type="submit">Actualizar</button>
+            <button mat-stroked-button (click)="actualizarUsuario()">Actualizar usuario</button>
+            <button mat-stroked-button routerLink="/creditodigital" routerLinkActive="active">Aumentar crédito</button>
         </form>
     </div>
 </div>
@@ -60,8 +61,11 @@
     </div>
 </div>
 <hr class="hr-subtitulo">
-<div class="formPadre">
-    <div class="formHijo" *ngIf="tarjetas.length > 0">
+<div class="padre">
+    <div class="hijo" *ngIf="tarjetas.length > 0">
+        <div class="boton">
+            <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
+        </div>
         <div *ngFor="let tarjeta of tarjetas; let i = index">
             <mat-expansion-panel expanded="{{expandPanelTarjetas[i]}}" >
                 <mat-expansion-panel-header (click)="fillForm(i)">
@@ -104,8 +108,11 @@
     </div>
 </div>
 <hr class="hr-subtitulo">
-<div class="formPadre">
-    <div class="formHijo" *ngIf="direcciones.length > 0">
+<div class="padre">
+    <div class="hijo" *ngIf="direcciones.length > 0">
+        <div class="boton">
+            <button mat-stroked-button routerLink="/direccion" routerLinkActive="active">Añadir direccion</button>
+        </div>
         <div *ngFor="let direccion of direcciones; let i = index">
             <mat-expansion-panel expanded="{{expandPanelDireccion[i]}}" >
                 <mat-expansion-panel-header (click)="fillFormDireccion(i)">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RegistroUsuarioComponent implements OnInit {
   form!: FormGroup;
   errors: string[] = [];
   
-  constructor(private dataManagement: DataManagementService) { }
+  constructor(private dataManagement: DataManagementService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -26,7 +27,9 @@ export class RegistroUsuarioComponent implements OnInit {
 
   public async crearUsuario() {
     if(this.form.valid) {
-      await this.dataManagement.crearUsuario(this.form.value);
+      await this.dataManagement.crearUsuario(this.form.value).then(() => {
+        this.router.navigate([''])
+      })
     }
   }
 

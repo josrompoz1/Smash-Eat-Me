@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CuponDescuento, Menu, Mesa } from 'src/app/Models/types';
+import { CuponDescuento, Menu, Mesa, Usuario } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-reservar-mesa',
@@ -15,18 +16,17 @@ export class ReservarMesaComponent implements OnInit {
   formDescuento!: FormGroup;
   menuSeleccionadoIndex: number = 0;
   mapMenuPrecio = new Map<Menu, number>();
+  usuarioLogged!: Usuario;
 
-  constructor(private dataManagement: DataManagementService) { }
+  userId: number = 0;
 
-  ngOnInit(): void {
-    this.getData()
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
   }
 
-  private async getData() {
-    this.menus = await this.dataManagement.getMenus();
-    this.menus.forEach(menu => {
-      if(menu.precio) this.mapMenuPrecio.set(menu, menu.precio)
-    })
+  ngOnInit(): void {
     this.form = new FormGroup({
       'nombre_apellido': new FormControl('', [Validators.required]),
       'correo': new FormControl('', [Validators.required]),
@@ -37,6 +37,24 @@ export class ReservarMesaComponent implements OnInit {
     })
     this.formDescuento = new FormGroup({
       'codigo': new FormControl('', [Validators.required])
+    })
+    this.getData()
+  }
+
+  private async getData() {
+    this.usuarioLogged = await this.dataManagement.getUsuarioById(this.userId)
+    console.log(this.usuarioLogged)
+    this.menus = await this.dataManagement.getMenus();
+    this.menus.forEach(menu => {
+      if(menu.precio) this.mapMenuPrecio.set(menu, menu.precio)
+    })
+    this.form.setValue({
+      'nombre_apellido': this.usuarioLogged.nombre,
+      'correo': this.usuarioLogged.correo,
+      'telefono': this.usuarioLogged.telefono,
+      'fecha': '',
+      'hora': '',
+      'nPersonas': ''
     })
   }
 
@@ -50,10 +68,9 @@ export class ReservarMesaComponent implements OnInit {
           fecha: new Date(this.form.value.fecha),
           hora: this.form.value.hora,
           precioDescuento: precioConDescuento,
-          usuarioId: 1,
+          usuarioId: this.userId,
           menuId: menu.id
         }
-        console.log(mesa)
         await this.dataManagement.postReservaMesa(mesa);
       }
       

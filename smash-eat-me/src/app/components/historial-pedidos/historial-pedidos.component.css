@@ -54,3 +54,13 @@ table {
     text-align: center;
     font-size: 110%;
 }
+
+p {
+    font-size: large;
+}
+
+.boton {
+    margin-top: -1em;
+    margin-bottom: 1.5em;
+    margin-left: 4em;
+}

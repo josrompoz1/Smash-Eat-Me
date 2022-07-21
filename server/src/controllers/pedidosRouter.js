@@ -59,11 +59,12 @@ function createRouterPedidos(db) {
 
   router.post('/pedidos', (req, res, next) => {
     db.query(
-      'INSERT INTO PedidoComida (metodoPago, fecha, hora, usuarioId) VALUES (?,?,?,?)',
-      [req.body.metodoPago, req.body.fecha.split("T")[0], req.body.hora, req.body.usuarioId],
+      'INSERT INTO PedidoComida (metodoPago, fecha, hora, nombreDireccion, usuarioId, direccionUsuarioId) VALUES (?,?,?,?,?,?)',
+      [req.body.metodoPago, req.body.fecha.split("T")[0], req.body.hora, req.body.nombreDireccion, req.body.usuarioId, req.body.direccionUsuarioId],
       (error) => {
         if (error) {
-          if (req.body.metodoPago || req.body.fecha || req.body.hora || req.body.usuarioId) {
+          if (req.body.metodoPago || req.body.fecha || req.body.hora || req.body.nombreDireccion || req.body.usuarioId || req.body.direccionUsuarioId) {
+            console.log(erorr)
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
