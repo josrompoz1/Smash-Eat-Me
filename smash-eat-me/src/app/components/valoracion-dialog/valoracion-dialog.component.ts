@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ProductoOfertado, Valoracion } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-valoracion-dialog',
@@ -13,9 +14,15 @@ export class ValoracionDialogComponent implements OnInit {
 
   productoAValorar!: ProductoOfertado;
   form!: FormGroup;
+  userId: number = 0;
 
   constructor(public dataManagement: DataManagementService,
-              private dialogRef: MatDialogRef<ValoracionDialogComponent>) { }
+              private dialogRef: MatDialogRef<ValoracionDialogComponent>,
+              private sesionService: SesionService) {
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
+  }
 
   ngOnInit(): void {
     if(this.dataManagement.selectedProducto) this.productoAValorar = this.dataManagement.selectedProducto;
@@ -37,7 +44,7 @@ export class ValoracionDialogComponent implements OnInit {
           resenya: this.form.value['resenya'],
           nombreUsuario: 'perico',
           nombreProducto: this.productoAValorar.nombre,
-          usuarioId: 1,
+          usuarioId: this.userId,
           productoPedidoId: this.productoAValorar.id
         }
         await this.dataManagement.postValoracion(valoracion);

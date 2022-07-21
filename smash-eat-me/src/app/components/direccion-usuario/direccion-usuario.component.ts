@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Direccion, ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-direccion-usuario',
@@ -12,14 +13,23 @@ export class DireccionUsuarioComponent implements OnInit {
 
   public direcciones: Direccion[] = [];
   direccionSeleccionadaIndex: number = -1;
+  direccionSeleccioinada!: Direccion;
   productosEnCesta: ProductoOfertado[] = [];
+  userId: number = 0
 
   constructor(private dataManagement: DataManagementService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private sesionService: SesionService) {
 
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
+    })
+    this.dataManagement.direccionSeleccionada.subscribe(value => {
+      this.direccionSeleccioinada = value;
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value;
     })
   }
 
@@ -28,12 +38,20 @@ export class DireccionUsuarioComponent implements OnInit {
   }
 
   private async getData() {
-    this.direcciones = await this.dataManagement.getDireccionesUsuario(1); //usuario 1 por defecto. cambiar cuando esté el login
+    this.direcciones = await this.dataManagement.getDireccionesUsuario(this.userId);
+    let i = 0;
+    this.direcciones.forEach(direccion => {
+      if(direccion.id == this.direccionSeleccioinada.id) {
+        this.direccionSeleccionadaIndex = i
+      }
+      i++;
+    })
   }
 
   public guardarDireccionSeleccionada() {
     const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
     this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
+    localStorage.setItem('direccionSeleccionada', JSON.stringify(direccionSeleccionada))
     this.router.navigate(['horaentrega'], { relativeTo: this.route });
   }
 

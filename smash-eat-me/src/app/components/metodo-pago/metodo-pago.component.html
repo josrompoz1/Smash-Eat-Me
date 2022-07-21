@@ -32,7 +32,7 @@
 <hr class="hr-pago">
 <div class="cestaPadre">
     <div class="tarjetas">
-        <mat-checkbox (change)="creditoSeleccionadoIndex = 0">Credito en la cartera digital....{{creditoDigital}}</mat-checkbox>
+        <mat-checkbox [checked]="creditoSeleccionadoIndex === 0" (change)="creditoSeleccionadoIndex = 0">Credito en la cartera digital....{{creditoDigital}}</mat-checkbox>
         <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarCarteraDigital()">Continuar</button>
     </div>
     <button mat-stroked-button  routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>

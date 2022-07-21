@@ -12,6 +12,7 @@ export class HoraEntregaComponent implements OnInit {
 
   public horas: string[] = [];
   horaSeleccionadaIndex: number = -1;
+  horaEntrega!: string;
   productosEnCesta: ProductoOfertado[] = [];
 
   constructor(private dataManagement: DataManagementService,
@@ -20,6 +21,9 @@ export class HoraEntregaComponent implements OnInit {
 
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
+    })
+    this.dataManagement.horaSeleccionada.subscribe(value => {
+      this.horaEntrega = value;
     })
   }
 
@@ -30,12 +34,19 @@ export class HoraEntregaComponent implements OnInit {
       this.horas.push(hora+i+':00')
       this.horas.push(hora+i+':30')
     }
-    hora++;
+    let i = 0;
+    this.horas.forEach(h => {
+      if(h == this.horaEntrega) {
+        this.horaSeleccionadaIndex = i
+      }
+      i++;
+    })
   }
 
   public guardarHoraSeleccionada() {
     const horaSeleccionada: string = this.horas[this.horaSeleccionadaIndex]
     this.dataManagement.horaSeleccionada.next(horaSeleccionada)
+    localStorage.setItem('horaSeleccionada', horaSeleccionada)
     this.router.navigate(['metodopago'], { relativeTo: this.route })
   }
 

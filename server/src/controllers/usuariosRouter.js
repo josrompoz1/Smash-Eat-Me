@@ -27,11 +27,7 @@ function createRouterUsuarios(db) {
                     console.log(error);
                     res.status(500).json({ status: 'error' });
                 } else {
-                    if (results.length == 0) {
-                        res.status(404).json({ status: 'Not found' })
-                    } else {
-                        res.status(200).json(results[0]);
-                    }
+                    res.status(200).json(results[0]);
                 }
             }
         );
@@ -46,11 +42,7 @@ function createRouterUsuarios(db) {
                     console.log(error);
                     res.status(500).json({ status: 'error' });
                 } else {
-                    if (results.length == 0) {
-                        res.status(404).json({ status: 'Not found' })
-                    } else {
-                        res.status(200).json(results[0].creditoDigital);
-                    }
+                    res.status(200).json(results[0].creditoDigital);
                 }
             }
         );
@@ -322,6 +314,7 @@ function createRouterUsuarios(db) {
             (error) => {
                 if (error) {
                     if (req.body.nombreDireccion || req.body.direccion || req.body.pais || req.body.ciudad || req.body.usuarioId) {
+                        console.log(error)
                         res.status(400).json({ status: 'Bad request' });
                     } else {
                         console.error(error);

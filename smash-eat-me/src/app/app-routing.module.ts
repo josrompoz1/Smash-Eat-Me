@@ -21,6 +21,7 @@ import { ProductosComponent } from './components/productos/productos.component';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { ReservarMesaComponent } from './components/reservar-mesa/reservar-mesa.component';
 import { ValoracionComponent } from './components/valoracion/valoracion.component';
+import { SesionService } from './Services/sesion.service';
 
 const routes: Routes = [
   { path: '', component: ProductosComponent },
@@ -40,13 +41,14 @@ const routes: Routes = [
   { path: 'valoracion', component: ValoracionComponent },
   { path: 'reservamesa', component: ReservarMesaComponent },
   { path: 'listadousuarios', component: ListadoUsuariosComponent },
-  { path: 'crearproducto', component: AddProductoComponent },
+  { path: 'crearproducto', component: AddProductoComponent, canActivate: [SesionService] },
   { path: 'listadocupones', component: ListadoCuponesDescuentoComponent },
   { path: 'menus', component: ListadoMenusComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'historialmesas', component: HistorialMesasComponent },
   { path: 'usuario', component: PerfilUsuarioComponent },
-  { path: 'signin', component: InicioSesionComponent }
+  { path: 'signin', component: InicioSesionComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

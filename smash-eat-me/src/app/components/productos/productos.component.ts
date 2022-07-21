@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { EditProductoComponent } from '../edit-producto/edit-producto.component';
 import { FiltroProductosComponent } from '../filtro-productos/filtro-productos.component';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-productos',
@@ -17,25 +18,23 @@ export class ProductosComponent implements OnInit {
   public productos: ProductoOfertado[] = [];
 
   private productosAñadidos:  ProductoOfertado[] = [];
-  rol: string = "ADMIN";
-
-  //Paginator inputs
-  page_size: number = 6;
-  page_number: number = 1;
-  pageSizeOptions: number[] = [6, 12, 24, 48];
   form!: FormGroup;
-
   numberOfFilters: number = 0;
   hidden: boolean = true;
   paramTipo!: string;
   paramBusqueda!: string;
 
-  constructor(private dataManagement: DataManagementService, private dialog: MatDialog) {
+  rol: string = '';
+
+  constructor(private dataManagement: DataManagementService, private dialog: MatDialog, private sesionService: SesionService) {
     this.dataManagement.paramTipo.subscribe(value => {
       this.paramTipo = value
     })
     this.dataManagement.paramBusqueda.subscribe(value => {
       this.paramBusqueda = value
+    })
+    this.sesionService.rol.subscribe(value => {
+      this.rol = value
     })
   }
 
@@ -62,11 +61,6 @@ export class ProductosComponent implements OnInit {
     })
   }
 
-  handlePage(page: PageEvent) {
-    this.page_size = page.pageSize;
-    this.page_number = page.pageIndex + 1;
-  }
-
   public onAdd(producto: ProductoOfertado) {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosAñadidos = value;
@@ -74,6 +68,8 @@ export class ProductosComponent implements OnInit {
     this.productosAñadidos.push(producto);
     this.dataManagement.productosEnCesta.next(this.productosAñadidos);
     this.dataManagement.numberOfItemsInBasket.next(this.productosAñadidos.length);
+    localStorage.setItem('productosEnCesta', JSON.stringify(this.productosAñadidos))
+    localStorage.setItem('numberOfItemsInBasket', JSON.stringify(this.productosAñadidos.length))
   }
 
   public async onDelete(producto: ProductoOfertado) {

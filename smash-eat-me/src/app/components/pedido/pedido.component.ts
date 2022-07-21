@@ -3,6 +3,7 @@ import { from } from 'rxjs';
 import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, ProductoOfertado, ProductoPedido, Tarjeta } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { Time } from "@angular/common";
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-pedido',
@@ -23,8 +24,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
   horaEntrega: string = "";
   b: boolean = true;
   productosPrecio = new Map<string, number>();
+  userId: number = 0
 
-  constructor(private dataManagement: DataManagementService) {
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
     this.dataManagement.direccionSeleccionada?.subscribe(value => {
       this.direccion = value;
     })
@@ -39,13 +41,15 @@ export class PedidoComponent implements OnInit, OnDestroy {
     })
     this.dataManagement.precioPedido.subscribe(value => {
       this.precioTotal = value;
-      this.precioFinal = value + 1;
     })
     this.dataManagement.descuentoAplicado.subscribe(value => {
       this.descuento = value;
     })
     this.dataManagement.horaSeleccionada.subscribe(value => {
       this.horaEntrega = value;
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
     })
   }
 
@@ -58,6 +62,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   private getData() {
+    this.precioFinal = this.precioTotal + 1;
     let array = from(this.productosPedido);
     array.forEach(val => {
       if (this.productosCantidad.has(val)) {
@@ -100,15 +105,16 @@ export class PedidoComponent implements OnInit, OnDestroy {
       fecha: new Date(),
       hora: this.horaEntrega,
       nombreDireccion: this.direccion.direccion,
-      usuarioId: 1,
+      usuarioId: this.userId,
       direccionUsuarioId: this.direccion.id
     };
     const credito: DeleteCashRequest = {
       creditoDigital: this.precioFinal
     }
 
+    console.log(pedido)
     const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
-    if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(1, credito);
+    if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
     this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
       if(producto.id) {
         const productoPedido: ProductoPedido = {
@@ -122,6 +128,8 @@ export class PedidoComponent implements OnInit, OnDestroy {
     })
     this.b = false;
     this.dataManagement.numberOfItemsInBasket.next(0);
+
+    this.destroyAll()
   }
 
   private destroyAll() {
@@ -134,6 +142,15 @@ export class PedidoComponent implements OnInit, OnDestroy {
     this.dataManagement.seleccionadoCreditoDigital.next(false);
     this.dataManagement.precioPedido.next(0)
     this.dataManagement.descuentoAplicado.next({})
+
+    localStorage.removeItem('numberOfItemsInBasket')
+    localStorage.removeItem('productosEnCesta')
+    localStorage.removeItem('direccionSeleccionada')
+    localStorage.removeItem('horaSeleccionada')
+    localStorage.removeItem('precioPedido')
+    localStorage.removeItem('seleccionadoCreditoDigital')
+    localStorage.removeItem('tarjetaSeleccionada')
+    localStorage.removeItem('descuentoAplicado')
   }
 
 }

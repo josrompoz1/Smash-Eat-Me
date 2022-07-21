@@ -13,19 +13,17 @@
                 <form [formGroup]="form" (ngSubmit)="reservarMesa()">
                     <mat-form-field appearance="fill">
                         <mat-label>Nombre y apellidos</mat-label>
-                        <input matInput type="text" name="nombre" formControlName="nombre_apellido"
-                            placeholder="Nombre completo">
+                        <input matInput type="text" name="nombre" formControlName="nombre_apellido" readonly>
                     </mat-form-field><br>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Correo electrónico</mat-label>
-                        <input matInput type="text" name="correo" formControlName="correo"
-                            placeholder="Correo electronico">
+                        <input matInput type="text" name="correo" formControlName="correo" readonly>
                     </mat-form-field><br>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Telefono</mat-label>
-                        <input matInput type="text" name="telefono" formControlName="telefono" placeholder="Telefono">
+                        <input matInput type="text" name="telefono" formControlName="telefono" readonly>
                     </mat-form-field><br>
 
                     <mat-form-field appearance="fill">

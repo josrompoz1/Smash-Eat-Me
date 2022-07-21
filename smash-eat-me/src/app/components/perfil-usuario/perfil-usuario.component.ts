@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Direccion, Tarjeta, Usuario, Valoracion } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { formatDate } from '@angular/common';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -20,11 +21,19 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   tarjetas: Tarjeta[] = []
   direcciones: Direccion[] = []
   valoraciones: Valoracion[] = []
-  id: number = 0;
+  idSelecc: number = 0;
   displayColumns: string[] = ['producto', 'puntuacion', 'resenya']
-  rol: string = 'ADMIN'
+  rol: string = ''
+  userId: number = 0
 
-  constructor(private dataManagement: DataManagementService) { }
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
+    this.sesionService.rol.subscribe(value => {
+      this.rol = value
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
+  }
 
   ngOnInit(): void {
     this.formUsuario = new FormGroup({
@@ -48,12 +57,14 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     })
     if(this.rol == 'ADMIN') {
       if(this.dataManagement.selectedUsuarioId) {
-        this.id = this.dataManagement.selectedUsuarioId
+        this.idSelecc = this.dataManagement.selectedUsuarioId
+        console.log(this.idSelecc)
       } else {
-        this.id = 2 //id de admin logueado
+        this.idSelecc = this.userId
+        console.log(this.idSelecc)
       }
-    } else if(this.rol == 'NOADMIN') {
-      this.id = 1 //id del usuario logueado
+    } else if(this.rol == 'NO ADMIN') {
+      this.idSelecc = this.userId
     }
     this.getData()
   }
@@ -63,7 +74,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   }
 
   private async getData() {
-    this.usuario = await this.dataManagement.getUsuarioById(this.id)
+    this.usuario = await this.dataManagement.getUsuarioById(this.idSelecc)
     this.formUsuario.setValue({
       'username': this.usuario.username,
       'nombre': this.usuario.nombre,
@@ -73,15 +84,15 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       'credito': this.usuario.creditoDigital,
       'telefono': this.usuario.telefono
     })
-    this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.id)
+    this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.idSelecc)
     this.tarjetas.forEach(tarjeta => {
       this.expandPanelTarjetas.push(false)
     })
-    this.direcciones = await this.dataManagement.getDireccionesUsuario(this.id)
+    this.direcciones = await this.dataManagement.getDireccionesUsuario(this.idSelecc)
     this.direcciones.forEach(direccion => {
       this.expandPanelDireccion.push(false)
     })
-    this.valoraciones = await this.dataManagement.getValoracionesByUsuarioId(this.id)
+    this.valoraciones = await this.dataManagement.getValoracionesByUsuarioId(this.idSelecc)
   }
 
   private async refreshData() {
@@ -99,7 +110,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
         contrasena: this.formUsuario.value.contrasena,
         telefono: this.formUsuario.value.telefono
       }
-      await this.dataManagement.updateUsuario(usuario, this.id).then(() => {
+      await this.dataManagement.updateUsuario(usuario, this.idSelecc).then(() => {
         this.getData()
       })
     }

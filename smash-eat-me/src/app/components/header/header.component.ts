@@ -11,11 +11,18 @@ import { SesionService } from 'src/app/Services/sesion.service';
 export class HeaderComponent implements OnInit {
 
   public numberOfItems: number | undefined;
-  rol: string = 'ADMIN';
+  rol: string = '';
+  userLogged: boolean = false;
 
   constructor(private dataManagement: DataManagementService, private sesion: SesionService) {
     this.dataManagement.numberOfItemsInBasket.subscribe(value => {
       this.numberOfItems = value;
+    })
+    this.sesion.userLogged.subscribe(value => {
+      this.userLogged = value
+    })
+    this.sesion.rol.subscribe(value => {
+      this.rol = value
     })
   }
 
