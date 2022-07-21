@@ -68,6 +68,8 @@ export class ProductosComponent implements OnInit {
     this.productosAñadidos.push(producto);
     this.dataManagement.productosEnCesta.next(this.productosAñadidos);
     this.dataManagement.numberOfItemsInBasket.next(this.productosAñadidos.length);
+    localStorage.setItem('productosEnCesta', JSON.stringify(this.productosAñadidos))
+    localStorage.setItem('numberOfItemsInBasket', JSON.stringify(this.productosAñadidos.length))
   }
 
   public async onDelete(producto: ProductoOfertado) {

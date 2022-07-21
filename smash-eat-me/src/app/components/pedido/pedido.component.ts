@@ -128,6 +128,8 @@ export class PedidoComponent implements OnInit, OnDestroy {
     })
     this.b = false;
     this.dataManagement.numberOfItemsInBasket.next(0);
+
+    this.destroyAll()
   }
 
   private destroyAll() {
@@ -140,6 +142,15 @@ export class PedidoComponent implements OnInit, OnDestroy {
     this.dataManagement.seleccionadoCreditoDigital.next(false);
     this.dataManagement.precioPedido.next(0)
     this.dataManagement.descuentoAplicado.next({})
+
+    localStorage.removeItem('numberOfItemsInBasket')
+    localStorage.removeItem('productosEnCesta')
+    localStorage.removeItem('direccionSeleccionada')
+    localStorage.removeItem('horaSeleccionada')
+    localStorage.removeItem('precioPedido')
+    localStorage.removeItem('seleccionadoCreditoDigital')
+    localStorage.removeItem('tarjetaSeleccionada')
+    localStorage.removeItem('descuentoAplicado')
   }
 
 }

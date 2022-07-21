@@ -13,6 +13,7 @@ export class DireccionUsuarioComponent implements OnInit {
 
   public direcciones: Direccion[] = [];
   direccionSeleccionadaIndex: number = -1;
+  direccionSeleccioinada!: Direccion;
   productosEnCesta: ProductoOfertado[] = [];
   userId: number = 0
 
@@ -23,6 +24,9 @@ export class DireccionUsuarioComponent implements OnInit {
 
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
+    })
+    this.dataManagement.direccionSeleccionada.subscribe(value => {
+      this.direccionSeleccioinada = value;
     })
     this.sesionService.userId.subscribe(value => {
       this.userId = value;
@@ -35,11 +39,19 @@ export class DireccionUsuarioComponent implements OnInit {
 
   private async getData() {
     this.direcciones = await this.dataManagement.getDireccionesUsuario(this.userId);
+    let i = 0;
+    this.direcciones.forEach(direccion => {
+      if(direccion.id == this.direccionSeleccioinada.id) {
+        this.direccionSeleccionadaIndex = i
+      }
+      i++;
+    })
   }
 
   public guardarDireccionSeleccionada() {
     const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
     this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
+    localStorage.setItem('direccionSeleccionada', JSON.stringify(direccionSeleccionada))
     this.router.navigate(['horaentrega'], { relativeTo: this.route });
   }
 

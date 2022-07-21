@@ -23,7 +23,24 @@ export class DataManagementService {
   public paramTipo: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public paramBusqueda: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private rest: RestService) { }
+  constructor(private rest: RestService) {
+    let numeroItemsEnCesta = localStorage.getItem('numberOfItemsInBasket')
+    if(numeroItemsEnCesta) this.numberOfItemsInBasket.next(JSON.parse(numeroItemsEnCesta))
+    let productosCesta = localStorage.getItem('productosEnCesta')
+    if(productosCesta) this.productosEnCesta.next(JSON.parse(productosCesta))
+    let direccion = localStorage.getItem('direccionSeleccionada')
+    if(direccion) this.direccionSeleccionada.next(JSON.parse(direccion))
+    let hora = localStorage.getItem('horaSeleccionada')
+    if(hora) this.horaSeleccionada.next(hora)
+    let precio = localStorage.getItem('precioPedido')
+    if(precio) this.precioPedido.next(JSON.parse(precio))
+    let tarjeta = localStorage.getItem('tarjetaSeleccionada')
+    if(tarjeta) this.tarjetaSeleccionada.next(JSON.parse(tarjeta))
+    let credito = localStorage.getItem('seleccionadoCreditoDigital')
+    if(credito) this.seleccionadoCreditoDigital.next(JSON.parse(credito))
+    let cupon = localStorage.getItem('descuentoAplicado')
+    if(cupon) this.descuentoAplicado.next(JSON.parse(cupon))
+  }
 
   //LOGIN
   public async login(login: Login): Promise<LoginResponse> {

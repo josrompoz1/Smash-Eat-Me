@@ -48,6 +48,7 @@ export class CestaComponent implements OnInit {
       }
     }
     this.dataManagement.precioPedido.next(this.precioTotal)
+    localStorage.setItem('precioPedido', JSON.stringify(this.precioTotal))
   }
 
   vaciarCesta() {
@@ -59,6 +60,14 @@ export class CestaComponent implements OnInit {
     this.precioTotal = 0;
     this.dataManagement.precioPedido.next(this.precioTotal)
     this.router.navigate(['cesta'])
+    localStorage.removeItem('numberOfItemsInBasket')
+    localStorage.removeItem('productosEnCesta')
+    localStorage.removeItem('direccionSeleccionada')
+    localStorage.removeItem('horaSeleccionada')
+    localStorage.removeItem('precioPedido')
+    localStorage.removeItem('seleccionadoCreditoDigital')
+    localStorage.removeItem('tarjetaSeleccionada')
+    localStorage.removeItem('descuentoAplicado')
   }
 
   tramitarPedido() {

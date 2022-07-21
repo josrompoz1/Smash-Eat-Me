@@ -22,8 +22,8 @@ export class ServerResponseInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((evt: any) => {
         if((request.url !== 'http://localhost:8080/productos') && !request.url.includes('valoraciones/producto/') && !request.url.includes('productos/tipo/') && !request.url.includes('productos/busqueda/')) {
-          if(localStorage.getItem('token')) {
-            const fecha = localStorage.getItem('fechaLogin')
+          if(sessionStorage.getItem('token')) {
+            const fecha = sessionStorage.getItem('fechaLogin')
             const fechaActual = +new Date()
             if(fecha) {
               if((fechaActual - +fecha) > 1800000) {
