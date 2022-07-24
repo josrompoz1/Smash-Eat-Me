@@ -60,3 +60,7 @@ mat-paginator {
 .mat-form-field {
     width: 100%;
 }
+
+img {
+    width: 75%;
+}
