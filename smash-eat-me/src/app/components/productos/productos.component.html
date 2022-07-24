@@ -17,7 +17,7 @@
         <mat-grid-list cols="3" rowHeight="4:3" gutterSize="80px">
             <mat-grid-tile *ngFor="let producto of productos">
                 <button type="button" (click)="onSelect(producto)">
-                    <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+                    <img src="{{producto.imagen}}" />
                 </button>
                 <mat-grid-tile-footer>
                     <h3 class="texto">{{producto.nombre | uppercase}}</h3>

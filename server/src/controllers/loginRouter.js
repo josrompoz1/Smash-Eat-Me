@@ -4,9 +4,11 @@ function createRouterLogin(db) {
     const router = express.Router();
 
     router.post('/signin', function (req, res, next) {
+        password = req.body.contrasena
+        query = "SELECT * FROM Usuario WHERE username=? AND contrasena='" + password + "'"
         db.query(
-            'SELECT * FROM Usuario WHERE username=? AND contrasena=?',
-            [req.body.username, req.body.contrasena],
+            query,
+            [req.body.username],
             (error, results) => {
                 if (error) {
                     console.log(error);

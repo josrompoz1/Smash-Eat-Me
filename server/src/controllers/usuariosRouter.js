@@ -19,8 +19,10 @@ function createRouterUsuarios(db) {
     });
 
     router.get('/usuarios/:id', function (req, res, next) {
+        id = req.params.id
+        query = "SELECT * FROM Usuario WHERE id=" + id
         db.query(
-            'SELECT * FROM Usuario WHERE id=?',
+            query,
             [req.params.id],
             (error, results) => {
                 if (error) {
