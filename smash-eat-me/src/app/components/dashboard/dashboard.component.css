@@ -57,7 +57,7 @@ table {
 }
 
 .mat-column-nombre {
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     width: 13%;
 }
@@ -68,7 +68,7 @@ table {
 }
 
 .mat-column-descripcion {
-    text-align: center;
+    text-align: left;
 }
 
 .mat-column-categoria {
