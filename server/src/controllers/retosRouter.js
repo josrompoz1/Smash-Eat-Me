@@ -6,7 +6,7 @@ function createRouterRetos(db) {
     //---------------------------------ENDPOINTS RETOS DE SEGURIDAD---------------------------------
     router.get('/retos', function (req, res, next) {
         db.query(
-            'SELECT * FROM Reto',
+            'SELECT * FROM Reto ORDER BY dificultad',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
