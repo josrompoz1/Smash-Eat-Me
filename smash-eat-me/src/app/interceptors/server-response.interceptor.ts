@@ -43,7 +43,6 @@ export class ServerResponseInterceptor implements HttpInterceptor {
             }
           } else {
             this.sesionService.redirectToLogin()
-            this.toastr.info("Debe iniciar sesión para realizar esa acción", 'Smash&Eat Me App')
           }
         }
       }, (err: any) => {

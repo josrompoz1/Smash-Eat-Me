@@ -34,7 +34,7 @@ export class CuponDescuentoDialogComponent implements OnInit {
       this.titulo = 'Añadir un nuevo cupon de descuento'
       this.form = new FormGroup({
         'codigo': new FormControl('', [Validators.required]),
-        'porcentaje': new FormControl('', [Validators.required, Validators.min(5), Validators.max(90)])
+        'porcentaje': new FormControl('', [Validators.required, Validators.min(5), Validators.max(100)])
       })
     }
   }

@@ -216,6 +216,10 @@ export class RestService extends AbstractWebService {
     return await this.makePostRequest(this.url + 'valoraciones', valoracion);
   }
 
+  public async deleteValoracion(id: number) {
+    return await this.makeDeleteRequest(this.url + 'valoraciones/' + id)
+  }
+
   //MESAS
   public async getAllMesas(): Promise<Mesa[]> {
     return await this.makeGetRequest(this.url + 'mesas')
