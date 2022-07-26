@@ -246,6 +246,10 @@ export class DataManagementService {
     return await this.rest.postValoracion(valoracion)
   }
 
+  public async deleteValoracion(id: number) {
+    return await this.rest.deleteValoracion(id)
+  }
+
   //MESAS
   public async getAllMesas(): Promise<Mesa[]> {
     return await this.rest.getAllMesas()

@@ -5,6 +5,10 @@
             <a class="logo" routerLink="" routerLinkActive="active">Smash&Eat Me</a>
         </div>
         <nav>
+            <button mat-icon-button routerLink="/dashboard" routerLinkActive="active">
+                <mat-icon>book</mat-icon>
+            </button>
+
             <button mat-icon-button routerLink="/cesta" routerLinkActive="active" *ngIf="numberOfItems !== 0">
                 <mat-icon matBadge="{{numberOfItems}}" matBadgeColor="warn">shopping_basket</mat-icon>
             </button>

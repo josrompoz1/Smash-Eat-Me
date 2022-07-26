@@ -67,6 +67,30 @@ function createRouterValoraciones(db) {
       });
   });
 
+  router.delete('/valoraciones/:id', function (req, res, next) {
+    db.query(
+        'SELECT * FROM Valoracion WHERE id=?',
+        [req.params.id],
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                res.status(500).json({ status: 'error' });
+            } else {
+              db.query(
+                'DELETE FROM Valoracion WHERE id=?',
+                [req.params.id],
+                (error) => {
+                  if (error) {
+                    res.status(500).json({ status: 'error' });
+                  } else {
+                    res.status(201).json({ status: 'Valoracion eliminada' });
+                  }
+                }
+              );
+            }
+        });
+  });
+
   return router;
 }
 

@@ -14,7 +14,7 @@ export class ListadoUsuariosComponent implements OnInit {
   valoraciones: Valoracion[] = [];
 
   displayedColumnsUsuario: string[] = ['username', 'correo', 'rol', 'perfil', 'eliminar'];
-  displayedColumnsValoracion: string[] = ['usuario', 'producto', 'puntuacion'];
+  displayedColumnsValoracion: string[] = ['usuario', 'producto', 'puntuacion', 'eliminar'];
 
   constructor(private dataManagement: DataManagementService, private router: Router) { }
 
@@ -34,6 +34,12 @@ export class ListadoUsuariosComponent implements OnInit {
 
   public async deleteUsuario(id: number) {
     await this.dataManagement.deleteUsuario(id).then(() => {
+      this.getData()
+    })
+  }
+
+  public async deleteValoracion(id: number) {
+    await this.dataManagement.deleteValoracion(id).then(() => {
       this.getData()
     })
   }
