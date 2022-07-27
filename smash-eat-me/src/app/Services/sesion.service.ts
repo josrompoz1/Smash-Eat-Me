@@ -12,14 +12,17 @@ export class SesionService implements CanActivate {
   public userLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public rol: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public userId: BehaviorSubject<number> = new BehaviorSubject<number>(0)
+  public fechaLogin: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
   constructor(private router: Router, private toastr: ToastrService) {
     let storedUserLogged = sessionStorage.getItem('userLogged')
     let storedRol = sessionStorage.getItem('rol')
     let storedUserId = sessionStorage.getItem('usuarioId')
+    let fecha = sessionStorage.getItem('fechaLogin')
     if (storedUserLogged) this.setUserLogged(storedUserLogged)
     if (storedRol) this.setRol(storedRol)
     if (storedUserId) this.setUserId(storedUserId)
+    if(fecha) this.fechaLogin.next(JSON.parse(fecha))
   }
 
   canActivate() {
