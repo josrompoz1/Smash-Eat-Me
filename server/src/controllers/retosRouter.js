@@ -191,7 +191,7 @@ function createRouterRetos(db) {
     //---------------------------------ENDPOINTS PASOS DE LAS SOLUCIONES---------------------------------
     router.get('/pasos/solucion/:id', function (req, res, next) {
         db.query(
-            'SELECT * FROM Paso WHERE solucionId=?',
+            'SELECT * FROM Paso WHERE solucionId=? ORDER BY numero',
             [req.params.id],
             (error, results) => {
                 if (error) {
