@@ -33,7 +33,7 @@ export class ReservarMesaComponent implements OnInit {
       'telefono': new FormControl('', [Validators.required]),
       'fecha': new FormControl('', [Validators.required]),
       'hora': new FormControl('', [Validators.required]),
-      'nPersonas': new FormControl('', [Validators.required, Validators.min(1), Validators.max(20)])
+      'nPersonas': new FormControl('', [Validators.required, Validators.min(1), Validators.max(10)])
     })
     this.formDescuento = new FormGroup({
       'codigo': new FormControl('', [Validators.required])

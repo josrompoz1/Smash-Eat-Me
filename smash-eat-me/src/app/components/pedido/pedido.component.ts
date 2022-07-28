@@ -62,13 +62,13 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   private getData() {
-    this.precioFinal = this.precioTotal + 1;
+    this.precioFinal = this.precioTotal + 2;
     let array = from(this.productosPedido);
     array.forEach(val => {
       if (this.productosCantidad.has(val)) {
         let cantidad = this.productosCantidad.get(val)
         if (cantidad != undefined) {
-          cantidad = cantidad + 1;
+          cantidad = cantidad + 2;
           this.productosCantidad.set(val, cantidad)
         }
       } else {
@@ -87,10 +87,10 @@ export class PedidoComponent implements OnInit, OnDestroy {
     if(this.descuento != undefined) {
       if(this.descuento.porcentaje != undefined) {
         this.precioConDescuento = (this.precioTotal * this.descuento.porcentaje) / 100
-        this.precioFinal = this.precioTotal - this.precioConDescuento + 1;
+        this.precioFinal = this.precioTotal - this.precioConDescuento + 2;
       }
     } else {
-      this.precioFinal = +this.precioTotal + 1;
+      this.precioFinal = +this.precioTotal + 2;
       console.log(this.precioFinal)
     }
   }
