@@ -127,6 +127,12 @@ export interface Paso {
     solucionId: number;
 }
 
+export interface Pista {
+    id: number;
+    pista: string;
+    retoId: number;
+}
+
 export interface Login {
     username: string;
     contrasena: string;
