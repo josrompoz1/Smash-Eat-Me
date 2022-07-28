@@ -18,12 +18,10 @@ export class ServerResponseInterceptor implements HttpInterceptor {
 
   constructor(private toastr: ToastrService, private sesionService: SesionService) {}
 
-//separar un interceptor para la sesion y otro para las respuestas del servidor
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((evt: any) => {
-        if((request.url !== 'http://localhost:8080/productos') && !request.url.includes('valoraciones/producto/') 
+        if(!request.url.includes('/productos') && !request.url.includes('valoraciones/producto/') 
             && !request.url.includes('productos/tipo/') && !request.url.includes('productos/busqueda/')
             && !request.url.includes('reto') && !request.url.includes('solucion') && (!request.url.includes('usuarios') && request.method=='POST')) {
           if(sessionStorage.getItem('token')) {
@@ -34,17 +32,16 @@ export class ServerResponseInterceptor implements HttpInterceptor {
                 this.sesionService.cerrarSesion()
                 this.sesionService.redirectToLogin()
                 this.toastr.info("La sesión ha caducado", 'Smash&Eat Me App')
-              } else {
-                if(this.predicates.indexOf(request.method) >= 0 && evt instanceof HttpResponse && evt.status == 201) {
-                  let message: string = evt.body['status']
-                  if(message) {
-                    this.toastr.success(message, 'Smash&Eat Me App')
-                  }
-                }
               }
             }
           } else {
             this.sesionService.redirectToLogin()
+          }
+        }
+        if(this.predicates.indexOf(request.method) >= 0 && evt instanceof HttpResponse && evt.status == 201) {
+          let message: string = evt.body['status']
+          if(message) {
+            this.toastr.success(message, 'Smash&Eat Me App')
           }
         }
       }, (err: any) => {
