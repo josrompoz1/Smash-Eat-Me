@@ -108,7 +108,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
         nombre: this.formUsuario.value.nombre,
         correo: this.formUsuario.value.correo,
         contrasena: this.formUsuario.value.contrasena,
-        telefono: this.formUsuario.value.telefono
+        telefono: this.formUsuario.value.telefono,
+        tipo: this.formUsuario.value.tipo
       }
       await this.dataManagement.updateUsuario(usuario, this.idSelecc).then(() => {
         this.getData()

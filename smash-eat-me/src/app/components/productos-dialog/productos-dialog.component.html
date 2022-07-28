@@ -36,6 +36,13 @@
                 <th>Reseña</th>
             </tr>
             <tr *ngFor="let valoracion of valoraciones">
+                <td *ngIf="valoracion.puntuacion == 0">
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
                 <td *ngIf="valoracion.puntuacion == 1">
                     <mat-icon>star</mat-icon>
                     <mat-icon>star_border</mat-icon>

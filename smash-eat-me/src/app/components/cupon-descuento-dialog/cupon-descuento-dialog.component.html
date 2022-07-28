@@ -15,7 +15,7 @@
         <form class="form" [formGroup]="form" (ngSubmit)="addOrUpdateCupon()">
             <mat-form-field appearance="fill">
                 <mat-label>Codigo de descuento</mat-label>
-                <input matInput type="text" name="codigo" formControlName="codigo" [readonly]="isReadOnly">
+                <input matInput type="text" name="codigo" formControlName="codigo" readonly="isReadOnly">
             </mat-form-field><br>
 
             <mat-form-field appearance="fill">

@@ -15,6 +15,8 @@ export class ValoracionDialogComponent implements OnInit {
   productoAValorar!: ProductoOfertado;
   form!: FormGroup;
   userId: number = 0;
+  value = 0;
+  disableButton: boolean = true;
 
   constructor(public dataManagement: DataManagementService,
               private dialogRef: MatDialogRef<ValoracionDialogComponent>,
@@ -28,8 +30,11 @@ export class ValoracionDialogComponent implements OnInit {
     if(this.dataManagement.selectedProducto) this.productoAValorar = this.dataManagement.selectedProducto;
     this.form = new FormGroup({
       'resenya': new FormControl('', [Validators.required]),
-      'puntuacion': new FormControl('', [Validators.required])
+      'puntuacion': new FormControl(0, [Validators.required])
     })
+    if(this.value > 0) {
+      this.disableButton = false
+    }
   }
 
   onClose() {
@@ -50,6 +55,17 @@ export class ValoracionDialogComponent implements OnInit {
         await this.dataManagement.postValoracion(valoracion);
       }
     }
+  }
+
+  public setValue() {
+    this.value = this.form.value['puntuacion']
+    if(this.value > 0) {
+      this.disableButton = false;
+    } else {
+      this.disableButton = true;
+    }
+    console.log(this.value)
+    console.log(this.disableButton)
   }
 
 }

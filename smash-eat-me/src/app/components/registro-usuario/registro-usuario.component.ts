@@ -21,7 +21,8 @@ export class RegistroUsuarioComponent implements OnInit {
       'username': new FormControl('', [Validators.required]),
       'correo': new FormControl('', [Validators.required, Validators.email]),
       'contrasena': new FormControl('', [Validators.required]),
-      'telefono': new FormControl(null, [])
+      'telefono': new FormControl(null, []),
+      'tipo': new FormControl('NO ADMIN', [Validators.required])
     })
   }
 

@@ -18,6 +18,8 @@ export class ServerResponseInterceptor implements HttpInterceptor {
 
   constructor(private toastr: ToastrService, private sesionService: SesionService) {}
 
+//separar un interceptor para la sesion y otro para las respuestas del servidor
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap((evt: any) => {
