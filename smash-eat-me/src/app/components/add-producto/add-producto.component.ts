@@ -25,7 +25,7 @@ export class AddProductoComponent implements OnInit {
       'descripcion': new FormControl('', [Validators.required]),
       'imagen': new FormControl('', [Validators.required]),
       'tipo': new FormControl('', [Validators.required]),
-      'precio': new FormControl('', [Validators.required])
+      'precio': new FormControl('', [Validators.required, Validators.max(100)])
     })
   }
 
@@ -39,6 +39,14 @@ export class AddProductoComponent implements OnInit {
         precio: this.form.value.precio,
       }
       await this.dataManagement.postProducto(producto)
+    } else {
+      this.errors.length = 0
+        for(let x in this.form.controls) {
+          console.log(this.form.controls[x])
+          if(this.form.controls[x].getError('required') != undefined) {
+            this.errors.push('El campo ' + x + ' es necesario')
+          }
+        }
     }
   }
 

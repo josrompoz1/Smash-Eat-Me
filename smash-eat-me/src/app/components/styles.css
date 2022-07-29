@@ -40,3 +40,11 @@ hr {
 mat-icon {
     cursor: pointer;
 }
+
+.error {
+    color: red;
+}
+
+li {
+    list-style-type: none;
+}

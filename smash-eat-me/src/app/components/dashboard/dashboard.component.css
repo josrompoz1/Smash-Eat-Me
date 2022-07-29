@@ -77,7 +77,7 @@ table {
     width: 15%;
 }
 
-.mat-column-completado, .mat-column-solucion {
+.mat-column-completado, .mat-column-pista, .mat-column-solucion {
     text-align: center;
     width: 7%;
 }

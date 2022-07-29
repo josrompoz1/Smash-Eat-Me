@@ -27,6 +27,11 @@
                 <mat-label>Ciudad</mat-label>
                 <input matInput type="text" name="ciudad" formControlName="ciudad" placeholder="Sevilla">
             </mat-form-field><br>
+            
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
             <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>

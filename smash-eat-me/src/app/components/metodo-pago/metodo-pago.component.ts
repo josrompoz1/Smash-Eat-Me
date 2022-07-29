@@ -52,7 +52,9 @@ export class MetodoPagoComponent implements OnInit {
     this.form = new FormGroup({
       'codigo': new FormControl('', [Validators.required])
     })
-    this.getData();
+    if(this.userId > 0) {
+      this.getData();
+    }
   }
 
   private async getData() {

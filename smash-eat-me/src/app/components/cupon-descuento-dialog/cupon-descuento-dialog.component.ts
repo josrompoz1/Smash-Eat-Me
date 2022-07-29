@@ -14,6 +14,7 @@ export class CuponDescuentoDialogComponent implements OnInit {
   titulo: string = '';
   form!: FormGroup;
   isReadOnly: boolean = false;
+  errors: string[] = []
 
   constructor(private dataManagement: DataManagementService,
     private dialogRef: MatDialogRef<CuponDescuentoDialogComponent>) { }
@@ -23,6 +24,7 @@ export class CuponDescuentoDialogComponent implements OnInit {
   }
 
   private getData() {
+    this.errors.length = 0;
     if (this.dataManagement.selectedCupon) {
       this.titulo = 'Detalles del cupon ' + this.dataManagement.selectedCupon.codigo?.toUpperCase();
       this.isReadOnly = true;
@@ -37,6 +39,7 @@ export class CuponDescuentoDialogComponent implements OnInit {
         'porcentaje': new FormControl('', [Validators.required, Validators.min(5), Validators.max(100)])
       })
     }
+    console.log(this.isReadOnly)
   }
 
   onClose() {
@@ -45,6 +48,7 @@ export class CuponDescuentoDialogComponent implements OnInit {
 
   public async addOrUpdateCupon() {
     if (this.form.valid) {
+      this.errors.length = 0;
       if (this.dataManagement.selectedCupon) {
         if(this.dataManagement.selectedCupon.id) {
           await this.dataManagement.changePercentCupon(this.dataManagement.selectedCupon.id, this.form.value.porcentaje)
@@ -55,6 +59,17 @@ export class CuponDescuentoDialogComponent implements OnInit {
           porcentaje: this.form.value.porcentaje
         }
         await this.dataManagement.postCuponDescuento(cupon)
+      }
+    } else {
+      this.errors.length = 0
+      for(let x in this.form.controls) {
+        if(this.form.controls[x].getError('required') != undefined) {
+          this.errors.push('El campo ' + x + ' es necesario')
+        } else if(this.form.controls[x].getError('min') != undefined) {
+          this.errors.push('El porcentaje no puede ser menor a 5')
+        } else if(this.form.controls[x].getError('max') != undefined) {
+          this.errors.push('El porcentaje no puede ser mayor a 100')
+        }
       }
     }
   }

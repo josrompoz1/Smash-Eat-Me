@@ -47,8 +47,10 @@ export class HistorialPedidosComponent implements OnInit {
       this.dataSource = await this.dataManagement.getAllPedidos()
     }
     if(this.rol === 'NO ADMIN') {
-      this.titulo = 'Mis pedidos'
-      this.dataSource = await this.dataManagement.getPedidosByUsuarioId(this.userId);
+      if(this.userId > 0) {
+        this.titulo = 'Mis pedidos'
+        this.dataSource = await this.dataManagement.getPedidosByUsuarioId(this.userId);
+      }
     }
   }
 

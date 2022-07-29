@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CuponDescuento, DeleteCashRequest, Direccion, Login, LoginResponse, Menu, Mesa, Paso, PedidoComida, PedidoComidaResponse, ProductoOfertado, ProductoPedido, Reto, Solucion, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
+import { CuponDescuento, DeleteCashRequest, Direccion, Login, LoginResponse, Menu, Mesa, Paso, PedidoComida, PedidoComidaResponse, Pista, ProductoOfertado, ProductoPedido, Reto, Solucion, Tarjeta, Usuario, Valoracion, ValoracionResponse } from '../Models/types';
 import { AbstractWebService } from './abstract-web-service.service';
 
 @Injectable()
@@ -274,6 +274,11 @@ export class RestService extends AbstractWebService {
   //PASOS
   public async getPasosBySolucionId(solucionId: number): Promise<Paso[]> {
     return await this.makeGetRequest(this.url + 'pasos/solucion/' + solucionId)
+  }
+
+  //PISTAS
+  public async getPistaByRetoId(retoId: number): Promise<Pista[]> {
+    return await this.makeGetRequest(this.url + 'pista/reto/' + retoId)
   }
 
 }

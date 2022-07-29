@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Paso, Reto, Solucion } from '../Models/types';
+import { Paso, Pista, Reto, Solucion } from '../Models/types';
 import { RestService } from './rest-service.service';
 
 @Injectable({
@@ -51,6 +51,11 @@ export class RetosService {
   //PASOS
   public async getPasosBySolucionId(solucionId: number): Promise<Paso[]> {
     return await this.rest.getPasosBySolucionId(solucionId)
+  }
+
+  //PISTAS
+  public async getPistaByRetoId(retoId: number): Promise<Pista[]> {
+    return await this.rest.getPistaByRetoId(retoId)
   }
 
 }

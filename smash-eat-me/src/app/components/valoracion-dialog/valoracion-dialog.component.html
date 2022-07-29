@@ -14,7 +14,7 @@
     <div class="formHijo">
         <form class="form" [formGroup]="form" (ngSubmit)="crearValoracion()">
             <mat-label>Puntuación (de 1 a 5)</mat-label>
-            <mat-slider formControlName="puntuacion" [max]=5 [min]=1 [step]=1 [thumbLabel]=true>
+            <mat-slider formControlName="puntuacion" [max]=5 [step]=1 [thumbLabel]=true (change)="setValue()">
             </mat-slider><br>
 
             <mat-form-field appearance="fill">
@@ -22,7 +22,12 @@
                 <input matInput type="text" name="resenya" formControlName="resenya"
                     placeholder="Breve resenya sobre el producto">
             </mat-form-field><br>
-            <button mat-stroked-button type="submit">Aceptar</button>
+                        
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit" [disabled]="disableButton">Aceptar</button>
         </form>
     </div>
 </div>

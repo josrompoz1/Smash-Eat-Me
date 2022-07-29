@@ -15,6 +15,9 @@ export class ValoracionDialogComponent implements OnInit {
   productoAValorar!: ProductoOfertado;
   form!: FormGroup;
   userId: number = 0;
+  value = 0;
+  disableButton: boolean = true;
+  errors: string[] = []
 
   constructor(public dataManagement: DataManagementService,
               private dialogRef: MatDialogRef<ValoracionDialogComponent>,
@@ -28,8 +31,11 @@ export class ValoracionDialogComponent implements OnInit {
     if(this.dataManagement.selectedProducto) this.productoAValorar = this.dataManagement.selectedProducto;
     this.form = new FormGroup({
       'resenya': new FormControl('', [Validators.required]),
-      'puntuacion': new FormControl('', [Validators.required])
+      'puntuacion': new FormControl(0, [Validators.required])
     })
+    if(this.value > 0) {
+      this.disableButton = false
+    }
   }
 
   onClose() {
@@ -38,18 +44,38 @@ export class ValoracionDialogComponent implements OnInit {
 
   public async crearValoracion() {
     if(this.form.valid) {
-      if(this.productoAValorar.id) {
-        const valoracion: Valoracion = {
-          puntuacion: this.form.value['puntuacion'],
-          resenya: this.form.value['resenya'],
-          nombreUsuario: 'perico',
-          nombreProducto: this.productoAValorar.nombre,
-          usuarioId: this.userId,
-          productoPedidoId: this.productoAValorar.id
+      if(this.userId > 0) {
+        if(this.productoAValorar.id) {
+          const valoracion: Valoracion = {
+            puntuacion: this.form.value['puntuacion'],
+            resenya: this.form.value['resenya'],
+            nombreUsuario: 'perico',
+            nombreProducto: this.productoAValorar.nombre,
+            usuarioId: this.userId,
+            productoPedidoId: this.productoAValorar.id
+          }
+          await this.dataManagement.postValoracion(valoracion);
         }
-        await this.dataManagement.postValoracion(valoracion);
+      }
+    } else {
+      this.errors.length = 0
+      for(let x in this.form.controls) {
+        if(this.form.controls[x].getError('required') != undefined) {
+          this.errors.push('El campo ' + x + ' es necesario')
+        }
       }
     }
+  }
+
+  public setValue() {
+    this.value = this.form.value['puntuacion']
+    if(this.value > 0) {
+      this.disableButton = false;
+    } else {
+      this.disableButton = true;
+    }
+    console.log(this.value)
+    console.log(this.disableButton)
   }
 
 }

@@ -13,7 +13,7 @@ export class AddDirecionComponent implements OnInit {
 
   form!: FormGroup;
   errors: string[] = [];
-  userId!: number;
+  userId: number = 0;
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
     this.sesionService.userId.subscribe(value => {
@@ -32,15 +32,24 @@ export class AddDirecionComponent implements OnInit {
   }
 
   public async crearDireccion() {
-    if(this.form.valid) {
-      const direccion: Direccion = {
-        nombreDireccion: this.form.value.nombreDireccion,
-        direccion: this.form.value.direccion,
-        pais: this.form.value.pais,
-        ciudad: this.form.value.ciudad,
-        usuarioId: +this.userId
+    if(this.userId > 0) {
+      if(this.form.valid) {
+        const direccion: Direccion = {
+          nombreDireccion: this.form.value.nombreDireccion,
+          direccion: this.form.value.direccion,
+          pais: this.form.value.pais,
+          ciudad: this.form.value.ciudad,
+          usuarioId: +this.userId
+        }
+        await this.dataManagement.crearDireccion(direccion)
+      } else {
+        this.errors.length = 0
+        for(let x in this.form.controls) {
+          if(this.form.controls[x].getError('required') != undefined) {
+            this.errors.push('El campo ' + x + ' es necesario')
+          }
+        }
       }
-      await this.dataManagement.crearDireccion(direccion)
     }
   }
 

@@ -42,7 +42,11 @@
                         <input matInput type="number" name="nPersonas" formControlName="nPersonas"
                             placeholder="Numero de personas">
                     </mat-form-field><br>
-
+            
+                    <div class="error" *ngFor="let error of errorsMesa">
+                        <li>{{error}}</li>
+                    </div>
+        
                     <button mat-stroked-button type="submit">Aceptar</button>
                 </form>
             </div>
@@ -72,6 +76,11 @@
                             <mat-label>Cupón de descuento</mat-label>
                             <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">
                         </mat-form-field><br>
+                                    
+                        <div class="error" *ngFor="let error of errors">
+                            <li>{{error}}</li>
+                        </div>
+
                         <button mat-stroked-button type="submit">Aplicar cupón</button>
                     </form>
                 </div>

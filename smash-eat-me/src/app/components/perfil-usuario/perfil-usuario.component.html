@@ -36,7 +36,7 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>Tipo de usuario</mat-label>
-                <input matInput type="text" name="tipo" formControlName="tipo" readonly="true">
+                <input matInput type="text" name="tipo" formControlName="tipo" [readonly]="true">
             </mat-form-field><br>
 
             <mat-form-field appearance="fill">
@@ -48,6 +48,10 @@
                 <mat-label>Telefono</mat-label>
                 <input matInput type="number" name="telefono" formControlName="telefono">
             </mat-form-field><br>
+                        
+            <div class="error" *ngFor="let error of errorsUsurio">
+                <li>{{error}}</li>
+            </div>
 
             <button mat-stroked-button (click)="actualizarUsuario()">Actualizar usuario</button>
             <button mat-stroked-button routerLink="/creditodigital" routerLinkActive="active">Aumentar crédito</button>
@@ -87,6 +91,11 @@
                         <mat-label>Expiración</mat-label>
                         <input matInput type="text" name="expiracion" formControlName="expiracion">
                     </mat-form-field><br>
+                                
+                    <div class="error" *ngFor="let error of errorsTarjeta">
+                        <li>{{error}}</li>
+                    </div>
+
                     <button mat-stroked-button (click)="editarTarjeta(i)">Actualizar</button>
                     <button mat-icon-button (click)="eliminarTarjeta(i)">
                         <mat-icon>delete</mat-icon>
@@ -144,6 +153,11 @@
                         <mat-label>Ciudad</mat-label>
                         <input matInput type="text" name="ciudad" formControlName="ciudad">
                     </mat-form-field><br>
+            
+                    <div class="error" *ngFor="let error of errorsDireccion">
+                        <li>{{error}}</li>
+                    </div>        
+
                     <button mat-stroked-button (click)="editarDireccion(i)">Actualizar</button>
                     <button mat-icon-button (click)="eliminarDireccion(i)">
                         <mat-icon>delete</mat-icon>
@@ -169,6 +183,13 @@
         <ng-container matColumnDef="puntuacion">
             <th mat-header-cell *matHeaderCellDef> Puntuacion </th>
             <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.puntuacion == 0">
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </div>
                 <div *ngIf="element.puntuacion == 1">
                     <mat-icon>star</mat-icon>
                     <mat-icon>star_border</mat-icon>

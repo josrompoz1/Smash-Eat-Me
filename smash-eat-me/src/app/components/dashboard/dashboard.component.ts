@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { Reto } from 'src/app/Models/types';
 import { RetosService } from 'src/app/Services/retos.service';
 import { DashboardDialogComponent } from '../dashboard-dialog/dashboard-dialog.component';
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   progreso: number = 0;
   retos: Reto[] = []
-  displayedColumns: string[] = ['nombre', 'descripcion', 'categoria', 'dificultad', 'completado', 'solucion'];
+  displayedColumns: string[] = ['nombre', 'descripcion', 'categoria', 'dificultad', 'completado', 'pista', 'solucion'];
   numberOfFilters: number = 0;
   hidden: boolean = true;
 
@@ -22,7 +23,8 @@ export class DashboardComponent implements OnInit {
   paramCategoria!: string;
 
   constructor(private retosService: RetosService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private toastr: ToastrService) {
     this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
@@ -130,6 +132,13 @@ export class DashboardComponent implements OnInit {
       dialogConfig.width = "95%";
       dialogConfig.height = "95%"
       this.dialog.open(SolucionesRetoDialogComponent, dialogConfig);
+    }
+  }
+
+  public async showPista(element: Reto) {
+    if(element.id != undefined) {
+      const pista = await this.retosService.getPistaByRetoId(element.id)
+      this.toastr.info(pista[0].pista, 'Smash&Eat Me App')
     }
   }
 

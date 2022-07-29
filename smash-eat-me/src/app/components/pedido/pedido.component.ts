@@ -62,13 +62,13 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   private getData() {
-    this.precioFinal = this.precioTotal + 1;
+    this.precioFinal = this.precioTotal + 2;
     let array = from(this.productosPedido);
     array.forEach(val => {
       if (this.productosCantidad.has(val)) {
         let cantidad = this.productosCantidad.get(val)
         if (cantidad != undefined) {
-          cantidad = cantidad + 1;
+          cantidad = cantidad + 2;
           this.productosCantidad.set(val, cantidad)
         }
       } else {
@@ -87,48 +87,50 @@ export class PedidoComponent implements OnInit, OnDestroy {
     if(this.descuento != undefined) {
       if(this.descuento.porcentaje != undefined) {
         this.precioConDescuento = (this.precioTotal * this.descuento.porcentaje) / 100
-        this.precioFinal = this.precioTotal - this.precioConDescuento + 1;
+        this.precioFinal = this.precioTotal - this.precioConDescuento + 2;
       }
     } else {
-      this.precioFinal = +this.precioTotal + 1;
+      this.precioFinal = +this.precioTotal + 2;
       console.log(this.precioFinal)
     }
   }
 
   public async crearPedido() {
-    let metodo: string = "";
-    if(this.creditoDigital == true) metodo = "Cartera digital"
-    else metodo = "Tarjeta";
-
-    const pedido: PedidoComida = {
-      metodoPago: metodo,
-      fecha: new Date(),
-      hora: this.horaEntrega,
-      nombreDireccion: this.direccion.direccion,
-      usuarioId: this.userId,
-      direccionUsuarioId: this.direccion.id
-    };
-    const credito: DeleteCashRequest = {
-      creditoDigital: this.precioFinal
-    }
-
-    console.log(pedido)
-    const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
-    if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
-    this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
-      if(producto.id) {
-        const productoPedido: ProductoPedido = {
-          cantidad: cantidadProducto,
-          pedidoId: pedidoResponse.id,
-          productoOfertadoId: producto.id
-        }
-        await this.dataManagement.postProductoPedido(productoPedido);
+    if(this.userId > 0) {
+      let metodo: string = "";
+      if(this.creditoDigital == true) metodo = "Cartera digital"
+      else metodo = "Tarjeta";
+  
+      const pedido: PedidoComida = {
+        metodoPago: metodo,
+        fecha: new Date(),
+        hora: this.horaEntrega,
+        nombreDireccion: this.direccion.direccion,
+        usuarioId: this.userId,
+        direccionUsuarioId: this.direccion.id
+      };
+      const credito: DeleteCashRequest = {
+        creditoDigital: this.precioFinal
       }
-      
-    })
-    this.b = false;
-    this.dataManagement.numberOfItemsInBasket.next(0);
-
+  
+      console.log(pedido)
+      const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
+      if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
+      this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
+        if(producto.id) {
+          const productoPedido: ProductoPedido = {
+            cantidad: cantidadProducto,
+            pedidoId: pedidoResponse.id,
+            productoOfertadoId: producto.id
+          }
+          await this.dataManagement.postProductoPedido(productoPedido);
+        }
+        
+      })
+      this.b = false;
+      this.dataManagement.numberOfItemsInBasket.next(0);
+    }
+    
     this.destroyAll()
   }
 
