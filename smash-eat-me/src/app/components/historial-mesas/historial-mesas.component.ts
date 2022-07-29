@@ -37,8 +37,10 @@ export class HistorialMesasComponent implements OnInit {
 
   private async getData() {
     if(this.rol == 'NO ADMIN') {
-      this.titulo = 'Mis reservas de mesa'
-      this.dataSource = await this.dataManagement.getMesaByUsuarioId(this.userId)
+      if(this.userId > 0) {
+        this.titulo = 'Mis reservas de mesa'
+        this.dataSource = await this.dataManagement.getMesaByUsuarioId(this.userId)
+      }
     } else if(this.rol == 'ADMIN') {
       this.titulo = 'Historial de reservas'
       this.tituloBoton = 'Ver mis reservas'

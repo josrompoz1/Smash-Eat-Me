@@ -48,6 +48,10 @@
                 <mat-label>Telefono</mat-label>
                 <input matInput type="number" name="telefono" formControlName="telefono">
             </mat-form-field><br>
+                        
+            <div class="error" *ngFor="let error of errorsUsurio">
+                <li>{{error}}</li>
+            </div>
 
             <button mat-stroked-button (click)="actualizarUsuario()">Actualizar usuario</button>
             <button mat-stroked-button routerLink="/creditodigital" routerLinkActive="active">Aumentar crédito</button>
@@ -87,6 +91,11 @@
                         <mat-label>Expiración</mat-label>
                         <input matInput type="text" name="expiracion" formControlName="expiracion">
                     </mat-form-field><br>
+                                
+                    <div class="error" *ngFor="let error of errorsTarjeta">
+                        <li>{{error}}</li>
+                    </div>
+
                     <button mat-stroked-button (click)="editarTarjeta(i)">Actualizar</button>
                     <button mat-icon-button (click)="eliminarTarjeta(i)">
                         <mat-icon>delete</mat-icon>
@@ -144,6 +153,11 @@
                         <mat-label>Ciudad</mat-label>
                         <input matInput type="text" name="ciudad" formControlName="ciudad">
                     </mat-form-field><br>
+            
+                    <div class="error" *ngFor="let error of errorsDireccion">
+                        <li>{{error}}</li>
+                    </div>        
+
                     <button mat-stroked-button (click)="editarDireccion(i)">Actualizar</button>
                     <button mat-icon-button (click)="eliminarDireccion(i)">
                         <mat-icon>delete</mat-icon>

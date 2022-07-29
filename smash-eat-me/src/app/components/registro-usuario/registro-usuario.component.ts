@@ -31,6 +31,15 @@ export class RegistroUsuarioComponent implements OnInit {
       await this.dataManagement.crearUsuario(this.form.value).then(() => {
         this.router.navigate([''])
       })
+    } else {
+      this.errors.length = 0
+      for(let x in this.form.controls) {
+        if(this.form.controls[x].getError('required') != undefined) {
+          this.errors.push('El campo ' + x + ' es necesario')
+        } else if(this.form.controls[x].getError('email') != undefined) {
+          this.errors.push('El campo correo electronico debe tener el formato de email')
+        }
+      }
     }
   }
 

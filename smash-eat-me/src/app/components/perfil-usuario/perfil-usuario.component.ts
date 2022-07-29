@@ -25,6 +25,9 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   displayColumns: string[] = ['producto', 'puntuacion', 'resenya']
   rol: string = ''
   userId: number = 0
+  errorsUsurio: string[] = []
+  errorsTarjeta: string[] = []
+  errorsDireccion: string[] = []
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
     this.sesionService.rol.subscribe(value => {
@@ -60,11 +63,16 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
         this.idSelecc = this.dataManagement.selectedUsuarioId
         console.log(this.idSelecc)
       } else {
-        this.idSelecc = this.userId
-        console.log(this.idSelecc)
+        if(this.userId > 0) {
+          this.idSelecc = this.userId
+          console.log(this.idSelecc)
+        }
       }
     } else if(this.rol == 'NO ADMIN') {
-      this.idSelecc = this.userId
+      if(this.userId > 0) {
+        this.idSelecc = this.userId
+      }
+      
     }
     this.getData()
   }
@@ -103,6 +111,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   public async actualizarUsuario() {
     if (this.formUsuario.valid) {
+      this.errorsUsurio.length = 0
       const usuario: Usuario = {
         username: this.formUsuario.value.username,
         nombre: this.formUsuario.value.nombre,
@@ -114,6 +123,15 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       await this.dataManagement.updateUsuario(usuario, this.idSelecc).then(() => {
         this.getData()
       })
+    } else {
+      this.errorsUsurio.length = 0
+      for(let x in this.formUsuario.controls) {
+        if(this.formUsuario.controls[x].getError('required') != undefined) {
+          this.errorsUsurio.push('El campo ' + x + ' es necesario')
+        } else if(this.formUsuario.controls[x].getError('email') != undefined) {
+          this.errorsUsurio.push('El campo correo electrónico debe tener el formato de email')
+        }
+      }
     }
   }
 
@@ -158,6 +176,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   public async editarTarjeta(indice: number) {
     let tarjetaSelecc = this.tarjetas[indice]
     if (this.formTarjeta.valid) {
+      this.errorsTarjeta.length = 0
+      this.checkFecha(this.formTarjeta.value.numeroTarjeta)
       const id = tarjetaSelecc.id
       let fechaForm = this.formTarjeta.value.expiracion
       let fechaSplit: string[] = fechaForm.split("/")
@@ -170,12 +190,32 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
         await this.dataManagement.editarTarjeta(tarjeta, id).then(() => {
           this.getData()
         })
+    } else {
+      this.errorsTarjeta.length = 0
+      for(let x in this.formTarjeta.controls) {
+        if(this.formTarjeta.controls[x].getError('required') != undefined) {
+          this.errorsTarjeta.push('El campo ' + x + ' es necesario')
+        } else if(this.formTarjeta.controls[x].getError('posterior') != undefined) {
+          this.errorsUsurio.push('La tarjeta está caducada')
+        }
+      }
+    }
+  }
+
+  private checkFecha(fechaString: string) {
+    if(fechaString !== '') {
+      const fecha = new Date(fechaString)
+      const c: boolean = fecha <= new Date()
+      if(c) {
+        this.formTarjeta.get('expiracion')?.setErrors({ 'posterior': c })
+      }
     }
   }
 
   public async editarDireccion(indice: number) {
     let direccionSelecc = this.direcciones[indice]
     if(this.formDireccion.valid) {
+      this.errorsDireccion.length = 0
       const id = direccionSelecc.id
       const direccion: Direccion = {
         nombreDireccion: this.formDireccion.value.nombre,
@@ -186,6 +226,13 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       if(id) await this.dataManagement.editarDireccion(direccion, id).then(() => {
         this.getData()
       })
+    } else {
+      this.errorsDireccion.length = 0
+      for(let x in this.formDireccion.controls) {
+        if(this.formDireccion.controls[x].getError('required') != undefined) {
+          this.errorsDireccion.push('El campo ' + x + ' es necesario')
+        }
+      }
     }
   }
 

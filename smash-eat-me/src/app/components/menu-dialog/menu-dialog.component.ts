@@ -16,6 +16,7 @@ export class MenuDialogComponent implements OnInit {
   isReadOnly: boolean = false;
   productosDisponibles: ProductoOfertado[] = []
   productosEnMenu: ProductoOfertado[] = []
+  errors: string[] = []
 
   constructor(public dataManagement: DataManagementService,
     private dialogRef: MatDialogRef<MenuDialogComponent>) { }
@@ -31,7 +32,7 @@ export class MenuDialogComponent implements OnInit {
       this.form = new FormGroup({
         'nombre': new FormControl(this.dataManagement.selectedMenu.nombre, [Validators.required]),
         'descripcion': new FormControl(this.dataManagement.selectedMenu.descripcion, [Validators.required]),
-        'precio': new FormControl(this.dataManagement.selectedMenu.precio, [Validators.required]),
+        'precio': new FormControl(this.dataManagement.selectedMenu.precio, [Validators.required, Validators.min(1), Validators.max(100)]),
         'producto': new FormControl('', [Validators.required])
       })
       this.productosDisponibles = await this.dataManagement.getProductosSinMenuId()
@@ -42,7 +43,7 @@ export class MenuDialogComponent implements OnInit {
       this.form = new FormGroup({
         'nombre': new FormControl('', [Validators.required]),
         'descripcion': new FormControl('', [Validators.required]),
-        'precio': new FormControl('', [Validators.required])
+        'precio': new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)])
       })
     }
   }
@@ -53,6 +54,7 @@ export class MenuDialogComponent implements OnInit {
 
   public async addOrUpdateMenu() {
     if (this.form.valid) {
+      this.errors.length = 0
       if (this.dataManagement.selectedMenu) {
         if(this.dataManagement.selectedMenu.id)
           await this.dataManagement.putMenuIdInProducto(this.form.value.producto, this.dataManagement.selectedMenu.id).then(() => {
@@ -65,6 +67,17 @@ export class MenuDialogComponent implements OnInit {
           precio: this.form.value.precio
         }
         await this.dataManagement.postMenu(menu)
+      }
+    } else {
+      this.errors.length = 0
+      for(let x in this.form.controls) {
+        if(this.form.controls[x].getError('required') != undefined) {
+          this.errors.push('El campo ' + x + ' es necesario')
+        } else if(this.form.controls[x].getError('min') != undefined) {
+          this.errors.push('El precio no puede ser menor a 1')
+        } else if(this.form.controls[x].getError('max') != undefined) {
+          this.errors.push('El precio no puede ser mayor a 100')
+        }
       }
     }
   }

@@ -23,7 +23,7 @@ export class ServerResponseInterceptor implements HttpInterceptor {
       tap((evt: any) => {
         if(!request.url.includes('/productos') && !request.url.includes('valoraciones/producto/') 
             && !request.url.includes('productos/tipo/') && !request.url.includes('productos/busqueda/')
-            && !request.url.includes('reto') && !request.url.includes('solucion') && (!request.url.includes('usuarios') && request.method=='POST')) {
+            && !request.url.includes('reto') && !request.url.includes('solucion')) {
           if(sessionStorage.getItem('token')) {
             const fecha = sessionStorage.getItem('fechaLogin')
             const fechaActual = +new Date()

@@ -96,39 +96,41 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   public async crearPedido() {
-    let metodo: string = "";
-    if(this.creditoDigital == true) metodo = "Cartera digital"
-    else metodo = "Tarjeta";
-
-    const pedido: PedidoComida = {
-      metodoPago: metodo,
-      fecha: new Date(),
-      hora: this.horaEntrega,
-      nombreDireccion: this.direccion.direccion,
-      usuarioId: this.userId,
-      direccionUsuarioId: this.direccion.id
-    };
-    const credito: DeleteCashRequest = {
-      creditoDigital: this.precioFinal
-    }
-
-    console.log(pedido)
-    const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
-    if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
-    this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
-      if(producto.id) {
-        const productoPedido: ProductoPedido = {
-          cantidad: cantidadProducto,
-          pedidoId: pedidoResponse.id,
-          productoOfertadoId: producto.id
-        }
-        await this.dataManagement.postProductoPedido(productoPedido);
+    if(this.userId > 0) {
+      let metodo: string = "";
+      if(this.creditoDigital == true) metodo = "Cartera digital"
+      else metodo = "Tarjeta";
+  
+      const pedido: PedidoComida = {
+        metodoPago: metodo,
+        fecha: new Date(),
+        hora: this.horaEntrega,
+        nombreDireccion: this.direccion.direccion,
+        usuarioId: this.userId,
+        direccionUsuarioId: this.direccion.id
+      };
+      const credito: DeleteCashRequest = {
+        creditoDigital: this.precioFinal
       }
-      
-    })
-    this.b = false;
-    this.dataManagement.numberOfItemsInBasket.next(0);
-
+  
+      console.log(pedido)
+      const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
+      if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
+      this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
+        if(producto.id) {
+          const productoPedido: ProductoPedido = {
+            cantidad: cantidadProducto,
+            pedidoId: pedidoResponse.id,
+            productoOfertadoId: producto.id
+          }
+          await this.dataManagement.postProductoPedido(productoPedido);
+        }
+        
+      })
+      this.b = false;
+      this.dataManagement.numberOfItemsInBasket.next(0);
+    }
+    
     this.destroyAll()
   }
 

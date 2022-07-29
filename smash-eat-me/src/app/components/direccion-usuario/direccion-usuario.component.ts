@@ -16,6 +16,7 @@ export class DireccionUsuarioComponent implements OnInit {
   direccionSeleccioinada!: Direccion;
   productosEnCesta: ProductoOfertado[] = [];
   userId: number = 0
+  disableButton: boolean = true;
 
   constructor(private dataManagement: DataManagementService,
               private route: ActivatedRoute,
@@ -34,7 +35,9 @@ export class DireccionUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.userId > 0) {
+      this.getData()
+    }
   }
 
   private async getData() {
@@ -57,6 +60,16 @@ export class DireccionUsuarioComponent implements OnInit {
 
   addDireccion() {
     this.router.navigate(['direccion']);
+  }
+
+  public setDireccionSeleccionadaIndex(i: number) {
+    if(this.direccionSeleccionadaIndex == i) {
+      this.direccionSeleccionadaIndex = -1
+      this.disableButton = true
+    } else {
+      this.direccionSeleccionadaIndex = i
+      this.disableButton = false
+    }
   }
 
 }

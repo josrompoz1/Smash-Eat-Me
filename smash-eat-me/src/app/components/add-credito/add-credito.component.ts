@@ -17,6 +17,7 @@ export class AddCreditoComponent implements OnInit {
   value = 0;
   creditoSeleccionado: number = 0;
   userId: number = 0
+  disableButton: boolean = true;
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService, private toastr: ToastrService) {
     this.sesionService.userId.subscribe(value => {
@@ -29,12 +30,33 @@ export class AddCreditoComponent implements OnInit {
   }
 
   private async getData() {
-    this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.userId);
-    this.creditoDigital = await this.dataManagement.getCreditoDigital(this.userId);
+    if(this.userId > 0) {
+      this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.userId);
+      this.creditoDigital = await this.dataManagement.getCreditoDigital(this.userId);
+    }
   }
 
   public setCreditoSeleccionado(credito: number) {
     this.creditoSeleccionado = credito;
+    if(this.creditoSeleccionado > 0 && this.tarjetaSeleccionadaIndex > -1) {
+      this.disableButton = false
+    } else {
+      this.disableButton = true
+    }
+  }
+
+  public setTarjetaSeleccionadaIndex(i: number) {
+    if(this.tarjetaSeleccionadaIndex == i) {
+      this.tarjetaSeleccionadaIndex = -1
+      this.disableButton = true
+    } else {
+      this.tarjetaSeleccionadaIndex = i
+      if(this.creditoSeleccionado > 0) {
+        this.disableButton = false
+      } else {
+        this.disableButton = true
+      }
+    }
   }
 
   public async anyadirCredito() {

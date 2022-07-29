@@ -6,7 +6,7 @@ function createRouterProductos(db) {
   //---------------------------------ENDPOINTS PRODUCTOS---------------------------------
   router.get('/productos', function (req, res, next) {
     db.query(
-      'SELECT * FROM ProductoOfertado',
+      'SELECT * FROM ProductoOfertado ORDER BY precio',
       [10 * (req.params.page || 0)],
       (error, results) => {
         if (error) {
@@ -277,7 +277,7 @@ function createRouterProductos(db) {
             res.status(500).json({ status: 'error' });
           }
         } else {
-          res.status(201).json({status: 'Resource created'});
+          res.status(201).json({status: 'Menú creado correctamente'});
         }
       }
     );

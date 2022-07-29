@@ -22,6 +22,11 @@
                 <input matInput type="text" name="resenya" formControlName="resenya"
                     placeholder="Breve resenya sobre el producto">
             </mat-form-field><br>
+                        
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
             <button mat-stroked-button type="submit" [disabled]="disableButton">Aceptar</button>
         </form>
     </div>

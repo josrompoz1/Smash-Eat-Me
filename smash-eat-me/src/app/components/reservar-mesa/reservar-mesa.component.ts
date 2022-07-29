@@ -13,6 +13,8 @@ export class ReservarMesaComponent implements OnInit {
 
   menus: Menu[] = []
   form!: FormGroup;
+  errorsMesa: string[] = []
+  errors: string[] = []
   formDescuento!: FormGroup;
   menuSeleccionadoIndex: number = 0;
   mapMenuPrecio = new Map<Menu, number>();
@@ -73,7 +75,13 @@ export class ReservarMesaComponent implements OnInit {
         }
         await this.dataManagement.postReservaMesa(mesa);
       }
-      
+    } else {
+      this.errorsMesa.length = 0
+      for(let x in this.form.controls) {
+        if(this.form.controls[x].getError('required') != undefined) {
+          this.errorsMesa.push('El campo ' + x + ' es necesario')
+        }
+      }
     }
   }
 
@@ -94,6 +102,13 @@ export class ReservarMesaComponent implements OnInit {
           }
         })
         this.formDescuento.controls['codigo'].disable();
+      }
+    } else {
+      this.errors.length = 0
+      for(let x in this.formDescuento.controls) {
+        if(this.formDescuento.controls[x].getError('required') != undefined) {
+          this.errors.push('El campo ' + x + ' es necesario')
+        }
       }
     }
   }

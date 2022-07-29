@@ -10,13 +10,19 @@
         <form class="form" [formGroup]="form" (ngSubmit)="crearTarjeta()">
             <mat-form-field appearance="fill">
                 <mat-label>Numero de tarjeta</mat-label>
-                <input matInput type="number" name="numero" formControlName="numero" placeholder="4242 4242 4242 4242">
+                <input matInput type="text" name="numero" formControlName="numero" placeholder="4242 4242 4242 4242 4242"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
             </mat-form-field><br>
 
             <mat-form-field appearance="fill">
                 <mat-label>Fecha de expiracion</mat-label>
                 <input matInput type="date" name="expiracion" formControlName="expiracion">
             </mat-form-field><br>
+                        
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
             <button mat-stroked-button type="submit">Aceptar</button>
         </form>
     </div>

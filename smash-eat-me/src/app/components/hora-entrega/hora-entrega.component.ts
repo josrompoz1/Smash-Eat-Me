@@ -14,6 +14,7 @@ export class HoraEntregaComponent implements OnInit {
   horaSeleccionadaIndex: number = -1;
   horaEntrega!: string;
   productosEnCesta: ProductoOfertado[] = [];
+  disableButton: boolean = true;
 
   constructor(private dataManagement: DataManagementService,
               private route: ActivatedRoute,
@@ -48,6 +49,16 @@ export class HoraEntregaComponent implements OnInit {
     this.dataManagement.horaSeleccionada.next(horaSeleccionada)
     localStorage.setItem('horaSeleccionada', horaSeleccionada)
     this.router.navigate(['metodopago'], { relativeTo: this.route })
+  }
+
+  public setHoraSeleccionadaIndex(i: number) {
+    if(this.horaSeleccionadaIndex == i) {
+      this.horaSeleccionadaIndex = -1
+      this.disableButton = true
+    } else {
+      this.horaSeleccionadaIndex = i
+      this.disableButton = false
+    }
   }
 
 }
