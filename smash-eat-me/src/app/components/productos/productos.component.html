@@ -1,6 +1,7 @@
 <div class="contenedor">
     <div class="titulo">
-        <h1>Todos nuestros platos</h1>
+        <span>Todos nuestros platos - </span>
+        <span [innerHTML]="searchValue"></span>
     </div>
     <div class="filtro">
         <mat-icon class="filter-icono" matBadge="{{numberOfFilters}}" [matBadgeHidden]="hidden" (click)="filterDialog()">filter_list</mat-icon>

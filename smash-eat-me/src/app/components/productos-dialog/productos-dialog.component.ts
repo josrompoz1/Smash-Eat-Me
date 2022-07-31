@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductoOfertado, ValoracionResponse } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
@@ -12,9 +13,11 @@ export class ProductosDialogComponent implements OnInit {
 
   producto!: ProductoOfertado;
   valoraciones: ValoracionResponse[] = [];
+  url?: SafeUrl
 
   constructor(public dataManagement: DataManagementService,
-              private dialogRef: MatDialogRef<ProductosDialogComponent>) { }
+              private dialogRef: MatDialogRef<ProductosDialogComponent>,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getData()
@@ -23,6 +26,7 @@ export class ProductosDialogComponent implements OnInit {
   private async getData() {
     if(this.dataManagement.selectedProducto) {
       this.producto = this.dataManagement.selectedProducto;
+      this.url = this.sanitizer.bypassSecurityTrustUrl(this.producto.imagen)
       if(this.producto.id) this.valoraciones = await this.dataManagement.getValoracionesWithProductoId(this.producto.id)
     }
   }

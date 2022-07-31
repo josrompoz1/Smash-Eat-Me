@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.component';
-import { PageEvent } from '@angular/material/paginator';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { EditProductoComponent } from '../edit-producto/edit-producto.component';
 import { FiltroProductosComponent } from '../filtro-productos/filtro-productos.component';
 import { SesionService } from 'src/app/Services/sesion.service';
+import { DomSanitizer, SafeHtml, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-productos',
@@ -23,10 +23,11 @@ export class ProductosComponent implements OnInit {
   hidden: boolean = true;
   paramTipo!: string;
   paramBusqueda!: string;
+  searchValue?: SafeHtml
 
   rol: string = '';
 
-  constructor(private dataManagement: DataManagementService, private dialog: MatDialog, private sesionService: SesionService) {
+  constructor(private dataManagement: DataManagementService, private dialog: MatDialog, private sesionService: SesionService, private sanitizer: DomSanitizer) {
     this.dataManagement.paramTipo.subscribe(value => {
       this.paramTipo = value
     })
@@ -105,6 +106,7 @@ export class ProductosComponent implements OnInit {
 
   private async filterData() {
     if(this.paramTipo != '' && this.paramBusqueda != '') {
+      this.searchValue = this.sanitizer.bypassSecurityTrustHtml(this.paramBusqueda)
       this.hidden = false;
       this.numberOfFilters = 2;
       this.productos = await this.dataManagement.getProductosFilterByTipoAndNombre(this.paramTipo, this.paramBusqueda)
@@ -113,12 +115,14 @@ export class ProductosComponent implements OnInit {
       this.numberOfFilters = 1;
       this.productos = await this.dataManagement.getProductosPorTipo(this.paramTipo);
     } else if(this.paramBusqueda != '') {
+      this.searchValue = this.sanitizer.bypassSecurityTrustHtml(this.paramBusqueda)
       this.hidden = false;
       this.numberOfFilters = 1;
       this.productos = await this.dataManagement.getProductosPorBusqueda(this.paramBusqueda);
     } else {
       this.hidden = true;
       this.numberOfFilters = 0;
+      this.searchValue = undefined
       this.getData()
     }
   }
