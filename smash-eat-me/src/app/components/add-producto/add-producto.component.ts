@@ -31,6 +31,7 @@ export class AddProductoComponent implements OnInit {
 
   public async crearPlato() {
     if(this.form.valid) {
+      this.errors.length = 0
       const producto: ProductoOfertado = {
         nombre: this.form.value.nombre,
         descripcion: this.form.value.descripcion,

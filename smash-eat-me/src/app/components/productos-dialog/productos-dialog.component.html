@@ -19,11 +19,13 @@
                 <th>Tipo de plato</th>
                 <th>Precio</th>
                 <th>Descripción</th>
+                <th>URL</th>
             </tr>
             <tr>
                 <td>{{producto.tipo}}</td>
                 <td>{{producto.precio}} €</td>
                 <td>{{producto.descripcion}}</td>
+                <td><a [href]="url">URL de la imagen</a></td>
             </tr>
         </table>
         
