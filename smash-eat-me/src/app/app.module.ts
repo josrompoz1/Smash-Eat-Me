@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
@@ -124,6 +125,7 @@ import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.
     MatProgressBarModule,
     MatMenuModule,
     MatExpansionModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { Reto } from 'src/app/Models/types';
 import { RetosService } from 'src/app/Services/retos.service';
+import { SnackBarService } from 'src/app/Services/snack-bar.service';
 import { DashboardDialogComponent } from '../dashboard-dialog/dashboard-dialog.component';
 import { SolucionesRetoDialogComponent } from '../soluciones-reto-dialog/soluciones-reto-dialog.component';
 
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private retosService: RetosService,
               private dialog: MatDialog,
-              private toastr: ToastrService) {
+              private snackService: SnackBarService) {
     this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
   public async showPista(element: Reto) {
     if(element.id != undefined) {
       const pista = await this.retosService.getPistaByRetoId(element.id)
-      this.toastr.info(pista[0].pista, 'Smash&Eat Me App')
+      this.snackService.openSnackBarPista(pista[0], "Cerrar")
     }
   }
 
