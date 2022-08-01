@@ -19,7 +19,7 @@ function createRouterProductos(db) {
     );
   });
 
-  router.get('/productos/:id', function (req, res, next) {
+  router.get('/productos/porId/:id', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado WHERE id=?',
       [req.params.id],

@@ -25,9 +25,11 @@ export class ProductosDialogComponent implements OnInit {
 
   private async getData() {
     if(this.dataManagement.selectedProducto) {
-      this.producto = this.dataManagement.selectedProducto;
-      this.url = this.sanitizer.bypassSecurityTrustUrl(this.producto.imagen)
-      if(this.producto.id) this.valoraciones = await this.dataManagement.getValoracionesWithProductoId(this.producto.id)
+      if(this.dataManagement.selectedProducto.id) {
+        this.producto = await this.dataManagement.getProductosById(this.dataManagement.selectedProducto.id);
+        this.url = this.sanitizer.bypassSecurityTrustUrl(this.producto.imagen)
+        if(this.producto.id) this.valoraciones = await this.dataManagement.getValoracionesWithProductoId(this.producto.id)
+      }
     }
   }
 

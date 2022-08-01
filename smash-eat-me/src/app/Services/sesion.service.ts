@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginResponse } from '../Models/types';
+import { RetosService } from './retos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SesionService implements CanActivate {
   public userId: BehaviorSubject<number> = new BehaviorSubject<number>(0)
   public fechaLogin: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
-  constructor(private router: Router, private toastr: ToastrService) {
+  constructor(private router: Router, private toastr: ToastrService, private retosService: RetosService) {
     let storedUserLogged = sessionStorage.getItem('userLogged')
     let storedRol = sessionStorage.getItem('rol')
     let storedUserId = sessionStorage.getItem('usuarioId')
@@ -23,6 +24,13 @@ export class SesionService implements CanActivate {
     if (storedRol) this.setRol(storedRol)
     if (storedUserId) this.setUserId(storedUserId)
     if(fecha) this.fechaLogin.next(JSON.parse(fecha))
+    this.rol.subscribe((data: string) => {
+      const rolActual = this.rol.getValue()
+      console.log(rolActual)
+      console.log(data)
+      // this.retosService.finishReto(15)
+      // https://stackoverflow.com/questions/66275321/how-to-get-previous-value-subject
+    })
   }
 
   canActivate() {

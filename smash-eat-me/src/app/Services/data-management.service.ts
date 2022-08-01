@@ -234,6 +234,10 @@ export class DataManagementService {
     return await this.rest.getAllValoraciones()
   }
 
+  public async getValoracionById(valoracionId: number): Promise<Valoracion> {
+    return await this.rest.getValoracionById(valoracionId)
+  }
+
   public async getValoracionesWithProductoId(id: number): Promise<ValoracionResponse[]> {
     return await this.rest.getValoracionesWithProductoId(id)
   }
