@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Paso, Reto, Solucion } from 'src/app/Models/types';
 import { RetosService } from 'src/app/Services/retos.service';
+import { SnackBarService } from 'src/app/Services/snack-bar.service';
 
 @Component({
   selector: 'app-soluciones-reto-dialog',
@@ -16,7 +17,8 @@ export class SolucionesRetoDialogComponent implements OnInit {
   retoId!: number;
 
   constructor(private dialogRef: MatDialogRef<SolucionesRetoDialogComponent>,
-              private retosService: RetosService) {
+              private retosService: RetosService,
+              private snackService: SnackBarService) {
     this.retosService.retoIdSeleccionado.subscribe(value => {
       this.retoId = value;
     })
@@ -40,6 +42,11 @@ export class SolucionesRetoDialogComponent implements OnInit {
 
   onClose() {
     this.dialogRef.close()
+  }
+
+  public async openSnackBar(solucionId: number) {
+    const pasos: Paso[] = await this.retosService.getPasosBySolucionId(solucionId);
+    this.snackService.openSnackBar(pasos, "")
   }
 
 }
