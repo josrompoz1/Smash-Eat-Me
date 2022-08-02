@@ -44,7 +44,10 @@ export class RetosService {
   }
 
   public async finishReto(retoId: number) {
-    return await this.rest.finishReto(retoId)
+    const reto: Reto = await this.rest.getRetoById(retoId)
+    if(!reto.completado) {
+      return await this.rest.finishReto(retoId)
+    }
   }
 
   //SOLUCIONES

@@ -6,17 +6,18 @@ import {
   HttpInterceptor,
   HttpResponse
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { CuponDescuento, Login, ProductoOfertado, Usuario, Valoracion } from '../Models/types';
 import { RetosService } from '../Services/retos.service';
 import { DataManagementService } from '../Services/data-management.service';
+import { SesionService } from '../Services/sesion.service';
 
 @Injectable()
 export class ChallengesInterceptor implements HttpInterceptor {
 
-  private predicates: string[] = ['POST'];
+  public idsUsuarioReto: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([])
 
-  constructor(private retosService: RetosService, private dataManagement: DataManagementService) {}
+  constructor(private retosService: RetosService, private dataManagement: DataManagementService, private sesionService: SesionService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -100,6 +101,16 @@ export class ChallengesInterceptor implements HttpInterceptor {
           } else if(usuarioSinActualizar.tipo == 'NO ADMIN') {
             if(usuarioActualizar.tipo == 'ADMIN') {
               await this.retosService.finishReto(15)
+            }
+          }
+        }
+        //RETO VER PEDIDOS Y PEDIDO AJENO
+        else if(this.sesionService.idsReto.getValue().length == 2) {
+          if(this.sesionService.idsReto.getValue()[0] != this.sesionService.idsReto.getValue()[1]) {
+            if(request.url.includes("/pedidos/usuario/")) {
+              await this.retosService.finishReto(6)
+            } else if(request.url.includes("/pedidos") && request.method == 'POST') {
+              await this.retosService.finishReto(7)
             }
           }
         }
