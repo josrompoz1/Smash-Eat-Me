@@ -19,6 +19,21 @@ function createRouterValoraciones(db) {
     );
   });
 
+  router.get('/valoraciones/:id', function (req, res, next) {
+    db.query(
+      'SELECT * FROM Valoracion WHERE id=?',
+      [req.params.id],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({ status: 'error' });
+        } else {
+          res.status(200).json(results[0]);
+        }
+      }
+    );
+  });
+
   router.get('/valoraciones/usuario/:usuarioId', function (req, res, next) {
     db.query(
       'SELECT * FROM Valoracion WHERE usuarioId=?',

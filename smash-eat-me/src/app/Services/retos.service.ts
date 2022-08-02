@@ -43,6 +43,13 @@ export class RetosService {
     return await this.rest.getRetosFilterByCategoriaAndDificultad(categoria, minimo, maximo)
   }
 
+  public async finishReto(retoId: number) {
+    const reto: Reto = await this.rest.getRetoById(retoId)
+    if(!reto.completado) {
+      return await this.rest.finishReto(retoId)
+    }
+  }
+
   //SOLUCIONES
   public async getSolucionesByRetoId(retoId: number): Promise<Solucion[]> {
     return await this.rest.getSolucionesByRetoId(retoId)
@@ -57,5 +64,6 @@ export class RetosService {
   public async getPistaByRetoId(retoId: number): Promise<Pista[]> {
     return await this.rest.getPistaByRetoId(retoId)
   }
+
 
 }

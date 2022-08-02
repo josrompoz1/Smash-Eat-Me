@@ -27,7 +27,7 @@ export class RestService extends AbstractWebService {
   }
 
   public async getProductosById(id: number): Promise<ProductoOfertado> {
-    return await this.makeGetRequest(this.url + 'productos/' + id);
+    return await this.makeGetRequest(this.url + 'productos/porId/' + id);
   }
 
   public async getProductosByMenuId(menuId: number): Promise<ProductoOfertado[]> {
@@ -204,6 +204,10 @@ export class RestService extends AbstractWebService {
     return await this.makeGetRequest(this.url + 'valoraciones')
   }
 
+  public async getValoracionById(valoracionId: number): Promise<Valoracion> {
+    return await this.makeGetRequest(this.url + 'valoraciones/' + valoracionId)
+  }
+
   public async getValoracionesWithProductoId(id: number): Promise<ValoracionResponse[]> {
     return await this.makeGetRequest(this.url + 'valoraciones/producto/' + id)
   }
@@ -264,6 +268,10 @@ export class RestService extends AbstractWebService {
 
   public async getRetosFilterByCategoriaAndDificultad(categoria: string, minimo: number, maximo: number): Promise<Reto[]> {
     return await this.makeGetRequest(this.url + 'retos/categoria/' + categoria + '/dificultad/' + minimo + '/' + maximo)
+  }
+
+  public async finishReto(retoId: number) {
+    return await this.makePutRequest(this.url + 'retos/' + retoId + '/setfinished', null)
   }
 
   //SOLUCIONES

@@ -64,6 +64,7 @@ import { FiltroProductosComponent } from './components/filtro-productos/filtro-p
 import { HistorialMesasComponent } from './components/historial-mesas/historial-mesas.component';
 import { PerfilUsuarioComponent } from './components/perfil-usuario/perfil-usuario.component';
 import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.component';
+import { ChallengesInterceptor } from './interceptors/challenges.interceptor';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.
     RestService,
     DataManagementService,
     ValoracionService,
-    { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ServerResponseInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ChallengesInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

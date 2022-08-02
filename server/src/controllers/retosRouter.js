@@ -129,7 +129,7 @@ function createRouterRetos(db) {
                                 if (error) {
                                     res.status(500).json({status: 'error'});
                                 } else {
-                                    res.status(204).json({status: 'Resource updated successfully'});
+                                    res.status(201).json({status: 'Has completado el reto: ' + results[0].nombre});
                                 }
                             }
                         );
