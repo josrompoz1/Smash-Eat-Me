@@ -39,7 +39,6 @@ export class CuponDescuentoDialogComponent implements OnInit {
         'porcentaje': new FormControl('', [Validators.required, Validators.min(5), Validators.max(100)])
       })
     }
-    console.log(this.isReadOnly)
   }
 
   onClose() {

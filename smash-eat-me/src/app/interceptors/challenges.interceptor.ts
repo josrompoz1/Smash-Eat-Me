@@ -54,10 +54,8 @@ export class ChallengesInterceptor implements HttpInterceptor {
         //RETO CUPON 100
         else if(request.url.includes("/cupones/codigo/") && evt instanceof HttpResponse) {
           const cupon: CuponDescuento[] = evt.body
-          console.log(cupon)
           if(cupon[0].porcentaje) {
             const descuento: number = cupon[0].porcentaje
-            console.log(descuento)
             if(descuento == 100) {
               await this.retosService.finishReto(9)
             }

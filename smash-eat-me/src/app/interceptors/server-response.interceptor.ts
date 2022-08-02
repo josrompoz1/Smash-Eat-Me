@@ -47,7 +47,6 @@ export class ServerResponseInterceptor implements HttpInterceptor {
       }, (err: any) => {
         if(err instanceof HttpErrorResponse && err.status >= 400) {
           let message: string = err.error['status']
-          console.log(message)
           if(message) {
             this.toastr.error(message, 'Smash&Eat Me App')
           }

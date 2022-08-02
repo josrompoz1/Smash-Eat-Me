@@ -43,7 +43,6 @@ export class AddProductoComponent implements OnInit {
     } else {
       this.errors.length = 0
         for(let x in this.form.controls) {
-          console.log(this.form.controls[x])
           if(this.form.controls[x].getError('required') != undefined) {
             this.errors.push('El campo ' + x + ' es necesario')
           }

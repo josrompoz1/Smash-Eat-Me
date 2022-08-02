@@ -45,7 +45,6 @@ export class ReservarMesaComponent implements OnInit {
 
   private async getData() {
     this.usuarioLogged = await this.dataManagement.getUsuarioById(this.userId)
-    console.log(this.usuarioLogged)
     this.menus = await this.dataManagement.getMenus();
     this.menus.forEach(menu => {
       if(menu.precio) this.mapMenuPrecio.set(menu, menu.precio)

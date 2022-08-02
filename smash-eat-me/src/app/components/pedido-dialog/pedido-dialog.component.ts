@@ -43,7 +43,6 @@ export class PedidoDialogComponent implements OnInit {
         'estado': this.pedido.estado,
         'nombreCliente': this.cliente.nombre
       })
-      console.log(this.form.value)
     }
     if(this.productosPedidos.length > 0) {
       this.productosPedidos.forEach(async p => {

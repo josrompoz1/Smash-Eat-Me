@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { LoginResponse } from '../Models/types';
 import { RetosService } from './retos.service';
 
@@ -16,7 +15,7 @@ export class SesionService implements CanActivate {
   public fechaLogin: BehaviorSubject<number> = new BehaviorSubject<number>(0)
   public idsReto: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
 
-  constructor(private router: Router, private toastr: ToastrService, private retosService: RetosService) {
+  constructor(private router: Router, private retosService: RetosService) {
     let storedUserLogged = sessionStorage.getItem('userLogged')
     let storedRol = sessionStorage.getItem('rol')
     let storedUserId = sessionStorage.getItem('usuarioId')
@@ -119,7 +118,10 @@ export class SesionService implements CanActivate {
     localStorage.removeItem('idsReto')
     this.idsReto.next([])
     localStorage.removeItem('fechaReto')
-    this.toastr.success('Sesión cerrada correctamente', 'Smash&Eat Me')
+    localStorage.removeItem('productosEnCesta')
+    localStorage.removeItem('precioPedido')
+    localStorage.removeItem('numberOfItemsInBasket')
+    window.location.reload()
     this.router.navigate([''])
   }
 

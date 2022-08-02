@@ -61,11 +61,9 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     if(this.rol == 'ADMIN') {
       if(this.dataManagement.selectedUsuarioId) {
         this.idSelecc = this.dataManagement.selectedUsuarioId
-        console.log(this.idSelecc)
       } else {
         if(this.userId > 0) {
           this.idSelecc = this.userId
-          console.log(this.idSelecc)
         }
       }
     } else if(this.rol == 'NO ADMIN') {

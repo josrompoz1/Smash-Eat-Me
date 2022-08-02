@@ -91,7 +91,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
       }
     } else {
       this.precioFinal = +this.precioTotal + 2;
-      console.log(this.precioFinal)
     }
   }
 
@@ -112,8 +111,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
       const credito: DeleteCashRequest = {
         creditoDigital: this.precioFinal
       }
-  
-      console.log(pedido)
+
       const pedidoResponse = await this.dataManagement.crearPedidoComida(pedido)
       if(this.creditoDigital == true) await this.dataManagement.deleteCreditoDigital(this.userId, credito);
       this.productosCantidad.forEach(async (cantidadProducto: number, producto: ProductoOfertado) => {
