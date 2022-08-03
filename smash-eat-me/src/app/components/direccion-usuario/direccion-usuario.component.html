@@ -13,7 +13,7 @@
             <table class="table-detalles">
                 <tr *ngFor="let item of direcciones;  let i = index">
                     <td>
-                        <mat-checkbox [checked]="direccionSeleccionadaIndex === i"
+                        <mat-checkbox [checked]="direccionSeleccionadaIndex === i" [disabled]="disableCheckbox"
                             (change)="setDireccionSeleccionadaIndex(i)">{{item.direccion}}</mat-checkbox>
                     </td>
                 </tr>
@@ -25,4 +25,6 @@
         No existen direcciones
     </div>
 </div>
-<router-outlet></router-outlet>
+<div *ngIf="enableHora">
+    <app-hora-entrega></app-hora-entrega>
+</div>

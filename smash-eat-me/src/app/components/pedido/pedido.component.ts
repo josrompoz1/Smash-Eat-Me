@@ -4,6 +4,7 @@ import { CuponDescuento, DeleteCashRequest, Direccion, PedidoComida, ProductoOfe
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { Time } from "@angular/common";
 import { SesionService } from 'src/app/Services/sesion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedido',
@@ -26,7 +27,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
   productosPrecio = new Map<string, number>();
   userId: number = 0
 
-  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService, private router: Router) {
     this.dataManagement.direccionSeleccionada?.subscribe(value => {
       this.direccion = value;
     })
@@ -125,11 +126,8 @@ export class PedidoComponent implements OnInit, OnDestroy {
         }
         
       })
-      this.b = false;
-      this.dataManagement.numberOfItemsInBasket.next(0);
+      this.destroyAll()
     }
-    
-    this.destroyAll()
   }
 
   private destroyAll() {
@@ -137,7 +135,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
     this.dataManagement.numberOfItemsInBasket.next(0);
     this.dataManagement.productosEnCesta.next([]);
     this.dataManagement.direccionSeleccionada.next({})
-    this.dataManagement.horaSeleccionada.next("");
+    this.dataManagement.horaSeleccionada.next('');
     this.dataManagement.tarjetaSeleccionada.next({})
     this.dataManagement.seleccionadoCreditoDigital.next(false);
     this.dataManagement.precioPedido.next(0)
@@ -151,6 +149,11 @@ export class PedidoComponent implements OnInit, OnDestroy {
     localStorage.removeItem('seleccionadoCreditoDigital')
     localStorage.removeItem('tarjetaSeleccionada')
     localStorage.removeItem('descuentoAplicado')
+  }
+
+  public cancelarPedido() {
+    this.destroyAll()
+    this.router.navigate([''])
   }
 
 }

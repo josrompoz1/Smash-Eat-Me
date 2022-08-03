@@ -89,7 +89,7 @@ connection.connect(function(err) {
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Bocadillo', 'Bocadillo de jamón ibérico',6.3,'https://cdn-icons-png.flaticon.com/512/5508/5508486.png','Plato')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Pancakes', 'Masa de harina, huevo, leche y aceite con sirope de caramento',3.2,'https://cdn-icons-png.flaticon.com/512/135/135561.png','Postre')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo,menuId) VALUES ('Gambas cocidas', 'Gambas de Huelva al puñao',12.0,'https://cdn-icons-png.flaticon.com/512/7430/7430044.png','Entremes',1)",
-                "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Cerveza', 'Cerveza casera',10.0,'https://cdn-icons-png.flaticon.com/512/931/931949.png','Bebida')",
+                "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Cerveza', 'Cerveza casera',2.0,'https://cdn-icons-png.flaticon.com/512/931/931949.png','Bebida')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo,menuId) VALUES ('Tarta de chocolate', 'Tarta con galleta y natilla de chocolate',3.0,'https://cdn-icons-png.flaticon.com/512/3565/3565217.png','Postre',1)",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Helado de chocolate', 'Helado de chocolate',10.0,'https://cdn-icons-png.flaticon.com/512/8060/8060536.png','Postre')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Copa de vino', 'Copa de vino Rioja',2.5,'https://cdn-icons-png.flaticon.com/512/850/850207.png','Bebida')",

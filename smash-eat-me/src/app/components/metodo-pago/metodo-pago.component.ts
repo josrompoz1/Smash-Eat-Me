@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CuponDescuento, ProductoOfertado, Tarjeta } from 'src/app/Models/types';
+import { CuponDescuento, Direccion, ProductoOfertado, Tarjeta } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { SesionService } from 'src/app/Services/sesion.service';
 
@@ -23,6 +23,9 @@ export class MetodoPagoComponent implements OnInit {
   descuentoAplicado!: CuponDescuento
   form!: FormGroup;
   userId: number = 0;
+  errors: string[] = []
+  direccion: Direccion = {};
+  hora: string = '';
 
   constructor(private dataManagement: DataManagementService,
     private route: ActivatedRoute,
@@ -43,6 +46,12 @@ export class MetodoPagoComponent implements OnInit {
     this.dataManagement.descuentoAplicado.subscribe(value => {
       this.descuentoAplicado = value;
     })
+    this.dataManagement.direccionSeleccionada.subscribe(value => {
+      this.direccion = value;
+    })
+    this.dataManagement.horaSeleccionada.subscribe(value => {
+      this.hora = value;
+    })
     this.sesionService.userId.subscribe(value => {
       this.userId = value
     })
@@ -52,18 +61,24 @@ export class MetodoPagoComponent implements OnInit {
     this.form = new FormGroup({
       'codigo': new FormControl('', [Validators.required])
     })
-    if(this.userId > 0) {
-      this.getData();
+    if (this.userId > 0) {
+      if (this.hora == '') {
+        this.router.navigate(['cesta/direccion/horaentrega'])
+      } else {
+        this.getData();
+      }
+    } else {
+      this.router.navigate(['cesta'])
     }
   }
 
   private async getData() {
     this.tarjetas = await this.dataManagement.getTarjetasUsuario(this.userId);
     this.creditoDigital = await this.dataManagement.getCreditoDigital(this.userId);
-    if(this.creditoSeleccionado == false) {
+    if (this.creditoSeleccionado == false) {
       let i = 0;
       this.tarjetas.forEach(tarjeta => {
-        if(tarjeta.id == this.tarjetaSeleccionada.id) {
+        if (tarjeta.id == this.tarjetaSeleccionada.id) {
           this.tarjetaSeleccionadaIndex = i
         }
         i++;
@@ -72,6 +87,7 @@ export class MetodoPagoComponent implements OnInit {
       this.creditoSeleccionadoIndex = 0
     }
     this.calculaPrecio();
+
   }
 
   public guardarTarjetaSeleccionada() {
@@ -86,20 +102,20 @@ export class MetodoPagoComponent implements OnInit {
 
   public guardarCarteraDigital() {
     this.tarjetaSeleccionadaIndex = -1;
-    
+
     this.dataManagement.seleccionadoCreditoDigital.next(true);
     localStorage.setItem('seleccionadoCreditoDigital', JSON.stringify(true))
     localStorage.setItem('tarjetaSeleccionada', JSON.stringify({}))
   }
 
   public async aplicarCuponDescuento() {
-    if(this.form.valid) {
+    if (this.form.valid) {
       const cupon: CuponDescuento[] = await this.dataManagement.getCuponDescuentoByCodigo(this.form.value.codigo);
-      if(cupon != undefined) {
+      if (cupon != undefined) {
         this.dataManagement.descuentoAplicado.next(cupon[0])
         localStorage.setItem('descuentoAplicado', JSON.stringify(cupon[0]))
-        if(cupon[0].porcentaje != undefined)
-        this.precioTotal = (this.precioTotal * (100 - cupon[0].porcentaje)) / 100
+        if (cupon[0].porcentaje != undefined)
+          this.precioTotal = (this.precioTotal * (100 - cupon[0].porcentaje)) / 100
         this.dataManagement.precioPedido.next(this.precioTotal)
         this.form.controls['codigo'].disable();
       }
@@ -107,7 +123,13 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   public tramitarPedido() {
-    this.router.navigate(['pedido']);
+    if (this.creditoSeleccionado && this.precioTotal > this.creditoDigital) {
+      this.errors.push('El credito digital es menor al precio del pedido')
+    } else {
+      this.errors.length = 0
+      this.router.navigate(['pedido']);
+    }
+
   }
 
   private calculaPrecio() {

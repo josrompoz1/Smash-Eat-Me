@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { from, map } from 'rxjs';
+import { Router } from '@angular/router';
+import { from } from 'rxjs';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
@@ -15,9 +15,9 @@ export class CestaComponent implements OnInit {
   productosCantidad = new Map<ProductoOfertado, number>();
   productosPrecio = new Map<string, number>();
   precioTotal: number = 0;
+  enableDireccion: boolean = false
 
   constructor(private dataManagement: DataManagementService,
-              private route: ActivatedRoute,
               private router: Router) {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
@@ -59,7 +59,11 @@ export class CestaComponent implements OnInit {
     this.dataManagement.productosEnCesta.next(this.productosEnCesta);
     this.precioTotal = 0;
     this.dataManagement.precioPedido.next(this.precioTotal)
-    this.router.navigate(['cesta'])
+    this.dataManagement.direccionSeleccionada.next({})
+    this.dataManagement.horaSeleccionada.next('')
+    this.dataManagement.tarjetaSeleccionada.next({})
+    this.dataManagement.seleccionadoCreditoDigital.next(false)
+    this.dataManagement.descuentoAplicado.next({})
     localStorage.removeItem('numberOfItemsInBasket')
     localStorage.removeItem('productosEnCesta')
     localStorage.removeItem('direccionSeleccionada')
@@ -68,10 +72,12 @@ export class CestaComponent implements OnInit {
     localStorage.removeItem('seleccionadoCreditoDigital')
     localStorage.removeItem('tarjetaSeleccionada')
     localStorage.removeItem('descuentoAplicado')
+    this.enableDireccion = false
+    this.router.navigate(['cesta'])
   }
 
-  tramitarPedido() {
-    this.router.navigate(['direccion'], { relativeTo: this.route });
+  activarDireccion() {
+    this.enableDireccion = true
   }
 
   eliminarUnProducto(producto: ProductoOfertado) {

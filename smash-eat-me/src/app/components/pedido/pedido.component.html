@@ -55,7 +55,8 @@
                     <td>{{precioFinal}}</td>
                 </tr>
             </table>
-            <button *ngIf="b" mat-stroked-button  (click)="crearPedido()">Aceptar pedido</button>
+            <button *ngIf="b" mat-stroked-button (click)="crearPedido()">Aceptar pedido</button>
+            <button *ngIf="b" mat-stroked-button (click)="cancelarPedido()">Cancelar</button>
         </div>
     </div>
 </div>

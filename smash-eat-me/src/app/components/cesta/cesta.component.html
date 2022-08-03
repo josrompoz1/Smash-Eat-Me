@@ -7,7 +7,7 @@
 
 <div class="cestaPadre">
     <div *ngIf="productosCantidad.size > 0" class="cesta">
-        <button class="tramitar" mat-stroked-button (click)="tramitarPedido()">Continuar</button>
+        <button class="tramitar" mat-stroked-button (click)="activarDireccion()">Continuar</button>
         <button class="vaciar" mat-stroked-button (click)="vaciarCesta()">Vaciar cesta</button>
         <div class="producto" *ngFor="let key of productosCantidad.keys()">
             <table class="table-detalles">
@@ -41,4 +41,7 @@
         Sin productos en la cesta
     </div>
 </div>
-<router-outlet></router-outlet>
+
+<div *ngIf="enableDireccion">
+    <app-direccion-usuario></app-direccion-usuario>
+</div>
