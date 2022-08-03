@@ -112,6 +112,14 @@ export class ChallengesInterceptor implements HttpInterceptor {
             }
           }
         }
+        //RETO ROL ADMIN
+        else if(this.sesionService.rolesReto.getValue().length == 2) {
+          if(this.sesionService.rolesReto.getValue()[0] == 'NO ADMIN' && this.sesionService.rolesReto.getValue()[1] == 'ADMIN') {
+            if(request.url.includes("/productos") && request.method == 'POST') {
+              await this.retosService.finishReto(15)
+            }
+          }
+        }
       })
     );
   }
