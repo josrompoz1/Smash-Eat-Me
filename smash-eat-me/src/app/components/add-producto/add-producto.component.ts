@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 
@@ -13,7 +14,7 @@ export class AddProductoComponent implements OnInit {
   form!: FormGroup;
   errors: string[] = [];
 
-  constructor(private dataManagement: DataManagementService) { }
+  constructor(private dataManagement: DataManagementService, private router: Router) { }
 
   ngOnInit(): void {
     this.getData()
@@ -39,7 +40,7 @@ export class AddProductoComponent implements OnInit {
         tipo: this.form.value.tipo,
         precio: this.form.value.precio,
       }
-      await this.dataManagement.postProducto(producto)
+      await this.dataManagement.postProducto(producto).then(() => this.router.navigate(['']))
     } else {
       this.errors.length = 0
         for(let x in this.form.controls) {

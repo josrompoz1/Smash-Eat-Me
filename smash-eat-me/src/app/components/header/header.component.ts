@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   public cerrarSesion() {
     this.sesion.cerrarSesion()
+    window.location.reload()
   }
 
 }

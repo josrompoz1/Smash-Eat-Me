@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CuponDescuento, Menu, Mesa, Usuario } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { SesionService } from 'src/app/Services/sesion.service';
@@ -22,7 +23,7 @@ export class ReservarMesaComponent implements OnInit {
 
   userId: number = 0;
 
-  constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
+  constructor(private dataManagement: DataManagementService, private sesionService: SesionService, private router: Router) {
     this.sesionService.userId.subscribe(value => {
       this.userId = value
     })
@@ -60,7 +61,10 @@ export class ReservarMesaComponent implements OnInit {
   }
 
   public async reservarMesa() {
+    this.checkFecha(this.form.value.fecha)
+    console.log(this.form.controls)
     if(this.form.valid) {
+      this.errorsMesa.length = 0
       const menu = this.menus[this.menuSeleccionadoIndex]
       const precioConDescuento = this.mapMenuPrecio.get(menu);
       if(menu.id != undefined) {
@@ -72,14 +76,30 @@ export class ReservarMesaComponent implements OnInit {
           usuarioId: this.userId,
           menuId: menu.id
         }
-        await this.dataManagement.postReservaMesa(mesa);
+        await this.dataManagement.postReservaMesa(mesa).then(() => this.router.navigate(['historialmesas']))
       }
     } else {
       this.errorsMesa.length = 0
       for(let x in this.form.controls) {
         if(this.form.controls[x].getError('required') != undefined) {
           this.errorsMesa.push('El campo ' + x + ' es necesario')
+        } else if(this.form.controls[x].getError('posterior') != undefined) {
+          this.errorsMesa.push('La reserva tiene que efectuarse con 1 día de antelación')
+        } else if(this.form.controls[x].getError('min') != undefined) {
+          this.errorsMesa.push('El número de personas debe ser mínimo 1')
+        } else if(this.form.controls[x].getError('max') != undefined) {
+          this.errorsMesa.push('El número de personas debe ser máximo 10')
         }
+      }
+    }
+  }
+
+  private checkFecha(fechaString: string) {
+    if(fechaString !== '') {
+      const fecha = new Date(fechaString)
+      const c: boolean = fecha < new Date()
+      if(c) {
+        this.form.get('fecha')?.setErrors({ 'posterior': c })
       }
     }
   }
@@ -90,6 +110,7 @@ export class ReservarMesaComponent implements OnInit {
 
   public async aplicarDescuento() {
     if (this.formDescuento.valid) {
+      this.errors.length = 0
       const descuento: CuponDescuento[] = await this.dataManagement.getCuponDescuentoByCodigo(this.formDescuento.value.codigo)
       if(descuento.length > 0) {
         this.menus.forEach(menu => {

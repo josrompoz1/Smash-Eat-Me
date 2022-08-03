@@ -111,7 +111,6 @@ export class SesionService implements CanActivate {
     localStorage.removeItem('productosEnCesta')
     localStorage.removeItem('precioPedido')
     localStorage.removeItem('numberOfItemsInBasket')
-    window.location.reload()
     this.router.navigate([''])
   }
 

@@ -107,6 +107,9 @@
 
     </div>
     <div class="formHijo" *ngIf="tarjetas.length == 0">
+        <div class="boton">
+            <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
+        </div>
         <p>No hay tarjetas guardadas para este usuario</p>
     </div>
 </div>
@@ -167,6 +170,9 @@
         </div>
     </div>
     <div class="formHijo" *ngIf="direcciones.length == 0">
+        <div class="boton">
+            <button mat-stroked-button routerLink="/direccion" routerLinkActive="active">Añadir direccion</button>
+        </div>
         <p>No hay direcciones guardadas para este usuario</p>
     </div>
 </div>

@@ -51,7 +51,7 @@ export class EditProductoComponent implements OnInit {
             'precio': this.form.value.precio,
             'imagen': this.form.value.imagen
           }
-          await this.dataManagement.editarProducto(this.dataManagement.selectedProducto.id, producto)
+          await this.dataManagement.editarProducto(this.dataManagement.selectedProducto.id, producto).then(() => this.onClose())
         }
       }
     } else {

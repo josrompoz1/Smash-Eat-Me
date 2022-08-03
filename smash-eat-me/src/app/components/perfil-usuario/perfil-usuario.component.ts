@@ -173,9 +173,10 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   public async editarTarjeta(indice: number) {
     let tarjetaSelecc = this.tarjetas[indice]
+    this.checkFecha(this.formTarjeta.value.expiracion)
     if (this.formTarjeta.valid) {
       this.errorsTarjeta.length = 0
-      this.checkFecha(this.formTarjeta.value.numeroTarjeta)
+      this.checkFecha(this.formTarjeta.value.expiracion)
       const id = tarjetaSelecc.id
       let fechaForm = this.formTarjeta.value.expiracion
       let fechaSplit: string[] = fechaForm.split("/")
@@ -194,7 +195,9 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
         if(this.formTarjeta.controls[x].getError('required') != undefined) {
           this.errorsTarjeta.push('El campo ' + x + ' es necesario')
         } else if(this.formTarjeta.controls[x].getError('posterior') != undefined) {
-          this.errorsUsurio.push('La tarjeta está caducada')
+          this.errorsTarjeta.push('La tarjeta está caducada')
+        } else if(this.formTarjeta.controls[x].getError('formato') != undefined) {
+          this.errorsTarjeta.push('El formato de la fecha debe ser dd/MM/yyyy')
         }
       }
     }
@@ -202,10 +205,17 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   private checkFecha(fechaString: string) {
     if(fechaString !== '') {
-      const fecha = new Date(fechaString)
-      const c: boolean = fecha <= new Date()
-      if(c) {
-        this.formTarjeta.get('expiracion')?.setErrors({ 'posterior': c })
+      const fechaSplit: string[] = fechaString.split("/")
+      let c: boolean;
+      if(fechaSplit.length == 3) {
+        const fechaFormateada = fechaSplit[2] + "-" + fechaSplit[1] + "-" + fechaSplit[0]
+        const fecha = new Date(fechaFormateada)
+        c = fecha <= new Date()
+        if(c) {
+          this.formTarjeta.get('expiracion')?.setErrors({ 'posterior': c })
+        }
+      } else {
+        this.formTarjeta.get('expiracion')?.setErrors({ 'formato': true })
       }
     }
   }
