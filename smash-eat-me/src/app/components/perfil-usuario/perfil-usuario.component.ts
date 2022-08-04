@@ -28,6 +28,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   errorsUsurio: string[] = []
   errorsTarjeta: string[] = []
   errorsDireccion: string[] = []
+  titulo: string = ''
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
     this.sesionService.rol.subscribe(value => {
@@ -81,6 +82,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   private async getData() {
     this.usuario = await this.dataManagement.getUsuarioById(this.idSelecc)
+    this.titulo = "Perfil del usuario " + this.usuario.username
     this.formUsuario.setValue({
       'username': this.usuario.username,
       'nombre': this.usuario.nombre,

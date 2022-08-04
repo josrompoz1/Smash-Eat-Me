@@ -29,7 +29,7 @@ function createRouterCuponesDescuento(db) {
                     res.status(500).json({ status: 'error' });
                 } else {
                     if (results.length == 0) {
-                        res.status(404).json({ status: 'Not found' })
+                        res.status(404).json({ status: 'Cupón no disponible' })
                     } else {
                         res.status(200).json(results);
                     }

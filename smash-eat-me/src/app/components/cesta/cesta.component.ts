@@ -22,12 +22,15 @@ export class CestaComponent implements OnInit {
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
     })
-    this.dataManagement.precioPedido.subscribe(value => {
-      this.precioTotal = value;
-    })
   }
 
   ngOnInit(): void {
+    if(this.productosEnCesta.length > 0) {
+      this.getData()
+    }
+  }
+
+  private getData() {
     let array = from(this.productosEnCesta);
     array.forEach(val => {
       if (this.productosCantidad.has(val)) {
@@ -47,7 +50,6 @@ export class CestaComponent implements OnInit {
         this.precioTotal += key.precio * cantidad;
       }
     }
-    this.dataManagement.precioPedido.next(this.precioTotal)
     localStorage.setItem('precioPedido', JSON.stringify(this.precioTotal))
   }
 
@@ -82,10 +84,10 @@ export class CestaComponent implements OnInit {
 
   eliminarUnProducto(producto: ProductoOfertado) {
     let indice = this.productosEnCesta.indexOf(producto);
-    const prueba = this.productosEnCesta
-    this.productosEnCesta.splice(indice,1)
-    this.dataManagement.productosEnCesta.next(this.productosEnCesta)
-    this.dataManagement.numberOfItemsInBasket.next(this.productosEnCesta.length)
+    let productos: ProductoOfertado[] = this.productosEnCesta.splice(indice,1)
+    localStorage.setItem('productosEnCesta', JSON.stringify(productos))
+    localStorage.setItem('numberOfItemsInBasket', JSON.stringify(productos.length))
+    this.dataManagement.numberOfItemsInBasket.next(productos.length)
 
     let cantidadActual = this.productosCantidad.get(producto)
     if (cantidadActual != undefined) {
@@ -100,10 +102,12 @@ export class CestaComponent implements OnInit {
     }
   }
 
-  anyadirUnProducto(producto: ProductoOfertado) {    
-    this.productosEnCesta.push(producto)
-    this.dataManagement.productosEnCesta.next(this.productosEnCesta)
-    this.dataManagement.numberOfItemsInBasket.next(this.productosEnCesta.length)
+  anyadirUnProducto(producto: ProductoOfertado) {
+    const productos: ProductoOfertado[] = this.productosEnCesta
+    productos.push(producto)
+    localStorage.setItem('productosEnCesta', JSON.stringify(productos))
+    localStorage.setItem('numberOfItemsInBasket', JSON.stringify(productos.length))
+    this.dataManagement.numberOfItemsInBasket.next(productos.length)
 
     let cantidadActual = this.productosCantidad.get(producto)
     if (cantidadActual != undefined) {

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { PedidoComida, ProductoPedido, ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { ValoracionService } from 'src/app/Services/valoracion.service';
@@ -13,7 +14,7 @@ import { ValoracionDialogComponent } from '../valoracion-dialog/valoracion-dialo
 })
 export class ValoracionComponent implements OnInit {
 
-  pedidoAvalorar!: PedidoComida;
+  pedidoAvalorar: PedidoComida = {};
   pedidoAValorarArray: PedidoComida[] = [];
   productosPedidos: ProductoPedido[] = [];
   productosAValorar: ProductoOfertado[] = [];
@@ -24,14 +25,17 @@ export class ValoracionComponent implements OnInit {
 
   constructor(private dataManagement: DataManagementService,
               private valoracionService: ValoracionService,
-              private dialog: MatDialog) {
-    this.valoracionService.pedidoAValorar.subscribe(value => {
-      this.pedidoAvalorar = value;
-    })
+              private dialog: MatDialog,
+              private route: Router) {
   }
 
-  async ngOnInit() {
-    this.getData()
+  ngOnInit() {
+    this.pedidoAvalorar = this.valoracionService.pedidoAValorar.getValue()
+    if(JSON.stringify(this.pedidoAvalorar) === JSON.stringify({})) {
+      this.route.navigate(['historialpedidos'])
+    } else {
+      this.getData()
+    }
   }
 
   public async onSelect(producto: ProductoOfertado): Promise<void> {

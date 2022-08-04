@@ -17,7 +17,7 @@
                     <td class="td-eliminar"><mat-icon (click)="eliminarUnProducto(key)">remove_circle_outline</mat-icon></td>
                     <td class="td-cantidad">{{productosCantidad.get(key)}}</td>
                     <td class="td-añadir"><mat-icon (click)="anyadirUnProducto(key)">add_circle</mat-icon></td>
-                    <td class="td-precio">{{productosPrecio.get(key.nombre)  | number : '.2-2'}} €</td>
+                    <td class="td-precio">{{productosPrecio.get(key.nombre) | number : '.2-2'}} €</td>
                 </tr>
             </table>
             <hr>

@@ -55,7 +55,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.userId > 0) {
+      this.getData()
+    }
   }
 
   ngOnDestroy() {
@@ -75,16 +77,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
       } else {
         this.productosCantidad.set(val, 1);
       }
-    })
-
-    for (let key of this.productosCantidad.keys()) {
-      let cantidad = this.productosCantidad.get(key);
-      if (cantidad != undefined) {
-        this.productosPrecio.set(key.nombre, key.precio * cantidad)
-        this.precioTotal += key.precio * cantidad;
-      }
-    }
-    
+    })    
     if(this.descuento != undefined) {
       if(this.descuento.porcentaje != undefined) {
         this.precioConDescuento = (this.precioTotal * this.descuento.porcentaje) / 100
@@ -126,7 +119,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
         }
         
       })
-      this.destroyAll()
+      this.dataManagement.numberOfItemsInBasket.next(0);
     }
   }
 
