@@ -93,7 +93,6 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   public guardarTarjetaSeleccionada() {
-    console.log(this.tarjetaSeleccionadaIndex)
     this.creditoSeleccionadoIndex = -1;
     this.disableTramitar = false
     this.disableCredito = true

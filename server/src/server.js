@@ -138,7 +138,7 @@ connection.connect(function(err) {
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (6, 'Ver pedidos', 'Mira los pedidos realizados por otro usuario', 'Control de acceso', 2)",
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (7, 'Pedido ajeno', 'Realiza un pedido con la sesión de otro usuario', 'Control de acceso', 3)",
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (8, 'Reseña 5 estrellas', 'Elimina valoraciones existentes con 5 estrellas', 'Control de acceso', 3)",
-                "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (9, 'Cupón 100%', 'Crea un cupón de descuento del 100% y realiza un pedido completamente gratis', 'Control de acceso', 4)",
+                "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (9, 'Cupón 100%', 'Crea un cupón de descuento del 100% y realiza un pedido solo con costes de envío', 'Control de acceso', 4)",
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (10, 'Fuerza bruta', 'Accede a la cuenta de un usuario administrador probando contraseñas comunes', 'Autenticacion e identificacion', 2)",
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (11, 'Cambia contraseña', 'Cambia la contraseña de un usuario administrador para que no tenga acceso a su cuenta', 'Autenticacion e identificacion', 4)",
                 "INSERT INTO Reto (id, nombre, descripcion, categoria, dificultad) VALUES (13, 'Credenciales', 'Consigue todos los usuarios y contraseñas de la aplicación e inicia sesión con el usuario cuyo ID sea 7', 'Inyeccion de codigo', 5)",

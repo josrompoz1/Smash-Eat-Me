@@ -34,7 +34,23 @@ export class ChallengesInterceptor implements HttpInterceptor {
           } else if(login.username == 'user7' && login.contrasena == 'htr23fgjm') {
             await this.retosService.finishReto(13)
           }
-        } 
+        }
+        //RETO CAMBIA CONTRASEÑA Y ROL ADMIN
+        else if(request.url.includes("/usuarios/") && request.method == 'PUT') {
+          const urlSplit: string[] = request.url.split("/")
+          const usuarioId: number = +urlSplit[urlSplit.length-1]
+          const usuarioSinActualizar: Usuario = await this.dataManagement.getUsuarioById(usuarioId)
+          const usuarioActualizar: Usuario = (request.body as Usuario)
+          const password = usuarioActualizar.contrasena
+          const tipo = usuarioActualizar.tipo
+          if((password != usuarioSinActualizar.contrasena) && (usuarioActualizar.tipo == 'ADMIN')) {
+            await this.retosService.finishReto(11)
+          } else if(usuarioSinActualizar.tipo == 'NO ADMIN') {
+            if(tipo == 'ADMIN') {
+              await this.retosService.finishReto(15)
+            }
+          }
+        }
         //RETO XSS REFLEJADO
         else if(request.url.includes("/productos/busqueda/") || (request.url.includes("/productos/") && request.url.includes("/busqueda/"))) {
           const urlSplit: string[] = request.url.split("/")
@@ -86,20 +102,6 @@ export class ChallengesInterceptor implements HttpInterceptor {
           const valoracion: Valoracion = await this.dataManagement.getValoracionById(valoracionId)
           if(valoracion.puntuacion == 5) {
             await this.retosService.finishReto(8)
-          }
-        }
-        //RETO CAMBIA CONTRASEÑA Y ROL ADMIN
-        else if(request.url.includes("/usuarios/") && request.method == 'PUT') {
-          const usuarioActualizar: Usuario = (request.body as Usuario)
-          const urlSplit: string[] = request.url.split("/")
-          const usuarioId: number = +urlSplit[urlSplit.length-1]
-          const usuarioSinActualizar: Usuario = await this.dataManagement.getUsuarioById(usuarioId)
-          if((usuarioActualizar.contrasena != usuarioSinActualizar.contrasena) && (usuarioActualizar.tipo == 'ADMIN')) {
-            await this.retosService.finishReto(11)
-          } else if(usuarioSinActualizar.tipo == 'NO ADMIN') {
-            if(usuarioActualizar.tipo == 'ADMIN') {
-              await this.retosService.finishReto(15)
-            }
           }
         }
         //RETO VER PEDIDOS Y PEDIDO AJENO

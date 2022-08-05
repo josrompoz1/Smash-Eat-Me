@@ -19,7 +19,8 @@
         </div>
         <button *ngIf="tarjetaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarTarjetaSeleccionada()">Continuar</button>
     </div>
-    <div *ngIf="tarjetas.length == 0">
+    <div class="formHijo" *ngIf="tarjetas.length == 0">
+        <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
         No existen tarjetas
     </div>
 </div>

@@ -62,7 +62,6 @@ export class ReservarMesaComponent implements OnInit {
 
   public async reservarMesa() {
     this.checkFecha(this.form.value.fecha)
-    console.log(this.form.controls)
     if(this.form.valid) {
       this.errorsMesa.length = 0
       const menu = this.menus[this.menuSeleccionadoIndex]

@@ -63,7 +63,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
 
   private getData() {
     if(this.userId > 0) {
-      if(this.dataManagement.numberOfItemsInBasket.getValue() > 0) {
+      if(this.dataManagement.numberOfItemsInBasket.getValue() == 0) {
         this.disableButton = false
       } else {
         this.disableButton = true
