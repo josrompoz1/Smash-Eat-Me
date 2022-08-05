@@ -74,8 +74,6 @@ export class ValoracionDialogComponent implements OnInit {
     } else {
       this.disableButton = true;
     }
-    console.log(this.value)
-    console.log(this.disableButton)
   }
 
 }

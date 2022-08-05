@@ -26,13 +26,7 @@ import { SesionService } from './Services/sesion.service';
 const routes: Routes = [
   { path: '', component: ProductosComponent },
   { path: 'registro', component: RegistroUsuarioComponent },
-  { path: 'cesta', component: CestaComponent, children: [
-    { path: 'direccion', component: DireccionUsuarioComponent, children: [
-      { path: 'horaentrega', component: HoraEntregaComponent, children: [
-        { path: 'metodopago', component: MetodoPagoComponent }
-      ] }
-    ] }
-  ]},
+  { path: 'cesta', component: CestaComponent },
   { path: 'direccion', component: AddDirecionComponent },
   { path: 'tarjeta', component: AddTarjetaComponent },
   { path: 'creditodigital', component: AddCreditoComponent },

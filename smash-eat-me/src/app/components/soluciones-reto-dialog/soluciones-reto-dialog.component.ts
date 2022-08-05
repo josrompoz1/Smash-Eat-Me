@@ -46,7 +46,7 @@ export class SolucionesRetoDialogComponent implements OnInit {
 
   public async openSnackBar(solucionId: number) {
     const pasos: Paso[] = await this.retosService.getPasosBySolucionId(solucionId);
-    this.snackService.openSnackBar(pasos, "")
+    this.snackService.openSnackBar(pasos, "Cerrar")
   }
 
 }

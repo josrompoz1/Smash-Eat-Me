@@ -39,7 +39,6 @@ export class CuponDescuentoDialogComponent implements OnInit {
         'porcentaje': new FormControl('', [Validators.required, Validators.min(5), Validators.max(100)])
       })
     }
-    console.log(this.isReadOnly)
   }
 
   onClose() {
@@ -51,14 +50,14 @@ export class CuponDescuentoDialogComponent implements OnInit {
       this.errors.length = 0;
       if (this.dataManagement.selectedCupon) {
         if(this.dataManagement.selectedCupon.id) {
-          await this.dataManagement.changePercentCupon(this.dataManagement.selectedCupon.id, this.form.value.porcentaje)
+          await this.dataManagement.changePercentCupon(this.dataManagement.selectedCupon.id, this.form.value.porcentaje).then(() => this.onClose())
         }
       } else {
         const cupon: CuponDescuento = {
           codigo: this.form.value.codigo,
           porcentaje: this.form.value.porcentaje
         }
-        await this.dataManagement.postCuponDescuento(cupon)
+        await this.dataManagement.postCuponDescuento(cupon).then(() => this.onClose())
       }
     } else {
       this.errors.length = 0

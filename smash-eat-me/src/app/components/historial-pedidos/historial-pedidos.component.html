@@ -5,6 +5,9 @@
 </div>
 <hr>
 
+<button mat-stroked-button *ngIf="rol == 'ADMIN' && tituloBoton == 'Ver mis pedidos'" (click)="adminMisPedidos()">{{tituloBoton}}</button>
+<button mat-stroked-button *ngIf="rol == 'ADMIN' && tituloBoton == 'Ver todos los pedidos'" (click)="adminTodosPedidos()">{{tituloBoton}}</button>
+
 <div *ngIf="rol === 'NO ADMIN' && dataSource.length > 0" class="pedidos">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -47,9 +50,6 @@
 </div>
 
 <div *ngIf="rol === 'ADMIN' && dataSource.length > 0 && tituloBoton == 'Ver mis pedidos'" class="pedidos">
-    <div class="boton">
-        <button mat-stroked-button (click)="adminMisPedidos()">{{tituloBoton}}</button>
-    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">
@@ -95,9 +95,6 @@
 </div>
 
 <div *ngIf="rol === 'ADMIN' && dataSource.length > 0 && tituloBoton == 'Ver todos los pedidos'" class="pedidos">
-    <div class="boton">
-        <button mat-stroked-button (click)="adminTodosPedidos()">{{tituloBoton}}</button>
-    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">

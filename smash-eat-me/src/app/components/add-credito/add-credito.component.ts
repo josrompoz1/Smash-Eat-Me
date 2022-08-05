@@ -60,14 +60,17 @@ export class AddCreditoComponent implements OnInit {
   }
 
   public async anyadirCredito() {
-    const creditoTotal = this.creditoDigital + this.creditoSeleccionado
-    if(creditoTotal > 1000) {
-      this.toastr.error('El credito digital no puede ser superior a 1000')
+    if(this.tarjetaSeleccionadaIndex > -1) {
+      const creditoTotal = this.creditoDigital + this.creditoSeleccionado
+      if(creditoTotal > 1000) {
+        this.toastr.error('El credito digital no puede ser superior a 1000')
+      } else {
+        await this.dataManagement.addCreditoDigital(this.userId, this.creditoSeleccionado)
+        await this.getData();
+      }
     } else {
-      await this.dataManagement.addCreditoDigital(this.userId, this.creditoSeleccionado)
-      await this.getData();
+      this.toastr.error('Debe seleccionar una tarjeta')
     }
-    
   }
 
 }

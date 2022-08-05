@@ -15,9 +15,9 @@
         <div class="solucion">
             <div class="solucionHijo">
                 <h2>{{solucion.nombre}}</h2>
-                <ul *ngFor="let paso of pasos">
-                    <li *ngIf="paso.solucionId == solucion.id" type="circle"><p><i><b>Paso {{paso.numero}}: </b></i>{{paso.solucion}}</p></li>
-                </ul>
+                <div *ngFor="let paso of pasos">
+                    <ol *ngIf="paso.solucionId == solucion.id" type="circle"><p><i><b>Paso {{paso.numero}}: </b></i>{{paso.solucion}}</p><br></ol>
+                </div>
                 <button mat-stroked-button *ngIf="solucion.tipo == 'Interactiva'" (click)="openSnackBar(solucion.id)">Solución interactiva</button>
             </div>
         </div>

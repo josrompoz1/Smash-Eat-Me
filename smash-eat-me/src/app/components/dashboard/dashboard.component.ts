@@ -47,8 +47,8 @@ export class DashboardComponent implements OnInit {
   public filterDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "70%"
+    dialogConfig.width = "70%";
+    dialogConfig.height = "80%"
     let dialogRef = this.dialog.open(DashboardDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.filterData()

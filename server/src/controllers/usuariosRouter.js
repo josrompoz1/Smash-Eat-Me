@@ -222,7 +222,7 @@ function createRouterUsuarios(db) {
                         res.status(500).json({ status: 'error' });
                     }
                 } else {
-                    res.status(201).json({ status: 'Resource created' });
+                    res.status(201).json({ status: 'Tarjeta creada correctamente' });
                 }
             }
         );
@@ -246,7 +246,7 @@ function createRouterUsuarios(db) {
                             (error) => {
                                 if (error) {
                                     if (req.body.numero || req.body.expiracion) {
-                                        res.status(400).json({ status: 'Bad request' });
+                                        res.status(400).json({ status: 'El formato de la fecha debe ser dd/MM/yyyy' });
                                     } else {
                                         console.log(error)
                                         res.status(500).json({ status: 'error' });
@@ -321,7 +321,7 @@ function createRouterUsuarios(db) {
                         res.status(500).json({ status: 'error' });
                     }
                 } else {
-                    res.status(201).json({status: 'Resource created'});
+                    res.status(201).json({status: 'Direccion añadida correctamente'});
                 }
             }
         );

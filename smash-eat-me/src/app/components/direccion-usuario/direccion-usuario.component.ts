@@ -17,11 +17,12 @@ export class DireccionUsuarioComponent implements OnInit {
   productosEnCesta: ProductoOfertado[] = [];
   userId: number = 0
   disableButton: boolean = true;
+  disableCheckbox = false;
+  enableHora: boolean = false;
 
   constructor(private dataManagement: DataManagementService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private sesionService: SesionService) {
+    private router: Router,
+    private sesionService: SesionService) {
 
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosEnCesta = value;
@@ -35,8 +36,10 @@ export class DireccionUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.userId > 0) {
+    if (this.userId > 0) {
       this.getData()
+    } else {
+      this.router.navigate(['cesta'])
     }
   }
 
@@ -44,18 +47,23 @@ export class DireccionUsuarioComponent implements OnInit {
     this.direcciones = await this.dataManagement.getDireccionesUsuario(this.userId);
     let i = 0;
     this.direcciones.forEach(direccion => {
-      if(direccion.id == this.direccionSeleccioinada.id) {
+      if (direccion.id == this.direccionSeleccioinada.id) {
         this.direccionSeleccionadaIndex = i
+        this.disableCheckbox = true
       }
       i++;
     })
+    if(this.disableCheckbox) {
+      this.disableButton = false
+    }
   }
 
   public guardarDireccionSeleccionada() {
     const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
     this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
     localStorage.setItem('direccionSeleccionada', JSON.stringify(direccionSeleccionada))
-    this.router.navigate(['horaentrega'], { relativeTo: this.route });
+    this.disableCheckbox = true
+    this.enableHora = true
   }
 
   addDireccion() {
@@ -63,7 +71,7 @@ export class DireccionUsuarioComponent implements OnInit {
   }
 
   public setDireccionSeleccionadaIndex(i: number) {
-    if(this.direccionSeleccionadaIndex == i) {
+    if (this.direccionSeleccionadaIndex == i) {
       this.direccionSeleccionadaIndex = -1
       this.disableButton = true
     } else {

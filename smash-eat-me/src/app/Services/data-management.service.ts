@@ -11,6 +11,7 @@ export class DataManagementService {
   selectedCupon?: CuponDescuento;
   selectedMenu?: Menu;
   selectedUsuarioId?: number;
+  
   public numberOfItemsInBasket: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public productosEnCesta: BehaviorSubject<ProductoOfertado[]> = new BehaviorSubject<ProductoOfertado[]>([]);
   public direccionSeleccionada: BehaviorSubject<Direccion> = new BehaviorSubject<Direccion>({});

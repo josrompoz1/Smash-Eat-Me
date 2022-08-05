@@ -9,8 +9,11 @@
     <div class="horas">
         <button class="continuar" mat-stroked-button  (click)="guardarHoraSeleccionada()" [disabled]="disableButton">Continuar</button>
         <div *ngFor="let item of horas;  let i = index">
-            <mat-checkbox [checked]="horaSeleccionadaIndex === i" (change)="setHoraSeleccionadaIndex(i)">{{item}}</mat-checkbox>
+            <mat-checkbox [checked]="horaSeleccionadaIndex === i" [disabled]="disableCheckbox" (change)="setHoraSeleccionadaIndex(i)">{{item}}</mat-checkbox>
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+
+<div *ngIf="enablePago">
+    <app-metodo-pago></app-metodo-pago>
+</div>

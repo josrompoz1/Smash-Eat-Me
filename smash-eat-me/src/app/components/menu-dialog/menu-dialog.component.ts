@@ -66,7 +66,7 @@ export class MenuDialogComponent implements OnInit {
           descripcion: this.form.value.descripcion,
           precio: this.form.value.precio
         }
-        await this.dataManagement.postMenu(menu)
+        await this.dataManagement.postMenu(menu).then(() => this.onClose())
       }
     } else {
       this.errors.length = 0

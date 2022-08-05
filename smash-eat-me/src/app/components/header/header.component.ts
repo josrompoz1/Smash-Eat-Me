@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { DataManagementService } from 'src/app/Services/data-management.service';
 import { SesionService } from 'src/app/Services/sesion.service';
 
@@ -31,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   public cerrarSesion() {
     this.sesion.cerrarSesion()
+    window.location.reload()
   }
 
 }

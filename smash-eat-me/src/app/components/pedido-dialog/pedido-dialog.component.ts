@@ -43,7 +43,6 @@ export class PedidoDialogComponent implements OnInit {
         'estado': this.pedido.estado,
         'nombreCliente': this.cliente.nombre
       })
-      console.log(this.form.value)
     }
     if(this.productosPedidos.length > 0) {
       this.productosPedidos.forEach(async p => {
@@ -62,15 +61,21 @@ export class PedidoDialogComponent implements OnInit {
       const estado = this.form.value.estado
       switch(estado) {
         case 'En preparacion': {
-          if(this.pedido.id) await this.dataManagement.putPedidoEnPreparacion(this.pedido.id)
+          if(this.pedido.id) await this.dataManagement.putPedidoEnPreparacion(this.pedido.id).then(() => {
+            this.onClose()
+          })
           break;
         }
         case 'En transito': {
-          if(this.pedido.id) await this.dataManagement.putPedidoEnTransito(this.pedido.id)
+          if(this.pedido.id) await this.dataManagement.putPedidoEnTransito(this.pedido.id).then(() => {
+            this.onClose()
+          })
           break;
         }
         case 'Entregado': {
-          if(this.pedido.id) await this.dataManagement.putPedidoEntregado(this.pedido.id)
+          if(this.pedido.id) await this.dataManagement.putPedidoEntregado(this.pedido.id).then(() => {
+            this.onClose()
+          })
           break;
         }
       }

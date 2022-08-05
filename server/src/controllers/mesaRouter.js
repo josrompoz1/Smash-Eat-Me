@@ -41,8 +41,6 @@ function createRouterMesas(db) {
       (error) => {
         if (error) {
           if (req.body.numeroPersonas || req.body.fecha || req.body.hora || req.body.usuarioId || req.body.menuId) {
-            console.log(req.body.fecha)
-            console.log(req.body.hora)
             res.status(400).json({ status: 'Bad request' });
           } else {
             console.error(error);
