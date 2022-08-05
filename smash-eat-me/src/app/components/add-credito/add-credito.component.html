@@ -7,24 +7,6 @@
 
 <div class="div-subtitulo">
     <div class="subtitulo">
-        <h2>Añadir credito</h2>
-    </div>
-</div>
-<hr class="hr-subtitulo">
-<div class="formPadre">
-    <div class="formHijo">
-        Credito en la cartera digital....{{creditoDigital}}
-        {{value}}
-        <mat-slider class="example-margin" [max]=100 [min]=0 [step]=1 [thumbLabel]=true [(ngModel)]="value"
-            aria-labelledby="example-name-label" (change)="setCreditoSeleccionado(value)">
-        </mat-slider>
-        <button class="tarjetas" mat-stroked-button (click)="anyadirCredito()" [disabled]="disableButton">Aceptar</button>
-    </div>
-</div>
-
-
-<div class="div-subtitulo">
-    <div class="subtitulo">
         <h2>Seleccionar tarjeta</h2>
     </div>
 </div>
@@ -40,5 +22,22 @@
     <div *ngIf="tarjetas.length == 0">
         No existen tarjetas
     </div>
+</div>
 
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Añadir credito</h2>
+    </div>
+</div>
+<hr class="hr-subtitulo">
+<div class="formPadre">
+    <div class="formHijo">
+        <p>Credito en la cartera digital....  {{creditoDigital | number : '.2-2'}} €</p>
+        <div class="form">
+            <mat-slider class="example-margin" [max]=100 [min]=0 [step]=1 [thumbLabel]=true [(ngModel)]="value"
+                aria-labelledby="example-name-label" (change)="setCreditoSeleccionado(value)">
+            </mat-slider>
+        </div>
+        <button class="tarjetas" mat-stroked-button (click)="anyadirCredito()" [disabled]="disableButton">Aceptar</button>
+    </div>
 </div>

@@ -26,10 +26,10 @@
                     <div class="producto" *ngFor="let key of productosCantidad.keys()">
                         <table class="table-productos">
                             <tr>
-                                <td><img src="{{key.imagen}}" /></td>
-                                <td>{{key.nombre}}</td>
-                                <td>{{productosCantidad.get(key)}}</td>
-                                <td>{{productosPrecio.get(key.nombre) | number : '.2-2'}} €</td>
+                                <td class="td-imagen"><img src="{{key.imagen}}" /></td>
+                                <td class="td-producto">{{key.nombre}}</td>
+                                <td class="td-cantidad">{{productosCantidad.get(key)}}</td>
+                                <td class="td-precio">{{productosPrecio.get(key.nombre) | number : '.2-2'}} €</td>
                             </tr>
                         </table>
                     </div>
@@ -55,8 +55,8 @@
                     <td>{{precioFinal | number : '.2-2'}} €</td>
                 </tr>
             </table>
-            <button *ngIf="b" mat-stroked-button (click)="crearPedido()">Aceptar pedido</button>
-            <button *ngIf="b" mat-stroked-button (click)="cancelarPedido()">Cancelar</button>
+            <button class="aceptar" *ngIf="disableButton" mat-stroked-button (click)="crearPedido()">Aceptar pedido</button>
+            <button *ngIf="disableButton" mat-stroked-button (click)="cancelarPedido()">Cancelar</button>
         </div>
     </div>
 </div>

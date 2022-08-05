@@ -1,3 +1,7 @@
+* {
+    font-size: large;
+}
+
 .padre {
     width: 100%;
     display: flex;
@@ -7,8 +11,9 @@
 }
 
 .pedido {
-    width: 80%;
-    background-color: #EEEEEE;
+    width: 90%;
+    background: #ECEFF1;
+    border-radius: 1.5em;
 }
 
 .detalles {
@@ -35,13 +40,18 @@
     margin: 0 auto;
     margin-top: 3em;
     margin-bottom: 3em;
-    width: 25em;
+    width: 90%;
     height: 5em;
 }
 
 button {
     margin: 0 auto;
     margin-top: 2em;
+}
+
+.aceptar {
+    background-color: #ffc11b;
+    margin-right: 4em;
 }
 
 .table-detalles th {
@@ -79,10 +89,26 @@ button {
     height: 100%;
 }
 
-.table-productos td {
-    text-align: center;
+img {
+    width: 30%;
 }
 
-img {
+.td-imagen {
+    text-align: center;
+    width: 50%;
+}
+
+.td-producto {
+    text-align: left;
     width: 20%;
+}
+
+.td-precio {
+    text-align: right;
+    width: 20%;
+}
+
+.td-cantidad {
+    text-align: right;
+    width: 10%;
 }

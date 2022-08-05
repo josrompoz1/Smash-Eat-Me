@@ -50,3 +50,22 @@ p {
     font-size: medium;
     font-weight: bold;
 }
+
+mat-checkbox {
+    margin-bottom: 1em;
+    font-size: medium;
+}
+
+.formHijo button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.error {
+    margin-bottom: 2em;
+}
+
+.formPadre .boton-tramitar {
+    background-color: #ffc11b;
+    width: 30%;
+}

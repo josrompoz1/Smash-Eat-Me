@@ -11,11 +11,11 @@
     </div>
 </div>
 <hr class="hr-pago">
-<div class="cestaPadre">
-    <button mat-stroked-button  routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
-    <div *ngIf="tarjetas.length > 0" class="tarjetas">
-        <div *ngFor="let item of tarjetas;  let i = index">
-            <mat-checkbox [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i">{{item.numero}}</mat-checkbox>
+<div class="formPadre">
+    <div *ngIf="tarjetas.length > 0" class="formHijo">
+        <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
+        <div class="tarjeta" *ngFor="let item of tarjetas;  let i = index">
+            <mat-checkbox [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i" [disabled]="disableCredito">{{item.numero}}</mat-checkbox>
         </div>
         <button *ngIf="tarjetaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarTarjetaSeleccionada()">Continuar</button>
     </div>
@@ -30,15 +30,18 @@
     </div>
 </div>
 <hr class="hr-pago">
-<div class="cestaPadre">
-    <div class="tarjetas">
-        <mat-checkbox [checked]="creditoSeleccionadoIndex === 0" (change)="creditoSeleccionadoIndex = 0">Credito en la cartera digital....{{creditoDigital}}</mat-checkbox>
-        <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarCarteraDigital()">Continuar</button>
+<div class="formPadre">
+    <div class="formHijo">
+        <button mat-stroked-button routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
+        <div class="form">
+            <mat-checkbox [checked]="creditoSeleccionadoIndex === 0" (change)="creditoSeleccionadoIndex = 0" [disabled]="disableCredito">Credito en la cartera digital....  {{creditoDigital | number : '.2-2'}} €</mat-checkbox>
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+        </div>
+        
+        <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-stroked-button (click)="guardarCarteraDigital()">Continuar</button>
     </div>
-    <div class="error" *ngFor="let error of errors">
-        <li>{{error}}</li>
-    </div>
-    <button mat-stroked-button  routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
 </div>
 
 <div class="div-subtitulo">
@@ -60,4 +63,6 @@
     </div>
 </div>
 
-<button *ngIf="creditoSeleccionadoIndex > -1 || tarjetaSeleccionadaIndex > -1" mat-stroked-button  (click)="tramitarPedido()">Tramitar pedido</button>
+<div class="formPadre">
+    <button class="boton-tramitar" mat-stroked-button (click)="tramitarPedido()" [disabled]="disableTramitar">Tramitar pedido</button>
+</div>

@@ -18,12 +18,12 @@ export class PedidoComponent implements OnInit, OnDestroy {
   creditoDigital: boolean = false;
   productosPedido: ProductoOfertado[] = [];
   precioTotal: number = 0;
-  descuento: CuponDescuento | undefined;
+  descuento: CuponDescuento = {};
   productosCantidad = new Map<ProductoOfertado, number>();
   precioConDescuento: number = 0;
   precioFinal: number = 0;
   horaEntrega: string = "";
-  b: boolean = true;
+  disableButton: boolean = true;
   productosPrecio = new Map<string, number>();
   userId: number = 0
 
@@ -39,9 +39,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
     })
     this.dataManagement.productosEnCesta.subscribe(value => {
       this.productosPedido = value;
-    })
-    this.dataManagement.precioPedido.subscribe(value => {
-      this.precioTotal = value;
     })
     this.dataManagement.descuentoAplicado.subscribe(value => {
       this.descuento = value;
@@ -65,27 +62,41 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   private getData() {
-    this.precioFinal = this.precioTotal + 2;
-    let array = from(this.productosPedido);
-    array.forEach(val => {
-      if (this.productosCantidad.has(val)) {
-        let cantidad = this.productosCantidad.get(val)
-        if (cantidad != undefined) {
-          cantidad = cantidad + 2;
-          this.productosCantidad.set(val, cantidad)
-        }
+    if(this.userId > 0) {
+      if(this.dataManagement.numberOfItemsInBasket.getValue() > 0) {
+        this.disableButton = false
       } else {
-        this.productosCantidad.set(val, 1);
+        this.disableButton = true
       }
-    })    
-    if(this.descuento != undefined) {
-      if(this.descuento.porcentaje != undefined) {
-        this.precioConDescuento = (this.precioTotal * this.descuento.porcentaje) / 100
-        this.precioFinal = this.precioTotal - this.precioConDescuento + 2;
+      let array = from(this.productosPedido);
+      array.forEach(val => {
+        if (this.productosCantidad.has(val)) {
+          let cantidad = this.productosCantidad.get(val)
+          if (cantidad != undefined) {
+            cantidad = cantidad + 2;
+            this.productosCantidad.set(val, cantidad)
+          }
+        } else {
+          this.productosCantidad.set(val, 1);
+        }
+      })
+  
+      for (let key of this.productosCantidad.keys()) {
+        let cantidad = this.productosCantidad.get(key);
+        if (cantidad != undefined) {
+          this.productosPrecio.set(key.nombre, key.precio * cantidad)
+          this.precioTotal += key.precio * cantidad;
+        }
       }
-    } else {
       this.precioFinal = +this.precioTotal + 2;
+      if(this.descuento != JSON.stringify({})) {
+        if(this.descuento.porcentaje != undefined) {
+          this.precioConDescuento = (this.precioTotal * this.descuento.porcentaje) / 100
+          this.precioFinal = this.precioTotal - this.precioConDescuento + 2;
+        }
+      }
     }
+    
   }
 
   public async crearPedido() {
@@ -119,12 +130,14 @@ export class PedidoComponent implements OnInit, OnDestroy {
         }
         
       })
+      this.disableButton = false
+      localStorage.setItem('numberOfItemsInBasket', JSON.stringify(0))
       this.dataManagement.numberOfItemsInBasket.next(0);
     }
   }
 
   private destroyAll() {
-    this.b = false;
+    this.disableButton = false;
     this.dataManagement.numberOfItemsInBasket.next(0);
     this.dataManagement.productosEnCesta.next([]);
     this.dataManagement.direccionSeleccionada.next({})

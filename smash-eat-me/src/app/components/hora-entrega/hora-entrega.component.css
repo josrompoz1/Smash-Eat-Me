@@ -23,3 +23,8 @@
 button {
     margin-bottom: 2em;
 }
+
+mat-checkbox {
+    margin-bottom: 1em;
+    font-size: medium;
+}

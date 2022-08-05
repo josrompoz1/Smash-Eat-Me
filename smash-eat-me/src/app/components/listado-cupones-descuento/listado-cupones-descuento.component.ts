@@ -32,7 +32,7 @@ export class ListadoCuponesDescuentoComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.width = "70%";
-    dialogConfig.height = "70%"
+    dialogConfig.height = "80%"
     let dialogRef = this.dialog.open(CuponDescuentoDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.dataManagement.selectedCupon = undefined;

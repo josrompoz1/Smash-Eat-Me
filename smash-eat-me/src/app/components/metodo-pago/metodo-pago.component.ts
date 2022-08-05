@@ -26,9 +26,11 @@ export class MetodoPagoComponent implements OnInit {
   errors: string[] = []
   direccion: Direccion = {};
   hora: string = '';
+  disableTramitar: boolean = true;
+  disableCredito: boolean = false;
+  disableTarjeta: boolean = false;
 
   constructor(private dataManagement: DataManagementService,
-    private route: ActivatedRoute,
     private router: Router,
     private sesionService: SesionService) {
     this.dataManagement.productosEnCesta.subscribe(value => {
@@ -91,7 +93,11 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   public guardarTarjetaSeleccionada() {
+    console.log(this.tarjetaSeleccionadaIndex)
     this.creditoSeleccionadoIndex = -1;
+    this.disableTramitar = false
+    this.disableCredito = true
+    this.disableTarjeta = true
     this.dataManagement.seleccionadoCreditoDigital.next(false);
 
     const tarjetaSeleccionada: Tarjeta = this.tarjetas[this.tarjetaSeleccionadaIndex]
@@ -102,7 +108,9 @@ export class MetodoPagoComponent implements OnInit {
 
   public guardarCarteraDigital() {
     this.tarjetaSeleccionadaIndex = -1;
-
+    this.disableTramitar = false
+    this.disableCredito = true
+    this.disableTarjeta = true
     this.dataManagement.seleccionadoCreditoDigital.next(true);
     localStorage.setItem('seleccionadoCreditoDigital', JSON.stringify(true))
     localStorage.setItem('tarjetaSeleccionada', JSON.stringify({}))
@@ -123,13 +131,14 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   public tramitarPedido() {
-    if (this.creditoSeleccionado && this.precioTotal > this.creditoDigital) {
-      this.errors.push('El credito digital es menor al precio del pedido')
-    } else {
-      this.errors.length = 0
-      this.router.navigate(['pedido']);
+    if(this.userId > 0 && (this.creditoSeleccionadoIndex > -1 || this.tarjetaSeleccionadaIndex > -1)) {
+      if (this.creditoSeleccionado && this.precioTotal > this.creditoDigital) {
+        this.errors.push('El credito digital es menor al precio del pedido')
+      } else {
+        this.errors.length = 0
+        this.router.navigate(['pedido']);
+      }
     }
-
   }
 
   private calculaPrecio() {
