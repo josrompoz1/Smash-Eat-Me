@@ -1,5 +1,4 @@
 const express = require('express');
-const { route } = require('express/lib/application');
 
 function createRouterCuponesDescuento(db) {
     const router = express.Router();

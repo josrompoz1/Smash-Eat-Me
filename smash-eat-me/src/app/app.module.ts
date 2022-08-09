@@ -24,7 +24,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductosDialogComponent } from './components/productos-dialog/productos-dialog.component';
-import { PaginatePipe } from './pipes/paginate.pipe';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { ServerResponseInterceptor } from './interceptors/server-response.interceptor';
 import { RestService } from './Services/rest-service.service';
@@ -72,7 +71,6 @@ import { ChallengesInterceptor } from './interceptors/challenges.interceptor';
     ProductosComponent,
     HeaderComponent,
     ProductosDialogComponent,
-    PaginatePipe,
     RegistroUsuarioComponent,
     CestaComponent,
     DireccionUsuarioComponent,
