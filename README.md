@@ -1,2 +1,2 @@
 # Smash-Eat-Me
-TFG para el desarrollo de una aplicación web que proponga retos de seguridad informática a los usuarios.
+Smash&Eat Me es una aplicación web insegura que propone retos de seguridad basados en vulnerabilidades del OWASP Top Ten. Su objetivo es concienciar sobre los problemas que puede causar que una aplicación real tenga debilidades o fallas de seguridad. Se puede utilizar para realizar diversos ataques que en una aplicación real sería ilegal.
