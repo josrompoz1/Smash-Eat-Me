@@ -17,7 +17,10 @@
                     <mat-icon matTooltip="Descargar progreso de los retos" [matTooltipPosition]="position" (click)="downloadProgress()">cloud_download</mat-icon>
                 </div>
                 <div class="upload-icon">
-                    <mat-icon matTooltip="Importar progreso de los retos" [matTooltipPosition]="position" (click)="uploadProgress()">cloud_upload</mat-icon>
+                    <label for="file-upload" class="custom-file-upload">
+                        <mat-icon matTooltip="Importar progreso de los retos" [matTooltipPosition]="position">cloud_upload</mat-icon>
+                    </label>
+                    <input id="file-upload" type="file" (change)="uploadProgress($event)"/>
                 </div>
             </div>
         </div>
