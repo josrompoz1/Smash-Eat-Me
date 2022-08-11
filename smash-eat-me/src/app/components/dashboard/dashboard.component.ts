@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { Reto } from 'src/app/Models/types';
+import { ExportService } from 'src/app/Services/export.service';
 import { RetosService } from 'src/app/Services/retos.service';
 import { SnackBarService } from 'src/app/Services/snack-bar.service';
 import { DashboardDialogComponent } from '../dashboard-dialog/dashboard-dialog.component';
@@ -18,13 +20,15 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'categoria', 'dificultad', 'completado', 'pista', 'solucion'];
   numberOfFilters: number = 0;
   hidden: boolean = true;
+  position: TooltipPosition = 'after'
 
   paramDificultad!: string;
   paramCategoria!: string;
 
   constructor(private retosService: RetosService,
               private dialog: MatDialog,
-              private snackService: SnackBarService) {
+              private snackService: SnackBarService,
+              private exportService: ExportService) {
     this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
@@ -142,9 +146,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  public downloadProgress() {
-    console.log("DOWNLOAD")
-    //funcionalidad para descargar un json con los datos de progreso
+  public async downloadProgress() {
+    const retos: Reto[] = await this.retosService.getAllRetos()
+    this.exportService.exportExcel(retos, 'progreso')
   }
 
   public uploadProgress() {
