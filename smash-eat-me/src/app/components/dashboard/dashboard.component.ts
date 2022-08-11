@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { Reto } from 'src/app/Models/types';
+import { ExportService } from 'src/app/Services/export.service';
 import { RetosService } from 'src/app/Services/retos.service';
 import { SnackBarService } from 'src/app/Services/snack-bar.service';
 import { DashboardDialogComponent } from '../dashboard-dialog/dashboard-dialog.component';
 import { SolucionesRetoDialogComponent } from '../soluciones-reto-dialog/soluciones-reto-dialog.component';
+import * as XLSX from 'xlsx';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,13 +22,16 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'categoria', 'dificultad', 'completado', 'pista', 'solucion'];
   numberOfFilters: number = 0;
   hidden: boolean = true;
+  position: TooltipPosition = 'after'
 
   paramDificultad!: string;
   paramCategoria!: string;
 
   constructor(private retosService: RetosService,
-              private dialog: MatDialog,
-              private snackService: SnackBarService) {
+    private dialog: MatDialog,
+    private snackService: SnackBarService,
+    private exportService: ExportService,
+    private toastr: ToastrService) {
     this.retosService.paramDificultad.subscribe(value => {
       this.paramDificultad = value
     })
@@ -41,7 +48,7 @@ export class DashboardComponent implements OnInit {
     this.retos = await this.retosService.getAllRetos()
     const nRetos: number = await this.retosService.countAllRetos()
     const nRetosCompletados: number = await this.retosService.countRetosCompletados()
-    this.progreso = (nRetosCompletados/nRetos)*100
+    this.progreso = (nRetosCompletados / nRetos) * 100
   }
 
   public filterDialog() {
@@ -56,7 +63,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private async filterData() {
-    if(this.paramCategoria != '' && this.paramDificultad != '') {
+    if (this.paramCategoria != '' && this.paramDificultad != '') {
       this.hidden = false;
       this.numberOfFilters = 2;
       let minimo: number;
@@ -81,14 +88,14 @@ export class DashboardComponent implements OnInit {
           minimo = 1;
           maximo = 5;
           break;
-        }     
+        }
       }
       this.retos = await this.retosService.getRetosFilterByCategoriaAndDificultad(this.paramCategoria, minimo, maximo)
-    } else if(this.paramCategoria != '') {
+    } else if (this.paramCategoria != '') {
       this.hidden = false;
       this.numberOfFilters = 1;
       this.retos = await this.retosService.getRetosFilterByCategoria(this.paramCategoria)
-    } else if(this.paramDificultad != '') {
+    } else if (this.paramDificultad != '') {
       this.hidden = false;
       this.numberOfFilters = 1;
       let minimo: number;
@@ -113,7 +120,7 @@ export class DashboardComponent implements OnInit {
           minimo = 1;
           maximo = 5;
           break;
-        }     
+        }
       }
       this.retos = await this.retosService.getRetosFilterByDificultad(minimo, maximo)
 
@@ -125,7 +132,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public solucionDialog(element: Reto) {
-    if(element.id != undefined) {
+    if (element.id != undefined) {
       this.retosService.retoIdSeleccionado.next(element.id)
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -136,20 +143,45 @@ export class DashboardComponent implements OnInit {
   }
 
   public async showPista(element: Reto) {
-    if(element.id != undefined) {
+    if (element.id != undefined) {
       const pista = await this.retosService.getPistaByRetoId(element.id)
       this.snackService.openSnackBarPista(pista[0], "Cerrar")
     }
   }
 
-  public downloadProgress() {
-    console.log("DOWNLOAD")
-    //funcionalidad para descargar un json con los datos de progreso
+  public async downloadProgress() {
+    const retos: Reto[] = await this.retosService.getAllRetos()
+    this.exportService.exportExcel(retos, 'progreso')
   }
 
-  public uploadProgress() {
-    console.log("UPLOAD")
-    //funcionalidad para importar un json con los datos de progreso
+  public uploadProgress(event: any) {
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) {
+      this.toastr.error("No se puede subir más de 1 archivo")
+    } else {
+      if (target.files[0].name.split(".")[1] == "xlsx") {
+        const reader: FileReader = new FileReader();
+        reader.readAsBinaryString(target.files[0]);
+        reader.onload = (e: any) => {
+          const binarystr: string = e.target.result;
+          const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+
+          const wsname: string = wb.SheetNames[0];
+          const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+          const data = XLSX.utils.sheet_to_json(ws);
+          data.forEach(async d => {
+            const reto: Reto = (d as Reto)
+            if (reto.completado == true) {
+              console.log("Completado")
+              if (reto.id) await this.retosService.finishReto(reto.id)
+            }
+          })
+        };
+      } else {
+        this.toastr.error("Formato no admitido")
+      }
+    }
   }
 
 }
