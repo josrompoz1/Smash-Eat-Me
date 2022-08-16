@@ -7,7 +7,7 @@ function createRouterProductos(db) {
   router.get('/productos', function (req, res, next) {
     db.query(
       'SELECT * FROM ProductoOfertado ORDER BY precio',
-      [10 * (req.params.page || 0)],
+      [],
       (error, results) => {
         if (error) {
           console.log(error);
@@ -107,8 +107,11 @@ function createRouterProductos(db) {
   });
 
   router.get('/productos/tipo/:tipo/busqueda/:busqueda', function (req, res, next) {
+    tipo = req.params.tipo
+    busqueda = req.params.busqueda
+    query = "SELECT * FROM ProductoOfertado WHERE tipo='" + tipo + " AND nombre LIKE '%" + busqueda + "%';"
     db.query(
-        'SELECT * FROM ProductoOfertado WHERE tipo=? AND nombre LIKE ?',
+        query,
         [req.params.tipo, "%" + req.params.busqueda + "%"],
         (error, results) => {
             if (error) {
@@ -251,7 +254,7 @@ function createRouterProductos(db) {
   router.get('/menus', function (req, res, next) {
     db.query(
       'SELECT * FROM Menu',
-      [10 * (req.params.page || 0)],
+      [],
       (error, results) => {
         if (error) {
           console.log(error);

@@ -29,6 +29,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   errorsTarjeta: string[] = []
   errorsDireccion: string[] = []
   titulo: string = ''
+  value: string = ""
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService) {
     this.sesionService.rol.subscribe(value => {
@@ -50,7 +51,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       'telefono': new FormControl('', [])
     })
     this.formTarjeta = new FormGroup({
-      'numeroTarjeta': new FormControl('', [Validators.required]),
+      'numeroTarjeta': new FormControl('', [Validators.required, Validators.maxLength(20)]),
       'expiracion': new FormControl('', [Validators.required])
     })
     this.formDireccion = new FormGroup({
@@ -196,6 +197,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       for(let x in this.formTarjeta.controls) {
         if(this.formTarjeta.controls[x].getError('required') != undefined) {
           this.errorsTarjeta.push('El campo ' + x + ' es necesario')
+        } else if(this.formTarjeta.controls[x].getError('maxlength') != undefined) {
+          this.errorsTarjeta.push('El número tiene como máximo 20 dígitos')
         } else if(this.formTarjeta.controls[x].getError('posterior') != undefined) {
           this.errorsTarjeta.push('La tarjeta está caducada')
         } else if(this.formTarjeta.controls[x].getError('formato') != undefined) {

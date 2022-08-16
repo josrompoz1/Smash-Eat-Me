@@ -7,7 +7,7 @@ function createRouterValoraciones(db) {
   router.get('/valoraciones', function (req, res, next) {
     db.query(
       'SELECT * FROM Valoracion',
-      [10 * (req.params.page || 0)],
+      [],
       (error, results) => {
         if (error) {
           console.log(error);

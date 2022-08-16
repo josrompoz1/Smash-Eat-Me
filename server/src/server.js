@@ -55,7 +55,7 @@ connection.connect(function(err) {
                 "INSERT INTO Menu (nombre, descripcion, precio) VALUES ('Menú completo','Menú de hamburguesa completa, patatas fritas y refresco',10.0)",
                 "INSERT INTO Menu (nombre, descripcion, precio) VALUES ('Menú italiano','Menú clásico de Italia',18.8)",
                 "INSERT INTO Menu (nombre, descripcion) VALUES ('Sin menú','Los comensales pedirán a la carta')",
-                "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Hamburgesa especial', 'Hamburguesa con queso, lechuga, tomate y cebolla',4.5,'https://cdn-icons-png.flaticon.com/512/883/883517.png','Plato')",
+                "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Hamburguesa especial', 'Hamburguesa con queso, lechuga, tomate y cebolla',4.5,'https://cdn-icons-png.flaticon.com/512/883/883517.png','Plato')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo,menuId) VALUES ('Pizza', 'Pizza con base de tomate, mozzarella y bacon',8.0,'https://cdn-icons-png.flaticon.com/512/1404/1404945.png','Plato',4)",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo) VALUES ('Perrito caliente', 'Perrito caliente clásico con ketchup y patatas',2.5,'https://cdn-icons-png.flaticon.com/512/3845/3845161.png','Plato')",
                 "INSERT INTO ProductoOfertado (nombre,descripcion,precio,imagen,tipo,menuId) VALUES ('Ensalada', 'Ensalada mixta',4.5,'https://cdn-icons-png.flaticon.com/512/1057/1057510.png','Entremes',1)",
