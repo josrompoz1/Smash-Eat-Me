@@ -14,6 +14,7 @@ export class ListadoUsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
   valoraciones: Valoracion[] = [];
   userId: number = 0
+  rol: string = ''
 
   displayedColumnsUsuario: string[] = ['username', 'correo', 'rol', 'perfil', 'eliminar'];
   displayedColumnsValoracion: string[] = ['usuario', 'producto', 'puntuacion', 'eliminar'];
@@ -24,10 +25,18 @@ export class ListadoUsuariosComponent implements OnInit {
     this.sessionService.userId.subscribe(value => {
       this.userId = value
     })
+    this.sessionService.rol.subscribe(value => {
+      this.rol = value
+    })
   }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.rol === 'ADMIN') {
+      this.getData()
+    } else {
+      this.router.navigate([''])
+    }
+    
   }
 
   private async getData() {

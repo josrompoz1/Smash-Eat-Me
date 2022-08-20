@@ -51,7 +51,7 @@ p {
     font-weight: bold;
 }
 
-mat-checkbox {
+mat-radio-button {
     margin-bottom: 1em;
     font-size: medium;
 }

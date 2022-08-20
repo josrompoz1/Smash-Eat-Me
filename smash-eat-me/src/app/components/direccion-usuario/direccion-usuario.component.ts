@@ -59,11 +59,13 @@ export class DireccionUsuarioComponent implements OnInit {
   }
 
   public guardarDireccionSeleccionada() {
-    const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
-    this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
-    localStorage.setItem('direccionSeleccionada', JSON.stringify(direccionSeleccionada))
-    this.disableCheckbox = true
-    this.enableHora = true
+    if(this.direccionSeleccionadaIndex > -1) {
+      const direccionSeleccionada: Direccion = this.direcciones[this.direccionSeleccionadaIndex]
+      this.dataManagement.direccionSeleccionada.next(direccionSeleccionada)
+      localStorage.setItem('direccionSeleccionada', JSON.stringify(direccionSeleccionada))
+      this.disableCheckbox = true
+      this.enableHora = true
+    }
   }
 
   addDireccion() {

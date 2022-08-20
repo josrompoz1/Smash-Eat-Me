@@ -7,6 +7,9 @@
 
 <div class="padre">
     <div class="pedido">
+        <div class="error" *ngFor="let er of error">
+            <p>{{er}}</p>
+        </div>
         <div class="detalles">
             <table class="table-detalles">
                 <tr>

@@ -64,11 +64,13 @@ export class HoraEntregaComponent implements OnInit {
   }
 
   public guardarHoraSeleccionada() {
-    const horaSeleccionada: string = this.horas[this.horaSeleccionadaIndex]
-    this.dataManagement.horaSeleccionada.next(horaSeleccionada)
-    localStorage.setItem('horaSeleccionada', horaSeleccionada)
-    this.disableCheckbox = true
-    this.enablePago = true
+    if(this.horaSeleccionadaIndex > -1) {
+      const horaSeleccionada: string = this.horas[this.horaSeleccionadaIndex]
+      this.dataManagement.horaSeleccionada.next(horaSeleccionada)
+      localStorage.setItem('horaSeleccionada', horaSeleccionada)
+      this.disableCheckbox = true
+      this.enablePago = true
+    }
   }
 
   public setHoraSeleccionadaIndex(i: number) {

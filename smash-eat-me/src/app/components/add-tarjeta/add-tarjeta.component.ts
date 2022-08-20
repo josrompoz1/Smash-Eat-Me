@@ -33,6 +33,7 @@ export class AddTarjetaComponent implements OnInit {
   }
 
   public async crearTarjeta() {
+    this.errors.length = 0
     if(this.userId > 0) {
       this.checkFecha(this.form.value.expiracion)
       if(this.form.valid) {
@@ -55,6 +56,8 @@ export class AddTarjetaComponent implements OnInit {
           }
         }
       }
+    } else {
+      this.errors.push('Debes iniciar sesión')
     }
   }
 

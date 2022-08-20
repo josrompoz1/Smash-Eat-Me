@@ -65,7 +65,7 @@ export class MetodoPagoComponent implements OnInit {
     })
     if (this.userId > 0) {
       if (this.hora == '') {
-        this.router.navigate(['cesta/direccion/horaentrega'])
+        this.router.navigate(['cesta'])
       } else {
         this.getData();
       }
@@ -130,9 +130,10 @@ export class MetodoPagoComponent implements OnInit {
   }
 
   public tramitarPedido() {
+    this.errors.length = 0
     if(this.userId > 0 && (this.creditoSeleccionadoIndex > -1 || this.tarjetaSeleccionadaIndex > -1)) {
-      if (this.creditoSeleccionado && this.precioTotal > this.creditoDigital) {
-        this.errors.push('El credito digital es menor al precio del pedido')
+      if (this.creditoSeleccionado && this.precioTotal+2 > this.creditoDigital) {
+        this.errors.push('El credito digital es menor al precio del pedido. Hay que tener en cuenta el coste es envío (2€)')
       } else {
         this.errors.length = 0
         this.router.navigate(['pedido']);

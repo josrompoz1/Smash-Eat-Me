@@ -32,7 +32,12 @@ export class HistorialMesasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.userId > 0) {
+      this.getData()
+    } else {
+      this.router.navigate(['signin'])
+    }
+    
   }
 
   private async getData() {

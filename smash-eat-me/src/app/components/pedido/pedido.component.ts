@@ -26,6 +26,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
   disableButton: boolean = true;
   productosPrecio = new Map<string, number>();
   userId: number = 0
+  error: string[] = []
 
   constructor(private dataManagement: DataManagementService, private sesionService: SesionService, private router: Router) {
     this.dataManagement.direccionSeleccionada?.subscribe(value => {
@@ -52,8 +53,17 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(!this.creditoDigital)
+    console.log(this.tarjeta != JSON.stringify({}))
+    console.log(!this.creditoDigital && this.tarjeta != JSON.stringify({}))
     if(this.userId > 0) {
-      this.getData()
+      if(!this.creditoDigital && this.tarjeta != JSON.stringify({})) {
+        this.router.navigate([''])
+      } else {
+        this.getData()
+      }
+    } else {
+      this.router.navigate([''])
     }
   }
 
@@ -100,6 +110,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   public async crearPedido() {
+    this.error.length = 0
     if(this.userId > 0) {
       let metodo: string = "";
       if(this.creditoDigital == true) metodo = "Cartera digital"
@@ -133,6 +144,8 @@ export class PedidoComponent implements OnInit, OnDestroy {
       this.disableButton = false
       localStorage.setItem('numberOfItemsInBasket', JSON.stringify(0))
       this.dataManagement.numberOfItemsInBasket.next(0);
+    } else {
+      this.error.push('Debe iniciar sesión')
     }
   }
 

@@ -64,7 +64,7 @@
                                     {{menu.nombre}}
                                 </mat-checkbox>
                             </td>
-                            <td class="td-precio" *ngIf="mapMenuPrecio.get(menu)">{{mapMenuPrecio.get(menu)}} €</td>
+                            <td class="td-precio" *ngIf="mapMenuPrecio.get(menu)">{{mapMenuPrecio.get(menu) | number : '.2-2'}} €</td>
                             <td class="td-precio" *ngIf="!mapMenuPrecio.get(menu)"></td>
                         </tr>
                     </table>

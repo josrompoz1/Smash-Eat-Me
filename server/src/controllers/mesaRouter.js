@@ -21,7 +21,7 @@ function createRouterMesas(db) {
 
   router.get('/mesas/usuario/:id', function (req, res, next) {
     db.query(
-      'SELECT * FROM Mesa WHERE usuarioId=?',
+      'SELECT * FROM Mesa WHERE usuarioId=? ORDER BY fecha DESC',
       [req.params.id],
       (error, results) => {
         if (error) {

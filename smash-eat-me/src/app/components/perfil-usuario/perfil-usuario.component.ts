@@ -137,6 +137,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   }
 
   public fillForm(indice: number) {
+    this.errorsTarjeta.length = 0
     const tarjeta = this.tarjetas[indice]
     let i: number = 0;
     this.expandPanelTarjetas.forEach(() => {
@@ -156,6 +157,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   }
 
   public fillFormDireccion(indice: number) {
+    this.errorsDireccion.length = 0
     const direccion = this.direcciones[indice]
     let i: number = 0;
     this.expandPanelDireccion.forEach(() => {
