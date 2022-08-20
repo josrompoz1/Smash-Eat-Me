@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class PedidoComponent implements OnInit, OnDestroy {
 
   direccion!: Direccion;
-  tarjeta: Tarjeta | undefined;
+  tarjeta!: Tarjeta;
   creditoDigital: boolean = false;
   productosPedido: ProductoOfertado[] = [];
   precioTotal: number = 0;
@@ -57,7 +57,8 @@ export class PedidoComponent implements OnInit, OnDestroy {
     console.log(this.tarjeta != JSON.stringify({}))
     console.log(!this.creditoDigital && this.tarjeta != JSON.stringify({}))
     if(this.userId > 0) {
-      if(!this.creditoDigital && this.tarjeta != JSON.stringify({})) {
+      const obj = {}
+      if(!this.creditoDigital && JSON.stringify(obj) == JSON.stringify(this.tarjeta)) {
         this.router.navigate([''])
       } else {
         this.getData()
