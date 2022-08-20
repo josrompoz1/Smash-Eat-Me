@@ -7,7 +7,7 @@ function createRouterCuponesDescuento(db) {
     router.get('/cupones', function (req, res, next) {
         db.query(
             'SELECT * FROM CuponDescuento ORDER BY porcentaje',
-            [10 * (req.params.page || 0)],
+            [],
             (error, results) => {
                 if (error) {
                     console.log(error);

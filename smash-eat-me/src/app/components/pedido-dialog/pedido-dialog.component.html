@@ -32,9 +32,9 @@
                 <mat-label>Estado</mat-label>
                 <mat-select matInput formControlName="estado">
                     <mat-option value="Pagado" disabled>Pagado</mat-option>
-                    <mat-option value="En preparacion">En preparacion</mat-option>
-                    <mat-option value="En transito">En transito</mat-option>
-                    <mat-option value="Entregado">Entregado</mat-option>
+                    <mat-option value="En preparacion" [disabled]="disablePreparacion">En preparacion</mat-option>
+                    <mat-option value="En transito" [disabled]="disableTransito">En transito</mat-option>
+                    <mat-option value="Entregado" [disabled]="disableEntregado">Entregado</mat-option>
                 </mat-select>
             </mat-form-field><br>
 

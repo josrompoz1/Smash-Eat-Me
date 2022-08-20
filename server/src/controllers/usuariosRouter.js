@@ -6,7 +6,7 @@ function createRouterUsuarios(db) {
     router.get('/usuarios', function (req, res, next) {
         db.query(
             'SELECT * FROM Usuario',
-            [10 * (req.params.page || 0)],
+            [],
             (error, results) => {
                 if (error) {
                     console.log(error);
@@ -84,7 +84,7 @@ function createRouterUsuarios(db) {
                             'UPDATE Usuario SET username=?, nombre=?, contrasena=?, correo=?, telefono=?, tipo=? WHERE id=?',
                             [req.body.username ? req.body.username : results[0].username, req.body.nombre ? req.body.nombre : results[0].nombre,
                             req.body.contrasena ? req.body.contrasena : results[0].contrasena,
-                            req.body.correo ? req.body.correo : results[0].correo, req.body.telefono ? req.body.telefono : results[0].telefono, req.body.tipo, req.params.id],
+                            req.body.correo ? req.body.correo : results[0].correo, req.body.telefono, req.body.tipo, req.params.id],
                             (error) => {
                                 if (error) {
                                     res.status(500).json({ status: 'error' });

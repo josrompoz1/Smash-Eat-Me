@@ -84,7 +84,8 @@
                 <form [formGroup]="formTarjeta">
                     <mat-form-field appearance="fill">
                         <mat-label>Numero</mat-label>
-                        <input matInput type="text" name="numero" formControlName="numeroTarjeta">
+                        <input matInput type="text" name="numero" formControlName="numeroTarjeta"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                     </mat-form-field><br>
 
                     <mat-form-field appearance="fill">
@@ -249,5 +250,5 @@
     </table>
 </div>
 <div *ngIf="valoraciones.length == 0" class="mesas">
-    <p>No hay valoraciones para este usuario</p>
+    <p>No hay valoraciones de este usuario</p>
 </div>

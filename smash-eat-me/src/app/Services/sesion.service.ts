@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { LoginResponse } from '../Models/types';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SesionService implements CanActivate {
+export class SesionService {
 
   public userLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public rol: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -52,13 +52,6 @@ export class SesionService implements CanActivate {
         }
       }
     }
-  }
-
-  canActivate() {
-    if(this.isAdmin(this.rol.getValue())) {
-      return true;
-    }
-    return false;
   }
 
   setUserLogged(data: any) {

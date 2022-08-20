@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CuponDescuento } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 import { CuponDescuentoDialogComponent } from '../cupon-descuento-dialog/cupon-descuento-dialog.component';
 
 @Component({
@@ -13,12 +15,27 @@ export class ListadoCuponesDescuentoComponent implements OnInit {
 
   cupones: CuponDescuento[] = []
   displayedColumns: string[] = ['codigo', 'porcentaje', 'editar', 'eliminar'];
+  rol: string = ''
+  userId: number = 0
 
   constructor(private dataManagement: DataManagementService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private sesionService: SesionService,
+              private router: Router) {
+    this.sesionService.rol.subscribe(value => {
+      this.rol = value
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
+  }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.userId > 0 && this.rol == 'ADMIN') {
+      this.getData()
+    } else {
+      this.router.navigate([''])
+    }
   }
 
   private async getData() {

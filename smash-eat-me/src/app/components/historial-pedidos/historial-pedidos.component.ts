@@ -45,12 +45,13 @@ export class HistorialPedidosComponent implements OnInit {
       this.titulo = 'Gestión de pedidos'
       this.tituloBoton = 'Ver mis pedidos'
       this.dataSource = await this.dataManagement.getAllPedidos()
-    }
-    if(this.rol === 'NO ADMIN') {
+    } else if(this.rol === 'NO ADMIN') {
       if(this.userId > 0) {
         this.titulo = 'Mis pedidos'
         this.dataSource = await this.dataManagement.getPedidosByUsuarioId(this.userId);
       }
+    } else {
+      this.router.navigate(['signin'])
     }
   }
 

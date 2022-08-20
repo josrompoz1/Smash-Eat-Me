@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductoOfertado } from 'src/app/Models/types';
 import { DataManagementService } from 'src/app/Services/data-management.service';
+import { SesionService } from 'src/app/Services/sesion.service';
 
 @Component({
   selector: 'app-add-producto',
@@ -13,11 +14,25 @@ export class AddProductoComponent implements OnInit {
 
   form!: FormGroup;
   errors: string[] = [];
+  rol: string = ''
+  userId: number = 0
 
-  constructor(private dataManagement: DataManagementService, private router: Router) { }
+  constructor(private dataManagement: DataManagementService, private router: Router, private sesionService: SesionService) {
+    this.sesionService.rol.subscribe(value => {
+      this.rol = value
+    })
+    this.sesionService.userId.subscribe(value => {
+      this.userId = value
+    })
+  }
 
   ngOnInit(): void {
-    this.getData()
+    if(this.userId > 0 && this.rol == 'ADMIN') {
+      this.getData()
+    } else {
+      this.router.navigate([''])
+    }
+    
   }
 
   private async getData() {

@@ -16,6 +16,9 @@ export class PedidoDialogComponent implements OnInit {
   productosEnPedido: ProductoOfertado[] = []
   cliente!: Usuario;
   form!: FormGroup;
+  disablePreparacion: boolean = false
+  disableTransito: boolean = false
+  disableEntregado: boolean = false
   
   constructor(private dataManagement: DataManagementService,
               private dialogRef: MatDialogRef<PedidoDialogComponent>) { }
@@ -43,13 +46,30 @@ export class PedidoDialogComponent implements OnInit {
         'estado': this.pedido.estado,
         'nombreCliente': this.cliente.nombre
       })
+      if(this.pedido.estado == 'Pagado') {
+        this.disablePreparacion = false
+        this.disableTransito = true
+        this.disableEntregado = true
+      } else if(this.pedido.estado == 'En preparacion') {
+        this.disablePreparacion = true
+        this.disableTransito = false
+        this.disableEntregado = true
+      } else if(this.pedido.estado == 'En transito') {
+        this.disablePreparacion = true
+        this.disableTransito = true
+        this.disableEntregado = false
+      } else if(this.pedido.estado == 'Entregado') {
+        this.disablePreparacion = true
+        this.disableTransito = true
+        this.disableEntregado = true
+      }
     }
     if(this.productosPedidos.length > 0) {
       this.productosPedidos.forEach(async p => {
         const productoOfertado = await this.dataManagement.getProductosById(p.productoOfertadoId)
         if(productoOfertado) this.productosEnPedido.push(productoOfertado)
       })
-    }    
+    }
   }
 
   onClose() {

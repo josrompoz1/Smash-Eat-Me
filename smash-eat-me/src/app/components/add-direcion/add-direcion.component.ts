@@ -33,6 +33,7 @@ export class AddDirecionComponent implements OnInit {
   }
 
   public async crearDireccion() {
+    this.errors.length = 0
     if(this.userId > 0) {
       if(this.form.valid) {
         const direccion: Direccion = {
@@ -51,6 +52,8 @@ export class AddDirecionComponent implements OnInit {
           }
         }
       }
+    } else {
+      this.errors.push('Debes iniciar sesión')
     }
   }
 

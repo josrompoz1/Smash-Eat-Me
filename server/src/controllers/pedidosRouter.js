@@ -7,7 +7,7 @@ function createRouterPedidos(db) {
   router.get('/pedidos', function (req, res, next) {
     db.query(
       'SELECT * FROM PedidoComida ORDER BY estado',
-      [10 * (req.params.page || 0)],
+      [],
       (error, results) => {
         if (error) {
           console.log(error);
@@ -69,7 +69,7 @@ function createRouterPedidos(db) {
         } else {
           db.query(
             'SELECT MAX(id) AS id FROM PedidoComida',
-            [10 * (req.params.page || 0)],
+            [],
             (error, result) => {
               if (error) {
                 console.log(error);
