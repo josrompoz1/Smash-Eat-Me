@@ -1,0 +1,14 @@
+.cerrar {
+    float: right;
+}
+
+button {
+    margin-top: 1em;
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+.mat-form-field {
+    width: 60%;
+    margin-bottom: 1em;
+}

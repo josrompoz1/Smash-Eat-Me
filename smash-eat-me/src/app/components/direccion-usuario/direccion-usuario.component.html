@@ -1,0 +1,30 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Selecciona direccion</h1>
+    </div>
+</div>
+<hr>
+
+<div class="cestaPadre">
+    <div *ngIf="direcciones.length > 0" class="direcciones">
+        <button class="guardar" mat-stroked-button (click)="guardarDireccionSeleccionada()" [disabled]="disableButton">Continuar</button>
+        <button class="add-direccion" mat-stroked-button (click)="addDireccion()">Añadir direccion</button>
+
+            <table class="table-detalles">
+                <tr *ngFor="let item of direcciones;  let i = index">
+                    <td>
+                        <mat-checkbox [checked]="direccionSeleccionadaIndex === i" [disabled]="disableCheckbox"
+                            (change)="setDireccionSeleccionadaIndex(i)">{{item.direccion}}</mat-checkbox>
+                    </td>
+                </tr>
+            </table>
+        
+    </div>
+    <div *ngIf="direcciones.length == 0" class="direcciones">
+        <button class="add-direccion" mat-stroked-button (click)="addDireccion()">Añadir direccion</button>
+        <p class="cero">No existen direcciones</p>
+    </div>
+</div>
+<div *ngIf="enableHora">
+    <app-hora-entrega></app-hora-entrega>
+</div>

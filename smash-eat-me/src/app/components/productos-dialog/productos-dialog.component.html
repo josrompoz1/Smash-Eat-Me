@@ -1,0 +1,87 @@
+<div class="contenedor">
+    <div *ngIf="producto" class="titulo">
+        <h1>{{producto.nombre | uppercase}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="productoPadre" *ngIf="producto">
+    <div class="productoHijo">
+        <div><img src="{{producto.imagen}}"></div>
+
+        <table class="table-detalles">
+            <tr>
+                <th>Tipo de plato</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>URL</th>
+            </tr>
+            <tr>
+                <td>{{producto.tipo}}</td>
+                <td>{{producto.precio}} €</td>
+                <td>{{producto.descripcion}}</td>
+                <td><a [href]="url">URL de la imagen</a></td>
+            </tr>
+        </table>
+        
+        <h1>Valoraciones de clientes</h1>
+        <hr>
+
+        <table class="table-detalles">
+            <tr>
+                <th>Puntuación</th>
+                <th>Reseña</th>
+            </tr>
+            <tr *ngFor="let valoracion of valoraciones">
+                <td *ngIf="valoracion.puntuacion == 0">
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
+                <td *ngIf="valoracion.puntuacion == 1">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
+                <td *ngIf="valoracion.puntuacion == 2">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
+                <td *ngIf="valoracion.puntuacion == 3">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
+                <td *ngIf="valoracion.puntuacion == 4">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star_border</mat-icon>
+                </td>
+                <td *ngIf="valoracion.puntuacion == 5">
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                    <mat-icon>star</mat-icon>
+                </td>
+                <td>{{valoracion.resenya}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

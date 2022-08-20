@@ -1,0 +1,48 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Registro de usuario</h1>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearUsuario()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre completo</mat-label>
+                <input matInput type="text" name="nombre" formControlName="nombre">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput type="text" name="username" formControlName="username">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Correo de usuario</mat-label>
+                <input matInput type="text" name="correo" formControlName="correo">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Telefono de usuario</mat-label>
+                <input matInput type="number" name="telefono" formControlName="telefono">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" name="contraseña" formControlName="contrasena">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Rol</mat-label>
+                <input matInput type="text" name="tipo" formControlName="tipo" [readonly]="true">
+            </mat-form-field><br>
+            
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+.cerrar {
+    float: right;
+}
+
+.padre{
+    width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5em;
+}
+
+.solucion {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.solucionHijo {
+    width: 80%;
+}
+
+button {
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+    background-color: #ffc11b;
+}
+
+h2 {
+    font-size: 25px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+ol {
+    font-size: large;
+    text-align: left;
+}
+
+p {
+    float: left;
+}

@@ -1,0 +1,69 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Metodo de pago</h1>
+    </div>
+</div>
+<hr>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Tarjeta de credito</h2>
+    </div>
+</div>
+<hr class="hr-pago">
+<div class="formPadre">
+    <div *ngIf="tarjetas.length > 0" class="formHijo">
+        <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
+        <div class="tarjeta" *ngFor="let item of tarjetas;  let i = index">
+            <mat-radio-button [checked]="tarjetaSeleccionadaIndex === i" (change)="tarjetaSeleccionadaIndex = i" [disabled]="disableCredito">{{item.numero}}</mat-radio-button>
+        </div>
+        <button *ngIf="tarjetaSeleccionadaIndex > -1 && productosEnCesta.length > 0" mat-stroked-button  (click)="guardarTarjetaSeleccionada()">Continuar</button>
+    </div>
+    <div class="formHijo" *ngIf="tarjetas.length == 0">
+        <button mat-stroked-button routerLink="/tarjeta" routerLinkActive="active">Añadir tarjeta</button>
+        No existen tarjetas
+    </div>
+</div>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Cartera digital</h2>
+    </div>
+</div>
+<hr class="hr-pago">
+<div class="formPadre">
+    <div class="formHijo">
+        <button mat-stroked-button routerLink="/creditodigital" routerLinkActive="active">Añadir credito digital</button>
+        <div class="form">
+            <mat-radio-button [checked]="creditoSeleccionadoIndex === 0" (change)="creditoSeleccionadoIndex = 0" [disabled]="disableCredito">Credito en la cartera digital....  {{creditoDigital | number : '.2-2'}} €</mat-radio-button>
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+        </div>
+        
+        <button *ngIf="creditoSeleccionadoIndex > -1 && productosEnCesta.length > 0" mat-stroked-button (click)="guardarCarteraDigital()">Continuar</button>
+    </div>
+</div>
+
+<div class="div-subtitulo">
+    <div class="subtitulo">
+        <h2>Cupon de descuento</h2>
+    </div>
+</div>
+<hr class="hr-pago">
+<div class="formPadre">
+    <div class="formHijo">
+        <p>Precio: {{precioTotal | number : '.2-2'}} €</p>
+        <form class="form" [formGroup]="form" (ngSubmit)="aplicarCuponDescuento()">
+            <mat-form-field appearance="fill">
+                <mat-label>Cupon descuento</mat-label>
+                <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">
+            </mat-form-field><br>
+            <button mat-stroked-button type="submit">Aplicar cupon</button>
+        </form>
+    </div>
+</div>
+
+<div class="formPadre">
+    <button class="boton-tramitar" mat-stroked-button (click)="tramitarPedido()" [disabled]="disableTramitar">Tramitar pedido</button>
+</div>

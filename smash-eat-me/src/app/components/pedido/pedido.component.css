@@ -1,0 +1,114 @@
+* {
+    font-size: large;
+}
+
+.padre {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.pedido {
+    width: 90%;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.detalles {
+    float: left;
+    width: 65%;
+    text-align: center;
+}
+
+.money {
+    float: right;
+    width: 35%;
+    text-align: center;
+}
+
+.table-money {
+    margin: 0 auto;
+    margin-top: 0.75em;
+    margin-left: 2em;
+    width: 18em;
+    height: 12em;
+}
+
+.table-detalles {
+    margin: 0 auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    width: 90%;
+    height: 5em;
+}
+
+button {
+    margin: 0 auto;
+    margin-top: 2em;
+}
+
+.aceptar {
+    background-color: #ffc11b;
+    margin-right: 4em;
+}
+
+.table-detalles th {
+    text-align: center;
+}
+
+.table-detalles td {
+    text-align: center;
+}
+
+.table-money th {
+    text-align: left;
+}
+
+.table-money td {
+    text-align: center;
+}
+
+.cestaPadre {
+    background-color: #EEEEEE;
+    height: 80%;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cesta {
+    width: auto;
+}
+
+.table-productos {
+    margin: 0 auto;
+    width: auto;
+    height: 100%;
+}
+
+img {
+    width: 30%;
+}
+
+.td-imagen {
+    text-align: center;
+    width: 50%;
+}
+
+.td-producto {
+    text-align: left;
+    width: 20%;
+}
+
+.td-precio {
+    text-align: right;
+    width: 20%;
+}
+
+.td-cantidad {
+    text-align: right;
+    width: 10%;
+}

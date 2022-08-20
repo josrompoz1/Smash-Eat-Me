@@ -1,0 +1,74 @@
+.cestaPadre {
+    background-color: #ECEFF1;
+    margin-right: 15rem;
+    margin-left: 15rem;
+    height: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5em;
+}
+
+.cesta {
+    width: auto;
+}
+
+.producto {
+    font-size: large;
+}
+
+img {
+    width: 50%;
+}
+
+mat-icon {
+    cursor: pointer;
+    font-size: 30px;
+    width: 30px;
+}
+
+.vaciar {
+    float: right;
+    margin-right: 2em;
+}
+
+.tramitar {
+    margin-left: 2em;
+}
+
+button {
+    margin-bottom: 2em;
+}
+
+.table-detalles {
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+}
+
+.td-imagen {
+    width: 40%;
+}
+
+.td-nombre {
+    width: 20%;
+}
+
+.td-eliminar {
+    width: 10%;
+}
+
+.td-cantidad {
+    width: 10%;
+}
+
+.td-añadir {
+    width: 10%;
+}
+
+.td-precio {
+    width: 12%;
+    font-weight: bold;
+}

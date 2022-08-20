@@ -1,0 +1,62 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>{{titulo}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="addOrUpdateMenu()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" name="nombre" formControlName="nombre" readonly={{isReadOnly}}>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <input matInput type="text" name="descripcion" formControlName="descripcion" readonly={{isReadOnly}}>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Precio</mat-label>
+                <input matInput type="number" name="precio" formControlName="precio" readonly={{isReadOnly}}>
+            </mat-form-field><br>
+
+            <mat-form-field *ngIf="dataManagement.selectedMenu" appearance="fill">
+                <mat-label>Seleccione un producto</mat-label>
+                <mat-select matInput formControlName="producto">
+                    <mat-option *ngFor="let producto of productosDisponibles" value="{{producto.id}}">{{producto.nombre}} ({{producto.precio}}€)</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="dataManagement.selectedMenu" class="contenedor">
+    <div class="titulo">
+        <h1>Productos del menú</h1>
+    </div>
+</div>
+<hr *ngIf="dataManagement.selectedMenu">
+<div *ngIf="productosEnMenu.length > 0" class="listado">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="80px">
+        <mat-grid-tile *ngFor="let producto of productosEnMenu">
+            <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+            <mat-grid-tile-footer>
+                <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

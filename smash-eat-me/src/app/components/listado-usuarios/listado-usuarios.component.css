@@ -1,0 +1,41 @@
+.padre {
+    display: flex;
+}
+
+.hijo1 {
+    width: 60%;
+    text-align: center;
+}
+
+.hijo2 {
+    width: 40%;
+    text-align: center;
+}
+
+.usuarios {
+    width: 100%;
+}
+
+table {
+    margin: 0 auto;
+    width: 85%;
+}
+
+.mat-column-username, .mat-column-usuario {
+    text-align: center;
+    font-weight: bold;
+}
+
+.mat-column-correo, .mat-column-producto {
+    width: 55%;
+    text-align: center;
+}
+
+.mat-column-rol, .mat-column-puntuacion {
+    text-align: center;
+    font-style: italic;
+}
+
+.mat-column-perfil, .mat-column-eliminar {
+    text-align: center;
+}

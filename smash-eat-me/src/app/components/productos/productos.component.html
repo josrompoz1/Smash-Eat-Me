@@ -1,0 +1,41 @@
+<div class="contenedor">
+    <div class="titulo">
+        <span>Todos nuestros platos - </span>
+        <span [innerHTML]="searchValue"></span>
+    </div>
+    <div class="filtro">
+        <mat-icon class="filter-icono" matBadge="{{numberOfFilters}}" [matBadgeHidden]="hidden" (click)="filterDialog()">filter_list</mat-icon>
+    </div>
+</div>
+<hr>
+
+<div *ngIf="productos.length!==0" class="listado">
+    <div *ngIf="rol === 'ADMIN'" class="boton">
+        <button mat-stroked-button routerLink="/crearproducto" routerLinkActive="active">Añadir
+            plato</button>
+    </div>
+    <div>
+        <mat-grid-list cols="3" rowHeight="4:3" gutterSize="80px">
+            <mat-grid-tile *ngFor="let producto of productos">
+                <button type="button" (click)="onSelect(producto)">
+                    <img src="{{producto.imagen}}" />
+                </button>
+                <mat-grid-tile-footer>
+                    <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+                    <div class="icono">
+                        <mat-icon *ngIf="rol == 'ADMIN'" class="edit-icono" (click)="onEdit(producto)">edit</mat-icon>
+                        <mat-icon *ngIf="rol == 'ADMIN'" class="remove-icono" (click)="onDelete(producto)">delete</mat-icon>
+                        <mat-icon class="fa-icono" (click)="onAdd(producto)">add_circle</mat-icon>
+                    </div>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
+<div *ngIf="productos.length===0" class="listado">
+    <div *ngIf="rol === 'ADMIN'" class="boton">
+        <button mat-stroked-button routerLink="/crearproducto" routerLinkActive="active">Añadir
+            plato</button>
+    </div>
+    Sin resultados en la busqueda
+</div>

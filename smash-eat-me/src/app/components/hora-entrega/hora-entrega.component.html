@@ -1,0 +1,19 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Elige hora de entrega</h1>
+    </div>
+</div>
+<hr>
+
+<div class="cestaPadre">
+    <div class="horas">
+        <button class="continuar" mat-stroked-button  (click)="guardarHoraSeleccionada()" [disabled]="disableButton">Continuar</button>
+        <div *ngFor="let item of horas;  let i = index">
+            <mat-checkbox [checked]="horaSeleccionadaIndex === i" [disabled]="disableCheckbox" (change)="setHoraSeleccionadaIndex(i)">{{item}}</mat-checkbox>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="enablePago">
+    <app-metodo-pago></app-metodo-pago>
+</div>

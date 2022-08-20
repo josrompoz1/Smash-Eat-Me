@@ -1,0 +1,71 @@
+.div-subtitulo {
+    border-left: 11em solid white;
+    padding-left: 2em;
+}
+
+.subtitulo {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.hr-pago {
+    width: 80%;
+    border-color: darkorange;
+    margin-bottom: 50px;
+}
+
+.cestaPadre {
+    background-color: #ECEFF1;
+    margin-right: 15rem;
+    margin-left: 15rem;
+    height: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5em;
+}
+
+.direcciones {
+    width: auto;
+}
+
+h2 {
+    margin-top: 1em;
+}
+
+form button {
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+.mat-form-field {
+    width: 60%;
+    margin-bottom: 1em;
+}
+
+p {
+    margin-top: 2em;
+    font-size: medium;
+    font-weight: bold;
+}
+
+mat-radio-button {
+    margin-bottom: 1em;
+    font-size: medium;
+}
+
+.formHijo button {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.error {
+    margin-bottom: 2em;
+}
+
+.formPadre .boton-tramitar {
+    background-color: #ffc11b;
+    width: 30%;
+}

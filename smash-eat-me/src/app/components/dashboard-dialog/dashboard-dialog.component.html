@@ -1,0 +1,41 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Opciones de filtrado</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="updateParametros()">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Difucultad</mat-label>
+                <mat-select matInput formControlName="dificultad">
+                    <mat-option value="Principiante">Principiante</mat-option>
+                    <mat-option value="Intermedio">Intermedio</mat-option>
+                    <mat-option value="Avanzado">Avanzado</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Categoría</mat-label>
+                <mat-select matInput formControlName="categoria">
+                    <mat-option value="Criptografía">Criptografía</mat-option>
+                    <mat-option value="Inyección de codigo">Inyección de codigo</mat-option>
+                    <mat-option value="Autenticación e identificación">Autenticación e identificación</mat-option>
+                    <mat-option value="Control de acceso">Control de acceso</mat-option>
+                    <mat-option value="Validacion indebida">Validacion indebida</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+        <button mat-stroked-button (click)="limpiarForm()">Limpiar</button>
+    </div>
+</div>

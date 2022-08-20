@@ -1,0 +1,90 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Reserva de mesa</h1>
+    </div>
+</div>
+<hr>
+
+<div class="padre">
+    <div class="hijo1">
+        <div class="formpadre">
+            <div class="formhijo">
+                <h3>DATOS</h3>
+                <form [formGroup]="form" (ngSubmit)="reservarMesa()">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre y apellidos</mat-label>
+                        <input matInput type="text" name="nombre" formControlName="nombre_apellido" readonly>
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Correo electrónico</mat-label>
+                        <input matInput type="text" name="correo" formControlName="correo" readonly>
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Telefono</mat-label>
+                        <input matInput type="text" name="telefono" formControlName="telefono" readonly>
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput type="date" name="fecha" formControlName="fecha"
+                            placeholder="Fecha de la reserva">
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Hora</mat-label>
+                        <input matInput type="time" name="hora" formControlName="hora" placeholder="Hora de la reserva">
+                    </mat-form-field><br>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Numero de personas</mat-label>
+                        <input matInput type="number" name="nPersonas" formControlName="nPersonas"
+                            placeholder="Numero de personas">
+                    </mat-form-field><br>
+            
+                    <div class="error" *ngFor="let error of errorsMesa">
+                        <li>{{error}}</li>
+                    </div>
+        
+                    <button mat-stroked-button type="submit">Aceptar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="hijo2">
+        <div class="formpadre">
+            <div class="formhijo">
+                <div class="seleccion">
+                    <h3>Seleccionar menú</h3>
+                    <table class="table-detalles">
+                        <tr *ngFor="let menu of menus; let i = index">
+                            <td class="td-nombre">
+                                <mat-checkbox [checked]="menuSeleccionadoIndex === i" (change)="setMenuSeleccionado(i)">
+                                    {{menu.nombre}}
+                                </mat-checkbox>
+                            </td>
+                            <td class="td-precio" *ngIf="mapMenuPrecio.get(menu)">{{mapMenuPrecio.get(menu) | number : '.2-2'}} €</td>
+                            <td class="td-precio" *ngIf="!mapMenuPrecio.get(menu)"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="descuento">
+                    <h3>Aplicar cupón de descuento</h3>
+                    <form [formGroup]="formDescuento" (ngSubmit)="aplicarDescuento()">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Cupón de descuento</mat-label>
+                            <input matInput type="text" name="codigo" formControlName="codigo" placeholder="SMASH">
+                        </mat-form-field><br>
+                                    
+                        <div class="error" *ngFor="let error of errors">
+                            <li>{{error}}</li>
+                        </div>
+
+                        <button mat-stroked-button type="submit">Aplicar cupón</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Detalles del pedido {{pedido.id}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="updateEstadoPedido()">
+            <mat-form-field appearance="fill">
+                <mat-label>Direccion</mat-label>
+                <input matInput type="text" name="direccion" formControlName="direccion" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de pedido</mat-label>
+                <input matInput type="text" name="fecha" formControlName="fecha" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Hora de entrega</mat-label>
+                <input matInput type="text" name="hora" formControlName="hora" readonly>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Estado</mat-label>
+                <mat-select matInput formControlName="estado">
+                    <mat-option value="Pagado" disabled>Pagado</mat-option>
+                    <mat-option value="En preparacion" [disabled]="disablePreparacion">En preparacion</mat-option>
+                    <mat-option value="En transito" [disabled]="disableTransito">En transito</mat-option>
+                    <mat-option value="Entregado" [disabled]="disableEntregado">Entregado</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre del cliente</mat-label>
+                <input matInput type="text" name="nombreCliente" formControlName="nombreCliente" readonly>
+            </mat-form-field><br>
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>
+
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Productos en el pedido</h1>
+    </div>
+</div>
+<hr>
+<div class="listado">
+    <mat-grid-list cols="3" rowHeight="3:2" gutterSize="80px">
+        <mat-grid-tile *ngFor="let producto of productosEnPedido">
+            <img style="width: auto; max-height: 100%;" src="{{producto.imagen}}" />
+            <mat-grid-tile-footer>
+                <h3 class="texto">{{producto.nombre | uppercase}}</h3>
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

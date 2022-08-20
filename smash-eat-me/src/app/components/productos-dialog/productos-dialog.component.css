@@ -1,0 +1,41 @@
+.productoPadre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3em;
+}
+  
+.productoHijo {
+    width: 90%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.productoHijo img {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 60%;
+    max-height: 500px;
+}
+
+.cerrar {
+    float: right;
+}
+
+.table-detalles {
+    margin: 0 auto;
+    margin-bottom: 3em;
+    width: 90%;
+    height: 4em;
+}
+
+table, th, td {
+    font-size: medium;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: #e1f5fd;
+  }

@@ -1,0 +1,25 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Soluciones del reto {{reto.nombre}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="padre">
+    <div class="dashboard" *ngFor="let solucion of soluciones">
+        <div class="solucion">
+            <div class="solucionHijo">
+                <h2>{{solucion.nombre}}</h2>
+                <div *ngFor="let paso of pasos">
+                    <ol *ngIf="paso.solucionId == solucion.id" type="circle"><p><i><b>Paso {{paso.numero}}: </b></i>{{paso.solucion}}</p><br></ol>
+                </div>
+                <button mat-stroked-button *ngIf="solucion.tipo == 'Interactiva'" (click)="openSnackBar(solucion.id)">Solución interactiva</button>
+            </div>
+        </div>
+    </div>
+</div>

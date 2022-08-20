@@ -1,0 +1,33 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Valorar {{productoAValorar.nombre}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearValoracion()">
+            <mat-label>Puntuación (de 1 a 5)</mat-label>
+            <mat-slider formControlName="puntuacion" [max]=5 [step]=1 [thumbLabel]=true (change)="setValue()">
+            </mat-slider><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Reseña</mat-label>
+                <input matInput type="text" name="resenya" formControlName="resenya"
+                    placeholder="Breve resenya sobre el producto">
+            </mat-form-field><br>
+                        
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit" [disabled]="disableButton">Aceptar</button>
+        </form>
+    </div>
+</div>

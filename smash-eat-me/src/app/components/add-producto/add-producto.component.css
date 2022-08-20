@@ -1,0 +1,16 @@
+button {
+    margin-top: 1em;
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+mat-slider {
+    width: 50%;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.mat-form-field {
+    width: 60%;
+    margin-bottom: 1em;
+}

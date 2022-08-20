@@ -1,0 +1,68 @@
+.padre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hijo1 {
+    width: 50%;
+    text-align: center;
+}
+
+.hijo2 {
+    width: 50%;
+    text-align: center;
+}
+
+button {
+    margin-top: 2em;
+    margin-bottom: 3em;
+    background-color: #ffc11b;
+}
+
+.mat-form-field {
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+h3 {
+    margin-top: 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.formpadre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3em;
+}
+  
+.formhijo {
+    width: 90%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.table-detalles {
+    margin: 0 auto;
+    margin-bottom: 3em;
+    width: 60%;
+    height: 4em;
+}
+
+.td-nombre {
+    text-align: left;
+}
+
+table, th, td {
+    font-size: medium;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: #e1f5fd;
+  }

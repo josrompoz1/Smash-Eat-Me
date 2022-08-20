@@ -1,0 +1,73 @@
+.pedido {
+    width: 100%;
+}
+
+.pedido table {
+    margin: 0 auto;
+    width: 60%;
+    margin-bottom: 3em;
+}
+
+.valoracion table {
+    margin: 0 auto;
+    width: 50%;
+    margin-bottom: 3em;
+}
+
+.mat-column-id {
+    border-right: 1px solid;
+    text-align: center;
+    font-style: italic;
+    font-size: medium;
+}
+
+.mat-column-direccion {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-pago {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-fecha {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-estado {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-nombre {
+    width: 60%;
+    text-align: center;
+    font-style: italic;
+}
+
+.mat-column-precio, .mat-column-tipo {
+    text-align: center;
+}
+
+.mat-column-valorar {
+    width: 15%;
+    text-align: center;
+}
+
+.div-subtitulo {
+    border-left: 11em solid white;
+    padding-left: 2em;
+}
+
+.subtitulo {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.hr-subtitulo {
+    width: 80%;
+    border-color: darkorange;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,66 @@
+mat-grid-tile {
+    background: transparent;
+}
+
+mat-grid-tile-footer .texto {
+    text-align: center;
+    font-size: 18px;
+}
+
+.listado {
+    padding-left: 75px;
+    padding-right: 75px;
+    font-size: 20px;
+}
+
+.filtro {
+    float: right;
+}
+
+.filter-icono {
+    font-size: 2.5em;
+}
+
+button {
+    cursor: pointer;
+}
+
+mat-paginator {
+    background-color: darkorange;
+    margin-top: 50px;
+}
+
+.fa-icono {
+    font-size: 35px;
+    position: absolute;
+    right: 20px;
+    top: 7px;
+}
+
+.remove-icono {
+    font-size: 35px;
+    position: absolute;
+    right: 60px;
+    top: 7px;
+}
+
+.edit-icono {
+    font-size: 35px;
+    position: absolute;
+    right: 100px;
+    top: 7px;
+}
+
+.boton {
+    margin-top: -1em;
+    margin-bottom: 1em;
+    margin-left: 1.5em;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+img {
+    width: 75%;
+}

@@ -1,0 +1,121 @@
+.padre{
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    margin-top: 3em;
+}
+
+.dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2.5em;
+}
+
+.progreso {
+    width: 80%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.mat-progress-bar {
+    width: 75%;
+    height: 1em;
+    margin: 0 auto;
+    margin-bottom: 3em;
+    border-radius: 7px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.filtros {
+    width: 80%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+    display: inline;
+}
+
+.retos {
+    width: 90%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+    vertical-align: bottom;
+}
+
+table {
+    margin: 0 auto;
+    width: 95%;
+    margin-bottom: 3em;
+}
+
+.mat-column-nombre {
+    text-align: left;
+    font-weight: bold;
+    width: 13%;
+}
+
+.mat-column-dificultad {
+    text-align: center;
+    width: 13%;
+}
+
+.mat-column-descripcion {
+    text-align: left;
+}
+
+.mat-column-categoria {
+    text-align: center;
+    font-style: italic;
+    width: 15%;
+}
+
+.mat-column-completado, .mat-column-pista, .mat-column-solucion {
+    text-align: center;
+    width: 7%;
+}
+
+.iconos {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+}
+
+.filter-icon {
+    float: left;
+}
+
+.download-icon {
+    margin: 0 auto;
+}
+
+.upload-icon {
+    float: right;
+}
+
+.iconos .mat-icon {
+    font-size: 50px;
+    margin-bottom: 1em;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label {
+    display: none
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}

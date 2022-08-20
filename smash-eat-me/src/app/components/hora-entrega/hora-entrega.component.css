@@ -1,0 +1,30 @@
+.cestaPadre {
+    background-color: #ECEFF1;
+    margin-right: 15rem;
+    margin-left: 15rem;
+    height: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.5em;
+}
+
+.horas {
+    width: auto;
+}
+
+.continuar {
+    float: left;
+    margin-right: 2em;
+}
+
+button {
+    margin-bottom: 2em;
+}
+
+mat-checkbox {
+    margin-bottom: 1em;
+    font-size: medium;
+}

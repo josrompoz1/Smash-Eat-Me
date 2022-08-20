@@ -1,0 +1,65 @@
+.pedidos {
+    width: 100%;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.mat-column-id {
+    border-right: 1px solid;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+.mat-column-direccion {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-pago {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-fecha {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-estado {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-valorar {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-usuario {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-hora {
+    text-align: center;
+    font-size: 110%;
+}
+
+.mat-column-gestionar {
+    text-align: center;
+    font-size: 110%;
+}
+
+p {
+    font-size: large;
+}
+
+button {
+    margin-left: 7em;
+    margin-bottom: 2em;
+}

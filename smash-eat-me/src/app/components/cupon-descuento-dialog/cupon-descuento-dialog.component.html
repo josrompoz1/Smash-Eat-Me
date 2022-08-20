@@ -1,0 +1,33 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>{{titulo}}</h1>
+    </div>
+    <div class="cerrar">
+        <mat-dialog-actions>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-dialog-actions>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="addOrUpdateCupon()">
+            <mat-form-field appearance="fill">
+                <mat-label>Codigo de descuento</mat-label>
+                <input matInput type="text" name="codigo" formControlName="codigo" readonly={{isReadOnly}}>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Porcentaje de descuento</mat-label>
+                <input matInput type="number" name="porcentaje" formControlName="porcentaje" >
+            </mat-form-field><br>
+
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

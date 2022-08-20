@@ -1,0 +1,49 @@
+.menuPadre {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3em;
+}
+  
+.menuHijo {
+    width: 90%;
+    text-align: center;
+    background: #ECEFF1;
+    border-radius: 1.5em;
+}
+
+.cerrar {
+    float: right;
+}
+
+.menu {
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.mat-column-nombre {
+    width: 30%;
+    text-align: center;
+    font-style: italic;
+    font-size: medium;
+}
+
+.mat-column-descripcion {
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.mat-column-precio {
+    width: 15%;
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+}

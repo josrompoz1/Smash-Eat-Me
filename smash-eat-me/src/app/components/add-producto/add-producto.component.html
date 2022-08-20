@@ -1,0 +1,47 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Añadir nuevo plato</h1>
+    </div>
+</div>
+<hr>
+
+<div class="formPadre">
+    <div class="formHijo">
+        <form class="form" [formGroup]="form" (ngSubmit)="crearPlato()">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre del plato</mat-label>
+                <input matInput type="text" name="nombre" formControlName="nombre">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Descripcion</mat-label>
+                <input matInput type="text" name="descripcion" formControlName="descripcion">
+            </mat-form-field><br>
+
+            <mat-label>Precio</mat-label>
+            <mat-slider formControlName="precio" [max]=100 [min]=1 [step]=0.25 [thumbLabel]=true>
+            </mat-slider><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>URL de la imagen del plato</mat-label>
+                <input matInput type="url" name="imagen" formControlName="imagen">
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Tipo de plato</mat-label>
+                <mat-select matInput formControlName="tipo">
+                    <mat-option value="Entremes">Entremes</mat-option>
+                    <mat-option value="Plato">Plato principal</mat-option>
+                    <mat-option value="Postre">Postre</mat-option>
+                    <mat-option value="Bebida">Bebida</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+            
+            <div class="error" *ngFor="let error of errors">
+                <li>{{error}}</li>
+            </div>
+
+            <button mat-stroked-button type="submit">Aceptar</button>
+        </form>
+    </div>
+</div>

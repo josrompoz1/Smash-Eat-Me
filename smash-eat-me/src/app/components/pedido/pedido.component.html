@@ -1,0 +1,65 @@
+<div class="contenedor">
+    <div class="titulo">
+        <h1>Resumen del pedido</h1>
+    </div>
+</div>
+<hr>
+
+<div class="padre">
+    <div class="pedido">
+        <div class="error" *ngFor="let er of error">
+            <p>{{er}}</p>
+        </div>
+        <div class="detalles">
+            <table class="table-detalles">
+                <tr>
+                    <th *ngIf="direccion != undefined">Direccion</th>
+                    <th *ngIf="creditoDigital == true">Metodo de pago</th>
+                    <th *ngIf="tarjeta != undefined && creditoDigital == false">Metodo de pago</th>
+                </tr>
+                <tr>
+                    <td *ngIf="direccion != undefined">{{direccion.direccion}}</td>
+                    <td *ngIf="creditoDigital == true">Cartera digital</td>
+                    <td *ngIf="tarjeta != undefined && creditoDigital == false">Tarjeta {{tarjeta.numero}}</td>
+                </tr>
+            </table>
+            <hr>
+            <div class="cestaPadre">
+                <div *ngIf="productosCantidad.size > 0" class="cesta">
+                    <div class="producto" *ngFor="let key of productosCantidad.keys()">
+                        <table class="table-productos">
+                            <tr>
+                                <td class="td-imagen"><img src="{{key.imagen}}" /></td>
+                                <td class="td-producto">{{key.nombre}}</td>
+                                <td class="td-cantidad">{{productosCantidad.get(key)}}</td>
+                                <td class="td-precio">{{productosPrecio.get(key.nombre) | number : '.2-2'}} €</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="money">
+            <table class="table-money">
+                <tr>
+                    <th class="th-money">Descuento</th>
+                    <td>{{precioConDescuento | number : '.2-2'}} €</td>
+                </tr>
+                <tr>
+                    <th class="th-money">Total productos</th>
+                    <td>{{precioTotal | number : '.2-2'}} €</td>
+                </tr>
+                <tr>
+                    <th class="th-money">Coste de envío</th>
+                    <td>2.00 €</td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>{{precioFinal | number : '.2-2'}} €</td>
+                </tr>
+            </table>
+            <button class="aceptar" *ngIf="disableButton" mat-stroked-button (click)="crearPedido()">Aceptar pedido</button>
+            <button *ngIf="disableButton" mat-stroked-button (click)="cancelarPedido()">Cancelar</button>
+        </div>
+    </div>
+</div>
